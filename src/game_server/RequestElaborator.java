@@ -7,6 +7,11 @@ import services.Register;
 import services.Service;
 import services.Unknown;
 
+/**
+ * @author      Noris
+ * @since       2015-03-26
+ */
+
 public class RequestElaborator {
 	
 	private JSONObject json;

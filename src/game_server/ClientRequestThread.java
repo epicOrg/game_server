@@ -12,6 +12,11 @@ import org.json.JSONObject;
 
 import services.Service;
 
+/**
+ * @author      Noris
+ * @since       2015-03-26
+ */
+
 public class ClientRequestThread implements Runnable {
 	
 	private Socket socket;

@@ -1,5 +1,7 @@
 package services;
 
+import game_server.StartServer;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,18 +10,17 @@ import org.json.JSONObject;
  * @since       2015-03-26
  */
 
-public class Register implements Service {
+public class Login implements Service {
 	
 	private JSONObject json;
 	
 	private String username;
 	private String password;
-	private String email;
 	
 	private boolean value;
 	private String error;
 	
-	public Register(JSONObject json) {
+	public Login(JSONObject json) {
 		super();
 		this.json = json;
 	}
@@ -36,7 +37,6 @@ public class Register implements Service {
 			
 			username = json.getString("username");
 			password = json.getString("password");
-			password = json.getString("email");
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -55,10 +55,11 @@ public class Register implements Service {
 		
 		try {
 			
-			jsonResponse.put("service", "REGISTER");
+			jsonResponse.put("service", "LOGIN");
 
 			if (value) {
 				jsonResponse.put("value", true);
+				jsonResponse.put("hash", hashCode());
 				return jsonResponse;
 			}
 			
@@ -70,5 +71,12 @@ public class Register implements Service {
 			//TODO
 			return new JSONObject();
 		}
+
+	}
+	
+	@Override
+	public int hashCode() {
+		//TODO
+		return username.hashCode();
 	}
 }

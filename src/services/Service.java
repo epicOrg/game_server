@@ -1,9 +1,8 @@
 package services;
 
-
 /**
- * @author      Fabio Noris
- * @since       2015-03-25
+ * @author      Noris
+ * @since       2015-03-26
  */
 
 public interface Service {
