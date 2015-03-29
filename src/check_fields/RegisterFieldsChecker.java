@@ -48,7 +48,7 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
-			json.put("usernames", usernameErrors);
+			json.put("username", usernameErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
