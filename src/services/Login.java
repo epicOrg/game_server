@@ -1,16 +1,18 @@
 package services;
 
-import game_server.StartServer;
+import game_server.DataManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @author      Noris
- * @since       2015-03-26
+ * @author	Noris
+ * @since	2015-03-26
  */
 
 public class Login implements Service {
+	
+	private DataManager dataManager = DataManager.getIstance();
 	
 	private JSONObject json;
 	
@@ -28,6 +30,7 @@ public class Login implements Service {
 	@Override
 	public String start() {
 		readFields();
+		checkFields();
 		saveFields();
 		return getResponse().toString();
 	}
@@ -44,9 +47,13 @@ public class Login implements Service {
 		}
 	}
 	
+	private boolean checkFields(){
+		//TODO
+		return true;
+	}
+	
 	private void saveFields(){
-		//TODO Save fields into database
-		value = true;
+		dataManager.setLogged(username, hashCode());
 	}
 	
 	private JSONObject getResponse() {
@@ -71,7 +78,6 @@ public class Login implements Service {
 			//TODO
 			return new JSONObject();
 		}
-
 	}
 	
 	@Override

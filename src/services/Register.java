@@ -3,12 +3,16 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.RegisterFieldsChecker;
+
 /**
- * @author      Noris
- * @since       2015-03-26
+ * @author	Noris
+ * @since	2015-03-26
  */
 
 public class Register implements Service {
+	
+	//private DataManager dataManager = DataManager.getIstance();
 	
 	private JSONObject json;
 	
@@ -16,8 +20,8 @@ public class Register implements Service {
 	private String password;
 	private String email;
 	
-	private boolean value;
-	private String error;
+	private JSONObject jsonResponse = new JSONObject();
+	private boolean fieldsAreOk = true;
 	
 	public Register(JSONObject json) {
 		super();
@@ -26,17 +30,30 @@ public class Register implements Service {
 	
 	@Override
 	public String start() {
+		
+		try {
+			
+			jsonResponse.put("service", "REGISTER");
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		readFields();
-		saveFields();
+		checkFields();
+		if ( fieldsAreOk )
+			saveFields();
 		return getResponse().toString();
+		
 	}
 	
 	private void readFields() {
+		
 		try {
 			
 			username = json.getString("username");
 			password = json.getString("password");
-			password = json.getString("email");
+			email = json.getString("email");
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -44,26 +61,27 @@ public class Register implements Service {
 		}
 	}
 	
+	private void checkFields(){
+		
+		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(jsonResponse);
+		fieldsAreOk &= registerFieldsChecker.checkUsername(username);
+		fieldsAreOk &= registerFieldsChecker.checkPassword(password);
+		fieldsAreOk &= registerFieldsChecker.checkEmail(email);
+	}
+	
 	private void saveFields(){
 		//TODO Save fields into database
-		value = true;
 	}
 	
 	private JSONObject getResponse() {
 		
-		JSONObject jsonResponse = new JSONObject();
-		
 		try {
-			
-			jsonResponse.put("service", "REGISTER");
 
-			if (value) {
-				jsonResponse.put("value", true);
+			if ( fieldsAreOk == true ) {
+				jsonResponse.put("value", "true");
 				return jsonResponse;
 			}
 			
-			jsonResponse.put("value", false);
-			jsonResponse.put("error", error);
 			return jsonResponse;
 			
 		} catch (JSONException e) {

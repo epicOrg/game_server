@@ -3,6 +3,11 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author	Noris
+ * @since	2015-03-26
+ */
+
 public class Unknown implements Service {
 
 	@Override
