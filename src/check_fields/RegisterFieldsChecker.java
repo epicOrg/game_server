@@ -1,6 +1,7 @@
 package check_fields;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,22 +31,24 @@ public class RegisterFieldsChecker {
 		
 		try {
 			
-			json.put("field", "USERNAME");
+			JSONArray usernameErrors = new JSONArray();
 			
 			if ( username.length() < 5 ) {
-				json.put("lenght", "short");
+				usernameErrors.put("short");
 				fieldIsOk = false;
 			}
 			
 			else if ( username.length() > 20 ) {
-				json.put("lenght", "long");
+				usernameErrors.put("long");
 				fieldIsOk = false;
 			}
 			
 			if ( username.contains(" ") ) {
-				json.put("char", " ");
+				usernameErrors.put("invalid");
 				fieldIsOk = false;
 			}
+			
+			json.put("usernames", usernameErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -68,17 +71,19 @@ public class RegisterFieldsChecker {
 		
 		try {
 			
-			json.put("field", "PASSWORD");
+			JSONArray passwordErrors = new JSONArray();
 			
 			if ( password.length() < 8) {
-				json.put("lenght", "short");
+				passwordErrors.put("short");
 				fieldIsOk = false;
 			}
 			
 			else if ( password.length() > 30) {
-				json.put("lenght", "long");
+				passwordErrors.put("long");
 				fieldIsOk = false;
 			}
+			
+			json.put("password", passwordErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -104,18 +109,20 @@ public class RegisterFieldsChecker {
 		
 		try {
 			
-			json.put("field", "EMAIL");
+			JSONArray emailErrors = new JSONArray();
 			
 			if ( !emailValidator.isValid(email) ) {
-				json.put("invalid", "email");
+				emailErrors.put("invalid");
 				fieldIsOk = false;
 			}
 			
 			if ( email.endsWith("@mailnesia.com") ) {
 				//TODO Add invalid domains
-				json.put("invalid", "domain");
+				emailErrors.put("domain");
 				fieldIsOk = false;
 			}
+			
+			json.put("email", emailErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
