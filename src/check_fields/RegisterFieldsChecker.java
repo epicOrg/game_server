@@ -83,6 +83,13 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
+			//Password must contains both letters and numbers
+			if ( !password.matches(".*[a-zA-Z]+.*") ||
+					!password.matches(".*\\d+.*") ) {
+				passwordErrors.put(FieldsNames.INVALID);
+				fieldIsOk = false;
+			}
+			
 			json.put(FieldsNames.PASSWORD, passwordErrors);
 			
 		} catch (JSONException e) {
@@ -112,7 +119,7 @@ public class RegisterFieldsChecker {
 			JSONArray emailErrors = new JSONArray();
 			
 			if ( !emailValidator.isValid(email) ) {
-				emailErrors.put(FieldsNames.INVALID_EMAIL);
+				emailErrors.put(FieldsNames.INVALID);
 				fieldIsOk = false;
 			}
 			
