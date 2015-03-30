@@ -21,8 +21,8 @@ public class FieldsNames {
 	//Error fields name
 	public static final String SHORT = "short";
 	public static final String LONG  = "long";
+	public static final String INVALID = "invalid";
 	public static final String INVALID_CHAR = "invalidChar";
-	public static final String INVALID_EMAIL = "invalidEmail";
 	public static final String INVALID_DOMAIN = "invalidDomain";
 
 }
