@@ -37,10 +37,13 @@ public class ClientRequestThread implements Runnable {
 			String string = in.readLine();
 			JSONObject json = new JSONObject(string);
 			
-			RequestElaborator requestElaborator = new RequestElaborator(json);
+			//Add client IP to json service message
+			json.put("ipAddr", socket.getInetAddress());
 			
 			OutputStreamWriter out = new OutputStreamWriter(
 					socket.getOutputStream(), Charset.forName("UTF-8").newEncoder());
+			
+			RequestElaborator requestElaborator = new RequestElaborator(json);
 			
 			Service service = requestElaborator.setService();
 			out.write(service.start());
