@@ -80,7 +80,7 @@ public class Register implements Service {
 		try {
 
 			if ( fieldsAreOk == true ) {
-				jsonResponse.put("value", true);
+				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				return jsonResponse;
 			}
 			

@@ -11,6 +11,7 @@ public class FieldsNames {
 	public static final String SERVICE = "sercice";
 	public static final String REGISTER = "register";
 	public static final String LOGIN = "login";
+	public static final String NO_ERRORS = "error";
 	
 	//Fields names
 	public static final String USERNAME = "username";
