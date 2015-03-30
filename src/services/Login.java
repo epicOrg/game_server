@@ -2,8 +2,12 @@ package services;
 
 import game_server.DataManager;
 
+import java.net.InetAddress;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import check_fields.FieldsNames;
 
 /**
  * @author	Noris
@@ -18,9 +22,11 @@ public class Login implements Service {
 	
 	private String username;
 	private String password;
+	private InetAddress ipAddress; 
 	
-	private boolean value;
-	private String error;
+	
+	private JSONObject jsonResponse = new JSONObject();
+	private boolean fieldsAreOk = true;
 	
 	public Login(JSONObject json) {
 		super();
@@ -29,17 +35,30 @@ public class Login implements Service {
 	
 	@Override
 	public String start() {
+		
+		try {
+			
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		readFields();
 		checkFields();
-		saveFields();
+		if ( fieldsAreOk )
+			saveFields();
 		return getResponse().toString();
+		
 	}
 	
 	private void readFields() {
 		try {
 			
-			username = json.getString("username");
-			password = json.getString("password");
+			username = json.getString(FieldsNames.USERNAME);
+			password = json.getString(FieldsNames.PASSWORD);
+			ipAddress = (InetAddress) json.get(FieldsNames.IP_ADDRESS);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -58,20 +77,13 @@ public class Login implements Service {
 	
 	private JSONObject getResponse() {
 		
-		JSONObject jsonResponse = new JSONObject();
-		
 		try {
-			
-			jsonResponse.put("service", "LOGIN");
 
-			if (value) {
+			if ( fieldsAreOk == true ) {
 				jsonResponse.put("value", true);
-				jsonResponse.put("hash", hashCode());
 				return jsonResponse;
 			}
 			
-			jsonResponse.put("value", false);
-			jsonResponse.put("error", error);
 			return jsonResponse;
 			
 		} catch (JSONException e) {
@@ -83,6 +95,6 @@ public class Login implements Service {
 	@Override
 	public int hashCode() {
 		//TODO
-		return username.hashCode();
+		return username.hashCode() * ipAddress.hashCode();
 	}
 }
