@@ -34,21 +34,21 @@ public class RegisterFieldsChecker {
 			JSONArray usernameErrors = new JSONArray();
 			
 			if ( username.length() < 5 ) {
-				usernameErrors.put(FieldsErrors.SHORT);
+				usernameErrors.put(FieldsNames.SHORT);
 				fieldIsOk = false;
 			}
 			
 			else if ( username.length() > 20 ) {
-				usernameErrors.put(FieldsErrors.LONG);
+				usernameErrors.put(FieldsNames.LONG);
 				fieldIsOk = false;
 			}
 			
 			if ( username.contains(" ") ) {
-				usernameErrors.put(FieldsErrors.INVALID_CHAR);
+				usernameErrors.put(FieldsNames.INVALID_CHAR);
 				fieldIsOk = false;
 			}
 			
-			json.put("username", usernameErrors);
+			json.put(FieldsNames.USERNAME, usernameErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -74,16 +74,16 @@ public class RegisterFieldsChecker {
 			JSONArray passwordErrors = new JSONArray();
 			
 			if ( password.length() < 8) {
-				passwordErrors.put(FieldsErrors.SHORT);
+				passwordErrors.put(FieldsNames.SHORT);
 				fieldIsOk = false;
 			}
 			
 			else if ( password.length() > 30) {
-				passwordErrors.put(FieldsErrors.LONG);
+				passwordErrors.put(FieldsNames.LONG);
 				fieldIsOk = false;
 			}
 			
-			json.put("password", passwordErrors);
+			json.put(FieldsNames.PASSWORD, passwordErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -112,17 +112,17 @@ public class RegisterFieldsChecker {
 			JSONArray emailErrors = new JSONArray();
 			
 			if ( !emailValidator.isValid(email) ) {
-				emailErrors.put(FieldsErrors.INVALID_EMAIL);
+				emailErrors.put(FieldsNames.INVALID_EMAIL);
 				fieldIsOk = false;
 			}
 			
 			if ( email.endsWith("@mailnesia.com") ) {
 				//TODO Add invalid domains
-				emailErrors.put(FieldsErrors.INVALID_DOMAIN);
+				emailErrors.put(FieldsNames.INVALID_DOMAIN);
 				fieldIsOk = false;
 			}
 			
-			json.put("email", emailErrors);
+			json.put(FieldsNames.EMAIL, emailErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

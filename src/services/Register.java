@@ -3,6 +3,7 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
 import check_fields.RegisterFieldsChecker;
 
 /**
@@ -33,12 +34,13 @@ public class Register implements Service {
 		
 		try {
 			
-			jsonResponse.put("service", "REGISTER");
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		readFields();
 		checkFields();
 		if ( fieldsAreOk )
@@ -51,9 +53,9 @@ public class Register implements Service {
 		
 		try {
 			
-			username = json.getString("username");
-			password = json.getString("password");
-			email = json.getString("email");
+			username = json.getString(FieldsNames.USERNAME);
+			password = json.getString(FieldsNames.PASSWORD);
+			email = json.getString(FieldsNames.EMAIL);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -78,7 +80,7 @@ public class Register implements Service {
 		try {
 
 			if ( fieldsAreOk == true ) {
-				jsonResponse.put("value", "true");
+				jsonResponse.put("value", true);
 				return jsonResponse;
 			}
 			
