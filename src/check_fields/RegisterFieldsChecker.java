@@ -34,17 +34,17 @@ public class RegisterFieldsChecker {
 			JSONArray usernameErrors = new JSONArray();
 			
 			if ( username.length() < 5 ) {
-				usernameErrors.put("short");
+				usernameErrors.put(FieldsErrors.SHORT);
 				fieldIsOk = false;
 			}
 			
 			else if ( username.length() > 20 ) {
-				usernameErrors.put("long");
+				usernameErrors.put(FieldsErrors.LONG);
 				fieldIsOk = false;
 			}
 			
 			if ( username.contains(" ") ) {
-				usernameErrors.put("invalid");
+				usernameErrors.put(FieldsErrors.INVALID_CHAR);
 				fieldIsOk = false;
 			}
 			
@@ -74,12 +74,12 @@ public class RegisterFieldsChecker {
 			JSONArray passwordErrors = new JSONArray();
 			
 			if ( password.length() < 8) {
-				passwordErrors.put("short");
+				passwordErrors.put(FieldsErrors.SHORT);
 				fieldIsOk = false;
 			}
 			
 			else if ( password.length() > 30) {
-				passwordErrors.put("long");
+				passwordErrors.put(FieldsErrors.LONG);
 				fieldIsOk = false;
 			}
 			
@@ -112,13 +112,13 @@ public class RegisterFieldsChecker {
 			JSONArray emailErrors = new JSONArray();
 			
 			if ( !emailValidator.isValid(email) ) {
-				emailErrors.put("invalid");
+				emailErrors.put(FieldsErrors.INVALID_EMAIL);
 				fieldIsOk = false;
 			}
 			
 			if ( email.endsWith("@mailnesia.com") ) {
 				//TODO Add invalid domains
-				emailErrors.put("domain");
+				emailErrors.put(FieldsErrors.INVALID_DOMAIN);
 				fieldIsOk = false;
 			}
 			
