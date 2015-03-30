@@ -1,8 +1,8 @@
 package services;
 
-import game_server.DataManager;
-
 import java.net.InetAddress;
+
+import online_management.OnlineManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,13 +16,14 @@ import check_fields.FieldsNames;
 
 public class Login implements Service {
 	
-	private DataManager dataManager = DataManager.getIstance();
+	//private DataManager dataManager = DataManager.getIstance();
 	
 	private JSONObject json;
 	
 	private String username;
 	private String password;
 	private InetAddress ipAddress; 
+	private int hashCode;
 	
 	
 	private JSONObject jsonResponse = new JSONObject();
@@ -72,7 +73,8 @@ public class Login implements Service {
 	}
 	
 	private void saveFields(){
-		dataManager.setLogged(username, hashCode());
+		OnlineManager onlineManager = OnlineManager.getInstance();
+		hashCode = onlineManager.setOnline(username, ipAddress);
 	}
 	
 	private JSONObject getResponse() {
@@ -81,6 +83,7 @@ public class Login implements Service {
 
 			if ( fieldsAreOk == true ) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
+				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
 				return jsonResponse;
 			}
 			
@@ -90,11 +93,5 @@ public class Login implements Service {
 			//TODO
 			return new JSONObject();
 		}
-	}
-	
-	@Override
-	public int hashCode() {
-		//TODO
-		return username.hashCode() * ipAddress.hashCode();
 	}
 }

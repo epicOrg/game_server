@@ -3,6 +3,8 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
+
 /**
  * @author	Noris
  * @since	2015-03-26
@@ -21,7 +23,7 @@ public class Unknown implements Service {
 		
 		try {
 			
-			jsonResponse.put("service", "UNKNOWN");
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
 			return jsonResponse;
 			
 		} catch (JSONException e) {
