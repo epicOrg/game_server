@@ -12,13 +12,13 @@ public class OnlineUser {
 	
 	private String username;
 	private InetAddress ipAddress;
-	private GregorianCalendar connectionTime;
+	private GregorianCalendar connectionDate;
 	
 	public OnlineUser(String username, InetAddress ipAddress) {
 		super();
 		this.username = username;
 		this.ipAddress = ipAddress;
-		connectionTime = new GregorianCalendar();
+		connectionDate = new GregorianCalendar();
 	}	
 	
 	public String getUsername() {
@@ -29,13 +29,21 @@ public class OnlineUser {
 		return ipAddress;
 	}
 
-	public GregorianCalendar getConnectionTime() {
-		return connectionTime;
+	public GregorianCalendar getConnectionDate() {
+		return connectionDate;
+	}
+	
+	/**
+	 * @return connection time in milliseconds
+	 */
+	public long getConnectionTime() {
+		GregorianCalendar now = new GregorianCalendar();
+		return now.getTimeInMillis() - connectionDate.getTimeInMillis();
 	}
 
 	@Override
 	public int hashCode() {
-		return username.hashCode() * ipAddress.hashCode() * connectionTime.hashCode();
+		return username.hashCode() * ipAddress.hashCode() * connectionDate.hashCode();
 	}
 
 }
