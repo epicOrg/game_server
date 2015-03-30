@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
 import services.Service;
 
 /**
@@ -38,7 +39,7 @@ public class ClientRequestThread implements Runnable {
 			JSONObject json = new JSONObject(string);
 			
 			//Add client IP to json service message
-			json.put("ipAddr", socket.getInetAddress());
+			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress());
 			
 			OutputStreamWriter out = new OutputStreamWriter(
 					socket.getOutputStream(), Charset.forName("UTF-8").newEncoder());
