@@ -33,17 +33,17 @@ public class RegisterFieldsChecker {
 			
 			JSONArray usernameErrors = new JSONArray();
 			
-			if ( username.length() < 5 ) {
+			if ( username.length() < FieldsValues.USERNAME_MIN_LENGTH ) {
 				usernameErrors.put(FieldsNames.SHORT);
 				fieldIsOk = false;
 			}
 			
-			else if ( username.length() > 20 ) {
+			else if ( username.length() > FieldsValues.USERNAME_MAX_LENGTH ) {
 				usernameErrors.put(FieldsNames.LONG);
 				fieldIsOk = false;
 			}
 			
-			if ( username.contains(" ") ) {
+			if ( username.matches(FieldsValues.USERNAME_FORBIDDEN_CHARS) ) {
 				usernameErrors.put(FieldsNames.INVALID_CHAR);
 				fieldIsOk = false;
 			}
@@ -73,19 +73,17 @@ public class RegisterFieldsChecker {
 			
 			JSONArray passwordErrors = new JSONArray();
 			
-			if ( password.length() < 8) {
+			if ( password.length() < FieldsValues.PASSWORD_MIN_LENGTH) {
 				passwordErrors.put(FieldsNames.SHORT);
 				fieldIsOk = false;
 			}
 			
-			else if ( password.length() > 30) {
+			else if ( password.length() > FieldsValues.PASSWORD_MAX_LENGTH) {
 				passwordErrors.put(FieldsNames.LONG);
 				fieldIsOk = false;
 			}
 			
-			//Password must contains both letters and numbers
-			if ( !password.matches(".*[a-zA-Z]+.*") ||
-					!password.matches(".*\\d+.*") ) {
+			if ( !password.matches(FieldsValues.PASSWORD_NEEDED_CHARS) ) {
 				passwordErrors.put(FieldsNames.INVALID);
 				fieldIsOk = false;
 			}
@@ -123,7 +121,7 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
-			if ( email.endsWith("@mailnesia.com") ) {
+			if ( email.endsWith("@example.com") ) {
 				//TODO Add invalid domains
 				emailErrors.put(FieldsNames.INVALID_DOMAIN);
 				fieldIsOk = false;
