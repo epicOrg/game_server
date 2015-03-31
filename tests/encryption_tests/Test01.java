@@ -1,14 +1,18 @@
-package encryption;
+package encryption_tests;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
+
+import encryption.Decrypter;
+import encryption.Encrypter;
+import encryption.SymmetricKeyGenerator;
 
 /**
  * @author	Noris
  * @since	2015-03-30
  */
 
-public class Test {
+public class Test01 {
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		
