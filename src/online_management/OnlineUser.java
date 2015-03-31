@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 
 /**
  * @author	Noris
- * @since	2015-03-30
+ * @since	2015/03/30
  */
 
 public class OnlineUser {
@@ -34,13 +34,16 @@ public class OnlineUser {
 	}
 	
 	/**
-	 * @return connection time in milliseconds
+	 * @return the connection time in milliseconds
 	 */
 	public long getConnectionTime() {
 		GregorianCalendar now = new GregorianCalendar();
 		return now.getTimeInMillis() - connectionDate.getTimeInMillis();
 	}
 
+	/**
+	 * @return a different value for every online user
+	 */
 	@Override
 	public int hashCode() {
 		return username.hashCode() * ipAddress.hashCode() * connectionDate.hashCode();
