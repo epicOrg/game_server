@@ -48,7 +48,8 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
-			json.put(FieldsNames.USERNAME, usernameErrors);
+			if ( !fieldIsOk )
+				json.put(FieldsNames.USERNAME, usernameErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -88,7 +89,8 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
-			json.put(FieldsNames.PASSWORD, passwordErrors);
+			if ( !fieldIsOk )
+				json.put(FieldsNames.PASSWORD, passwordErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -127,7 +129,8 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 			
-			json.put(FieldsNames.EMAIL, emailErrors);
+			if ( !fieldIsOk )
+				json.put(FieldsNames.EMAIL, emailErrors);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
