@@ -2,26 +2,27 @@ package online_management;
 
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @author	Noris
- * @since	2015/03/30
+ * @author Noris
+ * @since  2015/03/30
  */
 
 public class OnlineManager {
-	
+
 	private static OnlineManager onlineManager = new OnlineManager();
 	private static int onlineUsersNumber = 0;
-	
+
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
-	
+
 	/**
 	 * @return the instance of onlineManager
 	 */
 	public static OnlineManager getInstance() {
 		return onlineManager;
 	}
-	
+
 	/**
 	 * Set the user online.
 	 * 
@@ -32,7 +33,7 @@ public class OnlineManager {
 		onlineUsersNumber++;
 		return onlineUsers.get(username).hashCode();
 	}
-	
+
 	/**
 	 * Set the user offline.
 	 * 
@@ -45,7 +46,7 @@ public class OnlineManager {
 			onlineUsersNumber--;
 		}
 	}
-	
+
 	/**
 	 * @param username
 	 * @return true if the user is online, false otherwise
@@ -60,7 +61,7 @@ public class OnlineManager {
 	public static int getOnlineUsersNumber() {
 		return onlineUsersNumber;
 	}
-	
+
 	/**
 	 * @param username
 	 * @return IP Address of the user
@@ -68,7 +69,7 @@ public class OnlineManager {
 	public InetAddress getIpAddressByUsername(String username) {
 		return onlineUsers.get(username).getIpAddress();
 	}
-	
+
 	/**
 	 * 
 	 * @param username
@@ -76,6 +77,18 @@ public class OnlineManager {
 	 */
 	public int getHashCodeByUsername(String username) {
 		return onlineUsers.get(username).hashCode();
+	}
+
+	/**
+	 * @param hashCode
+	 * @return username
+	 */
+	public String getUsernameByHashCode(int hashCode) {
+		for (Map.Entry<String, OnlineUser> entry : onlineUsers.entrySet()) {
+			if (entry.getValue().hashCode() == hashCode())
+				return entry.getKey();
+		}
+		return null;
 	}
 
 }
