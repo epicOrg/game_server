@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @author Noris
- * @since  2015/03/30
+ * @date 2015/03/30
  */
 
 public class OnlineManager {
@@ -64,6 +64,14 @@ public class OnlineManager {
 
 	/**
 	 * @param username
+	 * @return the OnlineUser instance object of the user
+	 */
+	public OnlineUser getOnlineUserByUsername(String username) {
+		return onlineUsers.get(username);
+	}
+
+	/**
+	 * @param username
 	 * @return IP Address of the user
 	 */
 	public InetAddress getIpAddressByUsername(String username) {
@@ -71,7 +79,6 @@ public class OnlineManager {
 	}
 
 	/**
-	 * 
 	 * @param username
 	 * @return hashCode of the user
 	 */

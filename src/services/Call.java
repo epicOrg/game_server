@@ -2,6 +2,8 @@ package services;
 
 import java.net.InetAddress;
 
+import online_management.OnlineUser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,9 +20,9 @@ public class Call implements Service {
 
 	private JSONObject json;
 
+	private OnlineUser caller;
 	private String callerUsername;
 	private int callerHashCode;
-	private InetAddress callerIpAddress;
 	private int callerPort;
 
 	private String calleeUsername;
@@ -58,7 +60,6 @@ public class Call implements Service {
 
 			callerUsername = json.getString(FieldsNames.CALLER);
 			callerHashCode = (int) json.get(FieldsNames.HASHCODE);
-			callerIpAddress = (InetAddress) json.get(FieldsNames.IP_ADDRESS);
 			callerPort = (int) json.get(FieldsNames.PORT);
 			calleeUsername = json.getString(FieldsNames.CALLEE);
 
@@ -70,22 +71,33 @@ public class Call implements Service {
 
 	private void checkFields() {
 
-		CallFieldsChecker callFieldsChecker =
-				new CallFieldsChecker(jsonResponse);
+		CallFieldsChecker callFieldsChecker = new CallFieldsChecker(
+				jsonResponse);
 
-		if (callFieldsChecker.checkHashCode(callerUsername, callerHashCode)) {
+		caller = callFieldsChecker
+				.checkHashCode(callerUsername, callerHashCode);
+
+		if (caller == null) {
 			fieldsAreOk = false;
 			return;
 		}
 
 		calleeIpAddress = callFieldsChecker
 				.checkIfCalleeIsOnline(calleeUsername);
-		if (calleeIpAddress == null)
+		if (calleeIpAddress == null) {
 			fieldsAreOk = false;
+			return;
+		}
+
+		if (callFieldsChecker.checkPortLegality(callerPort)) {
+			fieldsAreOk = false;
+			return;
+		}
+
 	}
 
 	private void call() {
-		new Caller(callerIpAddress, callerPort, calleeIpAddress);
+		new Caller(caller, callerPort, calleeIpAddress);
 	}
 
 	private JSONObject getResponse() {

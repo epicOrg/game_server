@@ -3,6 +3,7 @@ package check_fields;
 import java.net.InetAddress;
 
 import online_management.OnlineManager;
+import online_management.OnlineUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,15 +23,15 @@ public class CallFieldsChecker {
 	}
 
 	/**
-	 * 
 	 * @param username of the caller
 	 * @param hashCode of the caller
-	 * @return true if the hashCode sent by the user corresponds to the hashCode
-	 *         generated and saved by the server in the login, false otherwise
+	 * @return the OnlineUser object of the user if the hashCode sent by the
+	 *         user corresponds to the hashCode generated and saved by the
+	 *         server in the login, null otherwise
 	 */
-	public boolean checkHashCode(String username, int hashCode) {
+	public OnlineUser checkHashCode(String username, int hashCode) {
 		if (hashCode == onlineManager.getHashCodeByUsername(username))
-			return true;
+			return onlineManager.getOnlineUserByUsername(username);
 
 		try {
 
@@ -41,7 +42,7 @@ public class CallFieldsChecker {
 			e.printStackTrace();
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
@@ -49,6 +50,39 @@ public class CallFieldsChecker {
 	 * @return if the callee is online its IP Address, otherwise null
 	 */
 	public InetAddress checkIfCalleeIsOnline(String callee) {
-		return onlineManager.getIpAddressByUsername(callee);
+		InetAddress calleeIpAddress = onlineManager
+				.getIpAddressByUsername(callee);
+
+		if (calleeIpAddress == null)
+			try {
+
+				json.put(FieldsNames.IP_ADDRESS, FieldsNames.INVALID);
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		return calleeIpAddress;
+	}
+
+	/**
+	 * @param port number
+	 * @return true if the port is valid, false otherwise
+	 */
+	public boolean checkPortLegality(int port) {
+		if (port > 1023)
+			return true;
+
+		try {
+
+			json.put(FieldsNames.PORT, FieldsNames.INVALID);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }

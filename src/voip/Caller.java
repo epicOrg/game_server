@@ -2,6 +2,8 @@ package voip;
 
 import java.net.InetAddress;
 
+import online_management.OnlineUser;
+
 /**
  * @author Noris
  * @date 2015/04/03
@@ -9,19 +11,21 @@ import java.net.InetAddress;
 
 public class Caller {
 
+	private OnlineUser caller;
 	private InetAddress callerIpAddress;
 	private int callerPort;
 
 	private InetAddress callee;
 	private int calleePort;
 
-	public Caller(InetAddress callerIpAddress, int callerPort,
-			InetAddress callee) {
+	public Caller(OnlineUser caller, int callerPort, InetAddress callee) {
 
-		this.callerIpAddress = callerIpAddress;
+		this.caller = caller;
 		this.callerPort = callerPort;
 		this.callee = callee;
 	}
 
-	// TODO
+	public void notifyCall() {
+		// TODO
+	}
 }

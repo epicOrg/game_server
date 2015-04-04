@@ -4,23 +4,23 @@ import java.net.InetAddress;
 import java.util.GregorianCalendar;
 
 /**
- * @author	Noris
- * @since	2015/03/30
+ * @author Noris
+ * @date 2015/03/30
  */
 
 public class OnlineUser {
-	
+
 	private String username;
 	private InetAddress ipAddress;
 	private GregorianCalendar connectionDate;
-	
+
 	public OnlineUser(String username, InetAddress ipAddress) {
 		super();
 		this.username = username;
 		this.ipAddress = ipAddress;
 		connectionDate = new GregorianCalendar();
-	}	
-	
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -32,7 +32,7 @@ public class OnlineUser {
 	public GregorianCalendar getConnectionDate() {
 		return connectionDate;
 	}
-	
+
 	/**
 	 * @return the connection time in milliseconds
 	 */
@@ -46,7 +46,8 @@ public class OnlineUser {
 	 */
 	@Override
 	public int hashCode() {
-		return username.hashCode() * ipAddress.hashCode() * connectionDate.hashCode();
+		return username.hashCode() * ipAddress.hashCode()
+				* connectionDate.hashCode();
 	}
 
 }
