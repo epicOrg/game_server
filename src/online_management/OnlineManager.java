@@ -12,7 +12,6 @@ import java.util.Map;
 public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
-	private static int onlineUsersNumber = 0;
 
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
 
@@ -30,7 +29,6 @@ public class OnlineManager {
 	 */
 	public int setOnline(String username, InetAddress ipAddress) {
 		onlineUsers.put(username, new OnlineUser(username, ipAddress));
-		onlineUsersNumber++;
 		return onlineUsers.get(username).hashCode();
 	}
 
@@ -41,10 +39,8 @@ public class OnlineManager {
 	 * @param hashCode
 	 */
 	public void setOffline(String username, int hashCode) {
-		if (getHashCodeByUsername(username) == hashCode) {
+		if (getHashCodeByUsername(username) == hashCode)
 			onlineUsers.remove(username);
-			onlineUsersNumber--;
-		}
 	}
 
 	/**
@@ -58,8 +54,8 @@ public class OnlineManager {
 	/**
 	 * @return the number of online users
 	 */
-	public static int getOnlineUsersNumber() {
-		return onlineUsersNumber;
+	public int getOnlineUsersNumber() {
+		return onlineUsers.size();
 	}
 
 	/**
