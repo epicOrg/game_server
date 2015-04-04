@@ -88,8 +88,8 @@ public class OnlineManager {
 	 */
 	public String getUsernameByHashCode(int hashCode) {
 		for (Map.Entry<String, OnlineUser> entry : onlineUsers.entrySet()) {
-			if (entry.getValue().hashCode() == hashCode())
-				return entry.getKey();
+			if (entry.getValue().hashCode() == hashCode)
+				return entry.getValue().getUsername();
 		}
 		return null;
 	}
