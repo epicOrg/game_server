@@ -11,9 +11,9 @@ import online_management.OnlineManager;
 import org.junit.Test;
 
 /**
- * This test set online a defined number of users and it chooses randomly one of
- * those users. Then, with the user name, it search the hashCode of this user,
- * and with this hashCode it search the user name again.
+ * This test sets online a defined number of users and it chooses randomly one
+ * of those users. Then, with the user name, it search the hashCode of this
+ * user, and with this hashCode it search the user name again.
  * 
  * @author Noris
  * @date 2015/04/05
@@ -38,14 +38,14 @@ public class Test01 {
 
 		// Get a random user
 		Random randomGenerator = new Random();
-		int randomNumber = randomGenerator.nextInt(ONLINE_USERS + 1);
+		int randomNumber = randomGenerator.nextInt(ONLINE_USERS);
 		String realUsername = "user" + randomNumber;
 
 		// Get the hashCode of realUsername
 		int hashCode = onlineManager.getHashCodeByUsername(realUsername);
 		System.out.println("HashCode of " + realUsername + ": " + hashCode);
 
-		// Get the user name of the previous found HashCode
+		// Get the user name of the previous founded HashCode
 		String foundUsername = onlineManager.getUsernameByHashCode(hashCode);
 		System.out.println("Username of " + hashCode + ": " + foundUsername);
 

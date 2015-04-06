@@ -16,7 +16,7 @@ import check_fields.FieldsNames;
  * specification <http://www.json.org/>).
  * 
  * @author Noris
- * @since 2015/03/31
+ * @date 2015/03/31
  *
  */
 

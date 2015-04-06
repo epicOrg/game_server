@@ -11,35 +11,35 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 
 /**
- * @author	Noris
- * @since	2015-03-30
+ * @author Noris
+ * @date 2015/03/30
  */
 
 public class Decrypter {
-	
+
 	byte[] cryptedData;
 	byte[] decryptedData;
 	private Key asymmetricKey;
-	
+
 	public Decrypter(byte[] cryptedData, Key asymmetricKey) {
 		super();
 		this.cryptedData = cryptedData;
 		this.asymmetricKey = asymmetricKey;
 	}
-	
+
 	public void decrypt(int encriptionLenght) {
-		
+
 		try {
-			
+
 			Cipher cipher = Cipher.getInstance("AES");
 			cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
 			decryptedData = new byte[cipher.getOutputSize(encriptionLenght)];
-			
+
 			int decriptionLenght = cipher.update(cryptedData, 0,
 					encriptionLenght, decryptedData, 0);
-			
+
 			decriptionLenght += cipher.doFinal(decryptedData, decriptionLenght);
-			
+
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class Decrypter {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public byte[] getDecryptedData() {
 		return decryptedData;
 	}

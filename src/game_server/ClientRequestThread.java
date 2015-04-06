@@ -14,12 +14,12 @@ import check_fields.FieldsNames;
 import services.Service;
 
 /**
- * @author	Noris
- * @since	2015-03-26
+ * @author Noris
+ * @date 2015/03/26
  */
 
 public class ClientRequestThread implements Runnable {
-	
+
 	private Socket socket;
 
 	public ClientRequestThread(Socket socket) {
@@ -29,26 +29,27 @@ public class ClientRequestThread implements Runnable {
 
 	@Override
 	public void run() {
-		
+
 		try {
-		
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(socket.getInputStream()));
-			
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					socket.getInputStream()));
+
 			String string = in.readLine();
 			JSONObject json = new JSONObject(string);
-			
-			//Add client IP to json service message
+
+			// Add client IP to json service message
 			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress());
-			
+
 			OutputStreamWriter out = new OutputStreamWriter(
-					socket.getOutputStream(), Charset.forName("UTF-8").newEncoder());
-			
+					socket.getOutputStream(), Charset.forName("UTF-8")
+							.newEncoder());
+
 			RequestElaborator requestElaborator = new RequestElaborator(json);
-			
+
 			Service service = requestElaborator.setService();
 			out.write(service.start());
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

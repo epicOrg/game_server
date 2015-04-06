@@ -7,31 +7,32 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * @author	Noris
- * @since	2015-03-30
+ * @author Noris
+ * @date 2015/03/30
  */
 
 public class AsymmetricKeysGenerator {
-	
+
 	private static final int KEYSIZE = 256;
-	
+
 	private Key publicKey;
 	private Key privateKey;
-	
+
 	public void generateKeys() {
-		
+
 		try {
-			
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator
+					.getInstance("RSA");
 			SecureRandom secureRandom = new SecureRandom();
-			
+
 			keyPairGenerator.initialize(KEYSIZE, secureRandom);
-			
+
 			KeyPair keyPair = keyPairGenerator.generateKeyPair();
-			
+
 			publicKey = keyPair.getPublic();
 			privateKey = keyPair.getPrivate();
-			
+
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
