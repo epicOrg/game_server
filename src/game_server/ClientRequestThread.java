@@ -21,10 +21,12 @@ import services.Service;
 public class ClientRequestThread implements Runnable {
 
 	private Socket socket;
+	private RequestElaborator requestElaborator;
 
 	public ClientRequestThread(Socket socket) {
 		super();
 		this.socket = socket;
+		requestElaborator = new RequestElaborator();
 	}
 
 	@Override
@@ -37,6 +39,8 @@ public class ClientRequestThread implements Runnable {
 
 			String string = in.readLine();
 			JSONObject json = new JSONObject(string);
+			
+			System.out.println(json.toString());
 
 			// Add client IP to json service message
 			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress());
@@ -45,9 +49,7 @@ public class ClientRequestThread implements Runnable {
 					socket.getOutputStream(), Charset.forName("UTF-8")
 							.newEncoder());
 
-			RequestElaborator requestElaborator = new RequestElaborator(json);
-
-			Service service = requestElaborator.setService();
+			Service service = requestElaborator.chooseService(json);
 			out.write(service.start());
 
 		} catch (IOException e) {

@@ -18,11 +18,11 @@ public class StartServer {
 		try {
 
 			@SuppressWarnings("resource")
-			final ServerSocket ServerSocket = new ServerSocket(PORT);
+			ServerSocket ServerSocket = new ServerSocket(PORT);
 
 			while (true) {
 
-				final Socket socket = ServerSocket.accept();
+				Socket socket = ServerSocket.accept();
 
 				Thread thread = new Thread(new ClientRequestThread(socket));
 				thread.start();

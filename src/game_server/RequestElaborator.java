@@ -3,6 +3,7 @@ package game_server;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
 import services.Call;
 import services.Login;
 import services.Register;
@@ -15,23 +16,19 @@ import services.Unknown;
  */
 
 public class RequestElaborator {
-
-	private JSONObject json;
-
-	public RequestElaborator(JSONObject json) {
+	public RequestElaborator() {
 		super();
 		// TODO (DEBUG PRINT)
 		// System.out.println(json.toString());
-		this.json = json;
 	}
 
-	public Service setService() throws JSONException {
-		switch (json.getString("SERVICE")) {
-		case "REGISTER":
+	public Service chooseService(JSONObject json) throws JSONException {
+		switch (json.getString(FieldsNames.SERVICE)) {
+		case FieldsNames.REGISTER:
 			return new Register(json);
-		case "LOGIN":
+		case FieldsNames.LOGIN:
 			return new Login(json);
-		case "CALL":
+		case FieldsNames.CALL:
 			return new Call(json);
 		default:
 			// TODO
