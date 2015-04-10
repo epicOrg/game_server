@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.Charset;
 
@@ -45,12 +46,10 @@ public class ClientRequestThread implements Runnable {
 			// Add client IP to json service message
 			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress());
 
-			OutputStreamWriter out = new OutputStreamWriter(
-					socket.getOutputStream(), Charset.forName("UTF-8")
-							.newEncoder());
+			PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
 			Service service = requestElaborator.chooseService(json);
-			out.write(service.start());
+			out.println(service.start());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

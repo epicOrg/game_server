@@ -57,8 +57,12 @@ public class Login implements Service {
 		try {
 
 			username = json.getString(FieldsNames.USERNAME);
+			System.out.println(username);
 			password = json.getString(FieldsNames.PASSWORD);
-			ipAddress = (InetAddress) json.get(FieldsNames.IP_ADDRESS);
+			System.out.println(password);
+			//ipAddress = (InetAddress) json.get(FieldsNames.IP_ADDRESS);
+			//deve prenderlo dal socket perche c'è il NAT di mezzo!
+			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -73,7 +77,7 @@ public class Login implements Service {
 
 	private void saveFields() {
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		hashCode = onlineManager.setOnline(username, ipAddress);
+		//hashCode = onlineManager.setOnline(username, ipAddress);
 	}
 
 	private JSONObject getResponse() {
@@ -81,15 +85,15 @@ public class Login implements Service {
 		try {
 
 			if (fieldsAreOk == true) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
+				jsonResponse.put(FieldsNames.NO_ERRORS, true);				
 				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
+				System.out.println(jsonResponse.toString());
 				return jsonResponse;
 			}
-
 			return jsonResponse;
 
 		} catch (JSONException e) {
-			// TODO
+			e.printStackTrace();
 			return new JSONObject();
 		}
 	}
