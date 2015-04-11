@@ -44,7 +44,7 @@ public class ClientRequestThread implements Runnable {
 			System.out.println(json.toString());
 
 			// Add client IP to json service message
-			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress());
+			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress().getHostAddress());
 
 			PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 

@@ -1,6 +1,7 @@
 package services;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import online_management.OnlineManager;
 
@@ -57,14 +58,16 @@ public class Login implements Service {
 		try {
 
 			username = json.getString(FieldsNames.USERNAME);
-			System.out.println(username);
+			System.out.println(json.toString());
 			password = json.getString(FieldsNames.PASSWORD);
-			System.out.println(password);
-			//ipAddress = (InetAddress) json.get(FieldsNames.IP_ADDRESS);
-			//deve prenderlo dal socket perche c'è il NAT di mezzo!
+			ipAddress = InetAddress.getByName(json.getString(FieldsNames.IP_ADDRESS));
+			System.out.println(ipAddress.toString());
 			
 
 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
