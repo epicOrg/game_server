@@ -40,13 +40,14 @@ public class ClientRequestThread implements Runnable {
 
 			String string = in.readLine();
 			JSONObject json = new JSONObject(string);
-			
+
 			System.out.println(json.toString());
 
 			// Add client IP to json service message
-			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress().getHostAddress());
+			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
+					.getHostAddress());
 
-			PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
 			Service service = requestElaborator.chooseService(json);
 			out.println(service.start());

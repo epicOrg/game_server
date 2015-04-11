@@ -58,11 +58,12 @@ public class Login implements Service {
 		try {
 
 			username = json.getString(FieldsNames.USERNAME);
-			System.out.println(json.toString());
 			password = json.getString(FieldsNames.PASSWORD);
-			ipAddress = InetAddress.getByName(json.getString(FieldsNames.IP_ADDRESS));
-			System.out.println(ipAddress.toString());
-			
+			ipAddress = InetAddress.getByName(json
+					.getString(FieldsNames.IP_ADDRESS));
+
+			// TODO REMOVE (debug print)
+			System.out.println(json.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +81,7 @@ public class Login implements Service {
 
 	private void saveFields() {
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		//hashCode = onlineManager.setOnline(username, ipAddress);
+		hashCode = onlineManager.setOnline(username, ipAddress);
 	}
 
 	private JSONObject getResponse() {
@@ -88,7 +89,7 @@ public class Login implements Service {
 		try {
 
 			if (fieldsAreOk == true) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);				
+				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
 				System.out.println(jsonResponse.toString());
 				return jsonResponse;
