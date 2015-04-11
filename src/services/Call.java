@@ -89,7 +89,7 @@ public class Call implements Service {
 			return;
 		}
 
-		if (callFieldsChecker.checkPortLegality(callerPort)) {
+		if (!callFieldsChecker.checkPortLegality(callerPort)) {
 			fieldsAreOk = false;
 			return;
 		}
@@ -104,7 +104,7 @@ public class Call implements Service {
 
 		try {
 
-			if (fieldsAreOk == true) {
+			if (fieldsAreOk) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				return jsonResponse;
 			}
