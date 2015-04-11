@@ -41,6 +41,7 @@ public class ClientRequestThread implements Runnable {
 			String string = in.readLine();
 			JSONObject json = new JSONObject(string);
 
+			// TODO REMOVE (debug print)
 			System.out.println(json.toString());
 
 			// Add client IP to json service message

@@ -91,7 +91,10 @@ public class Login implements Service {
 			if (fieldsAreOk == true) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
+				
+				// TODO REMOVE (debug print)
 				System.out.println(jsonResponse.toString());
+				
 				return jsonResponse;
 			}
 			return jsonResponse;
