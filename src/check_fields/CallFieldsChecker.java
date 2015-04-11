@@ -50,20 +50,20 @@ public class CallFieldsChecker {
 	 * @return if the callee is online its IP Address, otherwise null
 	 */
 	public InetAddress checkIfCalleeIsOnline(String callee) {
-		InetAddress calleeIpAddress = onlineManager
-				.getIpAddressByUsername(callee);
+		
+		if (onlineManager.checkIfOnline(callee))
+			return onlineManager.getIpAddressByUsername(callee);
 
-		if (calleeIpAddress == null)
-			try {
+		try {
 
-				json.put(FieldsNames.IP_ADDRESS, FieldsNames.INVALID);
+			json.put(FieldsNames.CALLEE, FieldsNames.OFFLINE);
 
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		return calleeIpAddress;
+		return null;
 	}
 
 	/**
