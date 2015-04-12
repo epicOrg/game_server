@@ -23,17 +23,24 @@ public class CallFieldsChecker {
 	}
 
 	/**
-	 * @param username of the caller
+	 * @param caller of the caller
 	 * @param hashCode of the caller
 	 * @return the OnlineUser object of the user if the hashCode sent by the
 	 *         user corresponds to the hashCode generated and saved by the
 	 *         server in the login, null otherwise
 	 */
-	public OnlineUser checkHashCode(String username, int hashCode) {
-		if (hashCode == onlineManager.getHashCodeByUsername(username))
-			return onlineManager.getOnlineUserByUsername(username);
-
+	public OnlineUser checkHashCode(String caller, int hashCode) {
 		try {
+			
+			if (!onlineManager.checkIfOnline(caller))
+			{
+				json.put(FieldsNames.CALLER, FieldsNames.OFFLINE);
+				return null;
+			}
+				
+			
+			if (hashCode == onlineManager.getHashCodeByUsername(caller))
+				return onlineManager.getOnlineUserByUsername(caller);
 
 			json.put(FieldsNames.HASHCODE, FieldsNames.INVALID);
 
