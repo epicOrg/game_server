@@ -18,7 +18,7 @@ import services.Unknown;
 public class RequestElaborator {
 	public RequestElaborator() {
 		super();
-		// TODO (DEBUG PRINT)
+		// TODO REMOVE (DEBUG PRINT)
 		// System.out.println(json.toString());
 	}
 

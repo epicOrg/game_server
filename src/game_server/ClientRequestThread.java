@@ -42,7 +42,7 @@ public class ClientRequestThread implements Runnable {
 			JSONObject json = new JSONObject(string);
 
 			// TODO REMOVE (debug print)
-			System.out.println(json.toString());
+			// System.out.println(json.toString());
 
 			// Add client IP to json service message
 			json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()

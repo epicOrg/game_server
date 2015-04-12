@@ -63,7 +63,7 @@ public class Login implements Service {
 					.getString(FieldsNames.IP_ADDRESS));
 
 			// TODO REMOVE (debug print)
-			System.out.println(json.toString());
+			// System.out.println(json.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -93,7 +93,7 @@ public class Login implements Service {
 				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
 				
 				// TODO REMOVE (debug print)
-				System.out.println(jsonResponse.toString());
+				// System.out.println(jsonResponse.toString());
 				
 				return jsonResponse;
 			}

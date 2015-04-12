@@ -46,7 +46,7 @@ public class Test01 {
 		// CLIENT: Read response from server
 		JSONObject jsonLoginFromServer = new JSONObject(stringLoginFromServer);
 		int hashCode = (int) jsonLoginFromServer.get(FieldsNames.HASHCODE);
-		
+
 		// CLIENT: Send a valid call request
 		JSONObject jsonCallFromClient = new JSONObject();
 		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.CALL);
@@ -55,7 +55,7 @@ public class Test01 {
 		jsonCallFromClient.put(FieldsNames.PORT, 6666);
 		jsonCallFromClient.put(FieldsNames.CALLEE, "JohnLocke");
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
-		
+
 		// SERVER: Read call request
 		Service call = new Call(jsonCallFromClient);
 		String stringCallFromServer = call.start().toString();

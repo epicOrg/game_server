@@ -23,22 +23,22 @@ public class CallFieldsChecker {
 	}
 
 	/**
-	 * @param caller of the caller
-	 * @param hashCode of the caller
+	 * @param caller
+	 *            username of the caller
+	 * @param hashCode
+	 *            hashcode of the caller
 	 * @return the OnlineUser object of the user if the hashCode sent by the
 	 *         user corresponds to the hashCode generated and saved by the
 	 *         server in the login, null otherwise
 	 */
 	public OnlineUser checkHashCode(String caller, int hashCode) {
 		try {
-			
-			if (!onlineManager.checkIfOnline(caller))
-			{
+
+			if (!onlineManager.checkIfOnline(caller)) {
 				json.put(FieldsNames.CALLER, FieldsNames.OFFLINE);
 				return null;
 			}
-				
-			
+
 			if (hashCode == onlineManager.getHashCodeByUsername(caller))
 				return onlineManager.getOnlineUserByUsername(caller);
 
@@ -53,11 +53,12 @@ public class CallFieldsChecker {
 	}
 
 	/**
-	 * @param username of the callee
+	 * @param callee
+	 *            username of the callee
 	 * @return if the callee is online its IP Address, otherwise null
 	 */
 	public InetAddress checkIfCalleeIsOnline(String callee) {
-		
+
 		if (onlineManager.checkIfOnline(callee))
 			return onlineManager.getIpAddressByUsername(callee);
 
@@ -74,7 +75,8 @@ public class CallFieldsChecker {
 	}
 
 	/**
-	 * @param port number
+	 * @param port
+	 *            the random port number choose by the caller
 	 * @return true if the port is valid, false otherwise
 	 */
 	public boolean checkPortLegality(int port) {
