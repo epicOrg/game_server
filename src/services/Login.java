@@ -50,7 +50,9 @@ public class Login implements Service {
 		checkFields();
 		if (fieldsAreOk)
 			saveFields();
-		return getResponse().toString();
+		
+		generatetResponse();
+		return jsonResponse.toString();
 
 	}
 
@@ -84,7 +86,7 @@ public class Login implements Service {
 		hashCode = onlineManager.setOnline(username, ipAddress);
 	}
 
-	private JSONObject getResponse() {
+	private void generatetResponse() {
 
 		try {
 
@@ -95,13 +97,10 @@ public class Login implements Service {
 				// TODO REMOVE (debug print)
 				// System.out.println(jsonResponse.toString());
 				
-				return jsonResponse;
 			}
-			return jsonResponse;
 
 		} catch (JSONException e) {
 			e.printStackTrace();
-			return new JSONObject();
 		}
 	}
 }

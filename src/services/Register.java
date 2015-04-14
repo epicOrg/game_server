@@ -13,8 +13,6 @@ import check_fields.RegisterFieldsChecker;
 
 public class Register implements Service {
 
-	// private DataManager dataManager = DataManager.getIstance();
-
 	private JSONObject json;
 
 	private String username;
@@ -45,7 +43,9 @@ public class Register implements Service {
 		checkFields();
 		if (fieldsAreOk)
 			saveFields();
-		return getResponse().toString();
+		
+		generateResponse();
+		return jsonResponse.toString();
 
 	}
 
@@ -76,20 +76,16 @@ public class Register implements Service {
 		// TODO Save fields into database
 	}
 
-	private JSONObject getResponse() {
+	private void generateResponse() {
 
 		try {
 
 			if (fieldsAreOk == true) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-				return jsonResponse;
 			}
-
-			return jsonResponse;
 
 		} catch (JSONException e) {
 			// TODO
-			return new JSONObject();
 		}
 	}
 

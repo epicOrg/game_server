@@ -51,7 +51,9 @@ public class Call implements Service {
 		checkFields();
 		if (fieldsAreOk)
 			call();
-		return getResponse().toString();
+		
+		generateResponse();
+		return jsonResponse.toString();
 	}
 
 	private void readFields() {
@@ -100,20 +102,18 @@ public class Call implements Service {
 		new Caller(caller, callerPort, calleeIpAddress);
 	}
 
-	private JSONObject getResponse() {
+	private void generateResponse() {
 
 		try {
 
 			if (fieldsAreOk) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-				return jsonResponse;
+			
 			}
 
-			return jsonResponse;
 
 		} catch (JSONException e) {
 			// TODO
-			return new JSONObject();
 		}
 	}
 }
