@@ -1,5 +1,6 @@
 package encryption;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -9,6 +10,9 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 
 /**
  * @author Noris
@@ -22,8 +26,15 @@ public class Decrypter {
 	private Key asymmetricKey;
 
 	public Decrypter(byte[] cryptedData, Key asymmetricKey) {
-		super();
 		this.cryptedData = cryptedData;
+		this.asymmetricKey = asymmetricKey;
+	}
+
+	// TODO Adjust throws
+	public Decrypter(String cryptedString, Key asymmetricKey)
+			throws DecoderException {
+		
+		this.cryptedData = Hex.decodeHex(cryptedString.toCharArray());
 		this.asymmetricKey = asymmetricKey;
 	}
 
@@ -65,4 +76,14 @@ public class Decrypter {
 		return decryptedData;
 	}
 
+	public String getDecryptedString() {
+		try {
+			
+			return new String(decryptedData, "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
 }

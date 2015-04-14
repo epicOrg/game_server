@@ -10,6 +10,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 
+import org.apache.commons.codec.binary.Hex;
+
 /**
  * @author Noris
  * @date 2015/03/30
@@ -64,6 +66,10 @@ public class Encrypter {
 
 	public byte[] getEncryptedData() {
 		return cryptedData;
+	}
+	
+	public String getEncryptedString() {
+		return new String(Hex.encodeHex(cryptedData));
 	}
 
 	public int getEncriptionLenght() {

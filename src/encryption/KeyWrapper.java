@@ -8,6 +8,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import org.apache.commons.codec.binary.Hex;
+
 /**
  * @author Noris
  * @date 2015/03/30
@@ -51,6 +53,10 @@ public class KeyWrapper {
 
 	public byte[] getWrappedKey() {
 		return wrappedKey;
+	}
+	
+	public String getWrappedKeyString() {
+		return Hex.encodeHexString(wrappedKey);
 	}
 
 }
