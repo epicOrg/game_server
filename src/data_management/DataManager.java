@@ -9,6 +9,7 @@ import writer.UserCreator;
 /**
  * 
  * @author Noris
+ * @author Micieli
  * @date 2015/03/27
  * 
  */

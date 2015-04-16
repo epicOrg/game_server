@@ -1,4 +1,4 @@
-package data_management;
+package data_management.password_encrypter;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -7,17 +7,20 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.binary.Hex;
 
 /**
+ * Implementation of @see {@link StringCrypter}. It encrypts a string using MD5.
+ * 
  * @author Noris
- * @date 2015/04/14
+ * @date 2015/04/16
  */
 
-public class PasswordCrypter {
+public class Md5StringEncrypter implements StringEncrypter {
 
-	public String cryptPassword(String password) {
+	@Override
+	public String encryptString(String string) {
 
 		try {
 
-			byte[] passwordBytes = password.getBytes("UTF-8");
+			byte[] passwordBytes = string.getBytes("UTF-8");
 
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			byte[] passwordCrypted = messageDigest.digest(passwordBytes);
@@ -30,9 +33,8 @@ public class PasswordCrypter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return null;
 
+		return null;
 	}
 
 }
