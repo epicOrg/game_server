@@ -24,13 +24,16 @@ public class Test01 {
 		String password1 = "OPS = Ops, Password Stupida!";
 		String password2 = password1;
 
-		PasswordEncrypter passwordEncrypter = new PasswordEncrypter(password1,
+		PasswordEncrypter passwordEncrypter1 = new PasswordEncrypter(password1,
 				new Md5StringEncrypter());
-		String encryptedPassword1 = passwordEncrypter.cryptPassword();
-		String encryptedPassword2 = passwordEncrypter.cryptPassword();
+		String encryptedPassword1 = passwordEncrypter1.cryptPassword();
 
-		System.out.println(encryptedPassword1);
-		System.out.println(encryptedPassword2);
+		PasswordEncrypter passwordEncrypter2 = new PasswordEncrypter(password1,
+				new Md5StringEncrypter());
+		String encryptedPassword2 = passwordEncrypter2.cryptPassword();
+
+		System.out.println("Password1: <" + encryptedPassword1 + ">");
+		System.out.println("Password2: <" + encryptedPassword2 + ">");
 
 		assertEquals(password1, password2);
 
