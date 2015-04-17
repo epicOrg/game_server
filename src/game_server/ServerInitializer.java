@@ -1,5 +1,6 @@
 package game_server;
 
+import writer.EmailFormatter;
 import writer.EmailSaver;
 import writer.UserCreator;
 import writer.UserLineFormatter;

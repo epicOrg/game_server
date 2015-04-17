@@ -1,7 +1,13 @@
-package game_server;
+package writer;
 
 import data_management.RegisteredUser;
-import writer.ILineFormatter;
+
+/**
+ * 
+ * @author Micieli
+ * @date 2015/04/17
+ * 
+ */
 
 public class EmailFormatter implements ILineFormatter {
 
