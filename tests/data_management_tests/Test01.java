@@ -20,13 +20,13 @@ public class Test01 {
 
 		DataManager dataManager = DataManager.getInstance();
 
-		RegisteredUser user = new RegisteredUser("Tony", "pass12345678",
-				"example@epic.org");
+		RegisteredUser user = new RegisteredUser("Hegel", "I_AM_A_LOL",
+				"hegel@epic.org");
 
 		dataManager.saveRegistrationFields(user);
 
-		RegisteredUser user2 = new RegisteredUser("Licia", "pass12343366",
-				"example2@epic.org");
+		RegisteredUser user2 = new RegisteredUser("Kant", "I_AM_TROLL",
+				"kant@epic.org");
 
 		dataManager.saveRegistrationFields(user2);
 	}
