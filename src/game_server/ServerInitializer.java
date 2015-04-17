@@ -1,8 +1,10 @@
 package game_server;
 
-import writer.LineFormatter;
+import writer.EmailSaver;
 import writer.UserCreator;
+import writer.UserLineFormatter;
 import data_management.DataManager;
+import data_management.RegisterDataSaver;
 
 /**
  * @author Micieli
@@ -14,8 +16,8 @@ public class ServerInitializer {
 
 	public void initDataManager() {
 		DataManager dataManager = DataManager.getInstance();
-		dataManager.setUserCreator(new UserCreator(dataManager.getPath(),
-				new LineFormatter()));
+		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserCreator(dataManager.getPath(), new UserLineFormatter()), 
+				new EmailSaver(dataManager.getPath() + "emails", new EmailFormatter()));
+		dataManager.setRegisterDataSaver(registerDataSaver);
 	}
-
 }

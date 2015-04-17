@@ -2,7 +2,7 @@ package data_management;
 
 import java.io.IOException;
 
-import writer.IUserCreator;
+import writer.IDataSaver;
 import exception.RegistrationFailedException;
 
 /**
@@ -15,7 +15,7 @@ import exception.RegistrationFailedException;
 
 public class DataManager {
 
-	private IUserCreator userCreator;
+	private IDataSaver registerDataSaver;
 	private static DataManager instance = new DataManager();
 
 	private DataManager() {
@@ -40,15 +40,15 @@ public class DataManager {
 		return instance;
 	}
 	
-	public void setUserCreator(IUserCreator userCreator) {
-		this.userCreator = userCreator;
+	public void setRegisterDataSaver(IDataSaver registerDataSaver) {
+		this.registerDataSaver = registerDataSaver;
 	}
 
 	public void saveRegistrationFields(RegisteredUser user)
 			throws RegistrationFailedException {
 
 		try {
-			userCreator.saveUser(user);
+			registerDataSaver.saveData(user);
 		} catch (IOException e) {
 			throw new RegistrationFailedException("Writing error");
 		}

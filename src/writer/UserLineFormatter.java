@@ -12,7 +12,7 @@ import data_management.RegisteredUser;
  * 
  */
 
-public class LineFormatter implements ILineFormatter {
+public class UserLineFormatter implements ILineFormatter {
 	
 	private static final String SEPARATOR = "\n";
 	

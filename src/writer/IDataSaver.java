@@ -3,6 +3,7 @@ package writer;
 import java.io.IOException;
 
 import data_management.RegisteredUser;
+import exception.RegistrationFailedException;
 
 /**
  * 
@@ -13,7 +14,7 @@ import data_management.RegisteredUser;
  * 
  */
 
-public interface IUserCreator {
+public interface IDataSaver {
 
 	/**
 	 * Data exporter.
@@ -22,7 +23,8 @@ public interface IUserCreator {
 	 * @param password
 	 * @param email
 	 * @throws IOException
+	 * @throws RegistrationFailedException 
 	 */
-	public abstract void saveUser(RegisteredUser user) throws IOException;
+	public abstract void saveData(RegisteredUser user) throws IOException;
 
 }

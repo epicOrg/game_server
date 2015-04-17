@@ -18,7 +18,7 @@ import data_management.RegisteredUser;
  * @date 2015/04/14
  * 
  */
-public class UserCreator implements IUserCreator {
+public class UserCreator implements IDataSaver {
 
 	private String path;
 	private ILineFormatter lineFormatter;
@@ -32,7 +32,7 @@ public class UserCreator implements IUserCreator {
 	}
 
 	@Override
-	public void saveUser(RegisteredUser user) throws IOException {		
+	public void saveData(RegisteredUser user) throws IOException {		
 		
 		
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path + user.getUsername())));
