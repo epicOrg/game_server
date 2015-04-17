@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
+import data_management.DataManager;
+import data_management.RegisteredUser;
 
 /**
  * @author Noris
@@ -21,10 +23,10 @@ public class Login implements Service {
 
 	private JSONObject json;
 
-	private String username;
-	private String password;
 	private InetAddress ipAddress;
 	private int hashCode;
+	private DataManager dataManager;
+	private RegisteredUser user;
 
 	private JSONObject jsonResponse = new JSONObject();
 	private boolean fieldsAreOk = true;
@@ -32,15 +34,14 @@ public class Login implements Service {
 	public Login(JSONObject json) {
 		super();
 		this.json = json;
+		dataManager = DataManager.getInstance();
 	}
 
 	@Override
 	public String start() {
 
 		try {
-
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,13 +60,12 @@ public class Login implements Service {
 	private void readFields() {
 		try {
 
-			username = json.getString(FieldsNames.USERNAME);
-			password = json.getString(FieldsNames.PASSWORD);
+			String username = json.getString(FieldsNames.USERNAME);
+			String password = json.getString(FieldsNames.PASSWORD);
 			ipAddress = InetAddress.getByName(json
 					.getString(FieldsNames.IP_ADDRESS));
-
-			// TODO REMOVE (debug print)
-			// System.out.println(json.toString());
+			user = new RegisteredUser(username, password, null); 
+			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -76,14 +76,15 @@ public class Login implements Service {
 		}
 	}
 
-	private boolean checkFields() {
-		// TODO
-		return true;
+	private void checkFields() {
+		
+		fieldsAreOk = dataManager.checkPassword(user);
+		
 	}
 
 	private void saveFields() {
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		hashCode = onlineManager.setOnline(username, ipAddress);
+		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress);
 	}
 
 	private void generatetResponse() {
@@ -92,11 +93,9 @@ public class Login implements Service {
 
 			if (fieldsAreOk == true) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
-				
-				// TODO REMOVE (debug print)
-				// System.out.println(jsonResponse.toString());
-				
+				jsonResponse.put(FieldsNames.HASHCODE, hashCode);				
+			}else{
+				jsonResponse.put(FieldsNames.NO_ERRORS, false);
 			}
 
 		} catch (JSONException e) {

@@ -48,8 +48,6 @@ public class LoginChecker implements ILoginChecker {
 
 		if (!registeredUser.getEncryptedPassword().equals(fields[1])) {
 			reader.close();
-			System.out.println(registeredUser.getEncryptedPassword() + "\n"
-					+ fields[1]);
 			throw new LoginFailedException("Wrong password!");
 		}
 
