@@ -71,18 +71,19 @@ public class Register implements Service {
 	private void checkFields() {
 
 		JSONObject errors = new JSONObject();
-		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(errors,
-				jsonResponse);
+		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(errors);
 		
 		noErrors &= registerFieldsChecker.checkUsername(registeredUser
 				.getUsername());
 		noErrors &= registerFieldsChecker.checkPassword(registeredUser
 				.getPassword());
 		noErrors &= registerFieldsChecker.checkEmail(registeredUser.getEmail());
-		
 		if (noErrors) {
 			checkAlradyUsed(errors);
 		}
+		try {
+			jsonResponse.put(FieldsNames.ERRORS, errors);
+		} catch (JSONException e) {}
 	}
 
 	private void checkAlradyUsed(JSONObject errors) {
