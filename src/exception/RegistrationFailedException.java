@@ -1,6 +1,7 @@
 package exception;
 
 /**
+ * An exception that is launched when the registration is failed
  * @author Micieli
  * @date 2015/04/17
  */

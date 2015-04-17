@@ -6,7 +6,7 @@ import exception.RegistrationFailedException;
 import game_server.ServerInitializer;
 
 /**
- * File saving test with DataManager.
+ * Test @see FileChecker 
  * 
  * @author Modica
  * @author Gavina

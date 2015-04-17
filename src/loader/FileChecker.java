@@ -11,7 +11,8 @@ import exception.EmailAlreadyUsedException;
 import exception.UsernameAlreadyUsedException;
 
 /**
- * 
+ * Implementation of @see IRegistrationChecker
+ * A class for registration data checking
  * @author Modica
  * @author Gavina
  * @date 2015/04/17
@@ -21,6 +22,11 @@ public class FileChecker implements IRegistrationChecker {
 	private String path;
 	private String filename;
 
+	/**
+	 * 
+	 * @param path the path of the file
+	 * @param filename the name of the file
+	 */
 	public FileChecker(String path, String filename) {
 		super();
 		this.path = path;

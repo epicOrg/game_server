@@ -6,7 +6,7 @@ import exception.EmailAlreadyUsedException;
 import exception.UsernameAlreadyUsedException;
 
 /**
- * 
+ * An interface for registration data checking
  * @author Gavina
  * @author Modica
  * @date 2015/04/17
@@ -15,16 +15,16 @@ public interface IRegistrationChecker {
 	
 	/**
 	 * 
-	 * @param username
-	 * @return true if username not exist
+	 * Check if username already exist
+	 * @param username  
 	 * @throws UsernameAlreadyUsedException
 	 */
 	public void checkUsername(String username) throws UsernameAlreadyUsedException;
 	
 	/**
 	 * 
+	 * Check if email already exist
 	 * @param email
-	 * @return true if email not exist
 	 * @throws EmailAlreadyUsedException
 	 * @throws IOException
 	 */
