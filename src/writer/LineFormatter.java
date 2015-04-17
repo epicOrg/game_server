@@ -20,7 +20,7 @@ public class LineFormatter implements ILineFormatter {
 	public String formatLine(RegisteredUser user) {
 		return	user.getUsername() + SEPARATOR +
 				user.getPassword() + SEPARATOR +
-				user.getEmail();
+				user.getEmail()+ "\n";
 	}
 
 }

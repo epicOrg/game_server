@@ -19,9 +19,11 @@ public class DataManager {
 	private static final String PATH = "database/";
 
 	private RegisteredUser user;
+	private UserCreator userCreator;
 
 	private DataManager(RegisteredUser user) {
 		this.user = user;
+		userCreator = new UserCreator(PATH , new LineFormatter());
 	}
 
 	public boolean checkUsername(String username) {
@@ -39,10 +41,7 @@ public class DataManager {
 		return true;
 	}
 
-	public boolean saveRegistrationFields() {
-
-		IUserCreator userCreator = new UserCreator(PATH + user.getUsername(),
-				new LineFormatter());
+	public boolean saveRegistrationFields() { 		
 
 		try {
 

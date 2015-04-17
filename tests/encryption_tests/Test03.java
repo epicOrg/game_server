@@ -29,7 +29,7 @@ public class Test03 {
 		symmetricKeyGenerator.generateKey();
 		Key asymmetricKey = symmetricKeyGenerator.getKey();
 
-		String string = "Questa Ã¨ una stringa di prova!";
+		String string = "Questa è una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
 		Encrypter encrypter = new Encrypter(string.getBytes(), asymmetricKey);
