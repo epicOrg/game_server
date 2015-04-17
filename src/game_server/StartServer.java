@@ -19,6 +19,8 @@ public class StartServer {
 
 			@SuppressWarnings("resource")
 			ServerSocket ServerSocket = new ServerSocket(PORT);
+			
+			new ServerInitializer().initDataManager();
 
 			while (true) {
 

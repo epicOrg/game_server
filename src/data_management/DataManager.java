@@ -2,10 +2,8 @@ package data_management;
 
 import java.io.IOException;
 
-import exception.RegistrationFailedException;
 import writer.IUserCreator;
-import writer.LineFormatter;
-import writer.UserCreator;
+import exception.RegistrationFailedException;
 
 /**
  * 
@@ -17,8 +15,6 @@ import writer.UserCreator;
 
 public class DataManager {
 
-	private static final String PATH = "database\\";
-	
 	private IUserCreator userCreator;
 	private static DataManager instance = new DataManager();
 
@@ -34,22 +30,34 @@ public class DataManager {
 		// TODO
 		return true;
 	}
-	
+
 	public boolean checkPassword(String username) {
 		// TODO
 		return true;
 	}
-	
+
 	public static DataManager getInstance() {
 		return instance;
-	}	
+	}
+	
+	public void setUserCreator(IUserCreator userCreator) {
+		this.userCreator = userCreator;
+	}
 
-	public void saveRegistrationFields(RegisteredUser user) throws RegistrationFailedException { 		
+	public void saveRegistrationFields(RegisteredUser user)
+			throws RegistrationFailedException {
 
 		try {
-			userCreator.writeUser(user);
+			userCreator.saveUser(user);
 		} catch (IOException e) {
 			throw new RegistrationFailedException("Writing error");
 		}
+	}
+	
+	public String getPath() {
+		if (System.getProperty("os.name").startsWith("Windows"))
+			return "database\\";
+		
+		return "database/";
 	}
 }

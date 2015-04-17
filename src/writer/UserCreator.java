@@ -32,7 +32,7 @@ public class UserCreator implements IUserCreator {
 	}
 
 	@Override
-	public void writeUser(RegisteredUser user) throws IOException {		
+	public void saveUser(RegisteredUser user) throws IOException {		
 		
 		
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path + user.getUsername())));

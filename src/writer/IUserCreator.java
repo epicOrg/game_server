@@ -23,6 +23,6 @@ public interface IUserCreator {
 	 * @param email
 	 * @throws IOException
 	 */
-	public abstract void writeUser(RegisteredUser user) throws IOException;
+	public abstract void saveUser(RegisteredUser user) throws IOException;
 
 }
