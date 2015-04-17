@@ -14,7 +14,7 @@ import data_management.RegisteredUser;
 
 public class UserLineFormatter implements ILineFormatter {
 
-	private static final String SEPARATOR = "\n";
+	private static final String SEPARATOR = " ";
 
 	@Override
 	public String formatLine(RegisteredUser user) {

@@ -2,9 +2,11 @@ package data_management;
 
 import java.io.IOException;
 
+import loader.ILoginChecker;
 import loader.IRegistrationChecker;
 import writer.IDataSaver;
 import exception.EmailAlreadyUsedException;
+import exception.LoginFailedException;
 import exception.RegistrationFailedException;
 import exception.UsernameAlreadyUsedException;
 
@@ -21,6 +23,7 @@ public class DataManager {
 	private IDataSaver registerDataSaver;
 	private static DataManager instance = new DataManager();
 	private IRegistrationChecker checker;
+	private ILoginChecker loginChecker;
 
 	private DataManager() {
 	}
@@ -40,13 +43,22 @@ public class DataManager {
 		} catch (EmailAlreadyUsedException e) {
 			return false;
 		} catch (IOException e) {
-			//TODO
+			// TODO
 		}
 		return true;
 	}
 
-	public boolean checkPassword(String username) {
-		// TODO
+	public boolean checkPassword(RegisteredUser registeredUser) {
+		try {
+
+			loginChecker.checkUser(registeredUser);
+
+		} catch (LoginFailedException e) {
+			return false;
+		} catch (IOException e) {
+			// TODO
+		}
+
 		return true;
 	}
 
@@ -57,7 +69,7 @@ public class DataManager {
 	public void setRegisterDataSaver(IDataSaver registerDataSaver) {
 		this.registerDataSaver = registerDataSaver;
 	}
-	
+
 	public void setChecker(IRegistrationChecker checker) {
 		this.checker = checker;
 	}
@@ -77,5 +89,9 @@ public class DataManager {
 			return "database\\";
 
 		return "database/";
+	}
+	
+	public void setLoginChecker(ILoginChecker loginChecker) {
+		this.loginChecker = loginChecker;
 	}
 }
