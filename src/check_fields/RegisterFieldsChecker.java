@@ -12,11 +12,13 @@ import org.json.JSONObject;
 
 public class RegisterFieldsChecker {
 
-	JSONObject json;
+	private JSONObject json;
+	private JSONObject errors;
 
-	public RegisterFieldsChecker(JSONObject json) {
+	public RegisterFieldsChecker(JSONObject json, JSONObject errors) {
 		super();
 		this.json = json;
+		this.errors = errors;
 	}
 
 	/**
@@ -48,9 +50,10 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk)
-				json.put(FieldsNames.USERNAME, usernameErrors);
-
+			if (!fieldIsOk){
+				errors.put(FieldsNames.USERNAME, usernameErrors);
+				json.put(FieldsNames.ERRORS, errors);
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,8 +92,10 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk)
-				json.put(FieldsNames.PASSWORD, passwordErrors);
+			if (!fieldIsOk){
+				errors.put(FieldsNames.PASSWORD, passwordErrors);
+				json.put(FieldsNames.ERRORS, errors);
+			}
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -129,8 +134,10 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk)
-				json.put(FieldsNames.EMAIL, emailErrors);
+			if (!fieldIsOk){
+				errors.put(FieldsNames.EMAIL, emailErrors);
+				json.put(FieldsNames.ERRORS, errors);
+			}
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
