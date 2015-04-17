@@ -1,5 +1,6 @@
 package game_server;
 
+import loader.FileChecker;
 import writer.EmailFormatter;
 import writer.EmailSaver;
 import writer.UserCreator;
@@ -17,12 +18,9 @@ public class ServerInitializer {
 
 	public void initDataManager() {
 		DataManager dataManager = DataManager.getInstance();
-
-		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
-				new UserCreator(dataManager.getPath(), new UserLineFormatter()),
-				new EmailSaver(dataManager.getPath() + "emails",
-						new EmailFormatter()));
-
+		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserCreator(dataManager.getPath(), new UserLineFormatter()), 
+				new EmailSaver(dataManager.getPath() + "emails", new EmailFormatter()));
 		dataManager.setRegisterDataSaver(registerDataSaver);
+		dataManager.setChecker(new FileChecker(dataManager.getPath(), "emails"));
 	}
 }

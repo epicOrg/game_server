@@ -2,8 +2,11 @@ package data_management;
 
 import java.io.IOException;
 
+import loader.IRegistrationChecker;
 import writer.IDataSaver;
+import exception.EmailAlreadyUsedException;
 import exception.RegistrationFailedException;
+import exception.UsernameAlreadyUsedException;
 
 /**
  * 
@@ -17,17 +20,28 @@ public class DataManager {
 
 	private IDataSaver registerDataSaver;
 	private static DataManager instance = new DataManager();
+	private IRegistrationChecker checker;
 
 	private DataManager() {
 	}
 
 	public boolean checkUsername(String username) {
-		// TODO
+		try {
+			checker.checkUsername(username);
+		} catch (UsernameAlreadyUsedException e) {
+			return false;
+		}
 		return true;
 	}
 
 	public boolean checkEmail(String email) {
-		// TODO
+		try {
+			checker.checkEmail(email);
+		} catch (EmailAlreadyUsedException e) {
+			return false;
+		} catch (IOException e) {
+			//TODO
+		}
 		return true;
 	}
 
@@ -39,9 +53,13 @@ public class DataManager {
 	public static DataManager getInstance() {
 		return instance;
 	}
-	
+
 	public void setRegisterDataSaver(IDataSaver registerDataSaver) {
 		this.registerDataSaver = registerDataSaver;
+	}
+	
+	public void setChecker(IRegistrationChecker checker) {
+		this.checker = checker;
 	}
 
 	public void saveRegistrationFields(RegisteredUser user)
@@ -53,11 +71,11 @@ public class DataManager {
 			throw new RegistrationFailedException("Writing error");
 		}
 	}
-	
+
 	public String getPath() {
 		if (System.getProperty("os.name").startsWith("Windows"))
 			return "database\\";
-		
+
 		return "database/";
 	}
 }
