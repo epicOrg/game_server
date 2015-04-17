@@ -14,13 +14,13 @@ import data_management.RegisteredUser;
 
 public class LineFormatter implements ILineFormatter {
 	
-	private static final String SEPARATOR = " ";
+	private static final String SEPARATOR = "\n";
 	
 	@Override
 	public String formatLine(RegisteredUser user) {
 		return	user.getUsername() + SEPARATOR +
 				user.getPassword() + SEPARATOR +
-				user.getEmail()+ "\n";
+				user.getEmail();
 	}
 
 }

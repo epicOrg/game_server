@@ -16,7 +16,7 @@ import writer.UserCreator;
 
 public class DataManager {
 
-	private static final String PATH = "database/";
+	private static final String PATH = "database\\";
 
 	private RegisteredUser user;
 	private UserCreator userCreator;

@@ -17,7 +17,7 @@ public class Test01 {
 
 	public static void main(String[] args) {
 
-		UserCreator creator = new UserCreator("registration.txt",
+		UserCreator creator = new UserCreator("database/",
 				new LineFormatter());
 
 		RegisteredUser user = new RegisteredUser("EpicOrg", "pass12345678",

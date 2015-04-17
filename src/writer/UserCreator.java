@@ -1,8 +1,10 @@
 package writer;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import data_management.RegisteredUser;
 
 /**
@@ -25,6 +27,7 @@ public class UserCreator implements IUserCreator {
 		super();
 		this.path = path;
 		this.lineFormatter = lineFormatter;
+		
 
 	}
 
@@ -32,7 +35,7 @@ public class UserCreator implements IUserCreator {
 	public void writeUser(RegisteredUser user) throws IOException {		
 		
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(path + "/" + user.getUsername()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path + user.getUsername())));
 
 		writer.write(lineFormatter.formatLine(user));
 
