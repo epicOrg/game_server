@@ -23,19 +23,17 @@ public class UserCreator implements IDataSaver {
 	private String path;
 	private ILineFormatter lineFormatter;
 
-	public UserCreator(String path,ILineFormatter lineFormatter) {
+	public UserCreator(String path, ILineFormatter lineFormatter) {
 		super();
 		this.path = path;
 		this.lineFormatter = lineFormatter;
-		
-
 	}
 
 	@Override
-	public void saveData(RegisteredUser user) throws IOException {		
-		
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path + user.getUsername())));
+	public void saveData(RegisteredUser user) throws IOException {
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path
+				+ user.getUsername())));
 
 		writer.write(lineFormatter.formatLine(user));
 

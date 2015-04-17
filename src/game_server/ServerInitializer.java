@@ -17,8 +17,12 @@ public class ServerInitializer {
 
 	public void initDataManager() {
 		DataManager dataManager = DataManager.getInstance();
-		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserCreator(dataManager.getPath(), new UserLineFormatter()), 
-				new EmailSaver(dataManager.getPath() + "emails", new EmailFormatter()));
+
+		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
+				new UserCreator(dataManager.getPath(), new UserLineFormatter()),
+				new EmailSaver(dataManager.getPath() + "emails",
+						new EmailFormatter()));
+
 		dataManager.setRegisterDataSaver(registerDataSaver);
 	}
 }

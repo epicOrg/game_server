@@ -14,11 +14,11 @@ import data_management.RegisteredUser;
  * 
  */
 
-public class EmailSaver implements IDataSaver{
-	
+public class EmailSaver implements IDataSaver {
+
 	private String filename;
 	private ILineFormatter lineFormatter;
-	
+
 	public EmailSaver(String filename, ILineFormatter lineFormatter) {
 		super();
 		this.filename = filename;
@@ -26,10 +26,11 @@ public class EmailSaver implements IDataSaver{
 	}
 
 	@Override
-	public void saveData(RegisteredUser user) throws IOException {		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filename),true));
-		
-		writer.append(lineFormatter.formatLine(user));	
+	public void saveData(RegisteredUser user) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
+				filename), true));
+
+		writer.append(lineFormatter.formatLine(user));
 		writer.close();
 	}
 

@@ -46,7 +46,7 @@ public class Register implements Service {
 		checkFields();
 		if (noErrors)
 			saveFields();
-		
+
 		generateResponse();
 		return jsonResponse.toString();
 
@@ -71,30 +71,37 @@ public class Register implements Service {
 
 		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(
 				jsonResponse);
-		noErrors &= registerFieldsChecker.checkUsername(registeredUser.getUsername());
-		noErrors &= registerFieldsChecker.checkPassword(registeredUser.getPassword());
+
+		noErrors &= registerFieldsChecker.checkUsername(registeredUser
+				.getUsername());
+		noErrors &= registerFieldsChecker.checkPassword(registeredUser
+				.getPassword());
 		noErrors &= registerFieldsChecker.checkEmail(registeredUser.getEmail());
 	}
 
 	private void saveFields() {
-		
+
 		try {
+
 			dataManager.saveRegistrationFields(registeredUser);
+
 		} catch (RegistrationFailedException e) {
 			try {
+
 				jsonResponse.put(FieldsNames.SERVER_ERROR, true);
+
 			} catch (JSONException e1) {
-				// TODO 
+				// TODO
 			}
+
 			noErrors = false;
 		}
-		
 	}
 
 	private void generateResponse() {
 
 		try {
-			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);	
+			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);
 		} catch (JSONException e) {
 			// TODO
 		}

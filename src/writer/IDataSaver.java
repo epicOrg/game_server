@@ -23,7 +23,7 @@ public interface IDataSaver {
 	 * @param password
 	 * @param email
 	 * @throws IOException
-	 * @throws RegistrationFailedException 
+	 * @throws RegistrationFailedException
 	 */
 	public abstract void saveData(RegisteredUser user) throws IOException;
 

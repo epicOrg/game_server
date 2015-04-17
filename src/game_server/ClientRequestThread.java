@@ -35,8 +35,8 @@ public class ClientRequestThread implements Runnable {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
-			
-			String request = in.readLine();			
+
+			String request = in.readLine();
 
 			// TODO REMOVE (debug print)
 			// System.out.println(json.toString());
@@ -52,7 +52,6 @@ public class ClientRequestThread implements Runnable {
 				out.println(service.start());
 				request = in.readLine();
 			}
-			
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

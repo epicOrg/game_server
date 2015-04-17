@@ -20,11 +20,12 @@ public class Md5StringEncrypter implements StringEncrypter {
 
 		try {
 
-			byte[] passwordBytes = string.getBytes("UTF-8");
+			byte[] stringBytes = string.getBytes("UTF-8");
 
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-			byte[] passwordCrypted = messageDigest.digest(passwordBytes);
-			return new String(Hex.encodeHex(passwordCrypted));
+			byte[] encryptedString = messageDigest.digest(stringBytes);
+
+			return new String(Hex.encodeHex(encryptedString));
 
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
