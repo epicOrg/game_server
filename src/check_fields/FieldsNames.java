@@ -3,7 +3,7 @@ package check_fields;
 /**
  * @author Noris
  * @date 2015/03/30
- * @version 6
+ * @version 7
  */
 
 public class FieldsNames {
@@ -48,6 +48,7 @@ public class FieldsNames {
 	public static final String LONG = "long";
 	public static final String INVALID_CHAR = "invalidChar";
 	public static final String INVALID_DOMAIN = "invalidDomain";
+	public static final String SERVER_ERROR = "server error";
 
 	// Call
 	public static final String OFFLINE = "offline";

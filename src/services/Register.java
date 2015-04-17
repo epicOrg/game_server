@@ -5,6 +5,9 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 import check_fields.RegisterFieldsChecker;
+import data_management.DataManager;
+import data_management.RegisteredUser;
+import exception.RegistrationFailedException;
 
 /**
  * @author Noris
@@ -14,17 +17,17 @@ import check_fields.RegisterFieldsChecker;
 public class Register implements Service {
 
 	private JSONObject json;
+	private DataManager dataManager;
 
-	private String username;
-	private String password;
-	private String email;
+	private RegisteredUser registeredUser;
 
 	private JSONObject jsonResponse = new JSONObject();
-	private boolean fieldsAreOk = true;
+	private boolean noErrors = true;
 
 	public Register(JSONObject json) {
 		super();
 		this.json = json;
+		dataManager = DataManager.getInstance();
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class Register implements Service {
 
 		readFields();
 		checkFields();
-		if (fieldsAreOk)
+		if (noErrors)
 			saveFields();
 		
 		generateResponse();
@@ -53,9 +56,10 @@ public class Register implements Service {
 
 		try {
 
-			username = json.getString(FieldsNames.USERNAME);
-			password = json.getString(FieldsNames.PASSWORD);
-			email = json.getString(FieldsNames.EMAIL);
+			String username = json.getString(FieldsNames.USERNAME);
+			String password = json.getString(FieldsNames.PASSWORD);
+			String email = json.getString(FieldsNames.EMAIL);
+			registeredUser = new RegisteredUser(username, password, email);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -67,23 +71,30 @@ public class Register implements Service {
 
 		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(
 				jsonResponse);
-		fieldsAreOk &= registerFieldsChecker.checkUsername(username);
-		fieldsAreOk &= registerFieldsChecker.checkPassword(password);
-		fieldsAreOk &= registerFieldsChecker.checkEmail(email);
+		noErrors &= registerFieldsChecker.checkUsername(registeredUser.getUsername());
+		noErrors &= registerFieldsChecker.checkPassword(registeredUser.getPassword());
+		noErrors &= registerFieldsChecker.checkEmail(registeredUser.getEmail());
 	}
 
 	private void saveFields() {
-		// TODO Save fields into database
+		
+		try {
+			dataManager.saveRegistrationFields(registeredUser);
+		} catch (RegistrationFailedException e) {
+			try {
+				jsonResponse.put(FieldsNames.SERVER_ERROR, true);
+			} catch (JSONException e1) {
+				// TODO 
+			}
+			noErrors = false;
+		}
+		
 	}
 
 	private void generateResponse() {
 
 		try {
-
-			if (fieldsAreOk == true) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-			}
-
+			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);	
 		} catch (JSONException e) {
 			// TODO
 		}

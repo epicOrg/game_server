@@ -19,7 +19,7 @@ public class LineFormatter implements ILineFormatter {
 	@Override
 	public String formatLine(RegisteredUser user) {
 		return	user.getUsername() + SEPARATOR +
-				user.getPassword() + SEPARATOR +
+				user.getEncryptedPassword() + SEPARATOR +
 				user.getEmail();
 	}
 

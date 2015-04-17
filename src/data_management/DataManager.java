@@ -2,6 +2,7 @@ package data_management;
 
 import java.io.IOException;
 
+import exception.RegistrationFailedException;
 import writer.IUserCreator;
 import writer.LineFormatter;
 import writer.UserCreator;
@@ -17,13 +18,11 @@ import writer.UserCreator;
 public class DataManager {
 
 	private static final String PATH = "database\\";
+	
+	private IUserCreator userCreator;
+	private static DataManager instance = new DataManager();
 
-	private RegisteredUser user;
-	private UserCreator userCreator;
-
-	private DataManager(RegisteredUser user) {
-		this.user = user;
-		userCreator = new UserCreator(PATH , new LineFormatter());
+	private DataManager() {
 	}
 
 	public boolean checkUsername(String username) {
@@ -40,16 +39,17 @@ public class DataManager {
 		// TODO
 		return true;
 	}
+	
+	public static DataManager getInstance() {
+		return instance;
+	}	
 
-	public boolean saveRegistrationFields() { 		
+	public void saveRegistrationFields(RegisteredUser user) throws RegistrationFailedException { 		
 
 		try {
-
 			userCreator.writeUser(user);
-			return true;
-
 		} catch (IOException e) {
-			return false;
+			throw new RegistrationFailedException("Writing error");
 		}
 	}
 }

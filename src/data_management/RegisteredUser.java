@@ -14,20 +14,26 @@ public class RegisteredUser {
 
 	private String username;
 	private String password;
+	private String encryptedPassword;
 	private String email;
 	private GregorianCalendar registrationDate;
 
 	public RegisteredUser(String username, String password, String email) {
 		this.username = username;
 		this.email = email;
-		cryptPassword(password);
+		this.password = password;
+		cryptPassword();
 		registrationDate = new GregorianCalendar();
 	}
 
-	private void cryptPassword(String password) {
+	private void cryptPassword() {
 		PasswordEncrypter passwordEncrypter = new PasswordEncrypter(password,
 				new Md5StringEncrypter());
-		this.password = passwordEncrypter.cryptPassword();
+		this.encryptedPassword = passwordEncrypter.cryptPassword();
+	}
+	
+	public String getEncryptedPassword() {
+		return encryptedPassword;
 	}
 
 	public String getUsername() {
