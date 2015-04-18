@@ -5,10 +5,8 @@ import java.io.IOException;
 import writer.IDataSaver;
 
 /**
- * 
  * @author Micieli
  * @date 2015/04/17
- * 
  */
 
 public class RegisterDataSaver implements IDataSaver {

@@ -1,7 +1,12 @@
 package game;
 
+/**
+ * @author Micieli
+ * @date 2015/04/18
+ */
+
 public class Player {
-	
+
 	private String username;
 	private float xPosition;
 	private float yPposition;
@@ -26,4 +31,5 @@ public class Player {
 	public void setyPposition(float yPposition) {
 		this.yPposition = yPposition;
 	}
+
 }

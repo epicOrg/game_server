@@ -16,9 +16,8 @@ import exception.FullRoomException;
 import exception.NoSuchRoomException;
 
 /**
- * 
- * @author Luca
- * @since 18/04/2015
+ * @author Micieli
+ * @date 2015/04/18
  */
 
 public class RoomService implements Service {
@@ -123,13 +122,13 @@ public class RoomService implements Service {
 		JSONObject roomsList = new JSONObject();
 
 		ArrayList<Room> rooms = dataManager.getRooms();
-		System.out.println("ROOMS N°" + rooms.size());
+		System.out.println("ROOMS Nï¿½" + rooms.size());
 
 		try {
 			for (Room room : rooms) {
 				JSONObject roomDescription = new JSONObject();
 				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
-						Room.MAX_PLAYER);
+						Room.MAX_PLAYERS);
 				roomDescription.put(FieldsNames.ROOM_CURRENT_PLAYERS,
 						room.getCurrentPlayers());
 				roomsList.put(room.getName(), roomDescription);
@@ -141,4 +140,5 @@ public class RoomService implements Service {
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -42,18 +42,25 @@ public class ClientRequestThread implements Runnable {
 			// System.out.println(json.toString());
 
 			while (!socket.isClosed()) {
-				if (request!= null) {
+				if (request != null) {
 					JSONObject json = new JSONObject(request);
+
+					// TODO REMOVE (debug print)
 					System.out.println(request);
+
 					// Add client IP to json service message
 					json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
 							.getHostAddress());
+
 					PrintWriter out = new PrintWriter(socket.getOutputStream(),
 							true);
+
 					Service service = requestElaborator.chooseService(json);
 					out.println(service.start());
 					request = in.readLine();
-					System.out.println("reading");
+
+					// TODO REMOVE (debug print)
+					System.out.println("Reading");
 				}
 			}
 
