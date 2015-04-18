@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -21,6 +22,8 @@ public class Room {
 
 	private Team teamA;
 	private Team teamB;
+
+	private ArrayList<Team> teams;
 
 	public Room(String roomName) {
 		super();
@@ -83,7 +86,7 @@ public class Room {
 	 * @return the team with less players or, if the teams has the same number
 	 *         of players, a random team.
 	 */
-	public Team getTeam() {
+	public Team getRandomTeam() {
 
 		if (teamA.getSize() < teamB.getSize())
 			return teamA;
@@ -95,6 +98,12 @@ public class Room {
 			return teamA;
 
 		return teamB;
+	}
+
+	public ArrayList<Team> getTeams() {
+		teams.add(teamA);
+		teams.add(teamB);
+		return teams;
 	}
 
 }

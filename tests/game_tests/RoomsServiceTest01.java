@@ -12,7 +12,7 @@ import data_management.GameDataManager;
  * @date 2015/04/18
  */
 
-public class RoomsServiceTest {
+public class RoomsServiceTest01 {
 
 	public static void main(String[] args) {
 

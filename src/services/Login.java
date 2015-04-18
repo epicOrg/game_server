@@ -19,9 +19,7 @@ import data_management.RegisteredUser;
 
 public class Login implements Service {
 
-	// private DataManager dataManager = DataManager.getIstance();
-
-	private JSONObject json;
+	private JSONObject jsonRequest;
 
 	private InetAddress ipAddress;
 	private int hashCode;
@@ -29,11 +27,11 @@ public class Login implements Service {
 	private RegisteredUser user;
 
 	private JSONObject jsonResponse = new JSONObject();
-	private boolean fieldsAreOk = true;
+	private boolean noErrors = true;
 
-	public Login(JSONObject json) {
+	public Login(JSONObject jsonRequest) {
 		super();
-		this.json = json;
+		this.jsonRequest = jsonRequest;
 		dataManager = DataManager.getInstance();
 	}
 
@@ -49,9 +47,9 @@ public class Login implements Service {
 
 		readFields();
 		checkFields();
-		if (fieldsAreOk)
+		if (noErrors)
 			saveFields();
-		
+
 		generatetResponse();
 		return jsonResponse.toString();
 
@@ -60,12 +58,12 @@ public class Login implements Service {
 	private void readFields() {
 		try {
 
-			String username = json.getString(FieldsNames.USERNAME);
-			String password = json.getString(FieldsNames.PASSWORD);
-			ipAddress = InetAddress.getByName(json
+			String username = jsonRequest.getString(FieldsNames.USERNAME);
+			String password = jsonRequest.getString(FieldsNames.PASSWORD);
+			user = new RegisteredUser(username, password, null);
+
+			ipAddress = InetAddress.getByName(jsonRequest
 					.getString(FieldsNames.IP_ADDRESS));
-			user = new RegisteredUser(username, password, null); 
-			
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -77,9 +75,7 @@ public class Login implements Service {
 	}
 
 	private void checkFields() {
-		
-		fieldsAreOk = dataManager.checkPassword(user);
-		
+		noErrors = dataManager.checkPassword(user);
 	}
 
 	private void saveFields() {
@@ -91,10 +87,10 @@ public class Login implements Service {
 
 		try {
 
-			if (fieldsAreOk == true) {
+			if (noErrors) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-				jsonResponse.put(FieldsNames.HASHCODE, hashCode);				
-			}else{
+				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
+			} else {
 				jsonResponse.put(FieldsNames.NO_ERRORS, false);
 			}
 

@@ -5,12 +5,11 @@ import game.Room;
 
 import java.util.ArrayList;
 
-import online_management.OnlineManager;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
+import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exception.FullRoomException;
 import exception.NoSuchRoomException;
@@ -23,45 +22,61 @@ import exception.NoSuchRoomException;
 public class RoomService implements Service {
 
 	private JSONObject request;
-	private GameDataManager dataManager;
+	private GameDataManager gameDataManager;
+
 	private JSONObject response;
+	private boolean noErrors = true;
 
 	public RoomService(JSONObject json) {
 		request = json;
-		dataManager = GameDataManager.getInstance();
+		gameDataManager = GameDataManager.getInstance();
 		response = new JSONObject();
 	}
 
 	@Override
 	public String start() {
 
-		// TODO Remove (debug print)
-		System.out.println(request.toString());
-
 		try {
 
 			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
+
+			checkFields();
+			if (noErrors)
+				runService(request.getString(FieldsNames.SERVICE_TYPE));
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		try {
-
-			String serviceType = request.getString(FieldsNames.SERVICE_TYPE);
-			runService(serviceType);
-
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		// TODO Remove (debug print)
-		System.out.println(response.toString());
-
+		generateResponse();
 		return response.toString();
 
+	}
+
+	private void checkFields() {
+
+		try {
+
+			JSONObject errors = new JSONObject();
+			RoomChecker roomChecker = new RoomChecker(errors);
+
+			if (roomChecker.checkHashCode(
+					request.getString(FieldsNames.USERNAME),
+					request.getInt(FieldsNames.HASHCODE)) == null) {
+
+				noErrors = false;
+			}
+
+			if (!noErrors)
+				response.put(FieldsNames.ERRORS, errors);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO
 	}
 
 	private void runService(String serviceType) throws JSONException {
@@ -70,7 +85,7 @@ public class RoomService implements Service {
 
 		switch (serviceType) {
 		case FieldsNames.CREATE_ROOM:
-			creationOk = dataManager.newRoom(request
+			creationOk = gameDataManager.newRoom(request
 					.getString(FieldsNames.ROOM_NAME));
 			response.put(FieldsNames.RESULT, creationOk);
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
@@ -93,13 +108,10 @@ public class RoomService implements Service {
 
 		try {
 
-			int hasCode = request.getInt(FieldsNames.HASHCODE);
-			String username = OnlineManager.getInstance()
-					.getUsernameByHashCode(hasCode);
-			Player player = new Player(username);
+			Player player = new Player(request.getString(FieldsNames.USERNAME));
 
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
-			Room room = dataManager.getRoomByName(roomName);
+			Room room = gameDataManager.getRoomByName(roomName);
 			room.addPlayer(player);
 			response.put(FieldsNames.RESULT, true);
 
@@ -132,8 +144,7 @@ public class RoomService implements Service {
 	private void addRoomsList() {
 		JSONObject roomsList = new JSONObject();
 
-		ArrayList<Room> rooms = dataManager.getRooms();
-		System.out.println("ROOMS N�" + rooms.size());
+		ArrayList<Room> rooms = gameDataManager.getRooms();
 
 		try {
 
@@ -147,6 +158,17 @@ public class RoomService implements Service {
 			}
 
 			response.put(FieldsNames.ROOMS_LIST, roomsList);
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void generateResponse() {
+		try {
+
+			response.put(FieldsNames.NO_ERRORS, noErrors);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

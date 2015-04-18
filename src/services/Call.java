@@ -18,7 +18,7 @@ import check_fields.FieldsNames;
 
 public class Call implements Service {
 
-	private JSONObject json;
+	private JSONObject jsonRequest;
 
 	private OnlineUser caller;
 	private String callerUsername;
@@ -31,8 +31,8 @@ public class Call implements Service {
 	private JSONObject jsonResponse = new JSONObject();
 	private boolean fieldsAreOk = true;
 
-	public Call(JSONObject json) {
-		this.json = json;
+	public Call(JSONObject jsonRequest) {
+		this.jsonRequest = jsonRequest;
 	}
 
 	@Override
@@ -60,10 +60,10 @@ public class Call implements Service {
 
 		try {
 
-			callerUsername = json.getString(FieldsNames.CALLER);
-			callerHashCode = (int) json.get(FieldsNames.HASHCODE);
-			callerPort = (int) json.get(FieldsNames.PORT);
-			calleeUsername = json.getString(FieldsNames.CALLEE);
+			callerUsername = jsonRequest.getString(FieldsNames.CALLER);
+			callerHashCode = (int) jsonRequest.get(FieldsNames.HASHCODE);
+			callerPort = (int) jsonRequest.get(FieldsNames.PORT);
+			calleeUsername = jsonRequest.getString(FieldsNames.CALLEE);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

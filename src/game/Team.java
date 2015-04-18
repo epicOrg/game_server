@@ -48,7 +48,7 @@ public class Team {
 	public int getSize() {
 		return players.size();
 	}
-	
+
 	public HashMap<String, Player> getPlayers() {
 		return players;
 	}
