@@ -1,51 +1,100 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 import exception.FullRoomException;
 
 /**
  * @author Micieli
+ * @author Noris
  * @date 2015/04/18
  */
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 2;
+	public static final int MAX_PLAYERS = 10;
 
-	private String name;
-	private ArrayList<Player> players = new ArrayList<Player>();
-	private int currentPlayers;
-	private boolean full = false;
+	private String roomName;
 
-	public Room(String name) {
+	private HashMap<String, Player> players = new HashMap<String, Player>();
+
+	private Team teamA;
+	private Team teamB;
+
+	public Room(String roomName) {
 		super();
-		this.name = name;
-		currentPlayers = 0;
+		this.roomName = roomName;
+		generateTeams();
 	}
 
 	public void addPlayer(Player player) throws FullRoomException {
-		if (currentPlayers >= MAX_PLAYERS) {
+
+		if (isFull()) {
 			throw new FullRoomException();
 		}
-		players.add(player);
-		currentPlayers++;
+
+		players.put(player.getUsername(), player);
 	}
 
-	public ArrayList<Player> getPlayers() {
+	/**
+	 * Remove the player from the room (and obviously from the team).
+	 * 
+	 * @param player
+	 */
+	public void removePlayer(Player player) {
+		player.getTeam().removePlayer(player);
+		player.setRoom(null);
+		players.remove(player.getUsername());
+	}
+
+	public HashMap<String, Player> getPlayers() {
 		return players;
 	}
 
 	public boolean isFull() {
-		return full;
+		return getCurrentPlayers() >= MAX_PLAYERS;
 	}
 
 	public int getCurrentPlayers() {
-		return currentPlayers;
+		return players.size();
 	}
 
 	public String getName() {
-		return name;
+		return roomName;
+	}
+
+	/**
+	 * Team generator: this method generate two team with different colors.
+	 */
+	public void generateTeams() {
+
+		teamA = new Team();
+		teamB = new Team();
+
+		while (teamA.getTeamColor().equals(teamB.getTeamColor())) {
+			teamB.setRandomTeamColor();
+		}
+	}
+
+	/**
+	 * Select a team for the incoming player.
+	 * 
+	 * @return the team with less players or, if the teams has the same number
+	 *         of players, a random team.
+	 */
+	public Team getTeam() {
+
+		if (teamA.getSize() < teamB.getSize())
+			return teamA;
+
+		else if (teamA.getSize() > teamB.getSize())
+			return teamB;
+
+		if (new Random().nextBoolean())
+			return teamA;
+
+		return teamB;
 	}
 
 }

@@ -7,6 +7,8 @@ package exception;
  * @author Gavina
  * @data 2015/04/17
  */
+
+@SuppressWarnings("serial")
 public class EmailAlreadyUsedException extends Exception {
 
 	public EmailAlreadyUsedException() {

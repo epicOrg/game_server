@@ -3,7 +3,7 @@ package check_fields;
 /**
  * @author Noris
  * @date 2015/03/30
- * @version 8
+ * @version 9
  */
 
 public class FieldsNames {
@@ -65,7 +65,7 @@ public class FieldsNames {
 	public static final String INVALID = "invalidField";
 	
 	//Room
-	public static final String ROOOMS_CREATE = "create";
+	public static final String CREATE_ROOM = "create";
 	public static final String ROOMS_LIST = "list";
     public static final String ROOM_NAME = "name";
     public static final String ROOM_MAX_PLAYERS = "maxPlayers";

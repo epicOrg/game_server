@@ -15,15 +15,14 @@ public class GameDataManager {
 	private static GameDataManager instance = new GameDataManager();
 	private ArrayList<Room> rooms = new ArrayList<>();
 
-	private GameDataManager() {
+	private GameDataManager() {}
+	
+	public static GameDataManager getInstance() {
+		return instance;
 	}
 
 	public ArrayList<Room> getRooms() {
 		return rooms;
-	}
-
-	public static GameDataManager getInstance() {
-		return instance;
 	}
 
 	public boolean newRoom(String name) {

@@ -16,17 +16,18 @@ public class RoomsServiceTest {
 
 	public static void main(String[] args) {
 
-		GameDataManager dataManager = GameDataManager.getInstance();
+		GameDataManager gameDataManager = GameDataManager.getInstance();
 
-		dataManager.newRoom("ciao");
+		gameDataManager.newRoom("ciao");
 
-		dataManager.newRoom("ok");
+		gameDataManager.newRoom("ok");
 
 		JSONObject request = new JSONObject();
+		
 		try {
 
 			request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOOMS_CREATE);
+			request.put(FieldsNames.SERVICE_TYPE, FieldsNames.CREATE_ROOM);
 			request.put(FieldsNames.ROOM_NAME, "ciao2");
 			System.out.println(request.toString());
 

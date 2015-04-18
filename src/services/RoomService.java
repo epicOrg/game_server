@@ -35,23 +35,29 @@ public class RoomService implements Service {
 	@Override
 	public String start() {
 
+		// TODO Remove (debug print)
 		System.out.println(request.toString());
+
 		try {
+
 			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
-			String serviceType = request.getString(FieldsNames.SERVICE_TYPE);
 
+			String serviceType = request.getString(FieldsNames.SERVICE_TYPE);
 			runService(serviceType);
 
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
+		// TODO Remove (debug print)
 		System.out.println(response.toString());
 
 		return response.toString();
@@ -59,9 +65,11 @@ public class RoomService implements Service {
 	}
 
 	private void runService(String serviceType) throws JSONException {
+
 		boolean creationOk;
+
 		switch (serviceType) {
-		case FieldsNames.ROOOMS_CREATE:
+		case FieldsNames.CREATE_ROOM:
 			creationOk = dataManager.newRoom(request
 					.getString(FieldsNames.ROOM_NAME));
 			response.put(FieldsNames.RESULT, creationOk);
@@ -84,9 +92,10 @@ public class RoomService implements Service {
 	private void addPlayer() {
 
 		try {
-			int hascode = request.getInt(FieldsNames.HASHCODE);
+
+			int hasCode = request.getInt(FieldsNames.HASHCODE);
 			String username = OnlineManager.getInstance()
-					.getUsernameByHashCode(hascode);
+					.getUsernameByHashCode(hasCode);
 			Player player = new Player(username);
 
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
@@ -111,7 +120,9 @@ public class RoomService implements Service {
 
 	private void joinFailed() {
 		try {
+
 			response.put(FieldsNames.RESULT, false);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,6 +136,7 @@ public class RoomService implements Service {
 		System.out.println("ROOMS N�" + rooms.size());
 
 		try {
+
 			for (Room room : rooms) {
 				JSONObject roomDescription = new JSONObject();
 				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
@@ -135,6 +147,7 @@ public class RoomService implements Service {
 			}
 
 			response.put(FieldsNames.ROOMS_LIST, roomsList);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
