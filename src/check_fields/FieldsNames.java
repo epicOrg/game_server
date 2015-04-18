@@ -13,10 +13,12 @@ public class FieldsNames {
 	 **************************************************************************/
 
 	public static final String SERVICE = "service";
+	public static final String SERVICE_TYPE = "serviceType";
 	public static final String REGISTER = "register";
 	public static final String LOGIN = "login";
 	public static final String CALL = "call";
 	public static final String UNKNOWN = "unknown";
+	public static final String ROOMS = "rooms";
 
 	/***************************************************************************
 	 * FIELDS NAMES
@@ -58,5 +60,13 @@ public class FieldsNames {
 
 	// Register, Login, Call
 	public static final String INVALID = "invalidField";
+	
+	//Room
+	public static final String ROOOMS_CREATE = "create";
+	public static final String ROOMS_LIST = "list";
+    public static final String ROOM_NAME = "name";
+    public static final String ROOM_MAX_PLAYERS = "maxPlayers";
+    public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
+
 
 }

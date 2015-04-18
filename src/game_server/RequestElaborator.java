@@ -7,6 +7,7 @@ import check_fields.FieldsNames;
 import services.Call;
 import services.Login;
 import services.Register;
+import services.RoomService;
 import services.Service;
 import services.Unknown;
 
@@ -31,6 +32,8 @@ public class RequestElaborator {
 			return new Login(json);
 		case FieldsNames.CALL:
 			return new Call(json);
+		case FieldsNames.ROOMS:
+			return new RoomService(json);
 		default:
 			return new Unknown();
 
