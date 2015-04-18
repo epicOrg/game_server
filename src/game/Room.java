@@ -23,8 +23,6 @@ public class Room {
 	private Team teamA;
 	private Team teamB;
 
-	private ArrayList<Team> teams;
-
 	public Room(String roomName) {
 		super();
 		this.roomName = roomName;
@@ -101,6 +99,8 @@ public class Room {
 	}
 
 	public ArrayList<Team> getTeams() {
+		// TODO
+		ArrayList<Team> teams = new ArrayList<Team>();
 		teams.add(teamA);
 		teams.add(teamB);
 		return teams;
