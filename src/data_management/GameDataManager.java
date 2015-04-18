@@ -1,5 +1,6 @@
 package data_management;
 
+import exception.NoSuchRoomException;
 import game.Room;
 
 import java.io.EOFException;
@@ -23,8 +24,15 @@ public class GameDataManager {
 	public boolean newRoom(String name) {
 		// TODO rooms stesso nome
 		rooms.add(new Room(name));
-		return true;
-		
+		return true;		
+	}
+	
+	public Room getRoomByName(String name) throws NoSuchRoomException{
+		for (Room room : rooms) {
+			if(name.equals(room.getName()))
+				return room;
+		}
+		throw new NoSuchRoomException();
 	}
 	
 }

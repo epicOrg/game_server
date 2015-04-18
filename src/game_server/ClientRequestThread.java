@@ -53,6 +53,7 @@ public class ClientRequestThread implements Runnable {
 					Service service = requestElaborator.chooseService(json);
 					out.println(service.start());
 					request = in.readLine();
+					System.out.println("reading");
 				}
 			}
 

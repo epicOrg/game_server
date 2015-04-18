@@ -24,6 +24,9 @@ public class FieldsNames {
 	 * FIELDS NAMES
 	 **************************************************************************/
 
+	// Commons
+	public static final String RESULT = "result";
+	
 	// Register
 	public static final String EMAIL = "email";
 
@@ -67,6 +70,7 @@ public class FieldsNames {
     public static final String ROOM_NAME = "name";
     public static final String ROOM_MAX_PLAYERS = "maxPlayers";
     public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
-
+    public static final String ROOM_JOIN = "join";
+    
 
 }

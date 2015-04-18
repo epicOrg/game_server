@@ -2,13 +2,13 @@ package game;
 
 public class Player {
 	
-	private String usename;
+	private String username;
 	private float xPosition;
 	private float yPposition;
 
-	public Player(String usename) {
+	public Player(String username) {
 		super();
-		this.usename = usename;
+		this.username = username;
 	}
 
 	public float getxPosition() {

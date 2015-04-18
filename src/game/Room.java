@@ -20,10 +20,11 @@ public class Room {
 	}
 
 	public void addPlayer(Player player) throws FullRoomException{
-		if(players.size() >= MAX_PLAYER){
+		if(currentPlayers >= MAX_PLAYER){
 			throw new FullRoomException();
 		}
 		players.add(player);
+		currentPlayers++;
 	}
 	
 	public ArrayList<Player> getPlayers() {
