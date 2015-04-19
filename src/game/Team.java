@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import exception.FullTeamException;
+import exceptions.FullTeamException;
 
 /**
  * Every room has two teams, which play one against the other. This class tracks
@@ -86,7 +86,7 @@ public class Team {
 	 * @return true if the team is full (no more players can join the team),
 	 *         false otherwise (there are more users slot).
 	 */
-	private boolean isFull() {
+	public boolean isFull() {
 		return getSize() >= MAX_PLAYERS;
 	}
 

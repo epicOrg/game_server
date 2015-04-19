@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import data_management.RegisteredUser;
-import exception.LoginFailedException;
+import exceptions.LoginFailedException;
 
 /**
  * @author Micieli

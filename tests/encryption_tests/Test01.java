@@ -3,9 +3,9 @@ package encryption_tests;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
 
-import encryption.Decrypter;
-import encryption.Encrypter;
-import encryption.SymmetricKeyGenerator;
+import connection_encryption.Decrypter;
+import connection_encryption.Encrypter;
+import connection_encryption.SymmetricKeyGenerator;
 
 /**
  * @author Noris

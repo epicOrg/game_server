@@ -11,8 +11,8 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
-import exception.FullRoomException;
-import exception.NoSuchRoomException;
+import exceptions.FullRoomException;
+import exceptions.NoSuchRoomException;
 
 /**
  * @author Micieli
@@ -153,7 +153,7 @@ public class RoomService implements Service {
 				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
 						Room.MAX_PLAYERS);
 				roomDescription.put(FieldsNames.ROOM_CURRENT_PLAYERS,
-						room.getCurrentPlayers());
+						room.getSize());
 				roomsList.put(room.getName(), roomDescription);
 			}
 

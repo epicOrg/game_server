@@ -5,10 +5,10 @@ import java.io.IOException;
 import loader.ILoginChecker;
 import loader.IRegistrationChecker;
 import writer.IDataSaver;
-import exception.EmailAlreadyUsedException;
-import exception.LoginFailedException;
-import exception.RegistrationFailedException;
-import exception.UsernameAlreadyUsedException;
+import exceptions.EmailAlreadyUsedException;
+import exceptions.LoginFailedException;
+import exceptions.RegistrationFailedException;
+import exceptions.UsernameAlreadyUsedException;
 
 /**
  * 

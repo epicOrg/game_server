@@ -1,4 +1,4 @@
-package encryption;
+package connection_encryption;
 
 import java.security.Key;
 

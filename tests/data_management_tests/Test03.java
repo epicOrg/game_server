@@ -2,7 +2,7 @@ package data_management_tests;
 
 import data_management.DataManager;
 import data_management.RegisteredUser;
-import exception.RegistrationFailedException;
+import exceptions.RegistrationFailedException;
 import game_server.ServerInitializer;
 
 /**

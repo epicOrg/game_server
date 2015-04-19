@@ -1,6 +1,6 @@
 package data_management;
 
-import exception.NoSuchRoomException;
+import exceptions.NoSuchRoomException;
 import game.Room;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
-package encryption;
+package connection_encryption;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +11,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 
+import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
 /**
@@ -17,31 +19,37 @@ import org.apache.commons.codec.binary.Hex;
  * @date 2015/03/30
  */
 
-public class Encrypter {
+public class Decrypter {
 
-	byte[] uncryptedData;
 	byte[] cryptedData;
-	int encriptionLenght;
+	byte[] decryptedData;
 	private Key asymmetricKey;
 
-	public Encrypter(byte[] uncryptedData, Key asymmetricKey) {
-		super();
-		this.uncryptedData = uncryptedData;
+	public Decrypter(byte[] cryptedData, Key asymmetricKey) {
+		this.cryptedData = cryptedData;
 		this.asymmetricKey = asymmetricKey;
 	}
 
-	public void encrypt() {
+	// TODO Adjust throws
+	public Decrypter(String cryptedString, Key asymmetricKey)
+			throws DecoderException {
+		
+		this.cryptedData = Hex.decodeHex(cryptedString.toCharArray());
+		this.asymmetricKey = asymmetricKey;
+	}
+
+	public void decrypt(int encriptionLenght) {
 
 		try {
 
 			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.ENCRYPT_MODE, asymmetricKey);
-			cryptedData = new byte[cipher.getOutputSize(uncryptedData.length)];
+			cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
+			decryptedData = new byte[cipher.getOutputSize(encriptionLenght)];
 
-			encriptionLenght = cipher.update(uncryptedData, 0,
-					uncryptedData.length, cryptedData, 0);
+			int decriptionLenght = cipher.update(cryptedData, 0,
+					encriptionLenght, decryptedData, 0);
 
-			encriptionLenght += cipher.doFinal(cryptedData, encriptionLenght);
+			decriptionLenght += cipher.doFinal(decryptedData, decriptionLenght);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
@@ -64,16 +72,18 @@ public class Encrypter {
 		}
 	}
 
-	public byte[] getEncryptedData() {
-		return cryptedData;
-	}
-	
-	public String getEncryptedString() {
-		return new String(Hex.encodeHex(cryptedData));
+	public byte[] getDecryptedData() {
+		return decryptedData;
 	}
 
-	public int getEncriptionLenght() {
-		return encriptionLenght;
+	public String getDecryptedString() {
+		try {
+			
+			return new String(decryptedData, "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
 	}
-
 }

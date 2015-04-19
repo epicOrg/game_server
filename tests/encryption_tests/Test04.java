@@ -8,9 +8,9 @@ import java.security.Key;
 import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
 
-import encryption.Decrypter;
-import encryption.Encrypter;
-import encryption.SymmetricKeyGenerator;
+import connection_encryption.Decrypter;
+import connection_encryption.Encrypter;
+import connection_encryption.SymmetricKeyGenerator;
 
 /**
  * Encryption test for a string.

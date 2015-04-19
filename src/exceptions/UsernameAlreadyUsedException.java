@@ -1,4 +1,4 @@
-package exception;
+package exceptions;
 
 /**
  * This exception is launched when the username is already used.

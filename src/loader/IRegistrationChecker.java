@@ -2,8 +2,8 @@ package loader;
 
 import java.io.IOException;
 
-import exception.EmailAlreadyUsedException;
-import exception.UsernameAlreadyUsedException;
+import exceptions.EmailAlreadyUsedException;
+import exceptions.UsernameAlreadyUsedException;
 
 /**
  * An interface for registration data checking

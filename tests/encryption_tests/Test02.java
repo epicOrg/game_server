@@ -3,9 +3,9 @@ package encryption_tests;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
 
-import encryption.Decrypter;
-import encryption.Encrypter;
-import encryption.SymmetricKeyGenerator;
+import connection_encryption.Decrypter;
+import connection_encryption.Encrypter;
+import connection_encryption.SymmetricKeyGenerator;
 
 /**
  * @author Noris
@@ -20,7 +20,7 @@ public class Test02 {
 		symmetricKeyGenerator.generateKey();
 		Key asymmetricKey = symmetricKeyGenerator.getKey();
 
-		String string = "Questa è una stringa di prova!";
+		String string = "Questa ï¿½ una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
 		Encrypter encrypter = new Encrypter(string.getBytes(), asymmetricKey);

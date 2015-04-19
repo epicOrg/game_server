@@ -1,4 +1,4 @@
-package exception;
+package exceptions;
 
 /**
  * @author Micieli
@@ -6,6 +6,6 @@ package exception;
  */
 
 @SuppressWarnings("serial")
-public class NoSuchRoomException extends Exception {
+public class FullRoomException extends Exception {
 
 }
