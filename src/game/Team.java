@@ -32,6 +32,14 @@ public class Team {
 		setRandomTeamColorFromList();
 	}
 
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
 	public void addPlayer(Player player) throws FullTeamException {
 
 		if (isFull()) {
@@ -84,8 +92,7 @@ public class Team {
 		admittedColors.add(Color.RED);
 		admittedColors.add(Color.GREEN);
 
-		Random random = new Random();
-		int randomNumber = random.nextInt(admittedColors.size());
+		int randomNumber = new Random().nextInt(admittedColors.size());
 
 		this.teamColor = admittedColors.get(randomNumber);
 	}
