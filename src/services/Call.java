@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import voip.Caller;
 import check_fields.CallFieldsChecker;
 import check_fields.FieldsNames;
+import exceptions.UserNotOnlineException;
 
 /**
  * @author Noris
@@ -29,7 +30,7 @@ public class Call implements Service {
 	private InetAddress calleeIpAddress;
 
 	private JSONObject jsonResponse = new JSONObject();
-	private boolean fieldsAreOk = true;
+	private boolean noErrors = true;
 
 	public Call(JSONObject jsonRequest) {
 		this.jsonRequest = jsonRequest;
@@ -49,9 +50,9 @@ public class Call implements Service {
 
 		readFields();
 		checkFields();
-		if (fieldsAreOk)
+		if (noErrors)
 			call();
-
+		
 		generateResponse();
 		return jsonResponse.toString();
 	}
@@ -61,8 +62,8 @@ public class Call implements Service {
 		try {
 
 			callerUsername = jsonRequest.getString(FieldsNames.CALLER);
-			callerHashCode = (int) jsonRequest.get(FieldsNames.HASHCODE);
-			callerPort = (int) jsonRequest.get(FieldsNames.PORT);
+			callerHashCode = jsonRequest.getInt(FieldsNames.HASHCODE);
+			callerPort = jsonRequest.getInt(FieldsNames.PORT);
 			calleeUsername = jsonRequest.getString(FieldsNames.CALLEE);
 
 		} catch (JSONException e) {
@@ -72,30 +73,42 @@ public class Call implements Service {
 	}
 
 	private void checkFields() {
+		
+		JSONObject errors = new JSONObject();
 
 		CallFieldsChecker callFieldsChecker = new CallFieldsChecker(
-				jsonResponse);
+				errors);
 
-		caller = callFieldsChecker
-				.checkHashCode(callerUsername, callerHashCode);
-
-		if (caller == null) {
-			fieldsAreOk = false;
+		noErrors &= callFieldsChecker.isUserOnline(callerUsername);
+		noErrors &= callFieldsChecker.checkHashCode(callerUsername, callerHashCode);		
+		if(noErrors){
+		try {
+			caller = callFieldsChecker
+					.getOnlineUser(callerUsername);
+		} catch (UserNotOnlineException e) {
+			noErrors = false;			
+			e.printStackTrace();
 			return;
 		}
-
-		calleeIpAddress = callFieldsChecker
-				.checkIfCalleeIsOnline(calleeUsername);
-		if (calleeIpAddress == null) {
-			fieldsAreOk = false;
-			return;
+		}
+		noErrors &= callFieldsChecker.checkIfCalleeIsOnline(calleeUsername);
+		if(noErrors){
+			
+			try {
+				OnlineUser callee = callFieldsChecker.getOnlineUser(calleeUsername);
+				calleeIpAddress = callee.getIpAddress();
+			} catch (UserNotOnlineException e) {
+				noErrors = false;
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return;
+			}
 		}
 
 		if (!callFieldsChecker.checkPortLegality(callerPort)) {
-			fieldsAreOk = false;
+			noErrors = false;
 			return;
 		}
-
 	}
 
 	private void call() {
@@ -106,15 +119,14 @@ public class Call implements Service {
 
 		try {
 
-			if (fieldsAreOk) {
+			if (noErrors) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-
+			
 			}
 
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO
 		}
 	}
-
 }
