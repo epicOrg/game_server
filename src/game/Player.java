@@ -12,32 +12,16 @@ public class Player {
 	private Room room;
 	private Team team;
 
-	private float xPosition;
-	private float yPosition;
+	private float[] position = new float[3];
+	private float[] direction = new float[3];
 
 	public Player(String username) {
 		super();
 		this.username = username;
 	}
-	
+
 	public String getUsername() {
 		return username;
-	}
-
-	public float getXPosition() {
-		return xPosition;
-	}
-
-	public void setXPosition(float xPosition) {
-		this.xPosition = xPosition;
-	}
-
-	public float getYPosition() {
-		return yPosition;
-	}
-
-	public void setYPosition(float yPosition) {
-		this.yPosition = yPosition;
 	}
 
 	public Room getRoom() {
@@ -54,6 +38,22 @@ public class Player {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public float[] getPosition() {
+		return position;
+	}
+
+	public void setPosition(float[] position) {
+		this.position = position;
+	}
+
+	public float[] getDirection() {
+		return direction;
+	}
+
+	public void setDirection(float[] direction) {
+		this.direction = direction;
 	}
 
 }
