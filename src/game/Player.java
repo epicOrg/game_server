@@ -12,8 +12,7 @@ public class Player {
 	private Room room;
 	private Team team;
 
-	private float[] position = new float[3];
-	private float[] direction = new float[3];
+	private PlayerStatus playerStatus;
 
 	public Player(String username) {
 		super();
@@ -40,20 +39,12 @@ public class Player {
 		this.team = team;
 	}
 
-	public float[] getPosition() {
-		return position;
+	public PlayerStatus getPlayerStatus() {
+		return playerStatus;
 	}
 
-	public void setPosition(float[] position) {
-		this.position = position;
-	}
-
-	public float[] getDirection() {
-		return direction;
-	}
-
-	public void setDirection(float[] direction) {
-		this.direction = direction;
+	public void setPlayerStatus(PlayerStatus playerStatus) {
+		this.playerStatus = playerStatus;
 	}
 
 }
