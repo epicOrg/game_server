@@ -24,7 +24,6 @@ public class Room {
 	private Team teamB;
 
 	public Room(String roomName) {
-		super();
 		this.roomName = roomName;
 		generateTeams();
 	}
@@ -113,9 +112,12 @@ public class Room {
 		return teamB;
 	}
 
+	/**
+	 * @return an ArrayList containing the two teams.
+	 */
 	public ArrayList<Team> getTeams() {
-		// TODO
-		ArrayList<Team> teams = new ArrayList<Team>();
+
+		ArrayList<Team> teams = new ArrayList<Team>(2);
 		teams.add(teamA);
 		teams.add(teamB);
 		return teams;

@@ -8,7 +8,6 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
- * 
  * Implementation of @see ICreatoreRapporto that saves users on a file.
  * 
  * @author Micieli

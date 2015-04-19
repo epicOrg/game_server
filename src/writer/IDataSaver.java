@@ -6,7 +6,6 @@ import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
 /**
- * 
  * Data export interface, regardless of saving support type.
  * 
  * @author Micieli

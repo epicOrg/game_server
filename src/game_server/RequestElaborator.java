@@ -17,11 +17,6 @@ import services.Unknown;
  */
 
 public class RequestElaborator {
-	public RequestElaborator() {
-		super();
-		// TODO REMOVE (DEBUG PRINT)
-		// System.out.println(json.toString());
-	}
 
 	public Service chooseService(JSONObject json) throws JSONException {
 
@@ -39,4 +34,5 @@ public class RequestElaborator {
 
 		}
 	}
+
 }

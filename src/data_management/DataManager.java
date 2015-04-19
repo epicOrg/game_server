@@ -11,17 +11,16 @@ import exceptions.RegistrationFailedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
- * 
  * @author Noris
  * @author Micieli
  * @date 2015/03/27
- * 
  */
 
 public class DataManager {
 
-	private IDataSaver registerDataSaver;
 	private static DataManager instance = new DataManager();
+
+	private IDataSaver registerDataSaver;
 	private IRegistrationChecker checker;
 	private ILoginChecker loginChecker;
 
@@ -30,7 +29,9 @@ public class DataManager {
 
 	public boolean checkUsername(String username) {
 		try {
+
 			checker.checkUsername(username);
+
 		} catch (UsernameAlreadyUsedException e) {
 			return false;
 		}
@@ -39,7 +40,9 @@ public class DataManager {
 
 	public boolean checkEmail(String email) {
 		try {
+
 			checker.checkEmail(email);
+
 		} catch (EmailAlreadyUsedException e) {
 			return false;
 		} catch (IOException e) {
@@ -90,8 +93,9 @@ public class DataManager {
 
 		return "database/";
 	}
-	
+
 	public void setLoginChecker(ILoginChecker loginChecker) {
 		this.loginChecker = loginChecker;
 	}
+
 }

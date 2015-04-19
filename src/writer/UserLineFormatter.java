@@ -3,7 +3,6 @@ package writer;
 import data_management.RegisteredUser;
 
 /**
- * 
  * Implementation of @see ILineFormatter. It formats file's lines.
  * 
  * @author Micieli

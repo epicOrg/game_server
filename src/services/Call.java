@@ -51,7 +51,7 @@ public class Call implements Service {
 		checkFields();
 		if (fieldsAreOk)
 			call();
-		
+
 		generateResponse();
 		return jsonResponse.toString();
 	}
@@ -108,12 +108,13 @@ public class Call implements Service {
 
 			if (fieldsAreOk) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-			
+
 			}
 
-
 		} catch (JSONException e) {
-			// TODO
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
+
 }

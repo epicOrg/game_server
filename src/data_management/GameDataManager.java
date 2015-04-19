@@ -15,8 +15,9 @@ public class GameDataManager {
 	private static GameDataManager instance = new GameDataManager();
 	private ArrayList<Room> rooms = new ArrayList<>();
 
-	private GameDataManager() {}
-	
+	private GameDataManager() {
+	}
+
 	public static GameDataManager getInstance() {
 		return instance;
 	}
@@ -30,6 +31,24 @@ public class GameDataManager {
 		rooms.add(new Room(name));
 		return true;
 	}
+	
+//	/*
+//	 * Possible future implementation of newRoom method.
+//	 */
+//	public void newRoom(String name) throws RoomAlreadyExistsException {
+//
+//		try {
+//			
+//			getRoomByName(name);
+//			
+//		} catch (NoSuchRoomException e) {
+//			
+//			rooms.add(new Room(name));
+//
+//		}
+//		
+//		throw new RoomAlreadyExistsException();
+//	}
 
 	public Room getRoomByName(String name) throws NoSuchRoomException {
 		for (Room room : rooms) {

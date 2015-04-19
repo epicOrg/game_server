@@ -22,15 +22,14 @@ public class ServerInitializer {
 		String path = dataManager.getPath();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
-				new UserCreator(path, new UserLineFormatter()),
-				new EmailSaver(path + "emails",
-						new EmailFormatter()));
+				new UserCreator(path, new UserLineFormatter()), new EmailSaver(
+						path + "emails", new EmailFormatter()));
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager
-				.setChecker(new FileChecker(path, "emails"));
+		dataManager.setChecker(new FileChecker(path, "emails"));
 
 		dataManager.setLoginChecker(new LoginChecker(path));
 	}
+
 }

@@ -3,7 +3,6 @@ package writer;
 import data_management.RegisteredUser;
 
 /**
- * 
  * Abstraction on file's format to write.
  * 
  * @author Micieli
