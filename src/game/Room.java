@@ -53,7 +53,7 @@ public class Room {
 		return players;
 	}
 
-	public boolean isFull() {
+	private boolean isFull() {
 		return getCurrentPlayers() >= MAX_PLAYERS;
 	}
 
@@ -74,7 +74,7 @@ public class Room {
 		teamB = new Team();
 
 		while (teamA.getTeamColor().equals(teamB.getTeamColor())) {
-			teamB.setRandomTeamColor();
+			teamB.setRandomTeamColorFromList();
 		}
 	}
 

@@ -3,7 +3,7 @@ package check_fields;
 /**
  * @author Noris
  * @date 2015/03/30
- * @version 9
+ * @version 10
  */
 
 public class FieldsNames {
@@ -26,7 +26,7 @@ public class FieldsNames {
 
 	// Commons
 	public static final String RESULT = "result";
-	
+
 	// Register
 	public static final String EMAIL = "email";
 
@@ -49,7 +49,7 @@ public class FieldsNames {
 	 **************************************************************************/
 
 	public static final String ERRORS = "errors";
-	
+
 	// Register
 	public static final String SHORT = "short";
 	public static final String LONG = "long";
@@ -63,14 +63,13 @@ public class FieldsNames {
 
 	// Register, Login, Call
 	public static final String INVALID = "invalidField";
-	
-	//Room
-	public static final String CREATE_ROOM = "create";
+
+	// Room
+	public static final String ROOM_CREATE = "create";
 	public static final String ROOMS_LIST = "list";
-    public static final String ROOM_NAME = "name";
-    public static final String ROOM_MAX_PLAYERS = "maxPlayers";
-    public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
-    public static final String ROOM_JOIN = "join";
-    
+	public static final String ROOM_NAME = "name";
+	public static final String ROOM_MAX_PLAYERS = "maxPlayers";
+	public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
+	public static final String ROOM_JOIN = "join";
 
 }

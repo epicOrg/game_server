@@ -32,7 +32,7 @@ public class RoomCheckerTest02 {
 		jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
 		jsonRequest.put(FieldsNames.USERNAME, "Nietzsche");
 		jsonRequest.put(FieldsNames.HASHCODE, hashCode+1);
-		jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.CREATE_ROOM);
+		jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
 		jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
 
 		System.out.println("Request: " + jsonRequest);

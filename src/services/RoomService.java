@@ -84,7 +84,7 @@ public class RoomService implements Service {
 		boolean creationOk;
 
 		switch (serviceType) {
-		case FieldsNames.CREATE_ROOM:
+		case FieldsNames.ROOM_CREATE:
 			creationOk = gameDataManager.newRoom(request
 					.getString(FieldsNames.ROOM_NAME));
 			response.put(FieldsNames.RESULT, creationOk);

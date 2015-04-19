@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class Team {
 	public Team(String teamName) {
 		super();
 		this.teamName = teamName;
-		setRandomTeamColor();
+		setRandomTeamColorFromList();
 	}
 
 	public void addPlayer(Player player) throws FullTeamException {
@@ -53,7 +54,7 @@ public class Team {
 		return players;
 	}
 
-	public boolean isFull() {
+	private boolean isFull() {
 		return getSize() >= MAX_PLAYERS;
 	}
 
@@ -62,7 +63,8 @@ public class Team {
 	}
 
 	/**
-	 * Generate a random team color.
+	 * Generate a random team color. If used twice it can generate two different
+	 * colors but very very similar.
 	 */
 	public void setRandomTeamColor() {
 		Random random = new Random();
@@ -70,6 +72,22 @@ public class Team {
 		float g = random.nextFloat();
 		float b = random.nextFloat();
 		teamColor = new Color(r, g, b);
+	}
+
+	/**
+	 * Select a random color from a predefined colors list.
+	 */
+	public void setRandomTeamColorFromList() {
+
+		ArrayList<Color> admittedColors = new ArrayList<Color>();
+		admittedColors.add(Color.BLUE);
+		admittedColors.add(Color.RED);
+		admittedColors.add(Color.GREEN);
+
+		Random random = new Random();
+		int randomNumber = random.nextInt(admittedColors.size());
+
+		this.teamColor = admittedColors.get(randomNumber);
 	}
 
 	public Color getTeamColor() {

@@ -27,7 +27,7 @@ public class RoomsServiceTest01 {
 		try {
 
 			request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			request.put(FieldsNames.SERVICE_TYPE, FieldsNames.CREATE_ROOM);
+			request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
 			request.put(FieldsNames.ROOM_NAME, "ciao2");
 			System.out.println(request.toString());
 
