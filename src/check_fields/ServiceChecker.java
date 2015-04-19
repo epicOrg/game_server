@@ -6,18 +6,20 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import exceptions.UserNotOnlineException;
+
 /**
  * @author Noris
  * @date 2015/04/19
  */
 
 public class ServiceChecker {
-	
-	private OnlineManager onlineManager = OnlineManager.getInstance();
-	private JSONObject jsonResponse;
-	
-	public ServiceChecker(JSONObject jsonResponse) {
-		this.jsonResponse = jsonResponse;
+
+	protected OnlineManager onlineManager = OnlineManager.getInstance();
+	protected JSONObject errors;
+
+	public ServiceChecker(JSONObject errors) {
+		this.errors = errors;
 	}
 
 	/**
@@ -29,25 +31,35 @@ public class ServiceChecker {
 	 *         user corresponds to the hashCode generated and saved by the
 	 *         server in the login, null otherwise
 	 */
-	public OnlineUser checkHashCode(String username, int hashCode) {
+	public boolean checkHashCode(String username, int hashCode) {
+
+		if (hashCode == onlineManager.getHashCodeByUsername(username))
+			return true;
+
 		try {
-
-			if (!onlineManager.checkIfOnline(username)) {
-				jsonResponse.put(FieldsNames.USERNAME, FieldsNames.OFFLINE);
-				return null;
-			}
-
-			if (hashCode == onlineManager.getHashCodeByUsername(username))
-				return onlineManager.getOnlineUserByUsername(username);
-
-			jsonResponse.put(FieldsNames.HASHCODE, FieldsNames.INVALID);
-
+			errors.put(FieldsNames.HASHCODE, FieldsNames.INVALID);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return null;
+		return false;
 	}
 
+	public boolean isUserOnline(String username) {
+		try {
+			if (!onlineManager.checkIfOnline(username)) {
+				errors.put(FieldsNames.USERNAME, FieldsNames.OFFLINE);
+				return false;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException{
+		return onlineManager.getOnlineUserByUsername(username);
+	}
 }

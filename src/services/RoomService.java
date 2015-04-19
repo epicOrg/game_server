@@ -60,13 +60,12 @@ public class RoomService implements Service {
 
 			JSONObject errors = new JSONObject();
 			RoomChecker roomChecker = new RoomChecker(errors);
-
-			if (roomChecker.checkHashCode(
-					request.getString(FieldsNames.USERNAME),
-					request.getInt(FieldsNames.HASHCODE)) == null) {
-
-				noErrors = false;
-			}
+			
+			String username = request.getString(FieldsNames.USERNAME);
+			int hashCode = request.getInt(FieldsNames.HASHCODE);
+			
+			noErrors &= roomChecker.isUserOnline(username);
+			noErrors &= roomChecker.checkHashCode(username, hashCode);
 
 			if (!noErrors)
 				response.put(FieldsNames.ERRORS, errors);

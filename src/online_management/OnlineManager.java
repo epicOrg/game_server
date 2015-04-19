@@ -4,6 +4,8 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
+import exceptions.UserNotOnlineException;
+
 /**
  * @author Noris
  * @date 2015/03/30
@@ -61,8 +63,11 @@ public class OnlineManager {
 	/**
 	 * @param username
 	 * @return the OnlineUser instance object of the user
+	 * @throws UserNotOnlineException 
 	 */
-	public OnlineUser getOnlineUserByUsername(String username) {
+	public OnlineUser getOnlineUserByUsername(String username) throws UserNotOnlineException {
+		if(!checkIfOnline(username))
+			throw new UserNotOnlineException();
 		return onlineUsers.get(username);
 	}
 
