@@ -31,6 +31,7 @@ public class Call implements Service {
 
 	private JSONObject jsonResponse = new JSONObject();
 	private boolean noErrors = true;
+	private JSONObject errors = new JSONObject();
 
 	public Call(JSONObject jsonRequest) {
 		this.jsonRequest = jsonRequest;
@@ -52,7 +53,7 @@ public class Call implements Service {
 		checkFields();
 		if (noErrors)
 			call();
-		
+
 		generateResponse();
 		return jsonResponse.toString();
 	}
@@ -73,29 +74,28 @@ public class Call implements Service {
 	}
 
 	private void checkFields() {
-		
-		JSONObject errors = new JSONObject();
 
-		CallFieldsChecker callFieldsChecker = new CallFieldsChecker(
-				errors);
+		CallFieldsChecker callFieldsChecker = new CallFieldsChecker(errors);
 
 		noErrors &= callFieldsChecker.isUserOnline(callerUsername);
-		noErrors &= callFieldsChecker.checkHashCode(callerUsername, callerHashCode);		
-		if(noErrors){
-		try {
-			caller = callFieldsChecker
-					.getOnlineUser(callerUsername);
-		} catch (UserNotOnlineException e) {
-			noErrors = false;			
-			e.printStackTrace();
-			return;
-		}
+		noErrors &= callFieldsChecker.checkHashCode(callerUsername,
+				callerHashCode);
+
+		if (noErrors) {
+			try {
+				caller = callFieldsChecker.getOnlineUser(callerUsername);
+			} catch (UserNotOnlineException e) {
+				noErrors = false;
+				e.printStackTrace();
+				return;
+			}
 		}
 		noErrors &= callFieldsChecker.checkIfCalleeIsOnline(calleeUsername);
-		if(noErrors){
-			
+		if (noErrors) {
+
 			try {
-				OnlineUser callee = callFieldsChecker.getOnlineUser(calleeUsername);
+				OnlineUser callee = callFieldsChecker
+						.getOnlineUser(calleeUsername);
 				calleeIpAddress = callee.getIpAddress();
 			} catch (UserNotOnlineException e) {
 				noErrors = false;
@@ -119,11 +119,8 @@ public class Call implements Service {
 
 		try {
 
-			if (noErrors) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-			
-			}
-
+			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);
+			jsonResponse.put(FieldsNames.ERRORS, errors);
 
 		} catch (JSONException e) {
 			// TODO
