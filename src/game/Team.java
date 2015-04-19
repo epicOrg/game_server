@@ -8,6 +8,9 @@ import java.util.Random;
 import exception.FullTeamException;
 
 /**
+ * Every room has two teams, which play one against the other. This class tracks
+ * the players of a single team.
+ * 
  * @author Noris
  * @date 2015/04/18
  */
@@ -40,28 +43,49 @@ public class Team {
 		this.teamName = teamName;
 	}
 
-	public void addPlayer(Player player) throws FullTeamException {
+	/**
+	 * Add a player to the team.
+	 * 
+	 * @param player
+	 * @throws FullTeamException
+	 */
+	public void addPlayer(Player player) { //throws FullTeamException {
 
-		if (isFull()) {
-			throw new FullTeamException();
-		}
+//		if (isFull()) {
+//			throw new FullTeamException();
+//		}
 
 		players.put(player.getUsername(), player);
 	}
 
+	/**
+	 * Remove a player from the team, and set to null the player's team.
+	 * 
+	 * @param player
+	 */
 	public void removePlayer(Player player) {
 		player.setTeam(null);
 		players.remove(player.getUsername());
 	}
 
+	/**
+	 * @return the numbers of the users currently playing in the team.
+	 */
 	public int getSize() {
 		return players.size();
 	}
 
+	/**
+	 * @return an HashMap containing all the players of the team.
+	 */
 	public HashMap<String, Player> getPlayers() {
 		return players;
 	}
 
+	/**
+	 * @return true if the team is full (no more players can join the team),
+	 *         false otherwise (there are more users slot).
+	 */
 	private boolean isFull() {
 		return getSize() >= MAX_PLAYERS;
 	}

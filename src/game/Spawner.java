@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * This class is used to generate a random position and a random direction to
+ * spawn the player at the beginning of the game.
+ * 
  * @author Noris
- * @date 2015/04/18
+ * @date 2015/04/19
  */
 
 public class Spawner {

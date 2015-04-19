@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import exception.FullRoomException;
+import exception.FullTeamException;
 
 /**
  * @author Micieli
@@ -29,6 +30,12 @@ public class Room {
 		generateTeams();
 	}
 
+	/**
+	 * Add a player to the room, and then to a random team.
+	 * 
+	 * @param player
+	 * @throws FullRoomException
+	 */
 	public void addPlayer(Player player) throws FullRoomException {
 
 		if (isFull()) {
@@ -36,10 +43,12 @@ public class Room {
 		}
 
 		players.put(player.getUsername(), player);
+		getRandomTeam().addPlayer(player);
+
 	}
 
 	/**
-	 * Remove the player from the room (and obviously from the team).
+	 * Remove the player from the room (and from the team).
 	 * 
 	 * @param player
 	 */
@@ -53,11 +62,18 @@ public class Room {
 		return players;
 	}
 
+	/**
+	 * @return true if the team is full (no more players can join the room),
+	 *         false otherwise (there are more users slot).
+	 */
 	private boolean isFull() {
-		return getCurrentPlayers() >= MAX_PLAYERS;
+		return getSize() >= MAX_PLAYERS;
 	}
 
-	public int getCurrentPlayers() {
+	/**
+	 * @return the numbers of the users currently playing in the team.
+	 */
+	public int getSize() {
 		return players.size();
 	}
 
