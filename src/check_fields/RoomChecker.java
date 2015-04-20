@@ -2,7 +2,6 @@ package check_fields;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * @author Noris
@@ -11,19 +10,13 @@ import org.json.JSONObject;
 
 public class RoomChecker extends ServiceChecker {
 
-	public RoomChecker(JSONObject errors) {
-		super(errors);
-	}
-
 	public void getRoomAlreadyExistsError() {
-
-		// TODO Sistemare
-
 		try {
 
-			JSONArray roomExistError = new JSONArray();
-			roomExistError.put(FieldsNames.ROOM_CREATE_ERROR_ALREADYPRESENT);
-			errors.put(FieldsNames.ERRORS, roomExistError);
+			JSONArray roomExistsError = new JSONArray();
+			roomExistsError.put(FieldsNames.ROOM_CREATE_ERROR_ALREADYPRESENT);
+			errors.put(FieldsNames.ERRORS, roomExistsError);
+			noErrors = false;
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -55,8 +48,10 @@ public class RoomChecker extends ServiceChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk)
+			if (!fieldIsOk) {
 				errors.put(FieldsNames.ERRORS, roomNameError);
+				noErrors = false;
+			}
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

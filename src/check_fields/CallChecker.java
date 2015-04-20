@@ -1,23 +1,13 @@
 package check_fields;
 
-import java.net.InetAddress;
-
-import online_management.OnlineManager;
-import online_management.OnlineUser;
-
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * @author Noris
  * @date 2015/04/03
  */
 
-public class CallFieldsChecker extends ServiceChecker{
-
-	public CallFieldsChecker(JSONObject errors) {
-		super(errors);
-	}
+public class CallChecker extends ServiceChecker {
 
 	/**
 	 * @param callee
@@ -38,7 +28,7 @@ public class CallFieldsChecker extends ServiceChecker{
 			e.printStackTrace();
 		}
 
-		return false;
+		return noErrors = false;
 	}
 
 	/**
@@ -59,6 +49,7 @@ public class CallFieldsChecker extends ServiceChecker{
 			e.printStackTrace();
 		}
 
-		return false;
+		return noErrors = false;
 	}
+
 }

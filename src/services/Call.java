@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import voip.Caller;
-import check_fields.CallFieldsChecker;
+import check_fields.CallChecker;
 import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
 
@@ -29,12 +29,13 @@ public class Call implements Service {
 	private String calleeUsername;
 	private InetAddress calleeIpAddress;
 
-	private JSONObject jsonResponse = new JSONObject();
-	private boolean noErrors = true;
-	private JSONObject errors = new JSONObject();
+	private JSONObject jsonResponse;
+	CallChecker callChecker;
 
 	public Call(JSONObject jsonRequest) {
 		this.jsonRequest = jsonRequest;
+		jsonResponse = new JSONObject();
+		callChecker = new CallChecker();
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class Call implements Service {
 
 		readFields();
 		checkFields();
-		if (noErrors)
+		if (callChecker.noErrors())
 			call();
 
 		generateResponse();
@@ -75,40 +76,34 @@ public class Call implements Service {
 
 	private void checkFields() {
 
-		CallFieldsChecker callFieldsChecker = new CallFieldsChecker(errors);
+		callChecker.isUserOnline(callerUsername);
+		callChecker.checkHashCode(callerUsername, callerHashCode);
 
-		noErrors &= callFieldsChecker.isUserOnline(callerUsername);
-		noErrors &= callFieldsChecker.checkHashCode(callerUsername,
-				callerHashCode);
-
-		if (noErrors) {
+		if (callChecker.noErrors()) {
 			try {
-				caller = callFieldsChecker.getOnlineUser(callerUsername);
+				caller = callChecker.getOnlineUser(callerUsername);
 			} catch (UserNotOnlineException e) {
-				noErrors = false;
+				callChecker.addError();
 				e.printStackTrace();
 				return;
 			}
 		}
-		noErrors &= callFieldsChecker.checkIfCalleeIsOnline(calleeUsername);
-		if (noErrors) {
+
+		callChecker.checkIfCalleeIsOnline(calleeUsername);
+		if (callChecker.noErrors()) {
 
 			try {
-				OnlineUser callee = callFieldsChecker
-						.getOnlineUser(calleeUsername);
+				OnlineUser callee = callChecker.getOnlineUser(calleeUsername);
 				calleeIpAddress = callee.getIpAddress();
 			} catch (UserNotOnlineException e) {
-				noErrors = false;
+				callChecker.addError();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return;
 			}
 		}
 
-		if (!callFieldsChecker.checkPortLegality(callerPort)) {
-			noErrors = false;
-			return;
-		}
+		callChecker.checkPortLegality(callerPort);
 	}
 
 	private void call() {
@@ -119,11 +114,14 @@ public class Call implements Service {
 
 		try {
 
-			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);
-			jsonResponse.put(FieldsNames.ERRORS, errors);
+			jsonResponse.put(FieldsNames.NO_ERRORS, callChecker.noErrors());
+			
+			if (!callChecker.noErrors())
+				jsonResponse.put(FieldsNames.ERRORS, callChecker.getErrors());
 
 		} catch (JSONException e) {
 			// TODO
 		}
 	}
+
 }

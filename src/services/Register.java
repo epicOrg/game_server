@@ -1,11 +1,10 @@
 package services;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
-import check_fields.RegisterFieldsChecker;
+import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
@@ -18,18 +17,21 @@ import exceptions.RegistrationFailedException;
 
 public class Register implements Service {
 
-	private JSONObject jsonRequest;
 	private DataManager dataManager;
+
+	private JSONObject jsonRequest;
+	private JSONObject jsonResponse;
 
 	private RegisteredUser registeredUser;
 
-	private JSONObject jsonResponse = new JSONObject();
-	private boolean noErrors = true;
+	private RegisterChecker registerChecker;
 
 	public Register(JSONObject json) {
 		super();
 		this.jsonRequest = json;
 		dataManager = DataManager.getInstance();
+		jsonResponse = new JSONObject();
+		registerChecker = new RegisterChecker();
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class Register implements Service {
 
 		readFields();
 		checkFields();
-		if (noErrors)
+		if (registerChecker.noErrors())
 			saveFields();
 
 		generateResponse();
@@ -71,56 +73,17 @@ public class Register implements Service {
 
 	private void checkFields() {
 
-		JSONObject errors = new JSONObject();
-		RegisterFieldsChecker registerFieldsChecker = new RegisterFieldsChecker(
-				errors);
+		registerChecker.checkUsername(registeredUser.getUsername());
+		registerChecker.checkPassword(registeredUser.getPassword());
+		registerChecker.checkEmail(registeredUser.getEmail());
 
-		noErrors &= registerFieldsChecker.checkUsername(registeredUser
-				.getUsername());
-		noErrors &= registerFieldsChecker.checkPassword(registeredUser
-				.getPassword());
-		noErrors &= registerFieldsChecker.checkEmail(registeredUser.getEmail());
-		if (noErrors) {
-			checkAlradyUsed(errors);
+		if (registerChecker.noErrors()) {
+
+			registerChecker.checkAlreadyUsedUsername(dataManager,
+					registeredUser.getUsername());
+			registerChecker.checkAlreadyUsedEmail(dataManager,
+					registeredUser.getEmail());
 		}
-
-		try {
-
-			if (!noErrors)
-				jsonResponse.put(FieldsNames.ERRORS, errors);
-
-		} catch (JSONException e) {
-			// TODO
-		}
-	}
-
-	private void checkAlradyUsed(JSONObject errors) {
-
-		if (!dataManager.checkEmail(registeredUser.getEmail())) {
-			JSONArray emailErrors = new JSONArray();
-			emailErrors.put(FieldsNames.ALREADY_USED);
-			try {
-				errors.put(FieldsNames.EMAIL, emailErrors);
-				jsonResponse.put(FieldsNames.ERRORS, errors);
-			} catch (JSONException e) {
-			}
-
-			noErrors = false;
-		}
-
-		if (!dataManager.checkUsername(registeredUser.getUsername())) {
-			JSONArray usernameErrors = new JSONArray();
-			usernameErrors.put(FieldsNames.ALREADY_USED);
-			try {
-				errors.put(FieldsNames.USERNAME, usernameErrors);
-				jsonResponse.put(FieldsNames.ERRORS, errors);
-			} catch (JSONException e) {
-				// TODO
-			}
-
-			noErrors = false;
-		}
-
 	}
 
 	private void saveFields() {
@@ -133,19 +96,21 @@ public class Register implements Service {
 			try {
 
 				jsonResponse.put(FieldsNames.SERVER_ERROR, true);
+				registerChecker.addError();
 
 			} catch (JSONException e1) {
 				// TODO
 			}
-
-			noErrors = false;
 		}
 	}
 
 	private void generateResponse() {
 
 		try {
-			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);
+
+			jsonResponse.put(FieldsNames.NO_ERRORS, registerChecker.noErrors());
+			jsonResponse.put(FieldsNames.ERRORS, registerChecker.getErrors());
+
 		} catch (JSONException e) {
 			// TODO
 		}

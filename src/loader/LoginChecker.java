@@ -35,10 +35,12 @@ public class LoginChecker implements ILoginChecker {
 		BufferedReader reader;
 
 		try {
+
 			reader = new BufferedReader(new FileReader(path
 					+ registeredUser.getUsername()));
+
 		} catch (FileNotFoundException e) {
-			System.out.println("marx");
+
 			throw new LoginFailedException("Not registred user!");
 		}
 

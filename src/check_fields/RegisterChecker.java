@@ -3,21 +3,15 @@ package check_fields;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+
+import data_management.DataManager;
 
 /**
  * @author Noris
  * @date 2015/03/28
  */
 
-public class RegisterFieldsChecker {
-
-	private JSONObject errors;
-
-	public RegisterFieldsChecker(JSONObject errors) {
-		super();
-		this.errors = errors;
-	}
+public class RegisterChecker extends ServiceChecker {
 
 	/**
 	 * Check if the user name is valid.
@@ -50,7 +44,9 @@ public class RegisterFieldsChecker {
 
 			if (!fieldIsOk) {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
+				noErrors = false;
 			}
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +59,7 @@ public class RegisterFieldsChecker {
 	/**
 	 * Check if the user password is valid.
 	 * 
-	 * @param password
+	 * @param user
 	 *            password
 	 * @return true if the password is valid, false if it's invalid
 	 */
@@ -92,6 +88,7 @@ public class RegisterFieldsChecker {
 
 			if (!fieldIsOk) {
 				errors.put(FieldsNames.PASSWORD, passwordErrors);
+				noErrors = false;
 			}
 
 		} catch (JSONException e) {
@@ -134,13 +131,51 @@ public class RegisterFieldsChecker {
 
 			if (!fieldIsOk) {
 				errors.put(FieldsNames.EMAIL, emailErrors);
+				noErrors = false;
 			}
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return fieldIsOk;
 
+	}
+
+	public boolean checkAlreadyUsedUsername(DataManager dataManager,
+			String username) {
+		if (!dataManager.checkUsername(username)) {
+			JSONArray usernameErrors = new JSONArray();
+			usernameErrors.put(FieldsNames.ALREADY_USED);
+
+			try {
+				errors.put(FieldsNames.USERNAME, usernameErrors);
+			} catch (JSONException e) {
+				// TODO
+			}
+
+			return noErrors = false;
+		}
+
+		return true;
+	}
+
+	public boolean checkAlreadyUsedEmail(DataManager dataManager, String email) {
+		if (!dataManager.checkEmail(email)) {
+			JSONArray emailErrors = new JSONArray();
+			emailErrors.put(FieldsNames.ALREADY_USED);
+
+			try {
+				errors.put(FieldsNames.EMAIL, emailErrors);
+
+			} catch (JSONException e) {
+			}
+
+			return noErrors = false;
+		}
+
+		return true;
 	}
 
 }

@@ -31,7 +31,7 @@ public class Test01 {
 		JSONObject jsonFromClient = new JSONObject();
 		jsonFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
 		jsonFromClient.put(FieldsNames.USERNAME, "Schopenhauer");
-		jsonFromClient.put(FieldsNames.PASSWORD, "DieWeltAlsWilleUndLOL");
+		jsonFromClient.put(FieldsNames.PASSWORD, "DieWeltAlsWilleUndL0L");
 		jsonFromClient.put(FieldsNames.EMAIL, "arthur@paralipomena.org");
 
 		Register register = new Register(jsonFromClient);

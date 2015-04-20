@@ -27,13 +27,6 @@ public class DataManager {
 	private DataManager() {
 	}
 
-	/**
-	 * Check if the username is not already used.
-	 * 
-	 * @param username
-	 *            username of the user
-	 * @return true if the username is not already used, false otherwise
-	 */
 	public boolean checkUsername(String username) {
 		try {
 
@@ -45,13 +38,6 @@ public class DataManager {
 		return true;
 	}
 
-	/**
-	 * Check if the email is not already used.
-	 * 
-	 * @param email
-	 *            email of the user
-	 * @return true if the email is not already used, false otherwise
-	 */
 	public boolean checkEmail(String email) {
 		try {
 
@@ -65,13 +51,6 @@ public class DataManager {
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param registeredUser
-	 * 
-	 * @return true if the user is registered and the password is correct, false
-	 *         otherwise
-	 */
 	public boolean checkPassword(RegisteredUser registeredUser) {
 		try {
 

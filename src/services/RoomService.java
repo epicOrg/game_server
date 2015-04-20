@@ -17,24 +17,24 @@ import exceptions.RoomAlreadyExistsException;
 
 /**
  * @author Micieli
+ * @author Noris
  * @date 2015/04/18
  */
 
 public class RoomService implements Service {
 
-	private JSONObject request;
 	private GameDataManager gameDataManager;
 
-	private JSONObject response;
-	private boolean noErrors = true;
+	private JSONObject jsonRequest;
+	private JSONObject jsonResponse;
 
-	JSONObject errors = new JSONObject();
-	RoomChecker roomChecker = new RoomChecker(errors);
+	private RoomChecker roomChecker;
 
 	public RoomService(JSONObject json) {
-		request = json;
+		jsonRequest = json;
 		gameDataManager = GameDataManager.getInstance();
-		response = new JSONObject();
+		jsonResponse = new JSONObject();
+		roomChecker = new RoomChecker();
 	}
 
 	@Override
@@ -42,11 +42,9 @@ public class RoomService implements Service {
 
 		try {
 
-			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-
 			checkFields();
-			if (noErrors)
-				runService(request.getString(FieldsNames.SERVICE_TYPE));
+			if (roomChecker.noErrors())
+				runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -54,7 +52,7 @@ public class RoomService implements Service {
 		}
 
 		generateResponse();
-		return response.toString();
+		return jsonResponse.toString();
 
 	}
 
@@ -64,11 +62,11 @@ public class RoomService implements Service {
 
 		try {
 
-			String username = request.getString(FieldsNames.USERNAME);
-			int hashCode = (int) request.get(FieldsNames.HASHCODE);
+			String username = jsonRequest.getString(FieldsNames.USERNAME);
+			int hashCode = (int) jsonRequest.get(FieldsNames.HASHCODE);
 
-			noErrors &= roomChecker.isUserOnline(username);
-			noErrors &= roomChecker.checkHashCode(username, hashCode);
+			roomChecker.isUserOnline(username);
+			roomChecker.checkHashCode(username, hashCode);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -87,11 +85,10 @@ public class RoomService implements Service {
 
 			try {
 
-				String roomName = request.getString(FieldsNames.ROOM_NAME);
+				String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 				if (!roomChecker.checkRoomName(roomName)) {
-					response.put(FieldsNames.SERVICE_TYPE,
+					jsonResponse.put(FieldsNames.SERVICE_TYPE,
 							FieldsNames.ROOM_CREATE);
-					noErrors = false;
 					break;
 				}
 
@@ -99,21 +96,21 @@ public class RoomService implements Service {
 
 			} catch (RoomAlreadyExistsException e) {
 				roomChecker.getRoomAlreadyExistsError();
-				response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-				noErrors = false;
+				jsonResponse.put(FieldsNames.SERVICE_TYPE,
+						FieldsNames.ROOM_CREATE);
 				break;
 			}
 
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
+			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
 			addRoomsList();
 			break;
 
 		case FieldsNames.ROOMS_LIST:
 			addRoomsList();
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
+			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
 			break;
 		case FieldsNames.ROOM_JOIN:
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN);
+			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN);
 			addPlayer();
 			break;
 		default:
@@ -122,14 +119,18 @@ public class RoomService implements Service {
 	}
 
 	private void addPlayer() {
+
 		try {
-			Player player = new Player(request.getString(FieldsNames.USERNAME));
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
-			
+
+			Player player = new Player(
+					jsonRequest.getString(FieldsNames.USERNAME));
+
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			Room room = gameDataManager.getRoomByName(roomName);
 			room.addPlayer(player);
-			response.put(FieldsNames.ROOM_NAME, roomName);
-			response.put(FieldsNames.RESULT, true);
+			jsonResponse.put(FieldsNames.ROOM_NAME, roomName);
+			jsonResponse.put(FieldsNames.RESULT, true);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			joinFailed();
@@ -148,7 +149,7 @@ public class RoomService implements Service {
 	private void joinFailed() {
 		try {
 
-			response.put(FieldsNames.RESULT, false);
+			jsonResponse.put(FieldsNames.RESULT, false);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -172,7 +173,7 @@ public class RoomService implements Service {
 				roomsList.put(room.getName(), roomDescription);
 			}
 
-			response.put(FieldsNames.ROOMS_LIST, roomsList);
+			jsonResponse.put(FieldsNames.ROOMS_LIST, roomsList);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -183,12 +184,11 @@ public class RoomService implements Service {
 	private void generateResponse() {
 		try {
 
-			if (!noErrors)
-				response.put(FieldsNames.ERRORS, errors);
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
+			jsonResponse.put(FieldsNames.NO_ERRORS, roomChecker.noErrors());
 
-			response.put(FieldsNames.NO_ERRORS, noErrors);
-
-			System.out.println("SERVER: " + response);
+			if (!roomChecker.noErrors())
+				jsonResponse.put(FieldsNames.ERRORS, roomChecker.getErrors());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
