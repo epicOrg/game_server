@@ -20,6 +20,9 @@ public class FieldsValues {
 	public static final String PASSWORD_NEEDED_CHARS = "^"
 			+ "([a-zA-Z]+[0-9][a-zA-Z0-9]*)" + "|"
 			+ "([0-9]+[a-zA-Z][a-zA-Z0-9]*)" + "$";
+	
+	public static final int ROOMNAME_MIN_LENGTH = 3;
+	public static final int ROOMNAME_MAX_LENGTH = 20;
 
 	// public static final String[] PASSWORD_FORBIDDEN = {"password", "qwerty",
 	// "123456"};

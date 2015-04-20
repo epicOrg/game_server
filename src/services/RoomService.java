@@ -13,6 +13,7 @@ import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
+import exceptions.RoomAlreadyExistsException;
 
 /**
  * @author Micieli
@@ -26,6 +27,9 @@ public class RoomService implements Service {
 
 	private JSONObject response;
 	private boolean noErrors = true;
+
+	JSONObject errors = new JSONObject();
+	RoomChecker roomChecker = new RoomChecker(errors);
 
 	public RoomService(JSONObject json) {
 		request = json;
@@ -56,40 +60,54 @@ public class RoomService implements Service {
 
 	private void checkFields() {
 
+		// TODO Mettere a posto
+
 		try {
 
-			JSONObject errors = new JSONObject();
-			RoomChecker roomChecker = new RoomChecker(errors);
-			
 			String username = request.getString(FieldsNames.USERNAME);
-			int hashCode = request.getInt(FieldsNames.HASHCODE);
-			
+			int hashCode = (int) request.get(FieldsNames.HASHCODE);
+
 			noErrors &= roomChecker.isUserOnline(username);
 			noErrors &= roomChecker.checkHashCode(username, hashCode);
-
-			if (!noErrors)
-				response.put(FieldsNames.ERRORS, errors);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// TODO
 	}
 
 	private void runService(String serviceType) throws JSONException {
 
-		boolean creationOk;
+		// TODO Mettere a posto
 
 		switch (serviceType) {
+
 		case FieldsNames.ROOM_CREATE:
-			creationOk = gameDataManager.newRoom(request
-					.getString(FieldsNames.ROOM_NAME));
-			response.put(FieldsNames.RESULT, creationOk);
+
+			try {
+
+				String roomName = request.getString(FieldsNames.ROOM_NAME);
+				if (!roomChecker.checkRoomName(roomName)) {
+					response.put(FieldsNames.SERVICE_TYPE,
+							FieldsNames.ROOM_CREATE);
+					noErrors = false;
+					break;
+				}
+
+				gameDataManager.newRoom(roomName);
+
+			} catch (RoomAlreadyExistsException e) {
+				roomChecker.getRoomAlreadyExistsError();
+				response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
+				noErrors = false;
+				break;
+			}
+
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
 			addRoomsList();
 			break;
+
 		case FieldsNames.ROOMS_LIST:
 			addRoomsList();
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
@@ -167,7 +185,12 @@ public class RoomService implements Service {
 	private void generateResponse() {
 		try {
 
+			if (!noErrors)
+				response.put(FieldsNames.ERRORS, errors);
+
 			response.put(FieldsNames.NO_ERRORS, noErrors);
+
+			System.out.println("SERVER: " + response);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

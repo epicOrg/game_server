@@ -1,6 +1,7 @@
 package data_management;
 
 import exceptions.NoSuchRoomException;
+import exceptions.RoomAlreadyExistsException;
 import game.Room;
 
 import java.util.ArrayList;
@@ -26,29 +27,21 @@ public class GameDataManager {
 		return rooms;
 	}
 
-	public boolean newRoom(String name) {
-		// TODO rooms stesso nome
-		rooms.add(new Room(name));
-		return true;
+	public void newRoom(String name) throws RoomAlreadyExistsException {
+
+		try {
+
+			getRoomByName(name);
+
+		} catch (NoSuchRoomException e) {
+
+			rooms.add(new Room(name));
+			return;
+
+		}
+
+		throw new RoomAlreadyExistsException();
 	}
-	
-//	/*
-//	 * Possible future implementation of newRoom method.
-//	 */
-//	public void newRoom(String name) throws RoomAlreadyExistsException {
-//
-//		try {
-//			
-//			getRoomByName(name);
-//			
-//		} catch (NoSuchRoomException e) {
-//			
-//			rooms.add(new Room(name));
-//
-//		}
-//		
-//		throw new RoomAlreadyExistsException();
-//	}
 
 	public Room getRoomByName(String name) throws NoSuchRoomException {
 		for (Room room : rooms) {

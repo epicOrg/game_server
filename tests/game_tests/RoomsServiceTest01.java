@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import services.RoomService;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
+import exceptions.RoomAlreadyExistsException;
 
 /**
  * @author Micieli
@@ -14,7 +15,7 @@ import data_management.GameDataManager;
 
 public class RoomsServiceTest01 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RoomAlreadyExistsException {
 
 		GameDataManager gameDataManager = GameDataManager.getInstance();
 

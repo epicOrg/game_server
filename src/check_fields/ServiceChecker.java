@@ -34,8 +34,10 @@ public class ServiceChecker {
 	public boolean checkHashCode(String username, int hashCode) {
 
 		try {
+
 			if (hashCode == onlineManager.getHashCodeByUsername(username))
 				return true;
+			
 		} catch (UserNotOnlineException e1) {
 			isUserOnline(username);
 			e1.printStackTrace();

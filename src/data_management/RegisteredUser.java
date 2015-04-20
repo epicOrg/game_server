@@ -2,7 +2,6 @@ package data_management;
 
 import java.util.GregorianCalendar;
 
-import data_management.password_encrypter.Md5StringEncrypter;
 import data_management.password_encrypter.PasswordEncrypter;
 
 /**

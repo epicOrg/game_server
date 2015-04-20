@@ -60,7 +60,7 @@ public class ClientRequestThread implements Runnable {
 					request = in.readLine();
 
 					// TODO REMOVE (debug print)
-					System.out.println("Reading");
+					System.out.println("> Reading...");
 				}
 			}
 

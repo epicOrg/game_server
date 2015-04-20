@@ -6,10 +6,12 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 
 /**
+ * If the Service selected from the client not exists, it generate an Unknown
+ * Service message.
+ * 
  * @author Noris
  * @date 2015/03/26
  */
-
 public class Unknown implements Service {
 
 	@Override
