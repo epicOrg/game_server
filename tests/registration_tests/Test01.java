@@ -1,6 +1,7 @@
 package registration_tests;
 
 import static org.junit.Assert.assertEquals;
+import game_server.ServerInitializer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +26,13 @@ public class Test01 {
 	@Test
 	public void test() throws JSONException {
 
+		new ServerInitializer().initDataManager();
+
 		JSONObject jsonFromClient = new JSONObject();
 		jsonFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-		jsonFromClient.put(FieldsNames.USERNAME, "EpicOrg");
-		jsonFromClient.put(FieldsNames.PASSWORD, "pass12345678");
-		jsonFromClient.put(FieldsNames.EMAIL, "example@epic.org");
+		jsonFromClient.put(FieldsNames.USERNAME, "Schopenhauer");
+		jsonFromClient.put(FieldsNames.PASSWORD, "DieWeltAlsWilleUndLOL");
+		jsonFromClient.put(FieldsNames.EMAIL, "arthur@paralipomena.org");
 
 		Register register = new Register(jsonFromClient);
 		String response = register.start();

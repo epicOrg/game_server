@@ -86,9 +86,11 @@ public class Register implements Service {
 
 		try {
 
-			jsonResponse.put(FieldsNames.ERRORS, errors);
+			if (!noErrors)
+				jsonResponse.put(FieldsNames.ERRORS, errors);
 
 		} catch (JSONException e) {
+			// TODO
 		}
 	}
 
@@ -113,6 +115,7 @@ public class Register implements Service {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
 				jsonResponse.put(FieldsNames.ERRORS, errors);
 			} catch (JSONException e) {
+				// TODO
 			}
 
 			noErrors = false;
