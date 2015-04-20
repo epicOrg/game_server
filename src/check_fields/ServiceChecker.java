@@ -37,7 +37,7 @@ public class ServiceChecker {
 
 			if (hashCode == onlineManager.getHashCodeByUsername(username))
 				return true;
-			
+
 		} catch (UserNotOnlineException e1) {
 			isUserOnline(username);
 			e1.printStackTrace();
@@ -53,6 +53,12 @@ public class ServiceChecker {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param username
+	 *            username of the user
+	 * @return true if the username is online, false otherwise
+	 */
 	public boolean isUserOnline(String username) {
 		try {
 			if (!onlineManager.checkIfOnline(username)) {

@@ -31,6 +31,12 @@ public class RoomChecker extends ServiceChecker {
 		}
 	}
 
+	/**
+	 * Check if the room name is valid.
+	 * 
+	 * @param roomName
+	 * @return true if the room name is valid, false otherwise
+	 */
 	public boolean checkRoomName(String roomName) {
 
 		boolean fieldIsOk = true;

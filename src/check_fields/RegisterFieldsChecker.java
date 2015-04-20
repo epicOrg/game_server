@@ -48,7 +48,7 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk){
+			if (!fieldIsOk) {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
 			}
 		} catch (JSONException e) {
@@ -63,7 +63,8 @@ public class RegisterFieldsChecker {
 	/**
 	 * Check if the user password is valid.
 	 * 
-	 * @param user password
+	 * @param password
+	 *            password
 	 * @return true if the password is valid, false if it's invalid
 	 */
 	public boolean checkPassword(String password) {
@@ -89,7 +90,7 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk){
+			if (!fieldIsOk) {
 				errors.put(FieldsNames.PASSWORD, passwordErrors);
 			}
 
@@ -105,7 +106,8 @@ public class RegisterFieldsChecker {
 	/**
 	 * Check if an email address is valid.
 	 * 
-	 * @param email address
+	 * @param email
+	 *            address
 	 * @return true if the email is valid, false if it's invalid
 	 * @see <a href="http://goo.gl/1G43mb">Apache Email Validator</a>
 	 */
@@ -130,7 +132,7 @@ public class RegisterFieldsChecker {
 				fieldIsOk = false;
 			}
 
-			if (!fieldIsOk){
+			if (!fieldIsOk) {
 				errors.put(FieldsNames.EMAIL, emailErrors);
 			}
 		} catch (JSONException e) {

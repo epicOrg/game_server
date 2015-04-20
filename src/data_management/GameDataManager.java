@@ -27,6 +27,13 @@ public class GameDataManager {
 		return rooms;
 	}
 
+	/**
+	 * Create a new @see {@link Room}
+	 * 
+	 * @param name
+	 *            the name of a new room
+	 * @throws RoomAlreadyExistsException
+	 */
 	public void newRoom(String name) throws RoomAlreadyExistsException {
 
 		try {
@@ -43,6 +50,13 @@ public class GameDataManager {
 		throw new RoomAlreadyExistsException();
 	}
 
+	/**
+	 * 
+	 * @param name
+	 *            the name of a room
+	 * @return the instance of Room with the same name
+	 * @throws NoSuchRoomException
+	 */
 	public Room getRoomByName(String name) throws NoSuchRoomException {
 		for (Room room : rooms) {
 			if (name.equals(room.getName()))
