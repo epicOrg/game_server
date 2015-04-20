@@ -1,8 +1,6 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 import exceptions.FullRoomException;
 
@@ -19,13 +17,12 @@ public class Room {
 	private String roomName;
 
 	private HashMap<String, Player> players = new HashMap<String, Player>();
-
-	private Team teamA;
-	private Team teamB;
+	
+	TeamGenerator teamGenerator;
 
 	public Room(String roomName) {
 		this.roomName = roomName;
-		generateTeams();
+		teamGenerator = new TeamGenerator();
 	}
 
 	/**
@@ -41,7 +38,7 @@ public class Room {
 		}
 
 		players.put(player.getUsername(), player);
-		getRandomTeam().addPlayer(player);
+		teamGenerator.getRandomTeam().addPlayer(player);
 
 	}
 
@@ -77,50 +74,6 @@ public class Room {
 
 	public String getName() {
 		return roomName;
-	}
-
-	/**
-	 * Team generator: this method generate two team with different colors.
-	 */
-	public void generateTeams() {
-
-		teamA = new Team();
-		teamB = new Team();
-
-		while (teamA.getTeamColor().equals(teamB.getTeamColor())) {
-			teamB.setRandomTeamColorFromList();
-		}
-	}
-
-	/**
-	 * Select a team for the incoming player.
-	 * 
-	 * @return the team with less players or, if the teams has the same number
-	 *         of players, a random team.
-	 */
-	public Team getRandomTeam() {
-
-		if (teamA.getSize() < teamB.getSize())
-			return teamA;
-
-		else if (teamA.getSize() > teamB.getSize())
-			return teamB;
-
-		if (new Random().nextBoolean())
-			return teamA;
-
-		return teamB;
-	}
-
-	/**
-	 * @return an ArrayList containing the two teams.
-	 */
-	public ArrayList<Team> getTeams() {
-
-		ArrayList<Team> teams = new ArrayList<Team>(2);
-		teams.add(teamA);
-		teams.add(teamB);
-		return teams;
 	}
 
 }
