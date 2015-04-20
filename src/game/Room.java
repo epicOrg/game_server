@@ -17,8 +17,8 @@ public class Room {
 	private String roomName;
 
 	private HashMap<String, Player> players = new HashMap<String, Player>();
-	
-	TeamGenerator teamGenerator;
+
+	private TeamGenerator teamGenerator;
 
 	public Room(String roomName) {
 		this.roomName = roomName;
@@ -74,6 +74,10 @@ public class Room {
 
 	public String getName() {
 		return roomName;
+	}
+
+	public TeamGenerator getTeamGenerator() {
+		return teamGenerator;
 	}
 
 }
