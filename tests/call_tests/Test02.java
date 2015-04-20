@@ -1,5 +1,7 @@
 package call_tests;
 
+import game_server.ServerInitializer;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -26,6 +28,7 @@ public class Test02 {
 			JSONException {
 
 		// SERVER: Set online "JohnLocke"
+		new ServerInitializer().initDataManager();
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("192.168.1.1");
 		onlineManager.setOnline("JohnLocke", ipAddress);
@@ -34,7 +37,7 @@ public class Test02 {
 		JSONObject jsonLoginFromClient = new JSONObject();
 		jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 		jsonLoginFromClient.put(FieldsNames.USERNAME, "GWFHegel");
-		jsonLoginFromClient.put(FieldsNames.PASSWORD, "AufhebungRulez!");
+		jsonLoginFromClient.put(FieldsNames.PASSWORD, "AufhebungRulez1");
 		jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.2");
 		System.out.println("Login Client Message: " + jsonLoginFromClient);
 
@@ -45,7 +48,7 @@ public class Test02 {
 
 		// CLIENT: Read response from server
 		JSONObject jsonLoginFromServer = new JSONObject(stringLoginFromServer);
-		int hashCode = (int) jsonLoginFromServer.get(FieldsNames.HASHCODE);
+		int hashCode = jsonLoginFromServer.getInt(FieldsNames.HASHCODE);
 
 		// CLIENT: Send an invalid call request (wrong hashCode)
 		JSONObject jsonCallFromClient = new JSONObject();

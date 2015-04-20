@@ -10,6 +10,8 @@ import online_management.OnlineManager;
 
 import org.junit.Test;
 
+import exceptions.UserNotOnlineException;
+
 /**
  * This test sets online a defined number of users and it chooses randomly one
  * of those users. Then, with the user name, it search the hashCode of this
@@ -42,14 +44,22 @@ public class Test01 {
 		String realUsername = "user" + randomNumber;
 
 		// Get the hashCode of realUsername
-		int hashCode = onlineManager.getHashCodeByUsername(realUsername);
-		System.out.println("HashCode of " + realUsername + ": " + hashCode);
+		int hashCode;
+		try {
+			hashCode = onlineManager.getHashCodeByUsername(realUsername);
+			System.out.println("HashCode of " + realUsername + ": " + hashCode);
 
-		// Get the user name of the previous founded HashCode
-		String foundUsername = onlineManager.getUsernameByHashCode(hashCode);
-		System.out.println("Username of " + hashCode + ": " + foundUsername);
+			// Get the user name of the previous founded HashCode
+			String foundUsername = onlineManager
+					.getUsernameByHashCode(hashCode);
+			System.out
+					.println("Username of " + hashCode + ": " + foundUsername);
 
-		assertEquals(realUsername, foundUsername);
+			assertEquals(realUsername, foundUsername);
+		} catch (UserNotOnlineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

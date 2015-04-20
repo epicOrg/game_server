@@ -1,5 +1,7 @@
 package call_tests;
 
+import game_server.ServerInitializer;
+
 import java.net.UnknownHostException;
 
 import org.json.JSONException;
@@ -23,10 +25,12 @@ public class Test03 {
 			JSONException {
 
 		// CLIENT: Send message to go online
+		new ServerInitializer().initDataManager();
+		
 		JSONObject jsonLoginFromClient = new JSONObject();
 		jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 		jsonLoginFromClient.put(FieldsNames.USERNAME, "GWFHegel");
-		jsonLoginFromClient.put(FieldsNames.PASSWORD, "AufhebungRulez!");
+		jsonLoginFromClient.put(FieldsNames.PASSWORD, "AufhebungRulez1");
 		jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.2");
 		System.out.println("Login Client Message: " + jsonLoginFromClient);
 

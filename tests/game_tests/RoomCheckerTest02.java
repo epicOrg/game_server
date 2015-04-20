@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import services.RoomService;
 import check_fields.FieldsNames;
+import exceptions.UserNotOnlineException;
 
 /**
  * RoomService request message test with hashCode error.
@@ -26,18 +27,24 @@ public class RoomCheckerTest02 {
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("15.10.18.44");
 		onlineManager.setOnline("Nietzsche", ipAddress);
-		int hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
+		int hashCode;
+		try {
+			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
+			JSONObject jsonRequest = new JSONObject();
+			jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
+			jsonRequest.put(FieldsNames.USERNAME, "Nietzsche");
+			jsonRequest.put(FieldsNames.HASHCODE, hashCode+1);
+			jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
+			jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
 
-		JSONObject jsonRequest = new JSONObject();
-		jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-		jsonRequest.put(FieldsNames.USERNAME, "Nietzsche");
-		jsonRequest.put(FieldsNames.HASHCODE, hashCode+1);
-		jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-		jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
+			System.out.println("Request: " + jsonRequest);
 
-		System.out.println("Request: " + jsonRequest);
+			System.out.println("Response: " + new RoomService(jsonRequest).start());
 
-		System.out.println("Response: " + new RoomService(jsonRequest).start());
+		} catch (UserNotOnlineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 }

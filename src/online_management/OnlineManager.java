@@ -39,8 +39,9 @@ public class OnlineManager {
 	 * 
 	 * @param username
 	 * @param hashCode
+	 * @throws UserNotOnlineException 
 	 */
-	public void setOffline(String username, int hashCode) {
+	public void setOffline(String username, int hashCode) throws UserNotOnlineException {
 		if (getHashCodeByUsername(username) == hashCode)
 			onlineUsers.remove(username);
 	}
@@ -82,8 +83,11 @@ public class OnlineManager {
 	/**
 	 * @param username
 	 * @return hashCode of the user
+	 * @throws UserNotOnlineException 
 	 */
-	public int getHashCodeByUsername(String username) {
+	public int getHashCodeByUsername(String username) throws UserNotOnlineException {
+		if(!checkIfOnline(username))
+			throw new UserNotOnlineException();
 		return onlineUsers.get(username).hashCode();
 	}
 
