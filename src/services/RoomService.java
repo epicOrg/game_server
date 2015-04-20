@@ -122,16 +122,14 @@ public class RoomService implements Service {
 	}
 
 	private void addPlayer() {
-
 		try {
-
 			Player player = new Player(request.getString(FieldsNames.USERNAME));
-
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
+			
 			Room room = gameDataManager.getRoomByName(roomName);
 			room.addPlayer(player);
+			response.put(FieldsNames.ROOM_NAME, roomName);
 			response.put(FieldsNames.RESULT, true);
-
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			joinFailed();
