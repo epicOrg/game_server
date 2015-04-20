@@ -17,6 +17,7 @@ public class RegisteredUser {
 	private String encryptedPassword;
 	private String email;
 	private GregorianCalendar registrationDate;
+	private static PasswordEncrypter passwordEncrypter;
 
 	public RegisteredUser(String username, String password, String email) {
 		this.username = username;
@@ -27,9 +28,7 @@ public class RegisteredUser {
 	}
 
 	private void cryptPassword() {
-		PasswordEncrypter passwordEncrypter = new PasswordEncrypter(password,
-				new Md5StringEncrypter());
-		this.encryptedPassword = passwordEncrypter.cryptPassword();
+		this.encryptedPassword = passwordEncrypter.cryptPassword(password);
 	}
 	
 	public String getEncryptedPassword() {
@@ -62,6 +61,10 @@ public class RegisteredUser {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public static void setPasswordEncrypter(PasswordEncrypter passwordEncrypter) {
+		RegisteredUser.passwordEncrypter = passwordEncrypter;
 	}
 	
 }

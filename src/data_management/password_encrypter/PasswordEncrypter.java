@@ -9,16 +9,13 @@ package data_management.password_encrypter;
 
 public class PasswordEncrypter {
 
-	private String password;
 	private StringEncrypter stringEncrypter;
 
-	public PasswordEncrypter(String password, StringEncrypter stringEncrypter) {
-		this.password = password;
+	public PasswordEncrypter( StringEncrypter stringEncrypter) {
 		this.stringEncrypter = stringEncrypter;
 	}
 
-	public String cryptPassword() {
+	public String cryptPassword(String password) {
 		return stringEncrypter.encryptString(password);
 	}
-
 }

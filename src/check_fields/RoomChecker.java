@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 public class RoomChecker extends ServiceChecker {
 	
-	public RoomChecker(JSONObject jsonResponse) {
-		super(jsonResponse);
+	public RoomChecker(JSONObject errors) {
+		super(errors);
 	}
 
 }
