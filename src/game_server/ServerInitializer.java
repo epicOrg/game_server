@@ -18,6 +18,7 @@ import data_management.RegisterDataSaver;
 public class ServerInitializer {
 
 	public void initDataManager() {
+
 		DataManager dataManager = DataManager.getInstance();
 		String path = dataManager.getPath();
 

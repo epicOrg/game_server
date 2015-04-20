@@ -27,9 +27,9 @@ public class ServiceChecker {
 	 *            username of the user
 	 * @param hashCode
 	 *            hashcode of the user
-	 * @return the OnlineUser object of the user if the hashCode sent by the
-	 *         user corresponds to the hashCode generated and saved by the
-	 *         server in the login, null otherwise
+	 * @return true if the hashCode sent by the user corresponds to the hashCode
+	 *         generated and saved by the server in the login, false otherwise
+	 * @throws UserNotOnlineException
 	 */
 	public boolean checkHashCode(String username, int hashCode) {
 
@@ -63,8 +63,10 @@ public class ServiceChecker {
 		}
 		return true;
 	}
-	
-	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException{
+
+	public OnlineUser getOnlineUser(String username)
+			throws UserNotOnlineException {
 		return onlineManager.getOnlineUserByUsername(username);
 	}
+
 }

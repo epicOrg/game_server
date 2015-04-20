@@ -1,10 +1,5 @@
 package check_fields;
 
-import java.net.InetAddress;
-
-import online_management.OnlineManager;
-import online_management.OnlineUser;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +17,7 @@ public class CallFieldsChecker extends ServiceChecker{
 	/**
 	 * @param callee
 	 *            username of the callee
-	 * @return if the callee is online its IP Address, otherwise null
+	 * @return true if the callee is online, false otherwise
 	 */
 	public boolean checkIfCalleeIsOnline(String callee) {
 

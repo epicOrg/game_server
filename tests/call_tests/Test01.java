@@ -5,8 +5,6 @@ import game_server.ServerInitializer;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import loader.FileChecker;
-import loader.LoginChecker;
 import online_management.OnlineManager;
 
 import org.json.JSONException;
@@ -16,13 +14,7 @@ import services.Call;
 import services.Login;
 import services.Register;
 import services.Service;
-import writer.EmailFormatter;
-import writer.EmailSaver;
-import writer.UserCreator;
-import writer.UserLineFormatter;
 import check_fields.FieldsNames;
-import data_management.DataManager;
-import data_management.RegisterDataSaver;
 
 /**
  * Test for a valid call request.
@@ -41,15 +33,16 @@ public class Test01 {
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("192.168.1.1");
 		onlineManager.setOnline("JohnLocke", ipAddress);
-		
-		//CLIENT REGISTRATION
+
+		// CLIENT REGISTRATION
 
 		JSONObject jsonRegFromClient = new JSONObject();
 		jsonRegFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
 		jsonRegFromClient.put(FieldsNames.USERNAME, "GWFHegel");
 		jsonRegFromClient.put(FieldsNames.PASSWORD, "AufhebungRulez1");
 		jsonRegFromClient.put(FieldsNames.EMAIL, "raiur@cuce.it");
-		System.out.println("Reg Client Message: " + new Register(jsonRegFromClient).start());
+		System.out.println("Reg Client Message: "
+				+ new Register(jsonRegFromClient).start());
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
