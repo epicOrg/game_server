@@ -18,7 +18,7 @@ import exceptions.UserNotOnlineException;
  * @author Noris
  * @date 2015/04/19
  */
-public class RoomCheckerTest02 {
+class RoomCheckerTest02 {
 
 	public static void main(String[] args) throws UnknownHostException,
 			JSONException {
@@ -33,13 +33,14 @@ public class RoomCheckerTest02 {
 			JSONObject jsonRequest = new JSONObject();
 			jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
 			jsonRequest.put(FieldsNames.USERNAME, "Nietzsche");
-			jsonRequest.put(FieldsNames.HASHCODE, hashCode+1);
+			jsonRequest.put(FieldsNames.HASHCODE, hashCode + 1);
 			jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
 			jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
 
 			System.out.println("Request: " + jsonRequest);
 
-			System.out.println("Response: " + new RoomService(jsonRequest).start());
+			System.out.println("Response: "
+					+ new RoomService(jsonRequest).start());
 
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block

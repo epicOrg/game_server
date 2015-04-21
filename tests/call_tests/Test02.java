@@ -26,7 +26,7 @@ import data_management.DataManager;
  * @date 2015/04/11
  *
  */
-public class Test02 {
+class Test02 {
 
 	public static void main(String[] args) throws UnknownHostException,
 			JSONException {

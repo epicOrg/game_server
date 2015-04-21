@@ -12,7 +12,7 @@ import game_server.ServerInitializer;
  * @author Noris
  * @date 2015/04/17
  */
-public class Test03 {
+class Test03 {
 
 	public static void main(String[] args) throws RegistrationFailedException {
 

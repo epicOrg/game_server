@@ -18,7 +18,7 @@ import check_fields.FieldsNames;
  *
  */
 
-public class Test02 {
+class Test02 {
 
 	public static void main(String[] args) throws JSONException {
 

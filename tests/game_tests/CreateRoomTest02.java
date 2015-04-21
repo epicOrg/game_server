@@ -21,7 +21,7 @@ import check_fields.FieldsNames;
  *
  */
 
-public class CreateRoomTest02 {
+class CreateRoomTest02 {
 
 	public static void main(String[] args) throws JSONException {
 

@@ -12,7 +12,7 @@ import connection_encryption.SymmetricKeyGenerator;
  * @date 2015/03/30
  */
 
-public class Test01 {
+class Test01 {
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 

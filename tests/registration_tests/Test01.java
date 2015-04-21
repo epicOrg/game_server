@@ -21,7 +21,7 @@ import check_fields.FieldsNames;
  *
  */
 
-public class Test01 {
+class Test01 {
 
 	@Test
 	public void test() throws JSONException {

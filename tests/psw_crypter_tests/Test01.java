@@ -16,7 +16,7 @@ import data_management.password_encrypter.PasswordEncrypter;
  * 
  */
 
-public class Test01 {
+class Test01 {
 
 	@Test
 	public void test() {

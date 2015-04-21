@@ -19,7 +19,7 @@ import check_fields.FieldsNames;
  * @date 2015/04/11
  *
  */
-public class Test03 {
+class Test03 {
 
 	public static void main(String[] args) throws UnknownHostException,
 			JSONException {

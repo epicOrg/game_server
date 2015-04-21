@@ -22,7 +22,7 @@ import exceptions.UserNotOnlineException;
  *
  */
 
-public class Test01 {
+class Test01 {
 
 	private final int ONLINE_USERS = 100;
 

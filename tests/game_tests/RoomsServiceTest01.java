@@ -13,7 +13,7 @@ import exceptions.RoomAlreadyExistsException;
  * @date 2015/04/18
  */
 
-public class RoomsServiceTest01 {
+class RoomsServiceTest01 {
 
 	public static void main(String[] args) throws RoomAlreadyExistsException {
 
