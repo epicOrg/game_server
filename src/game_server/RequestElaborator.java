@@ -18,20 +18,25 @@ import services.Unknown;
 
 public class RequestElaborator {
 
-	public Service chooseService(JSONObject json) throws JSONException {
+	public Service chooseService(JSONObject json) {
 
-		switch (json.getString(FieldsNames.SERVICE)) {
-		case FieldsNames.REGISTER:
-			return new Register(json);
-		case FieldsNames.LOGIN:
-			return new Login(json);
-		case FieldsNames.CALL:
-			return new Call(json);
-		case FieldsNames.ROOMS:
-			return new RoomService(json);
-		default:
+		try {
+
+			switch (json.getString(FieldsNames.SERVICE)) {
+			case FieldsNames.REGISTER:
+				return new Register(json);
+			case FieldsNames.LOGIN:
+				return new Login(json);
+			case FieldsNames.CALL:
+				return new Call(json);
+			case FieldsNames.ROOMS:
+				return new RoomService(json);
+			default:
+				return new Unknown();
+			}
+
+		} catch (JSONException e) {
 			return new Unknown();
-
 		}
 	}
 
