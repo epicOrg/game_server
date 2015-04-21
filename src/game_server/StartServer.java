@@ -19,7 +19,7 @@ public class StartServer {
 
 			@SuppressWarnings("resource")
 			ServerSocket ServerSocket = new ServerSocket(PORT);
-			
+
 			new ServerInitializer().initDataManager();
 
 			while (true) {
@@ -27,6 +27,10 @@ public class StartServer {
 				Socket socket = ServerSocket.accept();
 
 				Thread thread = new Thread(new ClientRequestThread(socket));
+
+				// TODO DEBUG: ID of the thread
+				System.out.println("> Thread ID: " + thread.getId());
+
 				thread.start();
 			}
 

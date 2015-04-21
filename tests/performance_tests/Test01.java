@@ -42,11 +42,11 @@ class Test01 {
 			jsonRegFromClient.put(FieldsNames.USERNAME, username);
 			jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@logos.org");
-			System.out.println("[" + i + 1 + "] CLIENT Registration Message: "
+			System.out.println("[" + i + "] CLIENT Registration Message: "
 					+ jsonRegFromClient);
 
 			// SERVER: Register the user
-			System.out.println("[" + i + 1 + "] SERVER Registration Message: "
+			System.out.println("[" + i + "] SERVER Registration Message: "
 					+ new Register(jsonRegFromClient).start() + "\n");
 
 			// CLIENT: Send message to go online
@@ -61,7 +61,7 @@ class Test01 {
 			// SERVER: Set the user online
 			Service login = new Login(jsonLoginFromClient);
 			String stringLoginFromServer = login.start().toString();
-			System.out.println("[" + i + 1 + "] SERVER Login Message: "
+			System.out.println("[" + i + "] SERVER Login Message: "
 					+ stringLoginFromServer + "\n");
 
 			// CLIENT: Read response from server

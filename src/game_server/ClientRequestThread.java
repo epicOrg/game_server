@@ -9,8 +9,8 @@ import java.net.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.Service;
+import check_fields.FieldsNames;
 
 /**
  * @author Noris
@@ -38,30 +38,32 @@ public class ClientRequestThread implements Runnable {
 
 			String request = in.readLine();
 
-			// TODO REMOVE (debug print)
-			// System.out.println(json.toString());
+			// TODO DEBUG: Client request
+			System.out.println("CLIENT: " + request);
 
 			while (!socket.isClosed()) {
-				if (request != null) {
-					JSONObject json = new JSONObject(request);
 
-					// TODO REMOVE (debug print)
-					System.out.println(request);
+				if (request == null)
+					return;
 
-					// Add client IP to json service message
-					json.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
-							.getHostAddress());
+				JSONObject jsonRequest = new JSONObject(request);
 
-					PrintWriter out = new PrintWriter(socket.getOutputStream(),
-							true);
+				// Add client IP to json service message
+				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
+						.getHostAddress());
 
-					Service service = requestElaborator.chooseService(json);
-					out.println(service.start());
-					request = in.readLine();
+				PrintWriter out = new PrintWriter(socket.getOutputStream(),
+						true);
 
-					// TODO REMOVE (debug print)
-					System.out.println("> Reading...");
-				}
+				Service service = requestElaborator.chooseService(jsonRequest);
+
+				String response = service.start();
+				out.println(response);
+				request = in.readLine();
+
+				// TODO DEBUG: Server response
+				System.out.println("SERVER : " + response);
+
 			}
 
 		} catch (IOException e) {

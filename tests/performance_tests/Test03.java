@@ -11,10 +11,10 @@ import check_fields.FieldsNames;
 import data_management.DataManager;
 
 /**
- * This test registers and logins NUMBER_OF_USERS users (login after
- * registration for every user). Before run this test start the server on the
- * same machine. Remember to restore the e-mails database after this test (it
- * already remove users registration file).
+ * This test registers and logins NUMBER_OF_USERS users (login after the
+ * registration). Before run this test, you must start the server on the same
+ * machine. Remember to restore the e-mails database after this test (it already
+ * remove users registration file, nut not the e-mails in the database).
  * 
  * @author Noris
  * @date 2015/04/21
@@ -22,12 +22,17 @@ import data_management.DataManager;
 
 class Test03 {
 
+	// Number of users to registered and logged in
 	private static final int NUMBER_OF_USERS = 10;
 
 	public static void main(String[] args) throws JSONException,
 			UnknownHostException, IOException, InterruptedException {
 
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
+
+			// CLIENT: Open the socket
+			Test_OpenSocket openSocket = new Test_OpenSocket();
+			openSocket.connectSocket();
 
 			// Generate a random user name
 			String username = "Schiller" + i;
@@ -38,10 +43,10 @@ class Test03 {
 			jsonRegFromClient.put(FieldsNames.USERNAME, username);
 			jsonRegFromClient.put(FieldsNames.PASSWORD, "Friedrich59");
 			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@neckar.com");
-			System.out.println("[" + i+1 + "] CLIENT Registration Message: "
+			System.out.println("[" + i + "] CLIENT Registration Message: "
 					+ jsonRegFromClient);
 
-			new Test_OpenSocket().start(jsonRegFromClient.toString());
+			openSocket.writeSocket(jsonRegFromClient.toString());
 
 			// CLIENT: Send message to go online
 			JSONObject jsonLoginFromClient = new JSONObject();
@@ -49,17 +54,18 @@ class Test03 {
 			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Friedrich59");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.4");
-			System.out.println("[" + i+1 + "] CLIENT Login Message: "
+			System.out.println("[" + i + "] CLIENT Login Message: "
 					+ jsonLoginFromClient + "\n");
-			
-			new Test_OpenSocket().start(jsonLoginFromClient.toString());
+
+			openSocket.writeSocket(jsonLoginFromClient.toString());
+			openSocket.closeSocket();
 		}
 
 		// Attends SECONDS seconds
 		int SECONDS = 2;
 		Thread.sleep(1000 * SECONDS);
 
-		// Delete registration file for a clean test
+		// Delete registration files for a clean test
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 			String username = "Schiller" + i;
 			new File(DataManager.getInstance().getPath() + username).delete();

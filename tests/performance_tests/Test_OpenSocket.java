@@ -19,19 +19,23 @@ class Test_OpenSocket {
 	private static final String SERVER_ADDRESS = "127.0.0.1";
 	private static final int SERVER_PORT = 7007;
 
-	private Socket socket;
+	private Socket socket = new Socket();;
 	private PrintWriter writer;
 
-	public void start(String message) throws UnknownHostException, IOException {
-
-		socket = new Socket();
+	public void connectSocket() throws UnknownHostException, IOException {
 		socket.connect(
 				new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS),
 						SERVER_PORT), 5000);
+	}
+	
+	public void writeSocket(String message) throws IOException {
+
 		writer = new PrintWriter(socket.getOutputStream(), true);
 
 		writer.println(message);
+	}
 
+	public void closeSocket() throws IOException {
 		socket.close();
 	}
 

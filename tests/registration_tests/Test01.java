@@ -21,11 +21,13 @@ import services.Register;
  *
  */
 
+@Deprecated
 class Test01 {
 
 	@Test
 	public void test() throws JSONException {
 
+		// Initialize the server
 		new ServerInitializer().initDataManager();
 
 		JSONObject jsonFromClient = new JSONObject();
