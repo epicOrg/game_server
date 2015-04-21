@@ -7,11 +7,11 @@ import java.util.Random;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
 import services.Login;
 import services.Register;
 import services.RoomService;
 import services.Service;
-import check_fields.FieldsNames;
 
 /**
  * Test for a valid Room Create request.

@@ -9,8 +9,8 @@ import java.net.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.Service;
 import check_fields.FieldsNames;
+import services.Service;
 
 /**
  * @author Noris

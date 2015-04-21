@@ -7,10 +7,9 @@ import java.net.UnknownHostException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import check_fields.FieldsNames;
 import services.Call;
 import services.Service;
-import check_fields.FieldsNames;
-
 /**
  * Test for an invalid call request (caller not online).
  * 

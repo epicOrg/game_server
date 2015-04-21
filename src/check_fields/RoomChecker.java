@@ -14,7 +14,7 @@ public class RoomChecker extends ServiceChecker {
 		try {
 
 			JSONArray roomExistsError = new JSONArray();
-			roomExistsError.put(FieldsNames.ROOM_CREATE_ERROR_ALREADYPRESENT);
+			roomExistsError.put(FieldsNames.ROOM_CREATE_ERROR_ALREADY_PRESENT);
 			errors.put(FieldsNames.ERRORS, roomExistsError);
 			noErrors = false;
 
@@ -39,12 +39,12 @@ public class RoomChecker extends ServiceChecker {
 			JSONArray roomNameError = new JSONArray();
 
 			if (roomName.length() < FieldsValues.ROOMNAME_MIN_LENGTH) {
-				roomNameError.put(FieldsNames.ROOM_CREATE_ERROR_INVALIDNAME);
+				roomNameError.put(FieldsNames.ROOM_CREATE_ERROR_INVALID_NAME);
 				fieldIsOk = false;
 			}
 
 			if (roomName.length() > FieldsValues.ROOMNAME_MAX_LENGTH) {
-				roomNameError.put(FieldsNames.ROOM_CREATE_ERROR_INVALIDNAME);
+				roomNameError.put(FieldsNames.ROOM_CREATE_ERROR_INVALID_NAME);
 				fieldIsOk = false;
 			}
 

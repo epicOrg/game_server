@@ -28,17 +28,17 @@ public class RegisterChecker extends ServiceChecker {
 			JSONArray usernameErrors = new JSONArray();
 
 			if (username.length() < FieldsValues.USERNAME_MIN_LENGTH) {
-				usernameErrors.put(FieldsNames.SHORT);
+				usernameErrors.put(FieldsNames.REGISTER_SHORT);
 				fieldIsOk = false;
 			}
 
 			else if (username.length() > FieldsValues.USERNAME_MAX_LENGTH) {
-				usernameErrors.put(FieldsNames.LONG);
+				usernameErrors.put(FieldsNames.REGISTER_LONG);
 				fieldIsOk = false;
 			}
 
 			if (username.matches(FieldsValues.USERNAME_FORBIDDEN_CHARS)) {
-				usernameErrors.put(FieldsNames.INVALID_CHAR);
+				usernameErrors.put(FieldsNames.REGISTER_INVALID_CHAR);
 				fieldIsOk = false;
 			}
 
@@ -72,17 +72,17 @@ public class RegisterChecker extends ServiceChecker {
 			JSONArray passwordErrors = new JSONArray();
 
 			if (password.length() < FieldsValues.PASSWORD_MIN_LENGTH) {
-				passwordErrors.put(FieldsNames.SHORT);
+				passwordErrors.put(FieldsNames.REGISTER_SHORT);
 				fieldIsOk = false;
 			}
 
 			else if (password.length() > FieldsValues.PASSWORD_MAX_LENGTH) {
-				passwordErrors.put(FieldsNames.LONG);
+				passwordErrors.put(FieldsNames.REGISTER_LONG);
 				fieldIsOk = false;
 			}
 
 			if (!password.matches(FieldsValues.PASSWORD_NEEDED_CHARS)) {
-				passwordErrors.put(FieldsNames.INVALID);
+				passwordErrors.put(FieldsNames.REGISTER_INVALID_CHAR);
 				fieldIsOk = false;
 			}
 
@@ -125,7 +125,7 @@ public class RegisterChecker extends ServiceChecker {
 
 			if (email.endsWith("@example.com")) {
 				// TODO Add invalid domains
-				emailErrors.put(FieldsNames.INVALID_DOMAIN);
+				emailErrors.put(FieldsNames.REGISTER_INVALID_DOMAIN);
 				fieldIsOk = false;
 			}
 
@@ -147,7 +147,7 @@ public class RegisterChecker extends ServiceChecker {
 			String username) {
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
-			usernameErrors.put(FieldsNames.ALREADY_USED);
+			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);
 
 			try {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
@@ -164,7 +164,7 @@ public class RegisterChecker extends ServiceChecker {
 	public boolean checkAlreadyUsedEmail(DataManager dataManager, String email) {
 		if (!dataManager.checkEmail(email)) {
 			JSONArray emailErrors = new JSONArray();
-			emailErrors.put(FieldsNames.ALREADY_USED);
+			emailErrors.put(FieldsNames.REGISTER_ALREADY_USED);
 
 			try {
 				errors.put(FieldsNames.EMAIL, emailErrors);
