@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 12
+ * @version 13
  * @date 2015/03/30
  */
 
@@ -30,7 +30,7 @@ public class FieldsNames {
 	 * *************************************************************************
 	 */
 
-	// Common
+	// All
 	public static final String RESULT = "result";
 	public static final String HASHCODE = "hashcode";
 
@@ -52,9 +52,11 @@ public class FieldsNames {
 	// Room
 	public static final String ROOMS_LIST = "list";
 	public static final String ROOM_NAME = "name";
+	public static final String ROOM_PLAYER_LIST = "playerList";
 	public static final String ROOM_MAX_PLAYERS = "maxPlayers";
 	public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
 	public static final String ROOM_CREATE = "create";
+	public static final String ROOM_JOIN = "join";
 
 	/*
 	 * *************************************************************************
@@ -71,8 +73,8 @@ public class FieldsNames {
 	public static final String LONG = "long";
 	public static final String INVALID_CHAR = "invalidChar";
 	public static final String INVALID_DOMAIN = "invalidDomain";
-	public static final String SERVER_ERROR = "server error";
-	public static final String ALREADY_USED = "already used";
+	public static final String SERVER_ERROR = "serverError";
+	public static final String ALREADY_USED = "alreadyUsed";
 
 	// Call
 	public static final String OFFLINE = "offline";
@@ -81,9 +83,8 @@ public class FieldsNames {
 	public static final String INVALID = "invalidField";
 
 	// Room
-	public static final String ROOM_CREATE_ERROR_INVALIDNAME = "createErrorInvalidname";
+	public static final String ROOM_CREATE_ERROR_INVALIDNAME = "createErrorInvalidName";
 	public static final String ROOM_CREATE_ERROR_ALREADYPRESENT = "createErrorAlreadyPresent";
-	public static final String ROOM_JOIN = "join";
 	public static final String ROOM_JOIN_ERROR_FULL = "joinErrorFull";
 	public static final String ROOM_JOIN_OTHERS = "joinErrorOthers";
 
