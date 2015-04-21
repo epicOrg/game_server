@@ -8,13 +8,13 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * Class used by @see {@link Test02_Start}. It send a message to the server.
+ * Class used by @see {@link Test02}. It send a message to the server.
  * 
  * @author Noris
  * @date 2015/04/21
  */
 
-class Test02_OpenSocket {
+class Test_OpenSocket {
 
 	private static final String SERVER_ADDRESS = "127.0.0.1";
 	private static final int SERVER_PORT = 7007;

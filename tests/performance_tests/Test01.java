@@ -33,7 +33,7 @@ class Test01 {
 
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 
-			// Generate a random username
+			// Generate a random user name
 			String username = "Eraclito" + i;
 
 			// CLIENT: Registration
@@ -42,11 +42,11 @@ class Test01 {
 			jsonRegFromClient.put(FieldsNames.USERNAME, username);
 			jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@logos.org");
-			System.out.println("[" + i + "] CLIENT Registration Message: "
+			System.out.println("[" + i + 1 + "] CLIENT Registration Message: "
 					+ jsonRegFromClient);
 
 			// SERVER: Register the user
-			System.out.println("[" + i + "] SERVER Registration Message: "
+			System.out.println("[" + i + 1 + "] SERVER Registration Message: "
 					+ new Register(jsonRegFromClient).start() + "\n");
 
 			// CLIENT: Send message to go online
@@ -55,13 +55,13 @@ class Test01 {
 			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
-			System.out.println("[" + i + "] CLIENT Login Message: "
+			System.out.println("[" + i + 1 + "] CLIENT Login Message: "
 					+ jsonLoginFromClient);
 
 			// SERVER: Set the user online
 			Service login = new Login(jsonLoginFromClient);
 			String stringLoginFromServer = login.start().toString();
-			System.out.println("[" + i + "] SERVER Login Message: "
+			System.out.println("[" + i + 1 + "] SERVER Login Message: "
 					+ stringLoginFromServer + "\n");
 
 			// CLIENT: Read response from server

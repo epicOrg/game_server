@@ -11,14 +11,15 @@ import check_fields.FieldsNames;
 import data_management.DataManager;
 
 /**
- * Start the server on the same machine before run this test. Remember to
- * restore emails database after this test.
+ * This test registers and logins NUMBER_OF_USERS users. Before run this test
+ * start the server on the same machine. Remember to restore the e-mails
+ * database after this test (it already remove users registration file).
  * 
  * @author Noris
  * @date 2015/04/21
  */
 
-public class Test02_Start {
+class Test02 {
 
 	private static final int NUMBER_OF_USERS = 10;
 
@@ -27,7 +28,7 @@ public class Test02_Start {
 
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 
-			// Generate a random username
+			// Generate a random user name
 			String username = "Eraclito" + i;
 
 			// CLIENT: Registration
@@ -36,10 +37,10 @@ public class Test02_Start {
 			jsonRegFromClient.put(FieldsNames.USERNAME, username);
 			jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@logos.org");
-			System.out.println("[" + i + "] CLIENT Registration Message: "
+			System.out.println("[" + i + 1 + "] CLIENT Registration Message: "
 					+ jsonRegFromClient);
 
-			new Test02_OpenSocket().start(jsonRegFromClient.toString());
+			new Test_OpenSocket().start(jsonRegFromClient.toString());
 		}
 
 		System.out.println();
@@ -55,7 +56,7 @@ public class Test02_Start {
 			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
-			System.out.println("[" + i + "] CLIENT Login Message: "
+			System.out.println("[" + i + 1 + "] CLIENT Login Message: "
 					+ jsonLoginFromClient);
 
 		}
