@@ -3,13 +3,15 @@ package game_server;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.Call;
+import services.CurrentRoom;
+import services.Game;
 import services.Login;
 import services.Register;
 import services.RoomService;
 import services.Service;
 import services.Unknown;
+import check_fields.FieldsNames;
 
 /**
  * @author Noris
@@ -19,9 +21,7 @@ import services.Unknown;
 public class RequestElaborator {
 
 	public Service chooseService(JSONObject json) {
-
 		try {
-
 			switch (json.getString(FieldsNames.SERVICE)) {
 			case FieldsNames.REGISTER:
 				return new Register(json);
@@ -31,10 +31,13 @@ public class RequestElaborator {
 				return new Call(json);
 			case FieldsNames.ROOMS:
 				return new RoomService(json);
+			case FieldsNames.CURRENT_ROOM:
+				return new CurrentRoom(json);
+			case FieldsNames.GAME:
+				return new Game(json);
 			default:
 				return new Unknown();
 			}
-
 		} catch (JSONException e) {
 			return new Unknown();
 		}
