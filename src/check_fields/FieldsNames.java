@@ -36,6 +36,7 @@ public class FieldsNames {
     public static final String RESULT = "result";
     public static final String HASHCODE = "hashcode";
     public static final String LIST = "list";
+    public static final String NAME = "name";
 
     // Register
     public static final String EMAIL = "email";
@@ -49,20 +50,6 @@ public class FieldsNames {
     public static final String CALLEE = "callee";
     public static final String PORT = "port";
 
-    /**
-     * ************************************************************************
-     * ERROR NAMES
-     * ************************************************************************
-     */
-
-    public static final String NO_ERRORS = "noErrors";
-    public static final String ERRORS = "errors";
-
-    //Common
-    public static final String INVALID = "invalidField";
-    public static final String OFFLINE = "offline";
-    public static final String SERVER_ERROR = "serverError";
-
     // Register
     public static final String REGISTER_SHORT = "short";
     public static final String REGISTER_LONG = "long";
@@ -74,6 +61,7 @@ public class FieldsNames {
     // Rooms/Room
     //Others
     public static final String ROOM_MAX_PLAYERS = "maxPlayers";
+    public static final String ROOM_NAME = "name";
 
     // Rooms
     // Service Type
@@ -81,7 +69,6 @@ public class FieldsNames {
     public static final String ROOM_CREATE = "create";
     public static final String ROOM_JOIN = "join";
     // Others
-    public static final String ROOM_NAME = "name";
     public static final String ROOM_CURRENT_PLAYERS = "currentPlayers";
     public static final String ROOM_CREATE_ERROR_INVALID_NAME = "createErrorInvalidname";
     public static final String ROOM_CREATE_ERROR_ALREADY_PRESENT = "createErrorAlreadyPresent";
@@ -93,6 +80,8 @@ public class FieldsNames {
     public static final String ROOM_PLAYER_LIST = "playerList";
     public static final String ROOM_START = "start";
     // Others
+    public static final String ROOM_TEAM = "team";
+    public static final String ROOM_TEAM_COLOR = "teamColor";
 
     // Game
     // Service Type
@@ -114,4 +103,17 @@ public class FieldsNames {
     public static final String GAME_Z = "z";
     public static final String GAME_PLAYER_NAME = "playerName";
 
+    /**
+     * ************************************************************************
+     * ERROR NAMES
+     * ************************************************************************
+     */
+
+    public static final String NO_ERRORS = "noErrors";
+    public static final String ERRORS = "errors";
+
+    //Common
+    public static final String INVALID = "invalidField";
+    public static final String OFFLINE = "offline";
+    public static final String SERVER_ERROR = "serverError";
 }

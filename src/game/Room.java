@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import exceptions.FullRoomException;
@@ -14,10 +15,7 @@ public class Room {
 
 	public static final int MAX_PLAYERS = 10;
 
-	private String roomName;
-
-	private HashMap<String, Player> players = new HashMap<String, Player>();
-
+	private String roomName;	
 	private TeamGenerator teamGenerator;
 
 	public Room(String roomName) {
@@ -37,9 +35,7 @@ public class Room {
 			throw new FullRoomException();
 		}
 
-		players.put(player.getUsername(), player);
 		teamGenerator.getRandomTeam().addPlayer(player);
-
 	}
 
 	/**
@@ -50,11 +46,6 @@ public class Room {
 	public void removePlayer(Player player) {
 		player.getTeam().removePlayer(player);
 		player.setRoom(null);
-		players.remove(player.getUsername());
-	}
-
-	public HashMap<String, Player> getPlayers() {
-		return players;
 	}
 
 	/**
@@ -62,14 +53,21 @@ public class Room {
 	 *         false otherwise (there are more users slot).
 	 */
 	private boolean isFull() {
-		return getSize() >= MAX_PLAYERS;
+		int size = 0;
+
+		for(Team team : teamGenerator.getTeams()){
+			size += team.getSize();
+		}
+		return size >= MAX_PLAYERS;
 	}
 
-	/**
-	 * @return the numbers of the users currently playing in the team.
-	 */
-	public int getSize() {
-		return players.size();
+	public int getSize(){
+		int size = 0;
+
+		for(Team team : teamGenerator.getTeams()){
+			size += team.getSize();
+		}
+		return size;
 	}
 
 	public String getName() {

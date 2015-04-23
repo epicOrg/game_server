@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author Noris
@@ -9,10 +8,11 @@ import java.util.Random;
  */
 
 public class TeamGenerator {
-	
-	private Team teamA;
-	private Team teamB;
-	
+
+	public static final int NUMBER_OF_TEAMS = 2;
+
+	private ArrayList<Team> teams = new ArrayList<Team>();
+
 	public TeamGenerator() {
 		generateTeams();
 	}
@@ -21,43 +21,40 @@ public class TeamGenerator {
 	 * Team generator: this method generate two team with different colors.
 	 */
 	private void generateTeams() {
-
-		teamA = new Team();
-		teamB = new Team();
-
-		while (teamA.getTeamColor().equals(teamB.getTeamColor())) {
-			teamB.setRandomTeamColorFromList();
+		for(int i = 0; i < NUMBER_OF_TEAMS; i++){
+			Team team = new Team();
+			team.setRandomTeamColor();
+			teams.add(team);
 		}
 	}
 
 	/**
 	 * Select a team for the incoming player.
 	 * 
-	 * @return the team with less players or, if the teams has the same number
-	 *         of players, a random team.
+	 * @return the team with less players.
 	 */
 	public Team getRandomTeam() {
-
-		if (teamA.getSize() < teamB.getSize())
-			return teamA;
-
-		else if (teamA.getSize() > teamB.getSize())
-			return teamB;
-
-		if (new Random().nextBoolean())
-			return teamA;
-
-		return teamB;
+		Team t;
+		int min;
+		
+		t = teams.get(0);
+		min = teams.get(0).getPlayers().size();
+		
+		for(int i = 1; i < teams.size(); i++){
+			Team temp = teams.get(i);
+			
+			if(temp.getPlayers().size() < min){
+				t = temp;
+				min = t.getPlayers().size();
+			}
+		}
+		return t;
 	}
 
 	/**
 	 * @return an ArrayList containing the two teams.
 	 */
 	public ArrayList<Team> getTeams() {
-
-		ArrayList<Team> teams = new ArrayList<Team>(2);
-		teams.add(teamA);
-		teams.add(teamB);
 		return teams;
 	}
 

@@ -32,9 +32,8 @@ public class ClientRequestThread implements Runnable {
 	public void run() {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			
+
 			String request = in.readLine();
-			// TODO DEBUG: Client request
 			System.out.println("CLIENT: " + request);
 
 			while (!socket.isClosed()) {
@@ -42,18 +41,13 @@ public class ClientRequestThread implements Runnable {
 					return;
 
 				JSONObject jsonRequest = new JSONObject(request);
-
-				// Add client IP to json service message
 				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress().getHostAddress());
 
 				PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
 				Service service = requestElaborator.chooseService(jsonRequest);
 
 				String response = service.start();
-				// TODO DEBUG: Server response
-				System.out.println("SERVER : " + response);
-				
+				System.out.println("SERVER: " + response);				
 				out.println(response);
 
 				request = in.readLine();
@@ -66,5 +60,5 @@ public class ClientRequestThread implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
