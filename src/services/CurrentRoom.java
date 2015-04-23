@@ -3,11 +3,7 @@ package services;
 import game.Player;
 import game.Room;
 import game.Team;
-import game.map.IMapGenerator;
-import game.map.MapObject;
-import game.map.SimpleMapGenerator;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.json.JSONArray;

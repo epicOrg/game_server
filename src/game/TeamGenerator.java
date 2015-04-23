@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author Noris
@@ -47,6 +48,11 @@ public class TeamGenerator {
 			if(temp.getPlayers().size() < min){
 				t = temp;
 				min = t.getPlayers().size();
+			} else if(temp.getPlayers().size() == min){
+				if(new Random().nextInt(2) == 0){
+					t = temp;
+					min = t.getPlayers().size();
+				}
 			}
 		}
 		return t;
