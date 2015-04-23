@@ -2,6 +2,11 @@ package game.map;
 
 import java.util.ArrayList;
 
+/**
+ * @author Torlaschi
+ * @date 2015/04/22
+ */
+
 public class SimpleMapGenerator implements IMapGenerator {
 	
 	private int groundDim = 20;
