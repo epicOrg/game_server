@@ -4,8 +4,6 @@ import game.Player;
 import game.Room;
 import game.Team;
 
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,9 +65,9 @@ public class CurrentRoom implements Service {
 				JSONObject team = new JSONObject();
 				JSONArray players = new JSONArray();
 				
-				for(Map.Entry<String, Player> e : t.getPlayers().entrySet()){
+				for(Player p : t.getPlayers()){
 					JSONObject jObject = new JSONObject();
-					jObject.put(FieldsNames.NAME, e.getValue().getUsername());
+					jObject.put(FieldsNames.NAME, p.getUsername());
 					players.put(jObject);
 				}
 				

@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 import exceptions.FullTeamException;
@@ -20,9 +19,9 @@ public class Team {
 	private String teamName;
 	private Color teamColor;
 
-	private HashMap<String, Player> players = new HashMap<String, Player>();
+	private ArrayList<Player> players = new ArrayList<Player>();
 
-	public static final int MAX_PLAYERS = Room.MAX_PLAYERS / 2;
+	public static final int MAX_PLAYERS = Room.MAX_PLAYERS / TeamGenerator.NUMBER_OF_TEAMS;
 
 	public Team() {
 		super();
@@ -50,12 +49,11 @@ public class Team {
 	 * @throws FullTeamException
 	 */
 	public void addPlayer(Player player) { //throws FullTeamException {
-
 //		if (isFull()) {
 //			throw new FullTeamException();
 //		}
 
-		players.put(player.getUsername(), player);
+		players.add(player);
 	}
 
 	/**
@@ -78,7 +76,7 @@ public class Team {
 	/**
 	 * @return an HashMap containing all the players of the team.
 	 */
-	public HashMap<String, Player> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
