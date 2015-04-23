@@ -64,6 +64,8 @@ public class CurrentRoom implements Service {
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
 			
+			jsonResponse.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
+			
 			JSONArray teams = new JSONArray();
 			for(Team t : room.getTeamGenerator().getTeams()){
 				JSONObject team = new JSONObject();
@@ -75,8 +77,8 @@ public class CurrentRoom implements Service {
 					players.put(jObject);
 				}
 				
-				team.put(FieldsNames.ROOM_TEAM_COLOR, t.getTeamColor());
-				team.put(FieldsNames.ROOM_NAME, t.getTeamColor());
+				team.put(FieldsNames.ROOM_TEAM_COLOR, t.getTeamColor().getRGB());
+				team.put(FieldsNames.ROOM_NAME, t.getTeamName());
 				team.put(FieldsNames.LIST, players);				
 				teams.put(team);
 			}

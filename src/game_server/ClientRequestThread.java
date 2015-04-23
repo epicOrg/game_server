@@ -51,6 +51,7 @@ public class ClientRequestThread implements Runnable {
 				out.println(response);
 
 				request = in.readLine();
+				System.out.println("CLIENT: " + request);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

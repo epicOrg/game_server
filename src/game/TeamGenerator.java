@@ -23,6 +23,7 @@ public class TeamGenerator {
 	private void generateTeams() {
 		for(int i = 0; i < NUMBER_OF_TEAMS; i++){
 			Team team = new Team();
+			team.setTeamName("Team " + (teams.size()+1));
 			team.setRandomTeamColor();
 			teams.add(team);
 		}
@@ -36,13 +37,13 @@ public class TeamGenerator {
 	public Team getRandomTeam() {
 		Team t;
 		int min;
-		
+
 		t = teams.get(0);
 		min = teams.get(0).getPlayers().size();
-		
+
 		for(int i = 1; i < teams.size(); i++){
 			Team temp = teams.get(i);
-			
+
 			if(temp.getPlayers().size() < min){
 				t = temp;
 				min = t.getPlayers().size();
