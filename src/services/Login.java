@@ -82,19 +82,18 @@ public class Login implements Service {
 	}
 
 	private void generatetResponse() {
-
-		try {
-			
+		try {			
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 
+			jsonResponse.put(FieldsNames.USERNAME, user.getUsername());
+			jsonResponse.put(FieldsNames.HASHCODE, hashCode);
 			if (noErrors) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-				jsonResponse.put(FieldsNames.HASHCODE, hashCode);
 			} else {
 				jsonResponse.put(FieldsNames.NO_ERRORS, false);
 			}
-
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -87,7 +87,7 @@ public class CurrentRoom implements Service {
 
 				for (Player p : t.getPlayers()) {
 					JSONObject jObject = new JSONObject();
-					jObject.put(FieldsNames.NAME, p.getUsername());
+					jObject.put(FieldsNames.USERNAME, p.getUsername());
 					players.put(jObject);
 				}
 
