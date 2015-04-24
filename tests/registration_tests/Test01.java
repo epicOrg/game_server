@@ -22,7 +22,7 @@ import services.Register;
  */
 
 @Deprecated
-class Test01 {
+public class Test01 {
 
 	@Test
 	public void test() throws JSONException {

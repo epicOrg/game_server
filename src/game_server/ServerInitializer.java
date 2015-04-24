@@ -9,8 +9,8 @@ import writer.UserLineFormatter;
 import data_management.DataManager;
 import data_management.RegisterDataSaver;
 import data_management.RegisteredUser;
-import data_management.password_encrypter.Md5StringEncrypter;
 import data_management.password_encrypter.PasswordEncrypter;
+import data_management.password_encrypter.SHA512StringEncrypter;
 
 /**
  * @author Micieli
@@ -36,7 +36,7 @@ public class ServerInitializer {
 		dataManager.setLoginChecker(new LoginChecker(path));
 
 		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
-				new Md5StringEncrypter()));
+				new SHA512StringEncrypter()));
 	}
 
 }

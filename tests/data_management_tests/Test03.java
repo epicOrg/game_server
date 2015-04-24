@@ -20,7 +20,7 @@ class Test03 {
 
 		DataManager dataManager = DataManager.getInstance();
 
-		RegisteredUser user = new RegisteredUser("marx", "I_AM_A_LOL",
+		RegisteredUser user = new RegisteredUser("marx", "proletarian707",
 				"marx@proletarian.org");
 
 		System.out.println(dataManager.checkPassword(user));

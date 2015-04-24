@@ -1,4 +1,4 @@
-package psw_crypter_tests;
+package psw_encrypt_tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ import data_management.password_encrypter.PasswordEncrypter;
  * 
  */
 
-class Test01 {
+public class Test01 {
 
 	@Test
 	public void test() {
