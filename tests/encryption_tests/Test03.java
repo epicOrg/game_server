@@ -20,7 +20,7 @@ import connection_encryption.SymmetricKeyGenerator;
  *
  */
 
-class Test03 {
+public class Test03 {
 
 	@Test
 	public void test() throws UnsupportedEncodingException {

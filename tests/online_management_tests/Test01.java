@@ -22,8 +22,7 @@ import exceptions.UserNotOnlineException;
  *
  */
 
-@Deprecated
-class Test01 {
+public class Test01 {
 
 	private final int ONLINE_USERS = 100;
 

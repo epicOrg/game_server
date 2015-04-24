@@ -21,7 +21,6 @@ import services.Register;
  *
  */
 
-@Deprecated
 public class Test01 {
 
 	@Test
