@@ -38,9 +38,11 @@ class RoomCheckerTest02 {
 			jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
 
 			System.out.println("Request: " + jsonRequest);
-
+			
+			RoomService roomService = new RoomService();
+			roomService.setRequest(jsonRequest);
 			System.out.println("Response: "
-					+ new RoomService(jsonRequest).start());
+					+ roomService.start());
 
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block

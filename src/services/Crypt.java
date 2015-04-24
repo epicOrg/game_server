@@ -14,11 +14,12 @@ public class Crypt {
 	
 	private Key clientPublicKey;
 	
-	public Crypt(JSONObject jsonRequest) {
-		this.jsonRequest = jsonRequest;
+	public Crypt() {
 	}
 	
 	public String start() {
+		jsonResponse = new JSONObject();
+
 		
 		try {
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);

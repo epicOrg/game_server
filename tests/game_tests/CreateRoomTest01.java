@@ -4,6 +4,8 @@ import game_server.ServerInitializer;
 
 import java.util.Random;
 
+import javax.print.DocFlavor.READER;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +13,7 @@ import check_fields.FieldsNames;
 import services.Login;
 import services.Register;
 import services.RoomService;
-import services.Service;
+import services.IService;
 
 /**
  * Test for a valid Room Create request.
@@ -40,8 +42,10 @@ class CreateRoomTest01 {
 		System.out.println("CLIENT Registration Message: " + jsonRegFromClient);
 
 		// SERVER: Register the user
+		Register register = new Register();
+		register.setRequest(jsonRegFromClient);
 		System.out.println("SERVER Registration Message: "
-				+ new Register(jsonRegFromClient).start() + "\n");
+				+ register.start() + "\n");
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
@@ -52,7 +56,8 @@ class CreateRoomTest01 {
 		System.out.println("CLIENT Login Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
-		Service login = new Login(jsonLoginFromClient);
+		IService login = new Login();
+		login.setRequest(jsonLoginFromClient);
 		String stringLoginFromServer = login.start().toString();
 		System.out.println("SERVER Login Message: " + stringLoginFromServer
 				+ "\n");
@@ -73,8 +78,10 @@ class CreateRoomTest01 {
 				+ jsonRoomCreateFromClient);
 
 		// SERVER: Send a response with the list of the online rooms
+		RoomService roomService = new RoomService();
+		roomService.setRequest(jsonRoomCreateFromClient);
 		System.out.println("SERVER RoomCreate Message: "
-				+ new RoomService(jsonRoomCreateFromClient).start());
+				+ roomService.start());
 	}
 
 }

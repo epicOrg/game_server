@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import services.Login;
 import services.Register;
-import services.Service;
+import services.IService;
 import check_fields.FieldsNames;
 import data_management.DataManager;
 
@@ -46,8 +46,10 @@ class Test01 {
 					+ jsonRegFromClient);
 
 			// SERVER: Register the user
+			Register register = new Register();
+			register.setRequest(jsonRegFromClient);
 			System.out.println("[" + i + "] SERVER Registration Message: "
-					+ new Register(jsonRegFromClient).start() + "\n");
+					+ register.start() + "\n");
 
 			// CLIENT: Send message to go online
 			JSONObject jsonLoginFromClient = new JSONObject();
@@ -59,7 +61,8 @@ class Test01 {
 					+ jsonLoginFromClient);
 
 			// SERVER: Set the user online
-			Service login = new Login(jsonLoginFromClient);
+			IService login = new Login();
+			login.setRequest(jsonLoginFromClient);
 			String stringLoginFromServer = login.start().toString();
 			System.out.println("[" + i + "] SERVER Login Message: "
 					+ stringLoginFromServer + "\n");

@@ -22,7 +22,7 @@ import game.Room;
  * @date 2015/04/18
  */
 
-public class RoomService implements Service {
+public class RoomService implements IService {
 
 	private GameDataManager gameDataManager;
 
@@ -31,11 +31,8 @@ public class RoomService implements Service {
 
 	private RoomChecker roomChecker;
 
-	public RoomService(JSONObject json) {
-		jsonRequest = json;
+	public RoomService() {
 		gameDataManager = GameDataManager.getInstance();
-		jsonResponse = new JSONObject();
-		roomChecker = new RoomChecker();
 	}
 
 	@Override
@@ -207,4 +204,10 @@ public class RoomService implements Service {
 		}
 	}
 
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		roomChecker = new RoomChecker();
+	}
 }

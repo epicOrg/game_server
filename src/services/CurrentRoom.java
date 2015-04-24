@@ -18,21 +18,20 @@ import game.Team;
  * @date 2015/04/18
  */
 
-public class CurrentRoom implements Service {
+public class CurrentRoom implements IService {
 
 	private JSONObject jsonRequest;
 	private JSONObject jsonResponse;
 
 	private GameDataManager gameDataManager;
 
-	public CurrentRoom(JSONObject json) {
-		jsonRequest = json;
-		jsonResponse = new JSONObject();
+	public CurrentRoom() {
 		gameDataManager = GameDataManager.getInstance();
 	}
 
 	@Override
 	public String start() {
+
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 		} catch (JSONException | MissingFieldException e) {
@@ -155,6 +154,12 @@ public class CurrentRoom implements Service {
 
 		} catch (JSONException e) {
 		}
+	}
+	
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
 	}
 
 }

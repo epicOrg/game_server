@@ -37,7 +37,9 @@ class RoomsServiceTest01 {
 			e.printStackTrace();
 		}
 
-		System.out.println(new RoomService(request).start());
+		RoomService roomService = new RoomService();
+		roomService.setRequest(request);
+		System.out.println(roomService.start());
 
 	}
 

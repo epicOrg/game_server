@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 import services.Call;
-import services.Service;
+import services.IService;
 /**
  * Test for an invalid call request (caller not online).
  * 
@@ -33,7 +33,8 @@ class Test04 {
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 
 		// SERVER: Read call request
-		Service call = new Call(jsonCallFromClient);
+		IService call = new Call();
+		call.setRequest(jsonCallFromClient);
 		String stringCallFromServer = call.start().toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 	}

@@ -12,7 +12,9 @@ import check_fields.FieldsNames;
  * @author Noris
  * @date 2015/03/26
  */
-public class Unknown implements Service {
+public class Unknown implements IService {
+	
+	private JSONObject jsonRequest;
 
 	@Override
 	public String start() {
@@ -35,4 +37,8 @@ public class Unknown implements Service {
 
 	}
 
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+	}
 }

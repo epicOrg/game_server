@@ -18,21 +18,19 @@ import check_fields.FieldsNames;
  * @date 2015/04/18
  */
 
-public class Game implements Service {
+public class Game implements IService {
 
 	private JSONObject jsonRequest;
 	private JSONObject jsonResponse;
 
 	private IMapGenerator mapGenerator;
 
-	public Game(JSONObject json) {
-		jsonRequest = json;
-		jsonResponse = new JSONObject();
-		mapGenerator = new SimpleMapGenerator();
+	public Game() {
 	}
 
 	@Override
 	public String start() {
+
 
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
@@ -83,6 +81,13 @@ public class Game implements Service {
 
 		} catch (JSONException e) {
 		}
+	}
+	
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		mapGenerator = new SimpleMapGenerator();
 	}
 
 }

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 import services.Call;
 import services.Login;
-import services.Service;
+import services.IService;
 
 /**
  * Test for an invalid call request (callee not online).
@@ -35,7 +35,8 @@ class Test03 {
 		System.out.println("Login Client Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
-		Service login = new Login(jsonLoginFromClient);
+		IService login = new Login();
+		login.setRequest(jsonLoginFromClient);
 		String stringLoginFromServer = login.start().toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);
 
@@ -53,7 +54,8 @@ class Test03 {
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 
 		// SERVER: Read call request
-		Service call = new Call(jsonCallFromClient);
+		IService call = new Call();
+		call.setRequest(jsonCallFromClient);
 		String stringCallFromServer = call.start().toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 	}

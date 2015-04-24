@@ -18,7 +18,7 @@ import exceptions.UserNotOnlineException;
  * @date 2015/04/03
  */
 
-public class Call implements Service {
+public class Call implements IService {
 
 	private JSONObject jsonRequest;
 
@@ -33,10 +33,7 @@ public class Call implements Service {
 	private JSONObject jsonResponse;
 	CallChecker callChecker;
 
-	public Call(JSONObject jsonRequest) {
-		this.jsonRequest = jsonRequest;
-		jsonResponse = new JSONObject();
-		callChecker = new CallChecker();
+	public Call() {
 	}
 
 	@Override
@@ -118,6 +115,13 @@ public class Call implements Service {
 
 		} catch (JSONException e) {
 		}
+	}
+
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		callChecker = new CallChecker();
 	}
 
 }

@@ -18,7 +18,7 @@ import exceptions.MissingFieldException;
  * @date 2015/03/26
  */
 
-public class Login implements Service {
+public class Login implements IService {
 
 	private JSONObject jsonRequest;
 
@@ -27,12 +27,10 @@ public class Login implements Service {
 	private DataManager dataManager;
 	private RegisteredUser user;
 
-	private JSONObject jsonResponse = new JSONObject();
+	private JSONObject jsonResponse;
 	private boolean noErrors = true;
 
-	public Login(JSONObject jsonRequest) {
-		super();
-		this.jsonRequest = jsonRequest;
+	public Login() {
 		dataManager = DataManager.getInstance();
 	}
 
@@ -95,5 +93,11 @@ public class Login implements Service {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
 	}
 }

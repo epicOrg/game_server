@@ -9,7 +9,7 @@ import java.net.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.Service;
+import services.IService;
 import check_fields.FieldsNames;
 
 /**
@@ -48,7 +48,7 @@ public class ClientRequestThread implements Runnable {
 
 				PrintWriter out = new PrintWriter(socket.getOutputStream(),
 						true);
-				Service service = requestElaborator.chooseService(jsonRequest);
+				IService service = requestElaborator.chooseService(jsonRequest);
 
 				String response = service.start();
 				System.out.println("SERVER: " + response);

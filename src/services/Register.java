@@ -16,7 +16,7 @@ import exceptions.RegistrationFailedException;
  * @date 2015/03/26
  */
 
-public class Register implements Service {
+public class Register implements IService {
 
 	private DataManager dataManager;
 
@@ -27,12 +27,8 @@ public class Register implements Service {
 
 	private RegisterChecker registerChecker;
 
-	public Register(JSONObject json) {
-		super();
-		this.jsonRequest = json;
+	public Register() {
 		dataManager = DataManager.getInstance();
-		jsonResponse = new JSONObject();
-		registerChecker = new RegisterChecker();
 	}
 
 	@Override
@@ -111,4 +107,10 @@ public class Register implements Service {
 		}
 	}
 
+	@Override
+	public void setRequest(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		registerChecker = new RegisterChecker();
+	}
 }

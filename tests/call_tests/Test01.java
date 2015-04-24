@@ -16,7 +16,7 @@ import check_fields.FieldsNames;
 import services.Call;
 import services.Login;
 import services.Register;
-import services.Service;
+import services.IService;
 import data_management.DataManager;
 
 /**
@@ -35,7 +35,7 @@ class Test01 {
 		// SERVER: Set online "JohnLocke"
 		new ServerInitializer().initDataManager();
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		InetAddress ipAddress = InetAddress.getByName("192.168.1.1");
+		InetAddress ipAddress = InetAddress.getByName("192.168.1.131");
 		onlineManager.setOnline("JohnLocke", ipAddress);
 
 		// Generate random username
@@ -50,8 +50,10 @@ class Test01 {
 		System.out.println("Registration Client Message: " + jsonRegFromClient);
 		
 		// SERVER: Register the user
+		Register register = new Register();
+		register.setRequest(jsonRegFromClient);
 		System.out.println("Registration Server Message: "
-				+ new Register(jsonRegFromClient).start());
+				+ register.start());
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
@@ -62,7 +64,8 @@ class Test01 {
 		System.out.println("Login Client Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
-		Service login = new Login(jsonLoginFromClient);
+		IService login = new Login();
+		login.setRequest(jsonLoginFromClient);
 		String stringLoginFromServer = login.start().toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);
 
@@ -80,7 +83,8 @@ class Test01 {
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 
 		// SERVER: Read call request
-		Service call = new Call(jsonCallFromClient);
+		IService call = new Call();
+		call.setRequest(jsonCallFromClient);
 		String stringCallFromServer = call.start().toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 

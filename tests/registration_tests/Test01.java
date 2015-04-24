@@ -35,7 +35,8 @@ public class Test01 {
 		jsonFromClient.put(FieldsNames.PASSWORD, "DieWeltAlsWilleUndL0L");
 		jsonFromClient.put(FieldsNames.EMAIL, "arthur@paralipomena.org");
 
-		Register register = new Register(jsonFromClient);
+		Register register = new Register();
+		register.setRequest(jsonFromClient);
 		String response = register.start();
 
 		/*

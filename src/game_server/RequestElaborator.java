@@ -1,5 +1,7 @@
 package game_server;
 
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,7 +11,7 @@ import services.Game;
 import services.Login;
 import services.Register;
 import services.RoomService;
-import services.Service;
+import services.IService;
 import services.Unknown;
 import check_fields.FieldsNames;
 
@@ -19,30 +21,42 @@ import check_fields.FieldsNames;
  */
 
 public class RequestElaborator {
+	
+	private HashMap<String, IService> services = new HashMap<>();
 
-	public Service chooseService(JSONObject json) {
-		try {
-			
-			switch (json.getString(FieldsNames.SERVICE)) {
-			case FieldsNames.REGISTER:
-				return new Register(json);
-			case FieldsNames.LOGIN:
-				return new Login(json);
-			case FieldsNames.CALL:
-				return new Call(json);
-			case FieldsNames.ROOMS:
-				return new RoomService(json);
-			case FieldsNames.CURRENT_ROOM:
-				return new CurrentRoom(json);
-			case FieldsNames.GAME:
-				return new Game(json);
-			default:
-				return new Unknown();
-			}
-			
-		} catch (JSONException e) {
-			return new Unknown();
-		}
+	public RequestElaborator() {
+		initMap();
 	}
 
+	private void initMap() {
+		addService(FieldsNames.REGISTER, new Register());
+		addService(FieldsNames.LOGIN, new Login());
+		addService(FieldsNames.CALL, new Call());
+		addService(FieldsNames.ROOMS, new RoomService());
+		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
+		addService(FieldsNames.GAME, new Game());		
+	}
+
+	public IService chooseService(JSONObject json) {
+	
+		String serviceName;
+		try {
+			serviceName = json.getString(FieldsNames.SERVICE);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			serviceName = null;
+		}
+		
+		IService service = services.get(serviceName);
+		if(service == null)
+			service = services.get(FieldsNames.UNKNOWN);
+		
+		service.setRequest(json);		
+		return service;			
+	}
+	
+	public void addService (String name, IService service){
+		services.put(name, service);
+	}
 }
