@@ -53,6 +53,7 @@ public class Team {
 //			throw new FullTeamException();
 //		}
 
+		player.setTeam(this);
 		players.add(player);
 	}
 
@@ -63,7 +64,7 @@ public class Team {
 	 */
 	public void removePlayer(Player player) {
 		player.setTeam(null);
-		players.remove(player.getUsername());
+		players.remove(player);
 	}
 
 	/**

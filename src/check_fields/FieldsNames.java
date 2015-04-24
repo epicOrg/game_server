@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 14
+ * @version 15
  * @date 2015/03/30
  */
 
@@ -78,10 +78,13 @@ public class FieldsNames {
     // Room
     // Service Type
     public static final String ROOM_PLAYER_LIST = "playerList";
-    public static final String ROOM_START = "start";
+    public static final String ROOM_ACTIONS = "action";
     // Others
     public static final String ROOM_TEAM = "team";
     public static final String ROOM_TEAM_COLOR = "teamColor";
+    public static final String ROOM_ACTION = "action";
+    public static final String ROOM_START = "start";
+    public static final String ROOM_EXIT = "exit";
 
     // Game
     // Service Type

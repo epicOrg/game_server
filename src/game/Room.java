@@ -1,9 +1,7 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import exceptions.FullRoomException;
+import exceptions.NoSuchPlayerException;
 
 /**
  * @author Micieli
@@ -46,6 +44,17 @@ public class Room {
 	public void removePlayer(Player player) {
 		player.getTeam().removePlayer(player);
 		player.setRoom(null);
+	}
+	
+	public Player getPlayerByName(String name) throws NoSuchPlayerException{
+		for(Team t : teamGenerator.getTeams()){
+			for(Player p : t.getPlayers()){
+				if(p.getUsername().equals(name))
+					return p;
+			}
+		}
+		
+		throw new NoSuchPlayerException();
 	}
 
 	/**
