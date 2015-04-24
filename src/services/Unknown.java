@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 
-
 /**
  * If the Service selected from the client not exists, it generate an Unknown
  * Service message.
@@ -20,18 +19,18 @@ public class Unknown implements Service {
 		return getResponse().toString();
 	}
 
-	private JSONObject getResponse() {
+	private String getResponse() {
 
 		JSONObject jsonResponse = new JSONObject();
 
 		try {
 
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
-			return jsonResponse;
+			return jsonResponse.toString();
 
 		} catch (JSONException e) {
-			// TODO
-			return new JSONObject();
+			return "{\"" + FieldsNames.SERVICE + "\":\"" + FieldsNames.UNKNOWN
+					+ "\"}";
 		}
 
 	}

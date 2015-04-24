@@ -21,12 +21,8 @@ public class Crypt {
 	public String start() {
 		
 		try {
-
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return null;

@@ -7,6 +7,7 @@ import check_fields.FieldsNames;
 import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
+import exceptions.MissingFieldException;
 import exceptions.RegistrationFailedException;
 
 /**
@@ -38,15 +39,11 @@ public class Register implements Service {
 	public String start() {
 
 		try {
-
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			readFields();
+		} catch (MissingFieldException e) {
+			return new MissingFieldException().getMissingFieldError();
 		}
 
-		readFields();
 		checkFields();
 		if (registerChecker.noErrors())
 			saveFields();
@@ -56,7 +53,7 @@ public class Register implements Service {
 
 	}
 
-	private void readFields() {
+	private void readFields() throws MissingFieldException {
 
 		try {
 
@@ -66,8 +63,7 @@ public class Register implements Service {
 			registeredUser = new RegisteredUser(username, password, email);
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new MissingFieldException();
 		}
 	}
 
@@ -99,7 +95,6 @@ public class Register implements Service {
 				registerChecker.addError();
 
 			} catch (JSONException e1) {
-				// TODO
 			}
 		}
 	}
@@ -108,11 +103,11 @@ public class Register implements Service {
 
 		try {
 
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
 			jsonResponse.put(FieldsNames.NO_ERRORS, registerChecker.noErrors());
 			jsonResponse.put(FieldsNames.ERRORS, registerChecker.getErrors());
 
 		} catch (JSONException e) {
-			// TODO
 		}
 	}
 

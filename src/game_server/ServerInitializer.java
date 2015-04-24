@@ -21,6 +21,7 @@ import data_management.password_encrypter.PasswordEncrypter;
 public class ServerInitializer {
 
 	public void initDataManager() {
+
 		DataManager dataManager = DataManager.getInstance();
 		String path = dataManager.getPath();
 
@@ -33,7 +34,9 @@ public class ServerInitializer {
 		dataManager.setChecker(new FileChecker(path, "emails"));
 
 		dataManager.setLoginChecker(new LoginChecker(path));
-		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(new Md5StringEncrypter()));
+
+		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
+				new Md5StringEncrypter()));
 	}
 
 }

@@ -22,6 +22,7 @@ public class RequestElaborator {
 
 	public Service chooseService(JSONObject json) {
 		try {
+			
 			switch (json.getString(FieldsNames.SERVICE)) {
 			case FieldsNames.REGISTER:
 				return new Register(json);
@@ -38,6 +39,7 @@ public class RequestElaborator {
 			default:
 				return new Unknown();
 			}
+			
 		} catch (JSONException e) {
 			return new Unknown();
 		}

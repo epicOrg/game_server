@@ -9,7 +9,7 @@ import java.net.Socket;
  * @date 2015/03/26
  */
 
-public class StartServer {
+public class ServerLauncher {
 
 	public static final int PORT = 7007;
 

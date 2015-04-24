@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 15
+ * @version 16
  * @date 2015/03/30
  */
 
@@ -10,7 +10,7 @@ public class FieldsNames {
 
     /**
      * ************************************************************************
-     * SERVICE NAMES
+     * SERVICES NAMES
      * ************************************************************************
      */
 
@@ -31,7 +31,7 @@ public class FieldsNames {
      * ************************************************************************
      */
 
-    // Common
+    // Commons
     public static final String IP_ADDRESS = "ipAddress";
     public static final String RESULT = "result";
     public static final String HASHCODE = "hashcode";
@@ -109,15 +109,15 @@ public class FieldsNames {
 
     /**
      * ************************************************************************
-     * ERROR NAMES
+     * ERRORS NAMES
      * ************************************************************************
      */
 
+
     public static final String NO_ERRORS = "noErrors";
     public static final String ERRORS = "errors";
-
-    //Common
     public static final String INVALID = "invalidField";
     public static final String OFFLINE = "offline";
     public static final String SERVER_ERROR = "serverError";
+    public static final String MISSING_FIELD = "missingField";
 }

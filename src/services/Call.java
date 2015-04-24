@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import voip.Caller;
 import check_fields.CallChecker;
 import check_fields.FieldsNames;
+import exceptions.MissingFieldException;
 import exceptions.UserNotOnlineException;
 
 /**
@@ -42,15 +43,11 @@ public class Call implements Service {
 	public String start() {
 
 		try {
-
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CALL);
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			readFields();
+		} catch (MissingFieldException e) {
+			return new MissingFieldException().getMissingFieldError();
 		}
 
-		readFields();
 		checkFields();
 		if (callChecker.noErrors())
 			call();
@@ -59,7 +56,7 @@ public class Call implements Service {
 		return jsonResponse.toString();
 	}
 
-	private void readFields() {
+	private void readFields() throws MissingFieldException {
 
 		try {
 
@@ -69,8 +66,7 @@ public class Call implements Service {
 			calleeUsername = jsonRequest.getString(FieldsNames.CALLEE);
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new MissingFieldException();
 		}
 	}
 
@@ -114,13 +110,13 @@ public class Call implements Service {
 
 		try {
 
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CALL);
 			jsonResponse.put(FieldsNames.NO_ERRORS, callChecker.noErrors());
-			
+
 			if (!callChecker.noErrors())
 				jsonResponse.put(FieldsNames.ERRORS, callChecker.getErrors());
 
 		} catch (JSONException e) {
-			// TODO
 		}
 	}
 

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 import data_management.DataManager;
 import data_management.RegisteredUser;
+import exceptions.MissingFieldException;
 
 /**
  * @author Noris
@@ -39,13 +40,11 @@ public class Login implements Service {
 	public String start() {
 
 		try {
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			readFields();
+		} catch (MissingFieldException e) {
+			return new MissingFieldException().getMissingFieldError();
 		}
 
-		readFields();
 		checkFields();
 		if (noErrors)
 			saveFields();
@@ -55,7 +54,7 @@ public class Login implements Service {
 
 	}
 
-	private void readFields() {
+	private void readFields() throws MissingFieldException {
 		try {
 
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
@@ -66,8 +65,7 @@ public class Login implements Service {
 					.getString(FieldsNames.IP_ADDRESS));
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new MissingFieldException();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,6 +84,8 @@ public class Login implements Service {
 	private void generatetResponse() {
 
 		try {
+			
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 
 			if (noErrors) {
 				jsonResponse.put(FieldsNames.NO_ERRORS, true);
@@ -95,7 +95,6 @@ public class Login implements Service {
 			}
 
 		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 	}
 }
