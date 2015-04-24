@@ -23,7 +23,7 @@ public class MapSynchronizer {
 	public ArrayList<PlayerStatus> getPositions(Player player) {
 		ArrayList<PlayerStatus> positions = new ArrayList<PlayerStatus>();
 
-		for(Team t : room.getTeamGenerator().getTeams()){
+		for (Team t : room.getTeamGenerator().getTeams()) {
 			for (Player p : t.getPlayers()) {
 				if (!player.getUsername().equals(p.getUsername()))
 					positions.add(p.getPlayerStatus());
@@ -39,7 +39,7 @@ public class MapSynchronizer {
 	public ArrayList<PlayerStatus> getAllPositions() {
 		ArrayList<PlayerStatus> positions = new ArrayList<PlayerStatus>();
 
-		for(Team t : room.getTeamGenerator().getTeams()){
+		for (Team t : room.getTeamGenerator().getTeams()) {
 			for (Player p : t.getPlayers()) {
 				positions.add(p.getPlayerStatus());
 			}

@@ -13,7 +13,7 @@ public class Room {
 
 	public static final int MAX_PLAYERS = 10;
 
-	private String roomName;	
+	private String roomName;
 	private TeamGenerator teamGenerator;
 
 	public Room(String roomName) {
@@ -45,15 +45,16 @@ public class Room {
 		player.getTeam().removePlayer(player);
 		player.setRoom(null);
 	}
-	
-	public Player getPlayerByName(String name) throws NoSuchPlayerException{
-		for(Team t : teamGenerator.getTeams()){
-			for(Player p : t.getPlayers()){
-				if(p.getUsername().equals(name))
+
+	public Player getPlayerByName(String name) throws NoSuchPlayerException {
+
+		for (Team t : teamGenerator.getTeams()) {
+			for (Player p : t.getPlayers()) {
+				if (p.getUsername().equals(name))
 					return p;
 			}
 		}
-		
+
 		throw new NoSuchPlayerException();
 	}
 
@@ -62,20 +63,24 @@ public class Room {
 	 *         false otherwise (there are more users slot).
 	 */
 	private boolean isFull() {
+
 		int size = 0;
 
-		for(Team team : teamGenerator.getTeams()){
+		for (Team team : teamGenerator.getTeams()) {
 			size += team.getSize();
 		}
+
 		return size >= MAX_PLAYERS;
 	}
 
-	public int getSize(){
+	public int getSize() {
+
 		int size = 0;
 
-		for(Team team : teamGenerator.getTeams()){
+		for (Team team : teamGenerator.getTeams()) {
 			size += team.getSize();
 		}
+
 		return size;
 	}
 

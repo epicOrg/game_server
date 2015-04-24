@@ -29,7 +29,7 @@ public class RegisteredUser {
 	private void cryptPassword() {
 		this.encryptedPassword = passwordEncrypter.cryptPassword(password);
 	}
-	
+
 	public String getEncryptedPassword() {
 		return encryptedPassword;
 	}
@@ -61,9 +61,9 @@ public class RegisteredUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public static void setPasswordEncrypter(PasswordEncrypter passwordEncrypter) {
 		RegisteredUser.passwordEncrypter = passwordEncrypter;
 	}
-	
+
 }

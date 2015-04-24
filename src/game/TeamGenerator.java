@@ -5,6 +5,7 @@ import java.util.Random;
 
 /**
  * @author Noris
+ * @author Torlaschi
  * @date 2015/04/20
  */
 
@@ -19,12 +20,13 @@ public class TeamGenerator {
 	}
 
 	/**
-	 * Team generator: this method generate two team with different colors.
+	 * Team generator: this method generate teams with different colors.
 	 */
 	private void generateTeams() {
-		for(int i = 0; i < NUMBER_OF_TEAMS; i++){
+
+		for (int i = 0; i < NUMBER_OF_TEAMS; i++) {
 			Team team = new Team();
-			team.setTeamName("Team " + (teams.size()+1));
+			team.setTeamName("Team " + (teams.size() + 1));
 			team.setRandomTeamColor();
 			teams.add(team);
 		}
@@ -36,30 +38,32 @@ public class TeamGenerator {
 	 * @return the team with less players.
 	 */
 	public Team getRandomTeam() {
+
 		Team t;
 		int min;
 
 		t = teams.get(0);
 		min = teams.get(0).getPlayers().size();
 
-		for(int i = 1; i < teams.size(); i++){
+		for (int i = 1; i < teams.size(); i++) {
 			Team temp = teams.get(i);
 
-			if(temp.getPlayers().size() < min){
+			if (temp.getPlayers().size() < min) {
 				t = temp;
 				min = t.getPlayers().size();
-			} else if(temp.getPlayers().size() == min){
-				if(new Random().nextInt(2) == 0){
+			} else if (temp.getPlayers().size() == min) {
+				if (new Random().nextInt(2) == 0) {
 					t = temp;
 					min = t.getPlayers().size();
 				}
 			}
 		}
+
 		return t;
 	}
 
 	/**
-	 * @return an ArrayList containing the two teams.
+	 * @return an ArrayList containing the teams.
 	 */
 	public ArrayList<Team> getTeams() {
 		return teams;
