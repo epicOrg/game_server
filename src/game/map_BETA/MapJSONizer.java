@@ -75,7 +75,7 @@ public class MapJSONizer {
 
 	}
 
-	public JSONObject getJsonMap() {
+	public JSONObject getJSONMap() {
 		return jsonMap;
 	}
 

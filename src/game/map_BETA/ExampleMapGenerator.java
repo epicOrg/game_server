@@ -30,7 +30,7 @@ public class ExampleMapGenerator implements MapGenerator {
 
 		// etc...
 
-		return mapJSONizer.getJsonMap();
+		return mapJSONizer.getJSONMap();
 	}
 
 }

@@ -7,10 +7,13 @@ package game.map_BETA;
  */
 
 public class MapNames {
-	
+
 	// Objects
 	public static final String WALL = "wall";
-	
+
+	// Positions
+	public static final String SPAWN_POINT = "SpawnPoint";
+
 	// Textures
 	public static final String WALL_TEXTURE_01 = "...";
 

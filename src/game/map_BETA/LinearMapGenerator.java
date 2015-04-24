@@ -32,16 +32,36 @@ public class LinearMapGenerator implements MapGenerator {
 	@Override
 	public JSONObject generateMap() {
 		// TODO
-		return mapJSONizer.getJsonMap();
+		return mapJSONizer.getJSONMap();
 	}
 
 	private void generateWallGrid() {
 
-		int gridNumber = getGridNumber((int) mapSize.getWidth());
+		int gridNumberWidth = getGridNumber((int) mapSize.getWidth());
 
-		for (int i = 0; i < gridNumber; i++) {
-			// TODO
+		for (int i = 0; i < gridNumberWidth / 2; i++) {
+
+			coordinates.add(-(i + 1) * mapSize.getWidth() / gridNumberWidth);
+
+			if (i % 2 == 0)
+				coordinates.add(mapSize.getWidth());
+			else
+				coordinates.add(-mapSize.getWidth());
 		}
+
+		for (int i = 0; i < gridNumberWidth / 2; i++) {
+
+			coordinates.add((i + 1) * mapSize.getWidth() / gridNumberWidth);
+
+			if (i % 2 == 0)
+				coordinates.add(mapSize.getWidth());
+			else
+				coordinates.add(-mapSize.getWidth());
+		}
+
+		int gridNumberLength = getGridNumber((int) mapSize.getLength());
+
+		// TODO
 
 	}
 
@@ -49,4 +69,17 @@ public class LinearMapGenerator implements MapGenerator {
 		return new Random().nextInt(size - 1 + (size + SCRAP / 2))
 				+ (size + SCRAP / 2);
 	}
+
+	private void generateDoors() {
+		// TODO
+	}
+
+	private void generateExit() {
+		// TODO
+	}
+
+	private void generateSpawnLocations() {
+		// TODO
+	}
+
 }
