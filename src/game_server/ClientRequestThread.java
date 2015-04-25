@@ -42,6 +42,9 @@ public class ClientRequestThread implements Runnable {
 				if (request == null)
 					return;
 
+				// TODO DEBUG: client request
+				System.out.println("CLIENT: " + request);
+
 				JSONObject jsonRequest = new JSONObject(request);
 				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
 						.getHostAddress());
@@ -51,11 +54,12 @@ public class ClientRequestThread implements Runnable {
 				IService service = requestElaborator.chooseService(jsonRequest);
 
 				String response = service.start();
-				System.out.println("SERVER: " + response);
 				out.println(response);
 
+				// TODO DEBUG: server response
+				System.out.println("SERVER: " + response);
+
 				request = in.readLine();
-				System.out.println("CLIENT: " + request);
 			}
 
 		} catch (IOException e) {

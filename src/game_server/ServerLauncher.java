@@ -15,6 +15,7 @@ public class ServerLauncher {
 
 	public static void main(String[] args) {
 		try {
+			
 			@SuppressWarnings("resource")
 			ServerSocket ServerSocket = new ServerSocket(PORT);
 			new ServerInitializer().initDataManager();
@@ -23,11 +24,13 @@ public class ServerLauncher {
 				Socket socket = ServerSocket.accept();
 				
 				Thread thread = new Thread(new ClientRequestThread(socket));
+				
 				// TODO DEBUG: ID of the thread
 				System.out.println("> Thread ID: " + thread.getId());
 
 				thread.start();
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
