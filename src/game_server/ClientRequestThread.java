@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import online_management.OnlineManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,9 +36,12 @@ public class ClientRequestThread implements Runnable {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
+			PrintWriter out = new PrintWriter(socket.getOutputStream(),
+					true);
+			OnlineManager onlineManager = OnlineManager.getInstance();
+			onlineManager.addStream(socket.getLocalPort(), out);
 
 			String request = in.readLine();
-			System.out.println("CLIENT: " + request);
 
 			while (!socket.isClosed()) {
 				if (request == null)
@@ -48,9 +53,9 @@ public class ClientRequestThread implements Runnable {
 				JSONObject jsonRequest = new JSONObject(request);
 				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
 						.getHostAddress());
-
-				PrintWriter out = new PrintWriter(socket.getOutputStream(),
-						true);
+				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getInetAddress()
+						.getHostAddress());
+				
 				IService service = requestElaborator.chooseService(jsonRequest);
 
 				String response = service.start();

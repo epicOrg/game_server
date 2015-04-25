@@ -37,6 +37,7 @@ public class FieldsNames {
     public static final String HASHCODE = "hashcode";
     public static final String LIST = "list";
     public static final String USERNAME = "username";
+    public static final String LOCAL_PORT = "localPort";
 
     // Register
     public static final String EMAIL = "email";

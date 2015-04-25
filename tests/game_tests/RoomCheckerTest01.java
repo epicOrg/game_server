@@ -26,7 +26,7 @@ class RoomCheckerTest01 {
 		// SERVER: Set online Friedrich Nietzsche
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("15.10.18.44");
-		onlineManager.setOnline("Nietzsche", ipAddress);
+		onlineManager.setOnline("Nietzsche", ipAddress, 5000);
 		int hashCode;
 		try {
 			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");

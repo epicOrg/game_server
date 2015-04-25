@@ -35,6 +35,7 @@ public class CurrentRoom implements IService {
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 		} catch (JSONException | MissingFieldException e) {
+			//TODO IL SERVICE TYPE NON VIENE INSERTIO E L'APP ESPLODE
 			return new MissingFieldException().getMissingFieldError();
 		}
 

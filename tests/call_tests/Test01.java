@@ -36,7 +36,7 @@ class Test01 {
 		new ServerInitializer().initDataManager();
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("192.168.1.131");
-		onlineManager.setOnline("JohnLocke", ipAddress);
+		onlineManager.setOnline("JohnLocke", ipAddress, 5000);
 
 		// Generate random username
 		String randomUsername = "Hegel" + new Random().nextInt(10000);

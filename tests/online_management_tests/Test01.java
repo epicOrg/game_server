@@ -35,7 +35,7 @@ public class Test01 {
 		for (int i = 0; i < ONLINE_USERS; i++) {
 			String usernameGen = "user" + i;
 			InetAddress ipAddressGen = InetAddress.getByName("192.168.1." + i);
-			onlineManager.setOnline(usernameGen, ipAddressGen);
+			onlineManager.setOnline(usernameGen, ipAddressGen, 3000);
 		}
 
 		// Get a random user

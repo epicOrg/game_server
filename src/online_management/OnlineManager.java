@@ -1,5 +1,7 @@
 package online_management;
 
+import java.io.BufferedOutputStream;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +16,7 @@ import exceptions.UserNotOnlineException;
 public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
-
+	private HashMap<Integer,PrintWriter> streams  = new HashMap<>();
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
 
 	/**
@@ -29,8 +31,11 @@ public class OnlineManager {
 	 * 
 	 * @return hashCode
 	 */
-	public int setOnline(String username, InetAddress ipAddress) {
-		onlineUsers.put(username, new OnlineUser(username, ipAddress));
+	public int setOnline(String username, InetAddress ipAddress,int port) {
+		OnlineUser onlineUser = new OnlineUser(username, ipAddress, port);
+		onlineUser.setOutStream(streams.get(port));
+		onlineUsers.put(username, new OnlineUser(username, ipAddress, port));
+		
 		return onlineUsers.get(username).hashCode();
 	}
 
@@ -102,5 +107,12 @@ public class OnlineManager {
 		}
 		return null;
 	}
-
+	
+	public void addStream(int port,PrintWriter outputStream){
+		streams.put(port, outputStream);
+	}
+	
+	public PrintWriter getStream(int port){
+		return streams.get(port);
+	}
 }

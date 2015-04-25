@@ -26,6 +26,7 @@ public class Login implements IService {
 	private int hashCode;
 	private DataManager dataManager;
 	private RegisteredUser user;
+	private int port;
 
 	private JSONObject jsonResponse;
 	private boolean noErrors = true;
@@ -61,6 +62,7 @@ public class Login implements IService {
 
 			ipAddress = InetAddress.getByName(jsonRequest
 					.getString(FieldsNames.IP_ADDRESS));
+			port = jsonRequest.getInt(FieldsNames.LOCAL_PORT);
 
 		} catch (JSONException e) {
 			throw new MissingFieldException();
@@ -76,7 +78,7 @@ public class Login implements IService {
 
 	private void saveFields() {
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress);
+		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress, port);
 	}
 
 	private void generatetResponse() {
