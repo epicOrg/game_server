@@ -13,7 +13,6 @@ import connection_encryption.SymmetricKeyGenerator;
 
 /**
  * Encryption test for a string.
- * [ TEST FAILED : string2 has a strange termination character. ]
  * 
  * @author Noris
  * @date 2015/03/31
@@ -32,17 +31,14 @@ public class Test03 {
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
-		Encrypter encrypter = new Encrypter(string.getBytes(), asymmetricKey);
-		encrypter.encrypt();
-		int encriptionLenght = encrypter.getEncriptionLenght();
+		Encrypter encrypter = new Encrypter(asymmetricKey);
+		encrypter.encrypt(string);
 
-		byte[] cryptedData = encrypter.getEncryptedData();
-
-		String string1 = new String(cryptedData, "UTF-8");
+		String string1 = encrypter.getEncryptedString();
 		System.out.println("Encrypted: " + string1);
 
-		Decrypter decrypter = new Decrypter(cryptedData, asymmetricKey);
-		decrypter.decrypt(encriptionLenght);
+		Decrypter decrypter = new Decrypter(asymmetricKey);
+		decrypter.decrypt(string1);
 
 		byte[] decryptedData = decrypter.getDecryptedData();
 

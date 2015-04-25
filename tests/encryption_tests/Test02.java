@@ -12,6 +12,7 @@ import connection_encryption.SymmetricKeyGenerator;
  * @date 2015/03/31
  */
 
+@Deprecated
 class Test02 {
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
@@ -23,9 +24,8 @@ class Test02 {
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
-		Encrypter encrypter = new Encrypter(string.getBytes(), asymmetricKey);
-		encrypter.encrypt();
-		int encriptionLenght = encrypter.getEncriptionLenght();
+		Encrypter encrypter = new Encrypter(asymmetricKey);
+		encrypter.encrypt(string);
 
 		byte[] cryptedData = encrypter.getEncryptedData();
 
@@ -38,8 +38,8 @@ class Test02 {
 		String string1 = new String(incomingData, "UTF-8");
 		System.out.println("Encrypted: " + string1);
 
-		Decrypter decrypter = new Decrypter(incomingData, asymmetricKey);
-		decrypter.decrypt(encriptionLenght);
+		Decrypter decrypter = new Decrypter(asymmetricKey);
+		decrypter.decrypt(new String(incomingData, "UTF-8"));
 
 		byte[] decryptedData = decrypter.getDecryptedData();
 

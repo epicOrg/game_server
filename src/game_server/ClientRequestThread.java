@@ -11,7 +11,7 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import connection_encryption.SecureConnection;
+import connection_encryption.SecureConnectionApplicator;
 import services.IService;
 import check_fields.FieldsNames;
 
@@ -23,13 +23,13 @@ import check_fields.FieldsNames;
 public class ClientRequestThread implements Runnable {
 
 	private Socket socket;
-	private SecureConnection secureConnection;
+	private SecureConnectionApplicator secureConnection;
 	private RequestElaborator requestElaborator;
 
 	public ClientRequestThread(Socket socket) {
 		super();
 		this.socket = socket;
-		secureConnection = new SecureConnection();
+		secureConnection = new SecureConnectionApplicator();
 		requestElaborator = new RequestElaborator();
 	}
 

@@ -10,7 +10,7 @@ import check_fields.FieldsNames;
  * @date 2015/04/25
  */
 
-public class SecureConnection {
+public class SecureConnectionApplicator {
 
 	private ConnectionEncrypter connectionEncrypter = new ConnectionEncrypter();
 
