@@ -37,7 +37,7 @@ public class Call implements IService {
 	}
 
 	@Override
-	public String start() {
+	public JSONObject start() {
 
 		try {
 			readFields();
@@ -50,7 +50,7 @@ public class Call implements IService {
 			call();
 
 		generateResponse();
-		return jsonResponse.toString();
+		return jsonResponse;
 	}
 
 	private void readFields() throws MissingFieldException {

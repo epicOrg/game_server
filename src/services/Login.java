@@ -36,7 +36,7 @@ public class Login implements IService {
 	}
 
 	@Override
-	public String start() {
+	public JSONObject start() {
 
 		try {
 			readFields();
@@ -49,7 +49,7 @@ public class Login implements IService {
 			saveFields();
 
 		generatetResponse();
-		return jsonResponse.toString();
+		return jsonResponse;
 
 	}
 

@@ -11,6 +11,7 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import connection_encryption.SecureConnection;
 import services.IService;
 import check_fields.FieldsNames;
 
@@ -22,11 +23,13 @@ import check_fields.FieldsNames;
 public class ClientRequestThread implements Runnable {
 
 	private Socket socket;
+	private SecureConnection secureConnection;
 	private RequestElaborator requestElaborator;
 
 	public ClientRequestThread(Socket socket) {
 		super();
 		this.socket = socket;
+		secureConnection = new SecureConnection();
 		requestElaborator = new RequestElaborator();
 	}
 
@@ -36,8 +39,7 @@ public class ClientRequestThread implements Runnable {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
-			PrintWriter out = new PrintWriter(socket.getOutputStream(),
-					true);
+			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			OnlineManager onlineManager = OnlineManager.getInstance();
 			onlineManager.addStream(socket.getLocalPort(), out);
 
@@ -50,15 +52,20 @@ public class ClientRequestThread implements Runnable {
 				// TODO DEBUG: client request
 				System.out.println("CLIENT: " + request);
 
-				JSONObject jsonRequest = new JSONObject(request);
+				JSONObject jsonEncryptedRequest = new JSONObject(request);
+				JSONObject jsonRequest = new JSONObject(
+						secureConnection.decrypt(jsonEncryptedRequest));
+
 				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
 						.getHostAddress());
 				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getInetAddress()
 						.getHostAddress());
-				
+
 				IService service = requestElaborator.chooseService(jsonRequest);
 
-				String response = service.start();
+				String response = secureConnection.encrypt(service.start())
+						.toString();
+
 				out.println(response);
 
 				// TODO DEBUG: server response

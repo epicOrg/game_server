@@ -1,5 +1,8 @@
 package exceptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import check_fields.FieldsNames;
 
 /**
@@ -10,13 +13,28 @@ import check_fields.FieldsNames;
 @SuppressWarnings("serial")
 public class MissingFieldException extends Exception {
 
-	public String getMissingFieldError() {
-		return "{\"" + FieldsNames.MISSING_FIELD + "\":\""
-				+ FieldsNames.INVALID + "\"}";
+	public JSONObject getMissingFieldError() {
+
+		JSONObject error = new JSONObject();
+
+		try {
+			error.put(FieldsNames.MISSING_FIELD, FieldsNames.INVALID);
+		} catch (JSONException e) {
+		}
+
+		return error;
 	}
 
-	public String getMissingFieldName(String fieldName) {
-		return "{\"" + FieldsNames.MISSING_FIELD + "\":\"" + fieldName + "\"}";
+	public JSONObject getMissingFieldName(String fieldName) {
+
+		JSONObject error = new JSONObject();
+
+		try {
+			error.put(FieldsNames.MISSING_FIELD, fieldName);
+		} catch (JSONException e) {
+		}
+
+		return error;
 	}
 
 }

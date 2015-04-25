@@ -29,7 +29,7 @@ public class Game implements IService {
 	}
 
 	@Override
-	public String start() {
+	public JSONObject start() {
 
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
@@ -37,7 +37,7 @@ public class Game implements IService {
 			return new MissingFieldException().getMissingFieldError();
 		}
 
-		return jsonResponse.toString();
+		return jsonResponse;
 	}
 
 	private void runService(String serviceType) {

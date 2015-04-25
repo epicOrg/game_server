@@ -1,5 +1,7 @@
 package game_server;
 
+import connection_encryption.AsymmetricKeysGenerator;
+import connection_encryption.ConnectionEncrypter;
 import data_management.DataManager;
 import data_management.RegisterDataSaver;
 import data_management.RegisteredUser;
@@ -23,6 +25,8 @@ public class ServerInitializer {
 
 	public void initDataManager() {
 
+		ConnectionEncrypter.setKeysGenerator(new AsymmetricKeysGenerator());
+
 		DataManager dataManager = DataManager.getInstance();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
@@ -31,8 +35,7 @@ public class ServerInitializer {
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager
-				.setChecker(new FileChecker(Paths.getEmailsPath()));
+		dataManager.setChecker(new FileChecker(Paths.getEmailsPath()));
 
 		dataManager.setLoginChecker(new LoginChecker(Paths.getUsersPath()));
 

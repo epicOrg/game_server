@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 17
+ * @version 18
  * @date 2015/03/30
  */
 
@@ -17,6 +17,7 @@ public class FieldsNames {
     public static final String SERVICE = "service";
     public static final String SERVICE_TYPE = "serviceType";
 
+    public static final String ENCRYPT = "encrypt";
     public static final String REGISTER = "register";
     public static final String LOGIN = "login";
     public static final String CALL = "call";
@@ -57,6 +58,13 @@ public class FieldsNames {
     public static final String REGISTER_INVALID_DOMAIN = "invalidDomain";
     public static final String REGISTER_SERVER_ERROR = "serverError";
     public static final String REGISTER_ALREADY_USED = "alreadyUsed";
+    
+    //Encrypt
+    public static final String ENCRYPT_MESSAGE = "encrypedMessage";
+    public static final String ENCRYPT_GET_KEY = "getKey";
+    public static final String ENCRYPT_SET_KEY = "setKey";
+    public static final String ENCRYPT_PUBLIC_KEY = "pKey";
+    public static final String ENCRYPT_WRAPPED_KEY = "aKey";
 
     // Rooms/Room
     //Others

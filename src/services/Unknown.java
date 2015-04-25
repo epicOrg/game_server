@@ -16,31 +16,25 @@ import check_fields.FieldsNames;
 @Deprecated
 public class Unknown implements IService {
 
-	private JSONObject jsonRequest;
-
 	@Override
-	public String start() {
-		return getResponse().toString();
+	public void setRequest(JSONObject request) {
 	}
 
-	private String getResponse() {
+	@Override
+	public JSONObject start() {
+		return getResponse();
+	}
+
+	private JSONObject getResponse() {
 
 		JSONObject jsonResponse = new JSONObject();
 
 		try {
-
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
-			return jsonResponse.toString();
-
 		} catch (JSONException e) {
-			return "{\"" + FieldsNames.SERVICE + "\":\"" + FieldsNames.UNKNOWN
-					+ "\"}";
 		}
 
+		return jsonResponse;
 	}
 
-	@Override
-	public void setRequest(JSONObject request) {
-		this.jsonRequest = request;
-	}
 }

@@ -32,7 +32,7 @@ public class Register implements IService {
 	}
 
 	@Override
-	public String start() {
+	public JSONObject start() {
 
 		try {
 			readFields();
@@ -45,7 +45,7 @@ public class Register implements IService {
 			saveFields();
 
 		generateResponse();
-		return jsonResponse.toString();
+		return jsonResponse;
 
 	}
 

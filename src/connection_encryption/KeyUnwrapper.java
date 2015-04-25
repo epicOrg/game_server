@@ -7,6 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
+
 /**
  * @author Noris
  * @date 2015/03/30
@@ -14,23 +17,31 @@ import javax.crypto.NoSuchPaddingException;
 
 public class KeyUnwrapper {
 
-	byte[] wrappedKey;
-	Key privateKey;
-	Key symmetricKey;
+	private Key privateKey;
+	private Key symmetricKey;
 
-	public KeyUnwrapper(byte[] wrappedKey, Key privateKey) {
+	public KeyUnwrapper(Key privateKey) {
 		super();
-		this.wrappedKey = wrappedKey;
 		this.privateKey = privateKey;
 	}
 
-	public void unwrapKey() {
+	public void unwrapKey(String wrappedKeyString) {
+
+		byte[] wrappedKeyData = null;
+
+		try {
+			wrappedKeyData = Hex.decodeHex(wrappedKeyString.toCharArray());
+		} catch (DecoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		try {
 
 			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.UNWRAP_MODE, privateKey);
-			symmetricKey = cipher.unwrap(wrappedKey, "AES", Cipher.SECRET_KEY);
+			symmetricKey = cipher.unwrap(wrappedKeyData, "AES",
+					Cipher.SECRET_KEY);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
@@ -42,6 +53,10 @@ public class KeyUnwrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public Key getUnwrappedKey() {
+		return symmetricKey;
 	}
 
 }

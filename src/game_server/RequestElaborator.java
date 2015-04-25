@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import services.Call;
 import services.CurrentRoom;
+import services.Encrypt;
 import services.Game;
 import services.IService;
 import services.Login;
@@ -29,6 +30,7 @@ public class RequestElaborator {
 	}
 
 	private void initMap() {
+		addService(FieldsNames.ENCRYPT, new Encrypt());
 		addService(FieldsNames.REGISTER, new Register());
 		addService(FieldsNames.LOGIN, new Login());
 		addService(FieldsNames.CALL, new Call());

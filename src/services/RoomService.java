@@ -36,7 +36,7 @@ public class RoomService implements IService {
 	}
 
 	@Override
-	public String start() {
+	public JSONObject start() {
 
 		try {
 
@@ -49,7 +49,7 @@ public class RoomService implements IService {
 		}
 
 		generateResponse();
-		return jsonResponse.toString();
+		return jsonResponse;
 
 	}
 

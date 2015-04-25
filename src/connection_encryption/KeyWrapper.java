@@ -17,9 +17,9 @@ import org.apache.commons.codec.binary.Hex;
 
 public class KeyWrapper {
 
-	Key symmetricKey;
-	Key publicKey;
-	byte[] wrappedKey;
+	private Key symmetricKey;
+	private Key publicKey;
+	private byte[] wrappedKey;
 
 	public KeyWrapper(Key symmetricKey, Key publicKey) {
 		super();

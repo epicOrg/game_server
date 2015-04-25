@@ -13,7 +13,7 @@ public interface IService {
 	/**
 	 * @return service response message
 	 */
-	public String start();
+	public JSONObject start();
 
 	public void setRequest(JSONObject request);
 }

@@ -9,7 +9,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.ShortBufferException;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -21,35 +20,29 @@ import org.apache.commons.codec.binary.Hex;
 
 public class Decrypter {
 
-	byte[] cryptedData;
-	byte[] decryptedData;
 	private Key asymmetricKey;
+	private byte[] decryptedData;
 
-	public Decrypter(byte[] cryptedData, Key asymmetricKey) {
-		this.cryptedData = cryptedData;
+	public Decrypter(Key asymmetricKey) {
 		this.asymmetricKey = asymmetricKey;
 	}
 
-	// TODO Adjust throws
-	public Decrypter(String cryptedString, Key asymmetricKey)
-			throws DecoderException {
+	public void decrypt(String encryptedString) {
 		
-		this.cryptedData = Hex.decodeHex(cryptedString.toCharArray());
-		this.asymmetricKey = asymmetricKey;
-	}
-
-	public void decrypt(int encriptionLenght) {
+		byte[] encryptedData = null;
+		
+		try {
+			encryptedData = Hex.decodeHex(encryptedString.toCharArray());
+		} catch (DecoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		try {
 
 			Cipher cipher = Cipher.getInstance("AES");
 			cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
-			decryptedData = new byte[cipher.getOutputSize(encriptionLenght)];
-
-			int decriptionLenght = cipher.update(cryptedData, 0,
-					encriptionLenght, decryptedData, 0);
-
-			decriptionLenght += cipher.doFinal(decryptedData, decriptionLenght);
+			decryptedData = cipher.doFinal(encryptedData);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
@@ -58,9 +51,6 @@ public class Decrypter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ShortBufferException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalBlockSizeException e) {
@@ -78,12 +68,13 @@ public class Decrypter {
 
 	public String getDecryptedString() {
 		try {
-			
+
 			return new String(decryptedData, "UTF-8");
-			
+
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			return null;
 		}
 	}
+
 }
