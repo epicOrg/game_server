@@ -12,12 +12,12 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.Call;
+import services.IService;
 import services.Login;
 import services.Register;
-import services.IService;
-import data_management.DataManager;
+import check_fields.FieldsNames;
+import database.Paths;
 
 /**
  * Test for a valid call request. Remember that the email could already exists
@@ -89,7 +89,7 @@ class Test01 {
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 
 		// Deleted registration file for a clean test
-		new File(DataManager.getInstance().getPath() + randomUsername).delete();
+		new File(Paths.getUsersPath() + randomUsername).delete();
 	}
 
 }

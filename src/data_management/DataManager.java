@@ -87,13 +87,6 @@ public class DataManager {
 		}
 	}
 
-	public String getPath() {
-		if (System.getProperty("os.name").startsWith("Windows"))
-			return "database\\";
-
-		return "database/";
-	}
-
 	public void setLoginChecker(ILoginChecker loginChecker) {
 		this.loginChecker = loginChecker;
 	}
