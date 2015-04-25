@@ -24,7 +24,7 @@ import database.Paths;
 
 class Test01 {
 
-	private static final int NUMBER_OF_USERS = 1000;
+	private static final int NUMBER_OF_USERS = 10;
 
 	public static void main(String[] args) throws JSONException {
 
@@ -57,7 +57,8 @@ class Test01 {
 			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
-			System.out.println("[" + i + 1 + "] CLIENT Login Message: "
+			jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
+			System.out.println("[" + i + "] CLIENT Login Message: "
 					+ jsonLoginFromClient);
 
 			// SERVER: Set the user online

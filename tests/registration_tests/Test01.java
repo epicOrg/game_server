@@ -37,7 +37,7 @@ public class Test01 {
 
 		Register register = new Register();
 		register.setRequest(jsonFromClient);
-		String response = register.start();
+		String response = register.start().toString();
 
 		/*
 		 * Console print "fake" control: it can not work because "An object is

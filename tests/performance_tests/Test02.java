@@ -66,6 +66,7 @@ class Test02 {
 			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
+			jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
 			System.out.println("[" + i + "] CLIENT Login Message: "
 					+ jsonLoginFromClient);
 

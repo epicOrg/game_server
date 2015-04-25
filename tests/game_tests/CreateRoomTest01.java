@@ -51,6 +51,7 @@ class CreateRoomTest01 {
 		jsonLoginFromClient.put(FieldsNames.USERNAME, randomUsername);
 		jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 		jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
+		jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
 		System.out.println("CLIENT Login Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
