@@ -31,7 +31,6 @@ public class Game implements IService {
 	@Override
 	public String start() {
 
-
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 		} catch (JSONException e) {
@@ -82,7 +81,7 @@ public class Game implements IService {
 		} catch (JSONException e) {
 		}
 	}
-	
+
 	@Override
 	public void setRequest(JSONObject request) {
 		this.jsonRequest = request;

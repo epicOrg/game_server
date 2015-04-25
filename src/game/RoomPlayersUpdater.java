@@ -14,6 +14,11 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 
+/**
+ * @author Micieli
+ * @date 2015/04/25
+ */
+
 public class RoomPlayersUpdater implements RoomEventListener {
 
 	private OnlineManager onlineManager;
@@ -31,9 +36,11 @@ public class RoomPlayersUpdater implements RoomEventListener {
 	public void onNewPlayerAdded(Player player) {
 
 		try {
+
 			PrintWriter writer = onlineManager.getOnlineUserByUsername(
 					player.getUsername()).getOuStream();
 			writers.put(player, writer);
+
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,13 +49,14 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		JSONObject message = generatePlayerList();
 		updatePlayers(message);
 
-		if(room.isFull())
+		if (room.isFull())
 			onRoomFull();
 	}
+
 	@Override
 	public void onRoomFull() {
 		JSONObject message = generateStarMessage();
-		updatePlayers(message);		
+		updatePlayers(message);
 	}
 
 	@Override
@@ -59,18 +67,18 @@ public class RoomPlayersUpdater implements RoomEventListener {
 	}
 
 	private JSONObject generateStarMessage() {
+
 		JSONObject message = new JSONObject();
-		
+
 		try {
 			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
 			message.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_START);
 			message.put(FieldsNames.NO_ERRORS, true);
-		
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}				
+		}
+
 		return message;
 	}
 
@@ -105,17 +113,19 @@ public class RoomPlayersUpdater implements RoomEventListener {
 			message.put(FieldsNames.ROOM_TEAM, teams);
 
 		} catch (JSONException e) {
-			e.printStackTrace();
 		}
+
 		return message;
 	}
 
 	private void updatePlayers(JSONObject message) {
-		
+
 		Collection<PrintWriter> writers = this.writers.values();
 		String strMessage = message.toString();
+
 		for (PrintWriter writer : writers) {
 			writer.println(strMessage);
-		}		
+		}
 	}
+
 }

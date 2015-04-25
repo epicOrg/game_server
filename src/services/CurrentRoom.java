@@ -156,7 +156,7 @@ public class CurrentRoom implements IService {
 		} catch (JSONException e) {
 		}
 	}
-	
+
 	@Override
 	public void setRequest(JSONObject request) {
 		this.jsonRequest = request;

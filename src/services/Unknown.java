@@ -15,7 +15,7 @@ import check_fields.FieldsNames;
 
 @Deprecated
 public class Unknown implements IService {
-	
+
 	private JSONObject jsonRequest;
 
 	@Override

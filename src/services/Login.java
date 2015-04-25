@@ -82,7 +82,7 @@ public class Login implements IService {
 	}
 
 	private void generatetResponse() {
-		try {			
+		try {
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 
 			jsonResponse.put(FieldsNames.USERNAME, user.getUsername());
@@ -96,7 +96,7 @@ public class Login implements IService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void setRequest(JSONObject request) {
 		this.jsonRequest = request;
