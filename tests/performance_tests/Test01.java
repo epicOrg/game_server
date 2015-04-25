@@ -7,11 +7,11 @@ import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.IService;
 import services.Login;
 import services.Register;
-import services.IService;
 import check_fields.FieldsNames;
-import data_management.DataManager;
+import database.Paths;
 
 /**
  * Register NUMBER_OF_USERS users and login them. Note: remember to delete the
@@ -77,7 +77,7 @@ class Test01 {
 		// Deleted registration file for a clean test
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 			String username = "Eraclito" + i;
-			new File(DataManager.getInstance().getPath() + username).delete();
+			new File(Paths.getUsersPath() + username).delete();
 		}
 
 	}

@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
-import data_management.DataManager;
+import database.Paths;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after
@@ -80,7 +80,7 @@ class Test02 {
 		// Delete registration file for a clean test
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 			String username = "Eraclito" + i;
-			new File(DataManager.getInstance().getPath() + username).delete();
+			new File(Paths.getUsersPath() + username).delete();
 		}
 
 	}
