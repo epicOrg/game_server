@@ -4,16 +4,14 @@ import game_server.ServerInitializer;
 
 import java.util.Random;
 
-import javax.print.DocFlavor.READER;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
+import services.IService;
 import services.Login;
 import services.Register;
 import services.RoomService;
-import services.IService;
+import check_fields.FieldsNames;
 
 /**
  * Test for a valid Room Create request.

@@ -12,6 +12,8 @@ import check_fields.FieldsNames;
  * @author Noris
  * @date 2015/03/26
  */
+
+@Deprecated
 public class Unknown implements IService {
 	
 	private JSONObject jsonRequest;

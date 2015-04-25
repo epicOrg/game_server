@@ -2,7 +2,7 @@ package data_management;
 
 import java.io.IOException;
 
-import writer.IDataSaver;
+import database.writer.IDataSaver;
 
 /**
  * @author Micieli

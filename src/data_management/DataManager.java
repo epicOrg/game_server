@@ -2,9 +2,9 @@ package data_management;
 
 import java.io.IOException;
 
-import loader.ILoginChecker;
-import loader.IRegistrationChecker;
-import writer.IDataSaver;
+import database.loader.ILoginChecker;
+import database.loader.IRegistrationChecker;
+import database.writer.IDataSaver;
 import exceptions.EmailAlreadyUsedException;
 import exceptions.LoginFailedException;
 import exceptions.RegistrationFailedException;

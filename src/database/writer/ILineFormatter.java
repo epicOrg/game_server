@@ -1,4 +1,4 @@
-package writer;
+package database.writer;
 
 import data_management.RegisteredUser;
 

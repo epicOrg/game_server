@@ -1,4 +1,4 @@
-package loader;
+package database.loader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,18 +20,14 @@ import exceptions.UsernameAlreadyUsedException;
 public class FileChecker implements IRegistrationChecker {
 
 	private String path;
-	private String filename;
 
 	/**
 	 * @param path
 	 *            the path of the file
-	 * @param filename
-	 *            the name of the file
 	 */
-	public FileChecker(String path, String filename) {
+	public FileChecker(String path) {
 		super();
 		this.path = path;
-		this.filename = filename;
 	}
 
 	@Override
@@ -52,7 +48,7 @@ public class FileChecker implements IRegistrationChecker {
 		BufferedReader reader;
 
 		try {
-			reader = new BufferedReader(new FileReader(path + filename));
+			reader = new BufferedReader(new FileReader(path));
 			String line = reader.readLine();
 			while (line != null) {
 
@@ -64,7 +60,7 @@ public class FileChecker implements IRegistrationChecker {
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
-			File file = new File(path + filename);
+			File file = new File(path);
 			file.createNewFile();
 		}
 

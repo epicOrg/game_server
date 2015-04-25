@@ -1,4 +1,4 @@
-package loader;
+package database.loader;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package writer;
+package database.writer;
 
 import java.io.BufferedWriter;
 import java.io.File;
