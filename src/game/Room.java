@@ -9,12 +9,13 @@ import exceptions.NoSuchPlayerException;
  * @date 2015/04/18
  */
 
-public class Room {
+public class Room{
 
 	public static final int MAX_PLAYERS = 10;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
+	private RoomEventListener playersUpdater;
 
 	public Room(String roomName) {
 		this.roomName = roomName;
@@ -32,8 +33,9 @@ public class Room {
 		if (isFull()) {
 			throw new FullRoomException();
 		}
-
+		
 		teamGenerator.getRandomTeam().addPlayer(player);
+		playersUpdater.onNewPlayerAdded(player);
 	}
 
 	/**
@@ -44,6 +46,7 @@ public class Room {
 	public void removePlayer(Player player) {
 		player.getTeam().removePlayer(player);
 		player.setRoom(null);
+		playersUpdater.onPlayerRemoved(player);
 	}
 
 	public Player getPlayerByName(String name) throws NoSuchPlayerException {
@@ -62,7 +65,7 @@ public class Room {
 	 * @return true if the team is full (no more players can join the room),
 	 *         false otherwise (there are more users slot).
 	 */
-	private boolean isFull() {
+	public boolean isFull() {
 
 		int size = 0;
 
@@ -90,6 +93,10 @@ public class Room {
 
 	public TeamGenerator getTeamGenerator() {
 		return teamGenerator;
+	}
+
+	public void setEventListener(RoomEventListener roomPlayersUpdater) {
+		this.playersUpdater = roomPlayersUpdater;
 	}
 
 }

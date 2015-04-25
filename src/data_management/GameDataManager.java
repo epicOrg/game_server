@@ -3,6 +3,8 @@ package data_management;
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
 import game.Room;
+import game.RoomEventListener;
+import game.RoomPlayersUpdater;
 
 import java.util.ArrayList;
 
@@ -34,10 +36,11 @@ public class GameDataManager {
 			getRoomByName(name);
 
 		} catch (NoSuchRoomException e) {
-
-			rooms.add(new Room(name));
+			Room room = new Room(name);
+			RoomEventListener listener = new RoomPlayersUpdater(room);
+			room.setEventListener(listener);
+			rooms.add(room);
 			return;
-
 		}
 
 		throw new RoomAlreadyExistsException();
