@@ -29,7 +29,6 @@ public class Encrypt implements IService {
 		generateResponse();
 
 		return jsonResponse;
-
 	}
 
 	private void runService() {
@@ -41,11 +40,9 @@ public class Encrypt implements IService {
 			case FieldsNames.ENCRYPT_GET_KEY:
 				jsonResponse.put(FieldsNames.ENCRYPT_PUBLIC_KEY,
 						ConnectionEncrypter.getPublicKey());
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				break;
 
 			case FieldsNames.ENCRYPT_SET_KEY:
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
 				break;
 
 			}
@@ -60,6 +57,7 @@ public class Encrypt implements IService {
 		try {
 
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.ENCRYPT);
+			jsonResponse.put(FieldsNames.NO_ERRORS, true);
 
 		} catch (JSONException e) {
 		}

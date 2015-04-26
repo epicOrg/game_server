@@ -10,16 +10,23 @@ import java.security.Key;
 public class ConnectionEncrypter {
 
 	private static KeysGenerator keysGenerator;
+	private static boolean enabled = false;
 
 	private Encrypter encrypter;
 	private Decrypter decrypter;
+	private boolean asymmetricKeySet = false;
 
 	public static void setKeysGenerator(KeysGenerator keysGenerator) {
 		ConnectionEncrypter.keysGenerator = keysGenerator;
+		enabled = true;
 	}
 
 	public static Key getPublicKey() {
 		return keysGenerator.getPublicKey();
+	}
+
+	public static boolean isEncryptionEnabled() {
+		return enabled;
 	}
 
 	public void setAsymmetricKey(String wrappedAsymmetricKey) {
@@ -27,6 +34,11 @@ public class ConnectionEncrypter {
 				.getUnwrappedKey();
 		encrypter = new Encrypter(asymmetricKey);
 		decrypter = new Decrypter(asymmetricKey);
+		asymmetricKeySet = true;
+	}
+
+	public boolean isAsymmetricKeySet() {
+		return asymmetricKeySet;
 	}
 
 	public String encryptResponse(String response) {
