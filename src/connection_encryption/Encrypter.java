@@ -59,7 +59,7 @@ public class Encrypter {
 	}
 
 	public String getEncryptedString() {
-		return new String(Hex.encodeHex(cryptedData));
+		return Hex.encodeHexString(cryptedData);
 	}
 
 }
