@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import online_management.OnlineManager;
@@ -41,6 +42,7 @@ public class ClientRequestThread implements Runnable {
 					socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			OnlineManager onlineManager = OnlineManager.getInstance();
+			System.out.println("LocalP1" + socket.getLocalPort());
 			onlineManager.addStream(socket.getLocalPort(), out);
 
 			String request = in.readLine();
@@ -53,18 +55,14 @@ public class ClientRequestThread implements Runnable {
 				System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
-				JSONObject jsonRequest = new JSONObject(
-						secureConnection.decrypt(jsonEncryptedRequest));
+				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);
 
-				jsonRequest.put(FieldsNames.IP_ADDRESS, socket.getInetAddress()
-						.getHostAddress());
-				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getInetAddress()
-						.getHostAddress());
+				InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+				jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
+				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
 
 				IService service = requestElaborator.chooseService(jsonRequest);
-
-				String response = secureConnection.encrypt(service.start())
-						.toString();
+				String response = secureConnection.encrypt(service.start()).toString();
 
 				out.println(response);
 
@@ -75,9 +73,9 @@ public class ClientRequestThread implements Runnable {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 

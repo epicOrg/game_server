@@ -38,7 +38,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		try {
 
 			PrintWriter writer = onlineManager.getOnlineUserByUsername(
-					player.getUsername()).getOuStream();
+					player.getUsername()).getOutStream();
 			writers.put(player, writer);
 
 		} catch (UserNotOnlineException e) {
@@ -47,7 +47,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		}
 
 		JSONObject message = generatePlayerList();
-		updatePlayers(message);
+		updatePlayers(player, message);
 
 		if (room.isFull())
 			onRoomFull();
@@ -56,14 +56,14 @@ public class RoomPlayersUpdater implements RoomEventListener {
 	@Override
 	public void onRoomFull() {
 		JSONObject message = generateStarMessage();
-		updatePlayers(message);
+		updatePlayers(null, message);
 	}
 
 	@Override
 	public void onPlayerRemoved(Player player) {
 		writers.remove(player);
 		JSONObject message = generatePlayerList();
-		updatePlayers(message);
+		updatePlayers(player, message);
 	}
 
 	private JSONObject generateStarMessage() {
@@ -113,19 +113,19 @@ public class RoomPlayersUpdater implements RoomEventListener {
 			message.put(FieldsNames.ROOM_TEAM, teams);
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		return message;
 	}
 
-	private void updatePlayers(JSONObject message) {
-
-		Collection<PrintWriter> writers = this.writers.values();
+	private void updatePlayers(Player excludedPlayer, JSONObject message) {	
 		String strMessage = message.toString();
 
-		for (PrintWriter writer : writers) {
-			writer.println(strMessage);
-		}
+		for(Player p : writers.keySet()){
+			if(p != excludedPlayer)
+				writers.get(p).println(strMessage);
+		}		
 	}
 
 }

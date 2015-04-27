@@ -62,7 +62,7 @@ public class OnlineUser {
 		this.writer = printWriter;		
 	}
 	
-	public PrintWriter getOuStream() {
+	public PrintWriter getOutStream() {
 		return writer;
 	}
 

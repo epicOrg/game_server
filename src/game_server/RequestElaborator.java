@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.omg.CORBA.UNKNOWN;
 
 import services.Call;
 import services.CurrentRoom;
@@ -13,6 +14,7 @@ import services.IService;
 import services.Login;
 import services.Register;
 import services.RoomService;
+import services.Unknown;
 import check_fields.FieldsNames;
 
 /**
@@ -37,6 +39,7 @@ public class RequestElaborator {
 		addService(FieldsNames.ROOMS, new RoomService());
 		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
 		addService(FieldsNames.GAME, new Game());
+		addService(FieldsNames.UNKNOWN, new Unknown()); // Perchè è deprecato? (Torlaschi)
 	}
 
 	public IService chooseService(JSONObject json) {
@@ -45,6 +48,7 @@ public class RequestElaborator {
 		try {
 			serviceName = json.getString(FieldsNames.SERVICE);
 		} catch (JSONException e) {
+			e.printStackTrace();
 			serviceName = null;
 		}
 

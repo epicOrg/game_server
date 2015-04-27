@@ -15,6 +15,7 @@ import exceptions.UserNotOnlineException;
 public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
+	
 	private HashMap<Integer,PrintWriter> streams  = new HashMap<>();
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
 
@@ -33,7 +34,7 @@ public class OnlineManager {
 	public int setOnline(String username, InetAddress ipAddress,int port) {
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress, port);
 		onlineUser.setOutStream(streams.get(port));
-		onlineUsers.put(username, new OnlineUser(username, ipAddress, port));
+		onlineUsers.put(username, onlineUser);
 		
 		return onlineUsers.get(username).hashCode();
 	}
