@@ -40,7 +40,7 @@ public class SecureConnectionApplicator {
 
 		// If the request is encrypted but the asymmetric key wasn't set, I
 		// return a JSNObject, that it cause an Unknown Service response.
-		if (!connectionEncrypter.isAsymmetricKeySet())
+		if (!connectionEncrypter.isSymmetricKeySet())
 			return new JSONObject();
 
 		String encryptedRequest = jsonRequest
@@ -66,7 +66,7 @@ public class SecureConnectionApplicator {
 				!ConnectionEncrypter.isEncryptionEnabled()
 				|| jsonResponse.getString(FieldsNames.SERVICE).equals(
 						FieldsNames.ENCRYPT)
-						|| !connectionEncrypter.isAsymmetricKeySet())
+						|| !connectionEncrypter.isSymmetricKeySet())
 			return jsonResponse;
 
 		String uncryptedResponse = jsonResponse
