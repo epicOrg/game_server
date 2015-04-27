@@ -7,8 +7,8 @@ import java.util.Random;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.Register;
+import check_fields.FieldsNames;
 
 /**
  * Test for client registration with an error: email already used.

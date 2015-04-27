@@ -12,9 +12,9 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import connection_encryption.SecureConnectionApplicator;
 import services.IService;
 import check_fields.FieldsNames;
+import connection_encryption.SecureConnectionApplicator;
 
 /**
  * @author Noris

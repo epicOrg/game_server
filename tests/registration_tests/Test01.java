@@ -7,8 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import check_fields.FieldsNames;
 import services.Register;
+import check_fields.FieldsNames;
 
 /**
  * Test for client register message without errors. Note: I can check only if

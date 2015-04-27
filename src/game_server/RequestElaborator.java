@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.CORBA.UNKNOWN;
 
 import services.Call;
 import services.CurrentRoom;

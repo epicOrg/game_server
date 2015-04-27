@@ -1,9 +1,6 @@
 package game;
 
-import exceptions.UserNotOnlineException;
-
 import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.HashMap;
 
 import online_management.OnlineManager;
@@ -13,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
+import exceptions.UserNotOnlineException;
 
 /**
  * @author Micieli

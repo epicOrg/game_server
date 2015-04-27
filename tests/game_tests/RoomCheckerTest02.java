@@ -8,8 +8,8 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.RoomService;
+import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
 
 /**
