@@ -42,7 +42,10 @@ public class ClientRequestThread implements Runnable {
 					socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			OnlineManager onlineManager = OnlineManager.getInstance();
-			System.out.println("LocalP1" + socket.getLocalPort());
+			
+			// TODO DEBUG: port
+			System.out.println("LocalP1: " + socket.getLocalPort());
+			
 			onlineManager.addStream(socket.getLocalPort(), out);
 
 			String request = in.readLine();

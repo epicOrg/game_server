@@ -13,7 +13,6 @@ import check_fields.FieldsNames;
  * @date 2015/03/26
  */
 
-@Deprecated
 public class Unknown implements IService {
 
 	@Override

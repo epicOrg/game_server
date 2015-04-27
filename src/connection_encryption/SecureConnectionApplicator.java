@@ -62,11 +62,12 @@ public class SecureConnectionApplicator {
 		// If (a) the encryption is not enabled, or if (b) the response is an
 		// encryption establishment message, or if (c) the asymmetric key is not
 		// set, it send an unencrypted response.
-		if (!jsonResponse.has(FieldsNames.ENCRYPT_MESSAGE) ||
-				!ConnectionEncrypter.isEncryptionEnabled()
+		if ((jsonResponse.has(FieldsNames.SERVICE) && (jsonResponse // TODO
+				.getString(FieldsNames.SERVICE).equals(FieldsNames.ENCRYPT)))
+				|| !ConnectionEncrypter.isEncryptionEnabled()
 				|| jsonResponse.getString(FieldsNames.SERVICE).equals(
 						FieldsNames.ENCRYPT)
-						|| !connectionEncrypter.isSymmetricKeySet())
+				|| !connectionEncrypter.isSymmetricKeySet())
 			return jsonResponse;
 
 		String uncryptedResponse = jsonResponse

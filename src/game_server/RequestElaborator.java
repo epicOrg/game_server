@@ -38,7 +38,7 @@ public class RequestElaborator {
 		addService(FieldsNames.ROOMS, new RoomService());
 		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
 		addService(FieldsNames.GAME, new Game());
-		addService(FieldsNames.UNKNOWN, new Unknown()); // Perchè è deprecato? (Torlaschi)
+		addService(FieldsNames.UNKNOWN, new Unknown());
 	}
 
 	public IService chooseService(JSONObject json) {
