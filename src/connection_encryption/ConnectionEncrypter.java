@@ -14,7 +14,7 @@ public class ConnectionEncrypter {
 
 	private Encrypter encrypter;
 	private Decrypter decrypter;
-	private boolean asymmetricKeySet = false;
+	private boolean symmetricKeySet = false;
 
 	public static void setKeysGenerator(KeysGenerator keysGenerator) {
 		ConnectionEncrypter.keysGenerator = keysGenerator;
@@ -29,16 +29,18 @@ public class ConnectionEncrypter {
 		return enabled;
 	}
 
-	public void setAsymmetricKey(String wrappedAsymmetricKey) {
-		Key asymmetricKey = new KeyUnwrapper(keysGenerator.getPrivateKey())
-				.getUnwrappedKey();
-		encrypter = new Encrypter(asymmetricKey);
-		decrypter = new Decrypter(asymmetricKey);
-		asymmetricKeySet = true;
+	public void setAsymmetricKey(String wrappedSymmetricKey) {
+		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(
+				keysGenerator.getPrivateKey());
+		keyUnwrapper.unwrapKey(wrappedSymmetricKey);
+		Key symmetricKey = keyUnwrapper.getUnwrappedKey();
+		encrypter = new Encrypter(symmetricKey);
+		decrypter = new Decrypter(symmetricKey);
+		symmetricKeySet = true;
 	}
 
-	public boolean isAsymmetricKeySet() {
-		return asymmetricKeySet;
+	public boolean isSymmetricKeySet() {
+		return symmetricKeySet;
 	}
 
 	public String encryptResponse(String response) {
