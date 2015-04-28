@@ -33,7 +33,6 @@ public class RequestElaborator {
 	private void initMap() {
 		addService(FieldsNames.ENCRYPT, new Encrypt());
 		addService(FieldsNames.REGISTER, new Register());
-		addService(FieldsNames.LOGIN, new Login());
 		addService(FieldsNames.CALL, new Call());
 		addService(FieldsNames.ROOMS, new RoomService());
 		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());

@@ -15,6 +15,6 @@ public interface IService {
 	 */
 	
 	public JSONObject start();
-
+	
 	public void setRequest(JSONObject request);
 }

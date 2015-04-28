@@ -1,5 +1,6 @@
 package services;
 
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -24,6 +25,7 @@ public class Login implements IService {
 
 	private InetAddress ipAddress;
 	private int hashCode;
+	private PrintWriter printWriter;
 	private DataManager dataManager;
 	private RegisteredUser user;
 	private int port;
@@ -31,7 +33,9 @@ public class Login implements IService {
 	private JSONObject jsonResponse;
 	private boolean noErrors = true;
 
-	public Login() {
+	public Login(PrintWriter printWriter) {
+		this.printWriter = printWriter;
+		
 		dataManager = DataManager.getInstance();
 	}
 
@@ -78,7 +82,7 @@ public class Login implements IService {
 
 	private void saveFields() {
 		OnlineManager onlineManager = OnlineManager.getInstance();
-		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress, port);
+		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress, printWriter);
 	}
 
 	private void generatetResponse() {

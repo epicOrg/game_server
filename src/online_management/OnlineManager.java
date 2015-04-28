@@ -31,9 +31,9 @@ public class OnlineManager {
 	 * 
 	 * @return hashCode
 	 */
-	public int setOnline(String username, InetAddress ipAddress,int port) {
-		OnlineUser onlineUser = new OnlineUser(username, ipAddress, port);
-		onlineUser.setOutStream(streams.get(port));
+	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
+		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
+		onlineUser.setOutStream(printWriter);
 		onlineUsers.put(username, onlineUser);
 		
 		return onlineUsers.get(username).hashCode();

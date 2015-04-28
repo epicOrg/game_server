@@ -13,15 +13,13 @@ public class OnlineUser {
 
 	private String username;
 	private InetAddress ipAddress;
-	private int port;
 	private PrintWriter writer;
 	private GregorianCalendar connectionDate;
 
-	public OnlineUser(String username, InetAddress ipAddress,int port) {
+	public OnlineUser(String username, InetAddress ipAddress) {
 		super();
 		this.username = username;
 		this.ipAddress = ipAddress;
-		this.port = port;
 		connectionDate = new GregorianCalendar();
 	}
 
@@ -31,10 +29,6 @@ public class OnlineUser {
 
 	public InetAddress getIpAddress() {
 		return ipAddress;
-	}
-	
-	public int getPort() {
-		return port;
 	}
 
 	public GregorianCalendar getConnectionDate() {
