@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 19
+ * @version 20
  * @date 2015/03/30
  */
 
@@ -109,6 +109,7 @@ public class FieldsNames {
 	public static final String GAME_OBJECT = "object";
 	public static final String GAME_TEXTURE = "texture";
 	public static final String GAME_POSITION = "position";
+	public static final String GAME_DIRECTION = "direction";
 	public static final String GAME_SIZE = "size";
 	public static final String GAME_X = "x";
 	public static final String GAME_Y = "y";
