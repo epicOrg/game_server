@@ -21,8 +21,8 @@ public class ConnectionEncrypter {
 		enabled = true;
 	}
 
-	public static Key getPublicKey() {
-		return keysGenerator.getPublicKey();
+	public static String getPublicKey() {
+		return KeyConverter.keyToString(keysGenerator.getPublicKey());
 	}
 
 	public static boolean isEncryptionEnabled() {
