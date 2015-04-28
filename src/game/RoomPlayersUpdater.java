@@ -47,8 +47,6 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		JSONObject message = generatePlayerList();
 		updatePlayers(player, message);
 
-		if (room.isFull())
-			onRoomFull();
 	}
 
 	@Override

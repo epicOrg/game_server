@@ -19,7 +19,19 @@ public class RoomChecker extends ServiceChecker {
 			noErrors = false;
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getFullRoomError() {
+		try {
+
+			JSONArray roomFullError = new JSONArray();
+			roomFullError.put(FieldsNames.ROOM_JOIN_ERROR_FULL);
+			errors.put(FieldsNames.ERRORS, roomFullError);
+			noErrors = false;
+
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}

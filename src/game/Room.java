@@ -11,7 +11,7 @@ import exceptions.NoSuchPlayerException;
 
 public class Room{
 
-	public static final int MAX_PLAYERS = 10;
+	public static final int MAX_PLAYERS = 2;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
@@ -65,7 +65,7 @@ public class Room{
 	 * @return true if the team is full (no more players can join the room),
 	 *         false otherwise (there are more users slot).
 	 */
-	public boolean isFull() {
+	private boolean isFull() {
 
 		int size = 0;
 
@@ -97,6 +97,12 @@ public class Room{
 
 	public void setEventListener(RoomEventListener roomPlayersUpdater) {
 		this.playersUpdater = roomPlayersUpdater;
+	}
+
+	public void checkIfFull() {
+		if(isFull())
+			playersUpdater.onRoomFull();
+		
 	}
 
 }

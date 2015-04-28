@@ -96,9 +96,9 @@ public class CurrentRoom implements IService {
 				team.put(FieldsNames.LIST, players);
 				teams.put(team);
 			}
-
+			
 			jsonResponse.put(FieldsNames.ROOM_TEAM, teams);
-
+			room.checkIfFull();
 		} catch (JSONException e) {
 		}
 	}

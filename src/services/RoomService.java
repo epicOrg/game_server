@@ -144,8 +144,8 @@ public class RoomService implements IService {
 		try {
 
 			Room room = gameDataManager.getRoomByName(roomName);
-			room.addPlayer(player);
 			jsonResponse.put(FieldsNames.ROOM_NAME, roomName);
+			room.addPlayer(player);
 			jsonResponse.put(FieldsNames.RESULT, true);
 
 		} catch (JSONException e) {
@@ -155,6 +155,7 @@ public class RoomService implements IService {
 			e.printStackTrace();
 		} catch (FullRoomException e) {
 			// TODO Auto-generated catch block
+			roomChecker.getFullRoomError();
 			joinFailed();
 			e.printStackTrace();
 		}
@@ -166,6 +167,7 @@ public class RoomService implements IService {
 			jsonResponse.put(FieldsNames.RESULT, false);
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
