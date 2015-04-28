@@ -55,7 +55,7 @@ class CreateRoomTest01 {
 		System.out.println("CLIENT Login Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
-		IService login = new Login();
+		IService login = new Login(null);
 		login.setRequest(jsonLoginFromClient);
 		String stringLoginFromServer = login.start().toString();
 		System.out.println("SERVER Login Message: " + stringLoginFromServer

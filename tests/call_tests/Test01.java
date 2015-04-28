@@ -36,7 +36,7 @@ class Test01 {
 		new ServerInitializer().initDataManager();
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("192.168.1.131");
-		onlineManager.setOnline("JohnLocke", ipAddress, 5000);
+		onlineManager.setOnline("JohnLocke", ipAddress, null);
 
 		// Generate random username
 		String randomUsername = "Hegel" + new Random().nextInt(10000);
@@ -64,7 +64,7 @@ class Test01 {
 		System.out.println("Login Client Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
-		IService login = new Login();
+		IService login = new Login(null);
 		login.setRequest(jsonLoginFromClient);
 		String stringLoginFromServer = login.start().toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);

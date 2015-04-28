@@ -62,7 +62,7 @@ class Test01 {
 					+ jsonLoginFromClient);
 
 			// SERVER: Set the user online
-			IService login = new Login();
+			IService login = new Login(null);
 			login.setRequest(jsonLoginFromClient);
 			String stringLoginFromServer = login.start().toString();
 			System.out.println("[" + i + "] SERVER Login Message: "
