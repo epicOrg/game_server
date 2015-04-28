@@ -42,7 +42,7 @@ public class ClientRequestThread implements Runnable {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
 			// TODO DEBUG: port
-			System.out.println("LocalP1: " + socket.getLocalPort());
+			System.out.println("Local Port: " + socket.getLocalPort());
 
 			String request = in.readLine();
 

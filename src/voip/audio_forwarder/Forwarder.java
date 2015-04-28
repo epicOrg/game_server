@@ -7,10 +7,11 @@ import voip.mixing.MixingPipedInputStream;
 import com.biasedbit.efflux.session.SingleParticipantSession;
 
 /**
- * Forward Audio data in a RTPSession mixing streams of other conversation Partecipants
+ * Forward Audio data in a RTPSession mixing streams of other conversation
+ * Partecipants.
  * 
  * @author Luca
- *
+ * @date 2015/04/28
  */
 public class Forwarder {
 
@@ -32,7 +33,7 @@ public class Forwarder {
 			if (audioInputStream.available() >= DATA_LENTH) {
 				byte[] data = new byte[DATA_LENTH];
 
-				System.out.println("Reading..." );
+				System.out.println("Reading...");
 				audioInputStream.read(data);
 				System.out.println("Sending" + data);
 				session.sendData(data, System.currentTimeMillis(), false);

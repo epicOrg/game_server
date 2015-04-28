@@ -47,6 +47,7 @@ public class DataManager {
 			return false;
 		} catch (IOException e) {
 			// TODO
+			e.printStackTrace();
 		}
 		return true;
 	}
@@ -59,7 +60,7 @@ public class DataManager {
 		} catch (LoginFailedException e) {
 			return false;
 		} catch (IOException e) {
-			// TODO
+			e.printStackTrace();
 		}
 
 		return true;

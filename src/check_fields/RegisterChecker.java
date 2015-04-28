@@ -48,7 +48,6 @@ public class RegisterChecker extends ServiceChecker {
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -92,7 +91,6 @@ public class RegisterChecker extends ServiceChecker {
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -135,7 +133,6 @@ public class RegisterChecker extends ServiceChecker {
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -152,7 +149,7 @@ public class RegisterChecker extends ServiceChecker {
 			try {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
 			} catch (JSONException e) {
-				// TODO
+				e.printStackTrace();
 			}
 
 			return noErrors = false;
@@ -168,8 +165,8 @@ public class RegisterChecker extends ServiceChecker {
 
 			try {
 				errors.put(FieldsNames.EMAIL, emailErrors);
-
 			} catch (JSONException e) {
+				e.printStackTrace();
 			}
 
 			return noErrors = false;

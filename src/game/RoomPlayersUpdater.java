@@ -73,6 +73,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 			message.put(FieldsNames.NO_ERRORS, true);
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		return message;
@@ -115,13 +116,13 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		return message;
 	}
 
-	private void updatePlayers(Player excludedPlayer, JSONObject message) {	
+	private void updatePlayers(Player excludedPlayer, JSONObject message) {
 		String strMessage = message.toString();
 
-		for(Player p : writers.keySet()){
-			if(p != excludedPlayer)
+		for (Player p : writers.keySet()) {
+			if (p != excludedPlayer)
 				writers.get(p).println(strMessage);
-		}		
+		}
 	}
 
 }

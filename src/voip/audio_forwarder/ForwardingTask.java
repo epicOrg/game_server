@@ -8,7 +8,7 @@ import java.util.TimerTask;
  * Task that try to forward data if there are any
  * 
  * @author Luca
- *
+ * @date 2015/04/28
  */
 public class ForwardingTask extends TimerTask {
 

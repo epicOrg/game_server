@@ -47,15 +47,14 @@ public class ServiceChecker {
 			if (hashCode == onlineManager.getHashCodeByUsername(username))
 				return true;
 
-		} catch (UserNotOnlineException e1) {
+		} catch (UserNotOnlineException e) {
 			isUserOnline(username);
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 
 		try {
 			errors.put(FieldsNames.HASHCODE, FieldsNames.INVALID);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -76,7 +75,6 @@ public class ServiceChecker {
 				return noErrors = false;
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;

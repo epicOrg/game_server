@@ -123,6 +123,7 @@ public class RoomService implements IService {
 			}
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -190,6 +191,7 @@ public class RoomService implements IService {
 			jsonResponse.put(FieldsNames.ROOMS_LIST, roomsList);
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -203,6 +205,7 @@ public class RoomService implements IService {
 				jsonResponse.put(FieldsNames.ERRORS, roomChecker.getErrors());
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 

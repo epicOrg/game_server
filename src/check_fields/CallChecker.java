@@ -24,7 +24,6 @@ public class CallChecker extends ServiceChecker {
 			errors.put(FieldsNames.CALLEE, FieldsNames.OFFLINE);
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -45,7 +44,6 @@ public class CallChecker extends ServiceChecker {
 			errors.put(FieldsNames.PORT, FieldsNames.INVALID);
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
