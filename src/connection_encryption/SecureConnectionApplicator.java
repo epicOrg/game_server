@@ -25,9 +25,9 @@ public class SecureConnectionApplicator {
 			if (jsonRequest.getString(FieldsNames.SERVICE).equals(
 					FieldsNames.ENCRYPT)) {
 
-				if (jsonRequest.has(FieldsNames.ENCRYPT_WRAPPED_KEY))
+				if (jsonRequest.has(FieldsNames.WRAPPED_KEY))
 					connectionEncrypter.setAsymmetricKey(jsonRequest
-							.getString(FieldsNames.ENCRYPT_WRAPPED_KEY));
+							.getString(FieldsNames.WRAPPED_KEY));
 
 				return jsonRequest;
 			}
@@ -44,7 +44,7 @@ public class SecureConnectionApplicator {
 			return new JSONObject();
 
 		String encryptedRequest = jsonRequest
-				.getString(FieldsNames.ENCRYPT_MESSAGE);
+				.getString(FieldsNames.ENCRYPTED_MESSAGE);
 		String uncryptedRequest = connectionEncrypter
 				.decryptRequest(encryptedRequest);
 
@@ -71,19 +71,19 @@ public class SecureConnectionApplicator {
 			return jsonResponse;
 
 		String uncryptedResponse = jsonResponse
-				.getString(FieldsNames.ENCRYPT_MESSAGE);
+				.getString(FieldsNames.ENCRYPTED_MESSAGE);
 		String encryptedResponse = connectionEncrypter
 				.encryptResponse(uncryptedResponse);
 
 		JSONObject jsonEncryptedResponse = new JSONObject();
-		jsonEncryptedResponse.put(FieldsNames.ENCRYPT_MESSAGE,
+		jsonEncryptedResponse.put(FieldsNames.ENCRYPTED_MESSAGE,
 				encryptedResponse);
 
 		return jsonEncryptedResponse;
 	}
 
 	private boolean isRequestEncrypted(JSONObject jsonRequest) {
-		return jsonRequest.has(FieldsNames.ENCRYPT_MESSAGE);
+		return jsonRequest.has(FieldsNames.ENCRYPTED_MESSAGE);
 	}
 
 }

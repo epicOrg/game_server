@@ -37,14 +37,10 @@ public class Encrypt implements IService {
 
 			switch (jsonRequest.getString(FieldsNames.SERVICE_TYPE)) {
 
-			case FieldsNames.ENCRYPT_GET_KEY:
-				jsonResponse.put(FieldsNames.ENCRYPT_PUBLIC_KEY,
-						ConnectionEncrypter.getPublicKey()); //TODO
+			case FieldsNames.PUBLIC_KEY_REQUEST:
+				jsonResponse.put(FieldsNames.PUBLIC_KEY,
+						ConnectionEncrypter.getPublicKey()); // TODO
 				break;
-
-			case FieldsNames.ENCRYPT_SET_KEY:
-				break;
-
 			}
 
 		} catch (JSONException e) {
