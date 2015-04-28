@@ -1,10 +1,16 @@
 package services;
 
+import data_management.GameDataManager;
 import exceptions.MissingFieldException;
+import exceptions.NoSuchRoomException;
+import game.Player;
+import game.Room;
+import game.Team;
 import game.map.IMapGenerator;
 import game.map.MapObject;
 import game.map.SimpleMapGenerator;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -50,8 +56,75 @@ public class Game implements IService {
 			generateMapResponse();
 			break;
 		case FieldsNames.GAME_POSITIONS:
-			// TODO
+			generatePositionsResponse();
 			break;
+		}
+	}
+	
+	private void generatePositionsResponse() {
+		try {
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			Room room = null;
+			try {
+				room = GameDataManager.getInstance().getRoomByName(roomName);
+			} catch (NoSuchRoomException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			JSONObject posObject = jsonRequest.getJSONObject(FieldsNames.GAME_POSITION);
+			JSONObject dirObject = jsonRequest.getJSONObject(FieldsNames.GAME_DIRECTION);
+			float xPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_X));
+			float yPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_Y));
+			float zPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_Z));
+			float xDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_X));
+			float yDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_Y));
+			float zDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_Z));
+			
+			String username = jsonRequest.getString(FieldsNames.USERNAME);
+			
+			out:
+			for(Team t : room.getTeamGenerator().getTeams()){
+				for(Player p : t.getPlayers()){
+					if(p.getUsername().equals(username)){
+						p.getPlayerStatus().setPosition(xPos, yPos, zPos);
+						p.getPlayerStatus().setDirection(xDir, yDir, zDir);
+						
+						break out;
+					}
+				}
+			}
+
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
+			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS);
+
+			JSONArray jPlayers = new JSONArray();
+			
+			ArrayList<Player> players = new ArrayList<Player>();
+			for(Team t : room.getTeamGenerator().getTeams()){
+				players.addAll(t.getPlayers());
+			}
+
+			for (Player p : players) {
+				JSONObject jPlayer = new JSONObject();
+				JSONObject jObjectPos = new JSONObject();
+				jObjectPos.put(FieldsNames.GAME_X, p.getPlayerStatus().getxPosition());
+				jObjectPos.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyPosition());
+				jObjectPos.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzPosition());
+				JSONObject jObjectDir = new JSONObject();
+				jObjectDir.put(FieldsNames.GAME_X, p.getPlayerStatus().getxDirection());
+				jObjectDir.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyDirection());
+				jObjectDir.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzDirection());
+				jPlayer.put(FieldsNames.GAME_POSITION, jObjectPos);
+				jPlayer.put(FieldsNames.GAME_DIRECTION, jObjectDir);
+				jPlayer.put(FieldsNames.USERNAME, p.getUsername());
+				
+				jPlayers.put(jPlayer);
+			}
+			
+			jsonResponse.put(FieldsNames.GAME_PLAYERS, jPlayers);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -79,6 +152,7 @@ public class Game implements IService {
 			jsonResponse.put(FieldsNames.GAME_ITEMS, items);
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
