@@ -60,7 +60,7 @@ public class Game implements IService {
 			break;
 		}
 	}
-	
+
 	private void generatePositionsResponse() {
 		try {
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
@@ -74,12 +74,12 @@ public class Game implements IService {
 			
 			JSONObject posObject = jsonRequest.getJSONObject(FieldsNames.GAME_POSITION);
 			JSONObject dirObject = jsonRequest.getJSONObject(FieldsNames.GAME_DIRECTION);
-			float xPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_X));
-			float yPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_Y));
-			float zPos = Float.parseFloat(posObject.getString(FieldsNames.GAME_Z));
-			float xDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_X));
-			float yDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_Y));
-			float zDir = Float.parseFloat(dirObject.getString(FieldsNames.GAME_Z));
+			float xPos = (float) posObject.getDouble(FieldsNames.GAME_X);
+			float yPos = (float) posObject.getDouble(FieldsNames.GAME_Y);
+			float zPos = (float) posObject.getDouble(FieldsNames.GAME_Z);
+			float xDir = (float) dirObject.getDouble(FieldsNames.GAME_X);
+			float yDir = (float) dirObject.getDouble(FieldsNames.GAME_Y);
+			float zDir = (float) dirObject.getDouble(FieldsNames.GAME_Z);
 			
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
 			
@@ -106,6 +106,9 @@ public class Game implements IService {
 			}
 
 			for (Player p : players) {
+				if(p.getUsername().equals(username))
+					continue;
+				
 				JSONObject jPlayer = new JSONObject();
 				JSONObject jObjectPos = new JSONObject();
 				jObjectPos.put(FieldsNames.GAME_X, p.getPlayerStatus().getxPosition());

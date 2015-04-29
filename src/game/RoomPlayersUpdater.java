@@ -120,8 +120,9 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		String strMessage = message.toString();
 
 		for (Player p : writers.keySet()) {
-			if (p != excludedPlayer)
+			if (p != excludedPlayer){
 				writers.get(p).println(strMessage);
+			}
 		}
 	}
 

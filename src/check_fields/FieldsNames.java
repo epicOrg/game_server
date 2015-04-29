@@ -91,6 +91,7 @@ public class FieldsNames {
 	public static final String ROOM_TEAM = "team";
 	public static final String ROOM_TEAM_COLOR = "teamColor";
 	public static final String ROOM_ACTION = "action";
+    public static final String ROOM_LIST_RECEIVED = "listReceived";
 	public static final String ROOM_START = "start";
 	public static final String ROOM_EXIT = "exit";
 

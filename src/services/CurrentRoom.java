@@ -96,9 +96,8 @@ public class CurrentRoom implements IService {
 				team.put(FieldsNames.LIST, players);
 				teams.put(team);
 			}
-			
+
 			jsonResponse.put(FieldsNames.ROOM_TEAM, teams);
-			room.checkIfFull();
 		} catch (JSONException e) {
 		}
 	}
@@ -109,7 +108,7 @@ public class CurrentRoom implements IService {
 
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			jsonResponse
-					.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
+			.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
 
 			String roomAction = null;
 			try {
@@ -121,6 +120,9 @@ public class CurrentRoom implements IService {
 			switch (roomAction) {
 			case FieldsNames.ROOM_EXIT:
 				generateActionExitResponse();
+				break;
+			case FieldsNames.ROOM_LIST_RECEIVED:
+				generateListReceivedResponse();
 				break;
 			}
 
@@ -154,6 +156,28 @@ public class CurrentRoom implements IService {
 			}
 
 		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void generateListReceivedResponse() throws MissingFieldException {
+		jsonResponse = null;
+
+		try {
+			String playerName = null;
+			String roomName = null;
+			try {
+				playerName = jsonRequest.getString(FieldsNames.USERNAME);
+				roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			} catch (JSONException e) {
+				throw new MissingFieldException();
+			}
+
+			Room room = gameDataManager.getRoomByName(roomName);
+
+			room.checkIfFull();				
+		} catch (NoSuchRoomException e) {
+			e.printStackTrace();
 		}
 	}
 

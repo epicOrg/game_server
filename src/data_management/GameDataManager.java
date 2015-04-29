@@ -47,7 +47,6 @@ public class GameDataManager {
 	}
 
 	public Room getRoomByName(String name) throws NoSuchRoomException {
-
 		for (Room room : rooms) {
 			if (name.equals(room.getName()))
 				return room;

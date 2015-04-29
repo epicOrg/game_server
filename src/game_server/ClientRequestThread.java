@@ -71,13 +71,19 @@ public class ClientRequestThread implements Runnable {
 				} else {
 					service = requestElaborator.chooseService(jsonRequest);
 				}
-				String response = secureConnection.encrypt(service.start())
-						.toString();
 
-				out.println(response);
+				JSONObject jResponse;
+				if ((jResponse = service.start()) != null) {
+					String response = secureConnection.encrypt(jResponse)
+							.toString();
 
-				// TODO DEBUG: server response
-				System.out.println("SERVER: " + response);
+					out.println(response);
+
+					// TODO DEBUG: server response
+					System.out.println("SERVER: " + response);
+				} else {
+					System.out.println("SERVER: " + "No response.");
+				}
 
 				request = in.readLine();
 			}
