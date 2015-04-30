@@ -51,7 +51,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 
 	@Override
 	public void onRoomFull() {
-		JSONObject message = generateStarMessage();
+		JSONObject message = generateStartMessage();
 		updatePlayers(null, message);
 	}
 
@@ -62,11 +62,12 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		updatePlayers(player, message);
 	}
 
-	private JSONObject generateStarMessage() {
+	private JSONObject generateStartMessage() {
 
 		JSONObject message = new JSONObject();
 
 		try {
+
 			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
 			message.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_START);
@@ -84,9 +85,9 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		JSONObject message = new JSONObject();
 
 		try {
+
 			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
-
 			message.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
 
 			JSONArray teams = new JSONArray();
@@ -120,7 +121,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 		String strMessage = message.toString();
 
 		for (Player p : writers.keySet()) {
-			if (p != excludedPlayer){
+			if (p != excludedPlayer) {
 				writers.get(p).println(strMessage);
 			}
 		}

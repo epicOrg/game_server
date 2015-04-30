@@ -92,31 +92,30 @@ public class PlayerStatus {
 	public void setzDirection(float zDirection) {
 		this.zDirection = zDirection;
 	}
-	
+
 	public JSONObject toJSONObject() {
-		
+
 		JSONObject playerStatus = new JSONObject();
-		
+
 		try {
-			
+
 			JSONObject position = new JSONObject();
 			position.put(FieldsNames.GAME_X, xPosition);
 			position.put(FieldsNames.GAME_Y, yPosition);
 			position.put(FieldsNames.GAME_Z, zPosition);
-			
+
 			JSONObject direction = new JSONObject();
 			position.put(FieldsNames.GAME_X, xDirection);
 			position.put(FieldsNames.GAME_Y, yDirection);
 			position.put(FieldsNames.GAME_Z, zDirection);
-			
-			
+
 			playerStatus.put(FieldsNames.GAME_POSITION, position);
 			playerStatus.put(FieldsNames.GAME_DIRECTION, direction);
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+
 		return playerStatus;
 	}
 

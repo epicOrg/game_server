@@ -50,9 +50,9 @@ public class Team {
 	 * @throws FullTeamException
 	 */
 	public void addPlayer(Player player) { // throws FullTeamException {
-	// if (isFull()) {
-	// throw new FullTeamException();
-	// }
+		// if (isFull()) {
+		// throw new FullTeamException();
+		// }
 
 		player.setTeam(this);
 		players.add(player);
@@ -76,7 +76,7 @@ public class Team {
 	}
 
 	/**
-	 * @return an HashMap containing all the players of the team.
+	 * @return an array containing all the players of the team.
 	 */
 	public ArrayList<Player> getPlayers() {
 		return players;

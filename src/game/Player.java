@@ -17,7 +17,7 @@ public class Player {
 	public Player(String username) {
 		super();
 		this.username = username;
-		
+
 		playerStatus = new PlayerStatus(5, 0.5f, -7, -1, -0.25f, 0);
 	}
 
