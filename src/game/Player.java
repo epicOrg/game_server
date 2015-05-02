@@ -1,5 +1,7 @@
 package game;
 
+import voip.AudioData;
+
 /**
  * @author Micieli
  * @author Noris
@@ -11,6 +13,7 @@ public class Player {
 	private String username;
 	private Room room;
 	private Team team;
+	private AudioData audioData = new AudioData();
 
 	private PlayerStatus playerStatus;
 
@@ -48,5 +51,8 @@ public class Player {
 	public void setPlayerStatus(PlayerStatus playerStatus) {
 		this.playerStatus = playerStatus;
 	}
-
+	
+	public AudioData getAudioData() {
+		return audioData;
+	}
 }

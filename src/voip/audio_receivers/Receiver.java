@@ -18,17 +18,17 @@ import com.biasedbit.efflux.session.RtpSessionDataListener;
  */
 public class Receiver implements RtpSessionDataListener {
 
-	private ArrayList<PipedOutputStream> pipedOutputStreams = new ArrayList<>();
+	private ArrayList<PipedOutputStream> pipedOutputStreams;
 
-	public Receiver(PipedOutputStream... bytesStreams) {
+	public Receiver(ArrayList<PipedOutputStream> pipedOutputStreams) {
 		super();
-		Collections.addAll(this.pipedOutputStreams, bytesStreams);
+		this.pipedOutputStreams = pipedOutputStreams;
 	}
 
 	@Override
 	public void dataPacketReceived(RtpSession arg0, RtpParticipantInfo arg1,
 			DataPacket packet) {
-		System.out.println("Received" + packet.getDataAsArray());
+		//System.out.println("Received" + packet.getDataAsArray());
 		for (PipedOutputStream pipedOutputStream : pipedOutputStreams) {
 			try {
 				pipedOutputStream.write(packet.getDataAsArray());

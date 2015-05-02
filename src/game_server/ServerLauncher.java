@@ -29,11 +29,9 @@ public class ServerLauncher {
 				System.out.println("> Thread ID: " + thread.getId());
 
 				thread.start();
-			}
-			
+			}			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }

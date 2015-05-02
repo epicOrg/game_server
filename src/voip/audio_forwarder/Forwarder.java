@@ -33,11 +33,11 @@ public class Forwarder {
 			if (audioInputStream.available() >= DATA_LENTH) {
 				byte[] data = new byte[DATA_LENTH];
 
-				System.out.println("Reading...");
+				//System.out.println("Reading...");
 				audioInputStream.read(data);
-				System.out.println("Sending" + data);
+				//System.out.println("Sending" + data);
 				session.sendData(data, System.currentTimeMillis(), false);
-				System.out.println("Sended" + data);
+				//System.out.println("Sended" + data);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

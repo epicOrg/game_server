@@ -7,7 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import voip.audio_forwarder.Forwarder;
-import voip.audio_forwarder.ForwardingTask;
+import voip.audio_forwarder.ForwardingThread;
 import voip.audio_receivers.Receiver;
 import voip.mixing.MixingPipedInputStream;
 
@@ -70,7 +70,10 @@ public class ThreePeopleConversationTest {
 			PipedOutputStream bytesStream1to3 = new PipedOutputStream();
 			PipedInputStream audioInputStream1to3 = new PipedInputStream(
 					bytesStream1to3, BUFFER_SIZE);
-			Receiver receiver1 = new Receiver(bytesStream1to2, bytesStream1to3);
+			ArrayList<PipedOutputStream> streamsFrom1 = new ArrayList<>();
+			streamsFrom1.add(bytesStream1to2);
+			streamsFrom1.add(bytesStream1to3);
+			Receiver receiver1 = new Receiver(streamsFrom1);
 			user1Server1.addDataListener(receiver1);
 
 			// Creo gli stream dall'2
@@ -81,7 +84,10 @@ public class ThreePeopleConversationTest {
 			PipedOutputStream bytesStream2to3 = new PipedOutputStream();
 			PipedInputStream audioInputStream2to3 = new PipedInputStream(
 					bytesStream2to3, BUFFER_SIZE);
-			Receiver receiver2 = new Receiver(bytesStream2to1, bytesStream2to3);
+			ArrayList<PipedOutputStream> streamsFrom2 = new ArrayList<>();
+			streamsFrom2.add(bytesStream2to1);
+			streamsFrom2.add(bytesStream2to3);
+			Receiver receiver2 = new Receiver(streamsFrom2);
 			user2Server2.addDataListener(receiver2);
 
 			// Creo gli stream dall'3
@@ -92,7 +98,10 @@ public class ThreePeopleConversationTest {
 			PipedOutputStream bytesStream3to2 = new PipedOutputStream();
 			PipedInputStream audioInputStream3to2 = new PipedInputStream(
 					bytesStream3to2, BUFFER_SIZE);
-			Receiver receiver3 = new Receiver(bytesStream3to1, bytesStream3to2);
+			ArrayList<PipedOutputStream> streamsFrom3 = new ArrayList<>();
+			streamsFrom3.add(bytesStream3to2);
+			streamsFrom3.add(bytesStream3to1);
+			Receiver receiver3 = new Receiver(streamsFrom3);
 			user3Server3.addDataListener(receiver3);
 
 			// creo le collezioni da mixare
@@ -115,23 +124,18 @@ public class ThreePeopleConversationTest {
 					streamToUser3);
 
 			// creo le classi che inviano i pacchetti mixati
-			final Forwarder forwarder1 = new Forwarder(mixingInputStream1,
+			Forwarder forwarder1 = new Forwarder(mixingInputStream1,
 					user1Server1);
-			final Forwarder forwarder2 = new Forwarder(mixingInputStream2,
+			Forwarder forwarder2 = new Forwarder(mixingInputStream2,
 					user2Server2);
-			final Forwarder forwarder3 = new Forwarder(mixingInputStream3,
+			Forwarder forwarder3 = new Forwarder(mixingInputStream3,
 					user3Server3);
+			ArrayList<Forwarder> forwarders = new ArrayList<>();
+			forwarders.add(forwarder1);
+			forwarders.add(forwarder2);
+			forwarders.add(forwarder3);
 
-			Thread thread = new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					TimerTask forwardingTask = new ForwardingTask(forwarder1,
-							forwarder2, forwarder3);
-					Timer timer = new Timer();
-					timer.scheduleAtFixedRate(forwardingTask, 0, 1);
-				}
-			});
+			Thread thread = new ForwardingThread(forwarders);
 			thread.setPriority(Thread.MAX_PRIORITY);
 			thread.start();
 
