@@ -46,10 +46,10 @@ class Test03 {
 
 		// CLIENT: Send an invalid call request (callee is not online)
 		JSONObject jsonCallFromClient = new JSONObject();
-		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.CALL);
+		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
 		jsonCallFromClient.put(FieldsNames.CALLER, "GWFHegel");
 		jsonCallFromClient.put(FieldsNames.HASHCODE, hashCode);
-		jsonCallFromClient.put(FieldsNames.PORT, 6666);
+		jsonCallFromClient.put(FieldsNames.AUDIO_PORT, 6666);
 		jsonCallFromClient.put(FieldsNames.CALLEE, "JohnLocke");
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 

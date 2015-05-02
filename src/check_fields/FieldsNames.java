@@ -2,7 +2,7 @@ package check_fields;
 
 /**
  * @author Noris
- * @version 20
+ * @version 21
  * @date 2015/03/30
  */
 
@@ -20,7 +20,7 @@ public class FieldsNames {
 	public static final String ENCRYPT = "encrypt";
 	public static final String REGISTER = "register";
 	public static final String LOGIN = "login";
-	public static final String CALL = "call";
+	public static final String AUDIO = "audio";
 	public static final String ROOMS = "rooms";
 	public static final String CURRENT_ROOM = "currentRoom";
 	public static final String GAME = "game";
@@ -46,10 +46,10 @@ public class FieldsNames {
 	// Register, Login
 	public static final String PASSWORD = "password";
 
-	// Call
+	// 
 	public static final String CALLER = "caller";
 	public static final String CALLEE = "callee";
-	public static final String PORT = "port";
+	public static final String AUDIO_PORT = "audioPort";
 
 	// Register
 	public static final String REGISTER_SHORT = "short";

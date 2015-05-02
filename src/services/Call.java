@@ -59,7 +59,7 @@ public class Call implements IService {
 
 			callerUsername = jsonRequest.getString(FieldsNames.CALLER);
 			callerHashCode = jsonRequest.getInt(FieldsNames.HASHCODE);
-			callerPort = jsonRequest.getInt(FieldsNames.PORT);
+			callerPort = jsonRequest.getInt(FieldsNames.AUDIO_PORT);
 			calleeUsername = jsonRequest.getString(FieldsNames.CALLEE);
 
 		} catch (JSONException e) {
@@ -107,7 +107,7 @@ public class Call implements IService {
 
 		try {
 
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CALL);
+			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
 			jsonResponse.put(FieldsNames.NO_ERRORS, callChecker.noErrors());
 
 			if (!callChecker.noErrors())
