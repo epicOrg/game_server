@@ -1,11 +1,16 @@
 package voip;
 
+/**
+ * @author Luca
+ * @date 2015/05/03
+ */
+
 public class AudioData {
-	
+
 	private int localPort;
 	private int remotePort;
 	private String ip;
-	
+
 	public AudioData(int localPort, int remotePort, String ip) {
 		super();
 		this.localPort = localPort;
@@ -40,6 +45,5 @@ public class AudioData {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
-	
+
 }

@@ -8,14 +8,16 @@ import game.Team;
 
 /**
  * 
- * Define the audio conversation between each players of the same team in the related room
+ * Define the audio conversation between each players of the same team in the
+ * related room.
  * 
  * @author Luca
+ * @date 2015/04/28
  *
  */
 
 public class RoomAudioCall {
-	
+
 	private Room room;
 	private ArrayList<TeamAudioCall> teamAudioCalls = new ArrayList<>();
 
@@ -23,37 +25,37 @@ public class RoomAudioCall {
 		super();
 		this.room = room;
 	}
+
 	/**
 	 * 
 	 * Prepare audio conversation for each teams in the room
 	 * 
 	 * @throws IOException
 	 */
-	public void prepare() throws IOException{
-		
-		for(Team team: room.getTeamGenerator().getTeams()){
+	public void prepare() throws IOException {
+
+		for (Team team : room.getTeamGenerator().getTeams()) {
 			TeamAudioCall call = new TeamAudioCall(team);
 			call.prepare();
 			teamAudioCalls.add(call);
-		}		
-	}	
+		}
+	}
 
 	/**
-	 * Starts data receiving and transfering
-	 * 
+	 * Starts data receiving and data transfer.
 	 */
-	public void startCall(){
+	public void startCall() {
 		for (TeamAudioCall teamAudioCall : teamAudioCalls) {
 			teamAudioCall.startCall();
 		}
 	}
-	
-	public void endCall(){
+
+	public void endCall() {
 		for (TeamAudioCall teamAudioCall : teamAudioCalls) {
 			teamAudioCall.endCall();
 		}
 	}
-	
+
 	public Room getRoom() {
 		return room;
 	}

@@ -26,7 +26,7 @@ class Test03 {
 
 		// CLIENT: Send message to go online
 		new ServerInitializer().initDataManager();
-		
+
 		JSONObject jsonLoginFromClient = new JSONObject();
 		jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 		jsonLoginFromClient.put(FieldsNames.USERNAME, "GWFHegel");

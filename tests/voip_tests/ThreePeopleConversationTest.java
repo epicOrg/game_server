@@ -3,8 +3,6 @@ package voip_tests;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import voip.audio_forwarder.Forwarder;
 import voip.audio_forwarder.ForwardingThread;
@@ -14,6 +12,11 @@ import voip.mixing.MixingPipedInputStream;
 import com.biasedbit.efflux.participant.RtpParticipant;
 import com.biasedbit.efflux.session.SingleParticipantSession;
 
+/**
+ * @author Luca
+ * @date 2015/04/28
+ */
+
 public class ThreePeopleConversationTest {
 
 	private static final String MY_IP = "10.42.0.80";
@@ -21,6 +24,7 @@ public class ThreePeopleConversationTest {
 	private static final int BUFFER_SIZE = DATA_LENTH * 100;
 
 	public static void main(String[] args) {
+
 		try {
 			int serverPort1 = 4000;
 			int serverPort2 = 5000;

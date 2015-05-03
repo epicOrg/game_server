@@ -3,12 +3,14 @@ package voip;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.zip.InflaterInputStream;
 
-import javax.imageio.stream.ImageInputStream;
+/**
+ * @author Luca
+ * @date 2015/04/28
+ */
 
 public class NetUtils {
-	
+
 	public static final String MY_IP = "10.42.01";
 	private static ArrayList<Integer> inUse = new ArrayList<>();
 
@@ -24,11 +26,13 @@ public class NetUtils {
 
 			} catch (IOException e) {
 				// Ignore IOException on close()
+				e.printStackTrace();
 			}
-			
+
 			if (inUse.contains(port)) {
 				return findFreePort();
 			}
+
 			inUse.add(port);
 			return port;
 
@@ -43,11 +47,10 @@ public class NetUtils {
 				}
 			}
 		}
-		throw new IllegalStateException(
-				"Could not find a free TCP/IP port");
+		throw new IllegalStateException("Could not find a free TCP/IP port");
 	}
-	
-	public static void releasePort(int port){
+
+	public static void releasePort(int port) {
 		Integer portOjb = new Integer(port);
 		inUse.remove(portOjb);
 	}
