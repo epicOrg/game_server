@@ -10,7 +10,6 @@ import game.map.IMapGenerator;
 import game.map.MapObject;
 import game.map.SimpleMapGenerator;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
