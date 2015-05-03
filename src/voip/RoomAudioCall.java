@@ -48,6 +48,12 @@ public class RoomAudioCall {
 		}
 	}
 	
+	public void endCall(){
+		for (TeamAudioCall teamAudioCall : teamAudioCalls) {
+			teamAudioCall.endCall();
+		}
+	}
+	
 	public Room getRoom() {
 		return room;
 	}

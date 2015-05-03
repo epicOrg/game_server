@@ -41,7 +41,7 @@ public class CallChecker extends ServiceChecker {
 
 		try {
 
-			errors.put(FieldsNames.AUDIO_PORT, FieldsNames.INVALID);
+			errors.put(FieldsNames.AUDIO_PORT_CLIENT, FieldsNames.INVALID);
 
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.Audio;
 import services.Call;
 import services.CurrentRoom;
 import services.Encrypt;
@@ -32,11 +33,13 @@ public class RequestElaborator {
 	private void initMap() {
 		addService(FieldsNames.ENCRYPT, new Encrypt());
 		addService(FieldsNames.REGISTER, new Register());
-		addService(FieldsNames.AUDIO, new Call());
+		addService(FieldsNames.CALL, new Call());
 		addService(FieldsNames.ROOMS, new RoomService());
 		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
 		addService(FieldsNames.GAME, new Game());
+		addService(FieldsNames.AUDIO, new Audio());
 		addService(FieldsNames.UNKNOWN, new Unknown());
+		
 	}
 
 	public IService chooseService(JSONObject json) {

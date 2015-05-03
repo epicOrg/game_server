@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
+import data_management.GameDataManager;
 import exceptions.UserNotOnlineException;
 
 /**
@@ -53,6 +54,7 @@ public class RoomPlayersUpdater implements RoomEventListener {
 	public void onRoomFull() {
 		JSONObject message = generateStartMessage();
 		updatePlayers(null, message);
+		GameDataManager.getInstance().newAudioCallForRoom(room);
 	}
 
 	@Override

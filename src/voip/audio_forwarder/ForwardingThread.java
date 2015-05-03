@@ -17,6 +17,7 @@ public class ForwardingThread extends Thread {
 	private static final int DELAY = 1;
 	
 	private ArrayList<Forwarder> forwarders = new ArrayList<>();
+	private Timer timer;
 
 	public ForwardingThread(ArrayList<Forwarder> forwarders) {
 		super();
@@ -35,7 +36,12 @@ public class ForwardingThread extends Thread {
 				}				
 			}
 		};
-		Timer timer = new Timer();
+		timer = new Timer();
 		timer.scheduleAtFixedRate(forwardingTask, DELAY, RATE);
+	}
+	
+	public void stopTask(){
+		if(timer != null )
+			timer.cancel();
 	}
 }

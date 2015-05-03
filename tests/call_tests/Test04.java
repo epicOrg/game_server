@@ -25,10 +25,10 @@ class Test04 {
 		new ServerInitializer().initDataManager();
 		// CLIENT: Send an invalid call request (caller is not online)
 		JSONObject jsonCallFromClient = new JSONObject();
-		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
+		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.CALL);
 		jsonCallFromClient.put(FieldsNames.CALLER, "GWFHegel");
 		jsonCallFromClient.put(FieldsNames.HASHCODE, 17240422);
-		jsonCallFromClient.put(FieldsNames.AUDIO_PORT, 6666);
+		jsonCallFromClient.put(FieldsNames.AUDIO_PORT_CLIENT, 6666);
 		jsonCallFromClient.put(FieldsNames.CALLEE, "JohnLocke");
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 

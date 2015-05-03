@@ -70,10 +70,10 @@ class Test02 {
 
 		// CLIENT: Send an invalid call request (wrong hashCode)
 		JSONObject jsonCallFromClient = new JSONObject();
-		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
+		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.CALL);
 		jsonCallFromClient.put(FieldsNames.CALLER, randomUsername);
 		jsonCallFromClient.put(FieldsNames.HASHCODE, hashCode + 1);
-		jsonCallFromClient.put(FieldsNames.AUDIO_PORT, 6666);
+		jsonCallFromClient.put(FieldsNames.AUDIO_PORT_CLIENT, 6666);
 		jsonCallFromClient.put(FieldsNames.CALLEE, "JohnLocke");
 		System.out.println("Call Client Message:  " + jsonCallFromClient);
 

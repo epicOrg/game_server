@@ -2,10 +2,15 @@ package voip;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.zip.InflaterInputStream;
+
+import javax.imageio.stream.ImageInputStream;
 
 public class NetUtils {
 	
 	public static final String MY_IP = "10.42.01";
+	private static ArrayList<Integer> inUse = new ArrayList<>();
 
 	public static int findFreePort() {
 		ServerSocket socket = null;
@@ -20,6 +25,11 @@ public class NetUtils {
 			} catch (IOException e) {
 				// Ignore IOException on close()
 			}
+			
+			if (inUse.contains(port)) {
+				return findFreePort();
+			}
+			inUse.add(port);
 			return port;
 
 		} catch (IOException e) {
@@ -34,6 +44,11 @@ public class NetUtils {
 			}
 		}
 		throw new IllegalStateException(
-				"Could not find a free TCP/IP port to start embedded Jetty HTTP Server on");
+				"Could not find a free TCP/IP port");
+	}
+	
+	public static void releasePort(int port){
+		Integer portOjb = new Integer(port);
+		inUse.remove(portOjb);
 	}
 }

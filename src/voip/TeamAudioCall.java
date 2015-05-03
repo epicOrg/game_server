@@ -95,9 +95,7 @@ public class TeamAudioCall {
 	}
 	//creates RTP session from server to client
 	private SingleParticipantSession createSession(Player player) {
-		int localPort = NetUtils.findFreePort();
-		player.getAudioData().setLocalPort(localPort);
-		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.MY_IP, localPort, 0);
+		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.MY_IP, player.getAudioData().getLocalPort(), 0);
 		RtpParticipant client = RtpParticipant.createReceiver(player.getAudioData().getIp(), player.getAudioData().getRemotePort(), 0);
 		SingleParticipantSession session = new SingleParticipantSession(player.getUsername(), 0, server, client);
 		return session;
@@ -120,6 +118,19 @@ public class TeamAudioCall {
 	private void initMap() {
 		for (Player player : team.getPlayers()) {
 			streams.put(player, new ArrayList<PipedInputStream>());
+		}
+	}
+
+	public void endCall() {
+		
+		thread.stopTask();
+		
+		Collection<SingleParticipantSession> sessios = sessions.values();
+		for (SingleParticipantSession singleParticipantSession : sessios) {
+			singleParticipantSession.terminate();
+		}		
+		for (Player player : team.getPlayers()) {
+			NetUtils.releasePort(player.getAudioData().getRemotePort());
 		}
 	}
 }
