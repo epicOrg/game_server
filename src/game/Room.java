@@ -9,7 +9,7 @@ import exceptions.NoSuchPlayerException;
  * @date 2015/04/18
  */
 
-public class Room{
+public class Room {
 
 	public static final int MAX_PLAYERS = 2;
 
@@ -33,7 +33,7 @@ public class Room{
 		if (isFull()) {
 			throw new FullRoomException();
 		}
-		
+
 		teamGenerator.getRandomTeam().addPlayer(player);
 		playersUpdater.onNewPlayerAdded(player);
 	}
@@ -100,9 +100,9 @@ public class Room{
 	}
 
 	public void checkIfFull() {
-		if(isFull())
+		if (isFull())
 			playersUpdater.onRoomFull();
-		
-	}
 
+	}
+	
 }

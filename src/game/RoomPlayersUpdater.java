@@ -1,5 +1,6 @@
 package game;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
@@ -9,8 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import voip.RoomAudioCall;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
+import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
 
 /**
@@ -18,7 +21,7 @@ import exceptions.UserNotOnlineException;
  * @date 2015/04/25
  */
 
-public class RoomPlayersUpdater implements RoomEventListener {
+public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
 
 	private OnlineManager onlineManager;
 
@@ -39,6 +42,8 @@ public class RoomPlayersUpdater implements RoomEventListener {
 			PrintWriter writer = onlineManager.getOnlineUserByUsername(
 					player.getUsername()).getOutStream();
 			writers.put(player, writer);
+
+			player.setPlayerEventListener(this);
 
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block
@@ -126,6 +131,42 @@ public class RoomPlayersUpdater implements RoomEventListener {
 			if (p != excludedPlayer) {
 				writers.get(p).println(strMessage);
 			}
+		}
+	}
+
+	@Override
+	public void onPlayerStatusChanged() {
+		for(Team t : room.getTeamGenerator().getTeams()){
+			for(Player p : t.getPlayers()){
+				if(p.getStatus() != true)
+					return;
+			}
+		}
+
+		JSONObject message = new JSONObject();
+		try {
+			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
+			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
+			message.put(FieldsNames.GAME_GO, true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		updatePlayers(null, message);
+
+		RoomAudioCall roomAudioCall = null;
+		try {
+			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
+		} catch (NoSuchRoomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			roomAudioCall.prepare();				
+			roomAudioCall.startCall();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
