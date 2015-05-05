@@ -11,5 +11,10 @@
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.12.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.12.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/email/activation.jar"/>
+	<classpathentry kind="lib" path="lib/email/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/email/mailapi-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/email/simple-java-mail-v2.1.jar"/>
+	<classpathentry kind="lib" path="lib/email/smtp-1.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
