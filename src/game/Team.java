@@ -125,4 +125,9 @@ public class Team {
 		return teamColor;
 	}
 
+	public void win() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -107,6 +107,7 @@ public class FieldsNames {
 	// Others
 	public static final String GAME_READY = "ready";
 	public static final String GAME_GO = "go";
+	public static final String GAME_WIN = "win";
 	public static final String GAME_WIDTH = "width";
 	public static final String GAME_LENGTH = "length";
 	public static final String GAME_HEIGHT = "height";

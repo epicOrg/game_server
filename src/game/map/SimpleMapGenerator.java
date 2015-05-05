@@ -32,6 +32,8 @@ public class SimpleMapGenerator implements IMapGenerator {
         mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "0 -1 -20", "40 2 2"));
         mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "20 -1 0", "2 2 38"));
         mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "-20 -1 0", "2 2 38"));
+        //win 
+        mapObjects.add(new MapObject("Obstacle", "arrow_texture_02", "0 -1 17", "0.3 2.5"));
 		return mapObjects;
 	}
 
