@@ -17,13 +17,13 @@ public class DrawMaze extends JPanel{
 		int alpha = this.getHeight();
 		int beta = this.getWidth();
 		
-		int cellWidth = alpha/maze.xSize ; // 20
-		int cellHeight = beta/maze.ySize; // 20
+		int cellWidth = alpha/maze.getxSize() ; // 20
+		int cellHeight = beta/maze.getySize(); // 20
 		int boardWidth =   alpha+1 ;            //  cellWidth * (maze.xSize + 1);
         int boardHeight = beta+1  ;              //cellHeight * (maze.ySize + 1);
         
-        for (int i = 0; i < maze.xSize; i++) {
-            for (int j = 0; j < maze.ySize; j++) {
+        for (int i = 0; i < maze.getxSize(); i++) {
+            for (int j = 0; j < maze.getySize(); j++) {
                 Coordinate2D c = new Coordinate2D(this.maze, i, j);
                 Node n = maze.nodeAt(c);
                 int x1 = cellWidth * i +2;

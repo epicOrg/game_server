@@ -22,7 +22,7 @@ public class Node {
      private  List<Node> linkedNeighbours;
      private List<Node> neighbours;
       boolean linked;
-
+      
      
      public Node(Coordinate2D coord) {
          Objects.requireNonNull(coord);
@@ -32,7 +32,7 @@ public class Node {
 
      public Node linkRandomUnlinkedNeighbour() {
          List<Node> list = new ArrayList<>(getNeighbours());
-         list.removeIf(n -> n.linked);
+     //    list.removeIf(  n -> n.linked  );
          if (list.isEmpty()) return null;
          Collections.shuffle(list);
          Node next = list.get(0);
@@ -46,7 +46,7 @@ public class Node {
      public List<Node> getNeighbours() {
          if (neighbours == null) {
              List<Node> nodes = new ArrayList<>(Arrays.asList(minusX(), plusX(), minusY(), plusY()));
-             nodes.removeIf(x -> x == null);
+        //     nodes.removeIf(x -> x == null);
              neighbours = Collections.unmodifiableList(nodes);
          }
          return neighbours;

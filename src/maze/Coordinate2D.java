@@ -18,7 +18,7 @@ public class Coordinate2D {
 
       public Coordinate2D(Maze maze, int x, int y) {
           Objects.requireNonNull(maze);
-          if (x < 0 || x >= maze.xSize || y < 0 || y >= maze.ySize) throw new IndexOutOfBoundsException();
+          if (x < 0 || x >= maze.getxSize() || y < 0 || y >= maze.getySize()) throw new IndexOutOfBoundsException();
           this.maze = maze;
           this.x = x;
           this.y = y;
@@ -45,8 +45,8 @@ public class Coordinate2D {
       }
 
       public Coordinate2D minusX() { return x == 0              ? null : new Coordinate2D(maze, x - 1, y); };
-      public Coordinate2D plusX()  { return x == maze.xSize - 1 ? null : new Coordinate2D(maze, x + 1, y); };
+      public Coordinate2D plusX()  { return x == maze.getxSize() - 1 ? null : new Coordinate2D(maze, x + 1, y); };
       public Coordinate2D minusY() { return y == 0              ? null : new Coordinate2D(maze, x, y - 1); };
-      public Coordinate2D plusY()  { return y == maze.ySize - 1 ? null : new Coordinate2D(maze, x, y + 1); };
+      public Coordinate2D plusY()  { return y == maze.getySize() - 1 ? null : new Coordinate2D(maze, x, y + 1); };
       public Maze getMaze() { return maze; }
 }

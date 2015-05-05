@@ -17,8 +17,26 @@ import maze.Node;
  */
 public class Maze {
 	
-	int xSize ;
-	int ySize;	
+	private int xSize ;
+	private int ySize;	
+	
+	
+	public int getxSize() {
+		return xSize;
+	}
+
+	public void setxSize(int xSize) {
+		this.xSize = xSize;
+	}
+
+	public int getySize() {
+		return ySize;
+	}
+
+	public void setySize(int ySize) {
+		this.ySize = ySize;
+	}
+
 	private  Map<Coordinate2D, Node> nodes;
 	private  Node start;
 	
@@ -31,10 +49,13 @@ public class Maze {
            growMaze();
        }
 	   
+	   /**
+	    * 
+	    */
 	    private void fill() {
-            for (int b = 0; b < xSize; b++) {
-                for (int c = 0; c < ySize; c++) {
-                    Coordinate2D coord = new Coordinate2D(this, b, c);
+            for (int i = 0; i < xSize; i++) {
+                for (int j = 0; j < ySize; j++) {
+                    Coordinate2D coord = new Coordinate2D(this, i, j);
                     nodes.put(coord, new Node(coord));
                 }
             }
