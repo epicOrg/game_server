@@ -7,7 +7,7 @@ import email_confirmation.EmailSender;
  * email: <http://mailnesia.com/mailbox/epicprova>.
  * 
  * @author Noris
- * @date 2015/05/
+ * @date 2015/05/05
  */
 
 class Test01 {

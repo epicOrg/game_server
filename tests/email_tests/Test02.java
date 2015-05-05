@@ -6,7 +6,7 @@ import email_confirmation.EmailConfirmation;
  * Random code generation test.
  * 
  * @author Noris
- * @date 2015/05/
+ * @date 2015/05/05
  */
 
 public class Test02 {

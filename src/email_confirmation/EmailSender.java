@@ -10,7 +10,7 @@ import org.codemonkey.simplejavamail.TransportStrategy;
 
 /**
  * @author Noris
- * @date 2015/05/
+ * @date 2015/05/05
  */
 
 public class EmailSender {
