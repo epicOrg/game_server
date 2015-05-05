@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class NetUtils {
 
-	public static final String MY_IP = "10.42.01";
+	public static final String MY_IP = "10.42.0.1";
 	private static ArrayList<Integer> inUse = new ArrayList<>();
 
 	public static int findFreePort() {

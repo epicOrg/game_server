@@ -26,6 +26,7 @@ public class ThreePeopleConversationTest {
 	public static void main(String[] args) {
 
 		try {
+
 			int serverPort1 = 4000;
 			int serverPort2 = 5000;
 			int serverPort3 = 6000;

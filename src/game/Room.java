@@ -11,7 +11,7 @@ import exceptions.NoSuchPlayerException;
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 2;
+	public static final int MAX_PLAYERS = 4;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
@@ -104,5 +104,5 @@ public class Room {
 			playersUpdater.onRoomFull();
 
 	}
-	
+
 }

@@ -52,15 +52,14 @@ public class TeamAudioCall {
 	 */
 	public void prepare() throws IOException {
 
-		for (int i = 0; i < team.getSize(); i++) {
-			ArrayList<Player> players = team.getPlayers();
-			for (Player player : players) {
-				SingleParticipantSession session = createSession(player);
-				sessions.put(player, session);
-				ArrayList<PipedOutputStream> outputStreams = createStreams(player);
-				Receiver receiver = new Receiver(outputStreams);
-				session.addDataListener(receiver);
-			}
+		ArrayList<Player> players = team.getPlayers();
+		System.out.println("players num:" + players.size());
+		for (Player player : players) {
+			SingleParticipantSession session = createSession(player);
+			sessions.put(player, session);
+			ArrayList<PipedOutputStream> outputStreams = createStreams(player);
+			Receiver receiver = new Receiver(outputStreams);
+			session.addDataListener(receiver);
 		}
 
 		prepareDataForwarding();
@@ -106,12 +105,17 @@ public class TeamAudioCall {
 	// creates RTP session from server to client
 	private SingleParticipantSession createSession(Player player) {
 		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.MY_IP,
-				player.getAudioData().getLocalPort(), 0);
+				player.getAudioData().getLocalPort(), player.getAudioData()
+						.getLocalPort() + 1);
 		RtpParticipant client = RtpParticipant.createReceiver(player
 				.getAudioData().getIp(), player.getAudioData().getRemotePort(),
-				0);
+				player.getAudioData().getRemotePort() + 1);
 		SingleParticipantSession session = new SingleParticipantSession(
 				player.getUsername(), 0, server, client);
+		System.out.println(player.getUsername() + " "
+				+ player.getAudioData().getIp() + " "
+				+ player.getAudioData().getLocalPort() + " "
+				+ player.getAudioData().getRemotePort());
 		return session;
 	}
 
