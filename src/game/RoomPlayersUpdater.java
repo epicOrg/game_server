@@ -136,6 +136,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onPlayerStatusChanged() {
+		System.out.println("player ready");
 		for(Team t : room.getTeamGenerator().getTeams()){
 			for(Player p : t.getPlayers()){
 				if(p.getStatus() != true)
@@ -164,6 +165,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		try {
 			roomAudioCall.prepare();				
 			roomAudioCall.startCall();
+			System.out.println("LOG _ Call Started");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

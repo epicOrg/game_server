@@ -1,10 +1,14 @@
 package services;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
+
+import online_management.OnlineManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import voip.NetUtils;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
@@ -135,7 +139,9 @@ public class RoomService implements IService {
 		try {
 
 			player = new Player(jsonRequest.getString(FieldsNames.USERNAME));
-
+			InetAddress address = OnlineManager.getInstance()
+					.getIpAddressByUsername(player.getUsername());
+			player.getAudioData().setIp(NetUtils.getIpByInetAddress(address));
 			roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 
 		} catch (JSONException e) {

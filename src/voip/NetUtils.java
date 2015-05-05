@@ -1,6 +1,7 @@
 package voip;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
@@ -53,5 +54,11 @@ public class NetUtils {
 	public static void releasePort(int port) {
 		Integer portOjb = new Integer(port);
 		inUse.remove(portOjb);
+	}
+	
+	public static String getIpByInetAddress(InetAddress address) {
+		
+		return address.getHostName();
+		
 	}
 }

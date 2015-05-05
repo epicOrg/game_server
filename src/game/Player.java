@@ -58,8 +58,6 @@ public class Player {
 
 	public void setPlayerStatus(PlayerStatus playerStatus) {
 		this.playerStatus = playerStatus;
-		
-		playerEventListener.onPlayerStatusChanged();
 	}
 	
 	public AudioData getAudioData() {
@@ -68,6 +66,7 @@ public class Player {
 	
 	public void setStatus(boolean status) {
 		this.status = status;
+		playerEventListener.onPlayerStatusChanged();
 	}
 	
 	public boolean getStatus() {

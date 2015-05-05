@@ -2,16 +2,19 @@ package voip_tests;
 
 import java.io.IOException;
 
+import data_management.GameDataManager;
 import voip.RoomAudioCall;
 import exceptions.FullRoomException;
+import exceptions.NoSuchRoomException;
 import game.Player;
 import game.Room;
 
 public class TeamCallTest {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, NoSuchRoomException {
 
 		Room room = new Room("ciao");
+		GameDataManager.getInstance().newAudioCallForRoom(room);
 		Player fabio = new Player("Fabio");
 		fabio.getAudioData().setIp("10.42.0.20");
 		fabio.getAudioData().setLocalPort(4000);
@@ -37,7 +40,7 @@ public class TeamCallTest {
 			e.printStackTrace();
 		}
 
-		RoomAudioCall audioCall = new RoomAudioCall(room);
+		RoomAudioCall audioCall = GameDataManager.getInstance().getCallbyRoomName("ciao");
 		audioCall.prepare();
 		audioCall.startCall();
 
