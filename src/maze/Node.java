@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * @author Hermann Tom
@@ -34,7 +35,13 @@ public class Node {
 
 	public Node linkRandomUnlinkedNeighbour() {
 		List<Node> list = new ArrayList<>(getNeighbours());
-		// list.removeIf( n -> n.linked );
+
+		list.removeIf( new Predicate<Node>() {
+			@Override
+			public boolean test(Node n) {
+				return n.linked;
+			}
+		});
 		if (list.isEmpty())
 			return null;
 		Collections.shuffle(list);
@@ -50,7 +57,14 @@ public class Node {
 		if (neighbours == null) {
 			List<Node> nodes = new ArrayList<>(Arrays.asList(minusX(), plusX(),
 					minusY(), plusY()));
-			// nodes.removeIf(x -> x == null);
+
+			nodes.removeIf(new Predicate<Node>() {
+				@Override
+				public boolean test(Node x) {
+					return x == null;
+				}
+			});
+			 
 			neighbours = Collections.unmodifiableList(nodes);
 		}
 		return neighbours;
