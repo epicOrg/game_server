@@ -11,6 +11,7 @@ import services.CurrentRoom;
 import services.Encrypt;
 import services.Game;
 import services.IService;
+import services.Polling;
 import services.Register;
 import services.RoomService;
 import services.Unknown;
@@ -39,6 +40,7 @@ public class RequestElaborator {
 		addService(FieldsNames.GAME, new Game());
 		addService(FieldsNames.AUDIO, new Audio());
 		addService(FieldsNames.UNKNOWN, new Unknown());
+		addService(FieldsNames.POLLING, new Polling());
 		
 	}
 

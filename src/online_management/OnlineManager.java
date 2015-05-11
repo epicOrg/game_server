@@ -27,12 +27,15 @@ public class OnlineManager {
 	}
 
 	/**
-	 * Set the user online.
+	 * Set the user online and starts the {@link PollingThread}
 	 * 
-	 * @return hashCode
+	 * @return user's hashCode
+	 * @see OnlineUser
 	 */
 	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
+		PollingThread pollingThread = new PollingThread(onlineUser);
+		pollingThread.start();
 		onlineUser.setOutStream(printWriter);
 		onlineUsers.put(username, onlineUser);
 		

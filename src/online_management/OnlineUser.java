@@ -15,12 +15,14 @@ public class OnlineUser {
 	private InetAddress ipAddress;
 	private PrintWriter writer;
 	private GregorianCalendar connectionDate;
+	private boolean polled;
 
 	public OnlineUser(String username, InetAddress ipAddress) {
 		super();
 		this.username = username;
 		this.ipAddress = ipAddress;
 		connectionDate = new GregorianCalendar();
+		polled = true;
 	}
 
 	public String getUsername() {
@@ -60,4 +62,11 @@ public class OnlineUser {
 		return writer;
 	}
 
+	public boolean isPolled() {
+		return polled;
+	}
+
+	public void setPolled(boolean polled) {
+		this.polled = polled;
+	}
 }
