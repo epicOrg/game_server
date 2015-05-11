@@ -28,7 +28,6 @@ public class Login implements IService {
 	private PrintWriter printWriter;
 	private DataManager dataManager;
 	private RegisteredUser user;
-	private int port;
 
 	private JSONObject jsonResponse;
 	private boolean noErrors = true;
@@ -66,7 +65,6 @@ public class Login implements IService {
 
 			ipAddress = InetAddress.getByName(jsonRequest
 					.getString(FieldsNames.IP_ADDRESS));
-			port = jsonRequest.getInt(FieldsNames.LOCAL_PORT);
 
 		} catch (JSONException e) {
 			throw new MissingFieldException();
@@ -77,6 +75,11 @@ public class Login implements IService {
 	}
 
 	private void checkFields() {
+		OnlineManager onlineManager = OnlineManager.getInstance();
+		if(onlineManager.checkIfOnline(user.getUsername())){
+			noErrors = false;
+			return;
+		}
 		noErrors = dataManager.checkPassword(user);
 	}
 
@@ -91,11 +94,8 @@ public class Login implements IService {
 
 			jsonResponse.put(FieldsNames.USERNAME, user.getUsername());
 			jsonResponse.put(FieldsNames.HASHCODE, hashCode);
-			if (noErrors) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-			} else {
-				jsonResponse.put(FieldsNames.NO_ERRORS, false);
-			}
+			jsonResponse.put(FieldsNames.NO_ERRORS, noErrors);
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
