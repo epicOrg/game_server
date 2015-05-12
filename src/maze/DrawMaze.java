@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class DrawMaze extends JPanel {
 
-	private Maze maze;
+	private Maze maze = new Maze(4,4);
 
 	public void paintComponent(Graphics g) {
 
