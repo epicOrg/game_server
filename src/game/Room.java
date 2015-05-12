@@ -16,11 +16,13 @@ public class Room {
 	private String roomName;
 	private TeamGenerator teamGenerator;
 	private RoomEventListener playersUpdater;
+	private boolean inPlay = false;
 
 	public Room(String roomName) {
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
 	}
+
 
 	/**
 	 * Add a player to the room, and then to a random team.
@@ -102,7 +104,14 @@ public class Room {
 	public void checkIfFull() {
 		if (isFull())
 			playersUpdater.onRoomFull();
-
 	}
-
+	
+	public void setInPlay(boolean inPlay) {
+		this.inPlay = inPlay;
+	}
+	
+	public boolean isInPlayng(){
+		return inPlay;
+	}
+	
 }

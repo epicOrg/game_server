@@ -108,10 +108,15 @@ public class FieldsNames {
 	public static final String GAME_STATUS = "status";
 	public static final String GAME_MAP = "map";
 	public static final String GAME_POSITIONS = "positions";
+	public static final String GAME_END = "end";
 	// Others
 	public static final String GAME_READY = "ready";
 	public static final String GAME_GO = "go";
+	
 	public static final String GAME_WIN = "win";
+	public static final String GAME_LOSE = "lose";
+	public static final String GAME_DRAW = "draw";	
+	
 	public static final String GAME_WIDTH = "width";
 	public static final String GAME_LENGTH = "length";
 	public static final String GAME_HEIGHT = "height";

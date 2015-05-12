@@ -143,7 +143,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 					return;
 			}
 		}
+		
+		RoomThread roomThread = new RoomThread(room, new WinCheckerTest());
+		//roomThread.start();
 
+		
 		JSONObject message = new JSONObject();
 		try {
 			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
