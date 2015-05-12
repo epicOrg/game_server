@@ -62,7 +62,7 @@ public class NetUtils {
 	
 	public static String getIpByInetAddress(InetAddress address) {
 		
-		return address.getHostName();
+		return address.getHostAddress();
 		
 	}
 	
