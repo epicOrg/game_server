@@ -106,18 +106,10 @@ public class Game implements IService {
 			float zDir = (float) dirObject.getDouble(FieldsNames.GAME_Z);
 
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
-
-			out: for (Team t : room.getTeamGenerator().getTeams()) {
-				for (Player p : t.getPlayers()) {
-					if (p.getUsername().equals(username)) {
-						p.getPlayerStatus().setPosition(xPos, yPos, zPos);
-						p.getPlayerStatus().setDirection(xDir, yDir, zDir);
-
-						break out;
-					}
-				}
-			}
-
+			
+			Player player = room.getPlayerByName(username);
+			player.getPlayerStatus().setPosition(xPos, yPos, zPos);
+			player.getPlayerStatus().setDirection(xDir, yDir, zDir);
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
 			jsonResponse.put(FieldsNames.SERVICE_TYPE,
 					FieldsNames.GAME_POSITIONS);
@@ -157,6 +149,9 @@ public class Game implements IService {
 
 			jsonResponse.put(FieldsNames.GAME_PLAYERS, jPlayers);
 		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (NoSuchPlayerException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

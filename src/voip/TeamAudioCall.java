@@ -104,7 +104,7 @@ public class TeamAudioCall {
 
 	// creates RTP session from server to client
 	private SingleParticipantSession createSession(Player player) {
-		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.MY_IP,
+		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.getLocalIpAddress(),
 				player.getAudioData().getLocalPort(), player.getAudioData()
 						.getLocalPort() + 1);
 		RtpParticipant client = RtpParticipant.createReceiver(player
