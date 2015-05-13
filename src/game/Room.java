@@ -17,12 +17,12 @@ public class Room {
 	private TeamGenerator teamGenerator;
 	private RoomEventListener playersUpdater;
 	private boolean inPlay = false;
+	private RoomThread roomThread;
 
 	public Room(String roomName) {
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
 	}
-
 
 	/**
 	 * Add a player to the room, and then to a random team.
@@ -46,9 +46,16 @@ public class Room {
 	 * @param player
 	 */
 	public void removePlayer(Player player) {
-		player.getTeam().removePlayer(player);
-		player.setRoom(null);
-		playersUpdater.onPlayerRemoved(player);
+		if (inPlay) {
+			playersUpdater.onExtingFromGame();
+			inPlay = false;
+			System.out.println("Game interrupdet");
+		} else {
+
+			player.getTeam().removePlayer(player);
+			player.setRoom(null);
+			playersUpdater.onPlayerRemoved(player);
+		}
 	}
 
 	public Player getPlayerByName(String name) throws NoSuchPlayerException {
@@ -105,13 +112,21 @@ public class Room {
 		if (isFull())
 			playersUpdater.onRoomFull();
 	}
-	
+
 	public void setInPlay(boolean inPlay) {
 		this.inPlay = inPlay;
 	}
-	
-	public boolean isInPlayng(){
+
+	public boolean isInPlayng() {
 		return inPlay;
 	}
-	
+
+	public void setRoomThread(RoomThread roomThread) {
+		this.roomThread = roomThread;
+	}
+
+	public RoomThread getRoomThread() {
+		return roomThread;
+	}
+
 }

@@ -49,6 +49,9 @@ public class RoomThread extends Thread {
 		timer.scheduleAtFixedRate(new WinTask(), 0, CHECKING_PERIOD);
 
 	}
+	public void shutdown(){
+		timer.cancel();
+	}
 
 	/**
 	 * 

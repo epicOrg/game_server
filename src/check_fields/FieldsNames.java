@@ -112,10 +112,12 @@ public class FieldsNames {
 	// Others
 	public static final String GAME_READY = "ready";
 	public static final String GAME_GO = "go";
+	public static final String GAME_EXIT = "exit";
 	
 	public static final String GAME_WIN = "win";
 	public static final String GAME_LOSE = "lose";
 	public static final String GAME_DRAW = "draw";	
+	public static final String GAME_INTERRUPTED = "interrupted";
 	
 	public static final String GAME_WIDTH = "width";
 	public static final String GAME_LENGTH = "length";
@@ -146,5 +148,6 @@ public class FieldsNames {
 	public static final String OFFLINE = "offline";
 	public static final String SERVER_ERROR = "serverError";
 	public static final String MISSING_FIELD = "missingField";
+	
 }
 	

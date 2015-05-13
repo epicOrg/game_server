@@ -28,8 +28,10 @@ public class WinCheckerTest implements IWinChecher {
 		float y = status.getyPosition();
 		float z = status.getzPosition();
 		
-		if((x-xWin)*(x-xWin) + (y-yWin)*(y-yWin) <= ray*ray )
+		if((x-xWin)*(x-xWin) + (z-zWin)*(z-zWin) <= ray*ray ){
+			System.out.println(player.getUsername() + " in position");
 			return true;
+		}
 		
 		return false;
 	}	

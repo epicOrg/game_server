@@ -27,6 +27,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
+	private RoomThread roomThread ;
 
 	public RoomPlayersUpdater(Room room) {
 		super();
@@ -59,6 +60,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	public void onRoomFull() {
 		JSONObject message = generateStartMessage();
 		updatePlayers(null, message);
+		room.setInPlay(true);
 		GameDataManager.getInstance().newAudioCallForRoom(room);
 	}
 
@@ -144,8 +146,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			}
 		}
 		
-		RoomThread roomThread = new RoomThread(room, new WinCheckerTest());
-		//roomThread.start();
+		roomThread = new RoomThread(room, new WinCheckerTest());
+		roomThread.start();
 
 		
 		JSONObject message = new JSONObject();
@@ -176,4 +178,22 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		}
 	}
 
+	@Override
+	public void onExtingFromGame() {
+		roomThread.shutdown();
+		JSONObject message = generateExitMessage();
+		updatePlayers(null, message);		
+	}
+
+	private JSONObject generateExitMessage() {
+		JSONObject message = new JSONObject();
+		try {
+			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
+			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
+			message.put(FieldsNames.GAME_END, FieldsNames.GAME_INTERRUPTED);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}		
+		return message;
+	}
 }

@@ -64,6 +64,37 @@ public class Game implements IService {
 	}
 
 	private void generateStatusResponse() {
+		
+		if(jsonRequest.has(FieldsNames.GAME_READY))
+			playerReady();
+		else if(jsonRequest.has(FieldsNames.GAME_EXIT));
+			removePlayer();
+	}
+
+	private void removePlayer() {
+		
+		try {
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			String username = jsonRequest.getString(FieldsNames.USERNAME);
+			Player player = gameDataManager.getRoomByName(roomName)
+					.getPlayerByName(username);
+			
+			Room room = gameDataManager.getRoomByName(roomName);
+			room.removePlayer(player);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchRoomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+
+	protected void playerReady() {
 		try {
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			String username = jsonRequest.getString(FieldsNames.USERNAME);

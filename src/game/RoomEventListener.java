@@ -34,4 +34,6 @@ public interface RoomEventListener {
 	 */
 	public void onPlayerRemoved(Player player);
 
+	public void onExtingFromGame();
+
 }
