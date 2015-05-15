@@ -63,25 +63,26 @@ public class Game implements IService {
 		}
 	}
 
-	private void generateStatusResponse() {
-		
-		if(jsonRequest.has(FieldsNames.GAME_READY))
+	private void generateStatusResponse() {		
+		if(jsonRequest.has(FieldsNames.GAME_READY)){
 			playerReady();
-		else if(jsonRequest.has(FieldsNames.GAME_EXIT));
+		} else if(jsonRequest.has(FieldsNames.GAME_EXIT)){
 			removePlayer();
+		}
+
 	}
 
 	private void removePlayer() {
-		
+
 		try {
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
 			Player player = gameDataManager.getRoomByName(roomName)
 					.getPlayerByName(username);
-			
+
 			Room room = gameDataManager.getRoomByName(roomName);
 			room.removePlayer(player);
-			
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,7 +138,7 @@ public class Game implements IService {
 			float zDir = (float) dirObject.getDouble(FieldsNames.GAME_Z);
 
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			
+
 			Player player = room.getPlayerByName(username);
 			player.getPlayerStatus().setPosition(xPos, yPos, zPos);
 			player.getPlayerStatus().setDirection(xDir, yDir, zDir);
