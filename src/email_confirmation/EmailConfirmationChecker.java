@@ -17,29 +17,25 @@ import database.Paths;
 
 public class EmailConfirmationChecker {
 
-	private static final String EXTENSION = ".EMAIL";
-
 	public void saveCode(RegisteredUser user, String code) throws IOException {
 
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
-				Paths.getUsersPath() + user.getUsername() + EXTENSION)));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(Paths.getConfirmPath()
+				+ user.getUsername())));
 
 		writer.write(code);
 		writer.close();
 	}
 
-	public boolean checkCode(RegisteredUser user, String code)
-			throws IOException {
+	public boolean checkCode(RegisteredUser user, String code) throws IOException {
 
-		BufferedReader reader = new BufferedReader(new FileReader(
-				Paths.getUsersPath() + user.getUsername() + EXTENSION));
+		BufferedReader reader = new BufferedReader(new FileReader(Paths.getConfirmPath()
+				+ user.getUsername()));
 
 		String savedCode = reader.readLine();
 		reader.close();
 
 		if (code.equals(savedCode)) {
-			new File(Paths.getUsersPath() + user.getUsername() + EXTENSION)
-					.delete();
+			new File(Paths.getConfirmPath() + user.getUsername()).delete();
 			return true;
 		}
 
