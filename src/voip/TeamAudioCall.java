@@ -32,7 +32,7 @@ public class TeamAudioCall {
 	// TODO decidere dove preparare e iniziare la chiamata
 
 	private static final int DATA_LENTH = 160;
-	private static final int BUFFER_SIZE = DATA_LENTH * 100;
+	private static final int BUFFER_SIZE = DATA_LENTH * 200;
 
 	private Team team;
 	private HashMap<Player, SingleParticipantSession> sessions = new HashMap<>();
@@ -69,16 +69,12 @@ public class TeamAudioCall {
 	protected void prepareDataForwarding() {
 		ArrayList<Forwarder> forwarders = new ArrayList<>();
 		for (Player player : team.getPlayers()) {
-			try {
-				MixingPipedInputStream mixingPipedInputStream = new MixingPipedInputStream(
-						streams.get(player));
-				Forwarder forwarder = new Forwarder(mixingPipedInputStream,
-						sessions.get(player));
-				forwarders.add(forwarder);
-			} catch (EmptyCollectionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			MixingPipedInputStream mixingPipedInputStream = new MixingPipedInputStream(
+					streams.get(player));
+			Forwarder forwarder = new Forwarder(mixingPipedInputStream,
+					sessions.get(player));
+			forwarders.add(forwarder);
 		}
 
 		thread = new ForwardingThread(forwarders);
@@ -104,9 +100,9 @@ public class TeamAudioCall {
 
 	// creates RTP session from server to client
 	private SingleParticipantSession createSession(Player player) {
-		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.getLocalIpAddress(),
-				player.getAudioData().getLocalPort(), player.getAudioData()
-						.getLocalPort() + 1);
+		RtpParticipant server = RtpParticipant.createReceiver(NetUtils
+				.getLocalIpAddress(), player.getAudioData().getLocalPort(),
+				player.getAudioData().getLocalPort() + 1);
 		RtpParticipant client = RtpParticipant.createReceiver(player
 				.getAudioData().getIp(), player.getAudioData().getRemotePort(),
 				player.getAudioData().getRemotePort() + 1);

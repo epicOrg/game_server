@@ -16,13 +16,9 @@ public class MixingPipedInputStream extends PipedInputStream {
 
 	private Collection<PipedInputStream> streams;
 
-	public MixingPipedInputStream(Collection<PipedInputStream> streams)
-			throws EmptyCollectionException {
+	public MixingPipedInputStream(Collection<PipedInputStream> streams) {
 		super();
 		this.streams = streams;
-		if (streams.isEmpty()) {
-			throw new EmptyCollectionException();
-		}
 	}
 
 	@Override

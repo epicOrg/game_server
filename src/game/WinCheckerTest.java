@@ -18,6 +18,7 @@ public class WinCheckerTest implements IWinChecher {
 				return false;
 		}
 		
+		System.out.println("team win " + team.getTeamName());
 		return true;
 		
 	}	

@@ -35,9 +35,11 @@ public class RoomAudioCall {
 	public void prepare() throws IOException {
 
 		for (Team team : room.getTeamGenerator().getTeams()) {
-			TeamAudioCall call = new TeamAudioCall(team);
-			call.prepare();
-			teamAudioCalls.add(call);
+			if (team.getSize() > 1) {
+				TeamAudioCall call = new TeamAudioCall(team);
+				call.prepare();
+				teamAudioCalls.add(call);
+			}
 		}
 	}
 
