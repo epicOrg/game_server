@@ -1,25 +1,23 @@
 package game;
 
-
 /**
+ * Interface for algorithms that checks for a winner team.
  * 
- * Interface for algorithms that check for a winner team
- * 
- * @author Luca
  * @see Team
  * @see Room
  * @see RoomThread
+ * 
+ * @author Luca
+ * @date 2015/05/05
  */
 
 public interface IWinChecher {
-	
+
 	/**
-	 * 
-	 * Checks if the team is a winner according to the algorithm
+	 * Checks if the team is a winner according to the algorithm.
 	 * 
 	 * @param team
-	 * @return true if the team is a winner
-	 * 
+	 * @return true if the team is a winner, false otherwise
 	 */
 	public boolean checkWin(Team team);
 }

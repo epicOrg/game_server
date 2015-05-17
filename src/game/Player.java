@@ -12,10 +12,10 @@ public class Player {
 
 	private String username;
 	private boolean status;
-	
+
 	private Room room;
 	private Team team;
-	
+
 	private AudioData audioData = new AudioData();
 
 	private PlayerStatus playerStatus;
@@ -27,7 +27,7 @@ public class Player {
 
 		playerStatus = new PlayerStatus(5, 0.5f, -7, -1, -0.25f, 0);
 	}
-	
+
 	public void setPlayerEventListener(PlayerEventListener playerEventListener) {
 		this.playerEventListener = playerEventListener;
 	}
@@ -59,18 +59,18 @@ public class Player {
 	public void setPlayerStatus(PlayerStatus playerStatus) {
 		this.playerStatus = playerStatus;
 	}
-	
+
 	public AudioData getAudioData() {
 		return audioData;
 	}
-	
+
 	public void setStatus(boolean status) {
 		this.status = status;
 		playerEventListener.onPlayerStatusChanged();
 	}
-	
+
 	public boolean getStatus() {
 		return status;
 	}
-	
+
 }

@@ -9,6 +9,11 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
 
+/**
+ * @author Micieli
+ * @date 2015/05/11
+ */
+
 public class Polling implements IService {
 	
 	private JSONObject request;

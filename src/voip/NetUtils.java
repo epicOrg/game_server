@@ -59,28 +59,32 @@ public class NetUtils {
 		Integer portOjb = new Integer(port);
 		inUse.remove(portOjb);
 	}
-	
+
 	public static String getIpByInetAddress(InetAddress address) {
-		
+
 		return address.getHostAddress();
-		
+
 	}
-	
+
 	public static String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-                        return inetAddress.getHostAddress().toString();
-                    }
-                }
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-	
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en
+					.hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr
+						.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+						return inetAddress.getHostAddress().toString();
+					}
+				}
+			}
+
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

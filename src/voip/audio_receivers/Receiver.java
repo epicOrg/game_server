@@ -26,8 +26,7 @@ public class Receiver implements RtpSessionDataListener {
 	}
 
 	@Override
-	public void dataPacketReceived(RtpSession arg0, RtpParticipantInfo arg1,
-			DataPacket packet) {
+	public void dataPacketReceived(RtpSession arg0, RtpParticipantInfo arg1, DataPacket packet) {
 		// System.out.println("Received: " + packet.getDataAsArray());
 		for (PipedOutputStream pipedOutputStream : pipedOutputStreams) {
 			try {

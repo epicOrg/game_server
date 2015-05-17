@@ -49,7 +49,7 @@ public class Room {
 		if (inPlay) {
 			playersUpdater.onExtingFromGame();
 			inPlay = false;
-			System.out.println("Game interrupdet");
+			System.out.println("Game interrupted.");
 		} else {
 
 			player.getTeam().removePlayer(player);

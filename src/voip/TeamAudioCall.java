@@ -13,7 +13,6 @@ import java.util.HashMap;
 import voip.audio_forwarder.Forwarder;
 import voip.audio_forwarder.ForwardingThread;
 import voip.audio_receivers.Receiver;
-import voip.mixing.EmptyCollectionException;
 import voip.mixing.MixingPipedInputStream;
 
 import com.biasedbit.efflux.participant.RtpParticipant;

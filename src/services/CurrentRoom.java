@@ -164,10 +164,10 @@ public class CurrentRoom implements IService {
 		jsonResponse = null;
 
 		try {
-			String playerName = null;
+			//String playerName = null;
 			String roomName = null;
 			try {
-				playerName = jsonRequest.getString(FieldsNames.USERNAME);
+				//playerName = jsonRequest.getString(FieldsNames.USERNAME);
 				roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			} catch (JSONException e) {
 				throw new MissingFieldException();
