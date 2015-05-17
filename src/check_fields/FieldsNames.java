@@ -29,6 +29,7 @@ public class FieldsNames {
 	public static final String UNKNOWN = "unknown";
 	public static final String AUDIO = "audio";
 	public static final String POLLING = "polling";
+	public static final String LOGOUT = "logout";
 	
 
 	/**
