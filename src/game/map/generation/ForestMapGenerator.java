@@ -1,4 +1,11 @@
-package game.map;
+package game.map.generation;
+
+import game.map.Dimension;
+import game.map.Item;
+import game.map.MapJSONizer;
+import game.map.MapObject;
+import game.map.MapUtils;
+import game.map.Texture;
 
 import java.util.ArrayList;
 

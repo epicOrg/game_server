@@ -1,4 +1,7 @@
-package game.map;
+package game.map.generation;
+
+import game.map.Dimension;
+import game.map.MapJSONizer;
 
 import java.util.ArrayList;
 import java.util.Random;

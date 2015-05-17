@@ -1,4 +1,4 @@
-package game.map;
+package game.map.generation;
 
 import org.json.JSONObject;
 

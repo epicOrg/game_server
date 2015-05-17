@@ -1,5 +1,7 @@
 package game.map;
 
+import game.map.generation.SegmentMapGenerator;
+
 /**
  * It loads the segments for {@link SegmentMapGenerator}.
  * 

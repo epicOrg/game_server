@@ -4,8 +4,8 @@ import game.Player;
 import game.Room;
 import game.Team;
 import game.map.MapAdapter;
-import game.map.MapGenerator;
-import game.map.SimpleMapGenerator;
+import game.map.generation.MapGenerator;
+import game.map.generation.SimpleMapGenerator;
 
 import java.util.ArrayList;
 
