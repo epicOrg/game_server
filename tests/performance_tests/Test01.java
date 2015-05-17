@@ -1,12 +1,11 @@
 package performance_tests;
 
-import game_server.ServerInitializer;
-
 import java.io.File;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ServerInitializer;
 import services.IService;
 import services.Login;
 import services.Register;

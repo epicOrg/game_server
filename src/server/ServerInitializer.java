@@ -1,4 +1,4 @@
-package game_server;
+package server;
 
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.ConnectionEncrypter;

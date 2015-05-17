@@ -1,10 +1,10 @@
 package data_management_tests;
 
+import server.ServerInitializer;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import database.loader.FileChecker;
 import exceptions.RegistrationFailedException;
-import game_server.ServerInitializer;
 
 /**
  * Test @see {@link FileChecker}.

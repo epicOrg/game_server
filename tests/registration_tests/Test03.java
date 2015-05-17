@@ -1,12 +1,11 @@
 package registration_tests;
 
-import game_server.ServerInitializer;
-
 import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ServerInitializer;
 import services.Register;
 import check_fields.FieldsNames;
 

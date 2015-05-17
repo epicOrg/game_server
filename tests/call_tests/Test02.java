@@ -1,7 +1,5 @@
 package call_tests;
 
-import game_server.ServerInitializer;
-
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -12,6 +10,7 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ServerInitializer;
 import services.Call;
 import services.IService;
 import services.Login;

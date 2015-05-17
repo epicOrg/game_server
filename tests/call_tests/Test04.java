@@ -1,12 +1,11 @@
 package call_tests;
 
-import game_server.ServerInitializer;
-
 import java.net.UnknownHostException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ServerInitializer;
 import services.Call;
 import services.IService;
 import check_fields.FieldsNames;

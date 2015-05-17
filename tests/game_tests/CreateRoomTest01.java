@@ -1,12 +1,11 @@
 package game_tests;
 
-import game_server.ServerInitializer;
-
 import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ServerInitializer;
 import services.IService;
 import services.Login;
 import services.Register;

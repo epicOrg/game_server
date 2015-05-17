@@ -1,12 +1,12 @@
 package registration_tests;
 
 import static org.junit.Assert.assertEquals;
-import game_server.ServerInitializer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import server.ServerInitializer;
 import services.Register;
 import check_fields.FieldsNames;
 

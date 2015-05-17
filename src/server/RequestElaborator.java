@@ -1,4 +1,4 @@
-package game_server;
+package server;
 
 import java.util.HashMap;
 

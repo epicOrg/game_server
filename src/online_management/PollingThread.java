@@ -1,7 +1,6 @@
 package online_management;
 
 import exceptions.UserNotOnlineException;
-import game_server.ClientRequestThread;
 
 import java.io.PrintWriter;
 import java.util.Timer;
@@ -10,6 +9,7 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import server.ClientRequestThread;
 import check_fields.FieldsNames;
 
 /**
