@@ -181,6 +181,12 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onExtingFromGame() {
 		roomThread.shutdown();
+		try {
+			GameDataManager.getInstance().stopCallForRoom(room.getName());
+		} catch (NoSuchRoomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONObject message = generateExitMessage();
 		updatePlayers(null, message);		
 	}

@@ -10,7 +10,10 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import voip.RoomAudioCall;
 import check_fields.FieldsNames;
+import data_management.GameDataManager;
+import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
 
 /**
@@ -74,7 +77,20 @@ public class RoomThread extends Thread {
 				return;
 			
 			endGame(winner);
-
+			try {
+				sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				GameDataManager gameDataManager = GameDataManager.getInstance();
+				gameDataManager.stopCallForRoom(room.getName());
+			} catch (NoSuchRoomException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 

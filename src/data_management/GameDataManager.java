@@ -61,6 +61,12 @@ public class GameDataManager {
 		throw new NoSuchRoomException();
 	}
 	
+	public void stopCallForRoom(String roomName) throws NoSuchRoomException{
+		RoomAudioCall audioCall = getCallbyRoomName(roomName);
+		audioCall.endCall();
+		audioCalls.remove(audioCall);
+	}
+	
 	public void newAudioCallForRoom(Room room){
 		RoomAudioCall audioCall = new RoomAudioCall(room);
 		audioCalls.add(audioCall);		

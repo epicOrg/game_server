@@ -53,6 +53,7 @@ public class RoomAudioCall {
 	}
 
 	public void endCall() {
+		System.out.println("Call ended");
 		for (TeamAudioCall teamAudioCall : teamAudioCalls) {
 			teamAudioCall.endCall();
 		}
