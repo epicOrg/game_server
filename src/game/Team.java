@@ -124,10 +124,11 @@ public class Team {
 	public Color getTeamColor() {
 		return teamColor;
 	}
-
-	public void win() {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * Empties the team removing all players
+	 */
+	public void empty(){
+		players.removeAll(players);
 	}
-
 }

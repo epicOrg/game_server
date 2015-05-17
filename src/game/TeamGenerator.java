@@ -20,7 +20,7 @@ public class TeamGenerator {
 	}
 
 	/**
-	 * Team generator: this method generate teams with different colors.
+	 * Generates teams with different colors.
 	 */
 	private void generateTeams() {
 
@@ -31,9 +31,18 @@ public class TeamGenerator {
 			teams.add(team);
 		}
 	}
+	
+	/**
+	 * Empties all teams removing all players
+	 */
+	public void emptyTeams(){
+		for (Team team : teams) {
+			team.empty();
+		}
+	}
 
 	/**
-	 * Select a team for the incoming player.
+	 * Selects a team for the incoming player.
 	 * 
 	 * @return the team with less players.
 	 */

@@ -188,7 +188,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			e.printStackTrace();
 		}
 		JSONObject message = generateExitMessage();
-		updatePlayers(null, message);		
+		updatePlayers(null, message);	
+		writers = new HashMap<>();
+		room.getTeamGenerator().emptyTeams();
 	}
 
 	private JSONObject generateExitMessage() {

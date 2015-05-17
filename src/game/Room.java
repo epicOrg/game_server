@@ -50,6 +50,7 @@ public class Room {
 			playersUpdater.onExtingFromGame();
 			inPlay = false;
 			System.out.println("Game interrupted.");
+			teamGenerator.emptyTeams();
 		} else {
 
 			player.getTeam().removePlayer(player);

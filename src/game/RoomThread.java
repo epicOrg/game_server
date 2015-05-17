@@ -117,6 +117,8 @@ public class RoomThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		room.getTeamGenerator().emptyTeams();
 	}
 
 	private JSONObject generateLoseMessage() {
