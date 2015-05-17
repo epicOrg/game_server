@@ -10,7 +10,7 @@ import java.util.Random;
 public class EmailConfirmation {
 
 	private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static final int CODE_LENGTH = 10;
+	private static final int CODE_LENGTH = 20;
 
 	public static String generateRandomCode() {
 
@@ -24,4 +24,7 @@ public class EmailConfirmation {
 		return stringBuilder.toString();
 	}
 
+	public static String getURL(String username) {
+		return "reg=" + username + "&" + generateRandomCode();
+	}
 }
