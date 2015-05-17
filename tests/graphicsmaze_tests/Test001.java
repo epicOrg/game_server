@@ -12,9 +12,11 @@ import maze.Maze;
  * @date 2015/05/05
  */
 
+@SuppressWarnings("serial")
 class Test001 extends JFrame {
 
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		Test001 test = new Test001();
 	}
 
