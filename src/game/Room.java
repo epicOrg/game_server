@@ -48,9 +48,9 @@ public class Room {
 	public void removePlayer(Player player) {
 		if (inPlay) {
 			playersUpdater.onExtingFromGame();
-			inPlay = false;
+			setInPlay(false);
 			System.out.println("Game interrupted.");
-			teamGenerator.emptyTeams();
+			
 		} else {
 
 			player.getTeam().removePlayer(player);
@@ -115,7 +115,12 @@ public class Room {
 	}
 
 	public void setInPlay(boolean inPlay) {
-		this.inPlay = inPlay;
+		if(this.inPlay && !inPlay){
+			playersUpdater.onGameEnded();	
+			teamGenerator.emptyTeams();
+		}
+			
+		this.inPlay = inPlay;		
 	}
 
 	public boolean isInPlayng() {

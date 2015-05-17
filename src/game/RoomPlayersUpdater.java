@@ -70,6 +70,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		JSONObject message = generatePlayerList();
 		updatePlayers(player, message);
 	}
+	
+	@Override
+	public void onGameEnded() {	
+		writers = new HashMap<>();
+	}
 
 	private JSONObject generateStartMessage() {
 
@@ -189,8 +194,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		}
 		JSONObject message = generateExitMessage();
 		updatePlayers(null, message);	
-		writers = new HashMap<>();
-		room.getTeamGenerator().emptyTeams();
+		
 	}
 
 	private JSONObject generateExitMessage() {

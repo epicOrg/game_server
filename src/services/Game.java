@@ -68,6 +68,7 @@ public class Game implements IService {
 			playerReady();
 		} else if (jsonRequest.has(FieldsNames.GAME_EXIT)) {
 			removePlayer();
+			jsonResponse = null;
 		}
 
 	}
@@ -171,9 +172,11 @@ public class Game implements IService {
 			jsonResponse.put(FieldsNames.GAME_PLAYERS, jPlayers);
 		} catch (JSONException e) {
 			e.printStackTrace();
+			jsonResponse = null;
 		} catch (NoSuchPlayerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			jsonResponse = null;
 		}
 	}
 

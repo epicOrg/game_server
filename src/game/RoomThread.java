@@ -118,7 +118,7 @@ public class RoomThread extends Thread {
 			e.printStackTrace();
 		}
 		
-		room.getTeamGenerator().emptyTeams();
+		room.setInPlay(false);
 	}
 
 	private JSONObject generateLoseMessage() {
