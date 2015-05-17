@@ -1,14 +1,10 @@
 package services;
 
-import data_management.GameDataManager;
-import exceptions.MissingFieldException;
-import exceptions.NoSuchPlayerException;
-import exceptions.NoSuchRoomException;
 import game.Player;
 import game.Room;
 import game.Team;
-import game.map.IMapGenerator;
-import game.map.MapObject;
+import game.map.MapAdapter;
+import game.map.MapGenerator;
 import game.map.SimpleMapGenerator;
 
 import java.util.ArrayList;
@@ -18,6 +14,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.FieldsNames;
+import data_management.GameDataManager;
+import exceptions.MissingFieldException;
+import exceptions.NoSuchPlayerException;
+import exceptions.NoSuchRoomException;
 
 /**
  * @author Torlaschi
@@ -30,7 +30,7 @@ public class Game implements IService {
 	private JSONObject jsonResponse;
 
 	private GameDataManager gameDataManager;
-	private IMapGenerator mapGenerator;
+	private MapGenerator mapGenerator;
 
 	public Game() {
 		gameDataManager = GameDataManager.getInstance();
@@ -63,10 +63,10 @@ public class Game implements IService {
 		}
 	}
 
-	private void generateStatusResponse() {		
-		if(jsonRequest.has(FieldsNames.GAME_READY)){
+	private void generateStatusResponse() {
+		if (jsonRequest.has(FieldsNames.GAME_READY)) {
 			playerReady();
-		} else if(jsonRequest.has(FieldsNames.GAME_EXIT)){
+		} else if (jsonRequest.has(FieldsNames.GAME_EXIT)) {
 			removePlayer();
 		}
 
@@ -77,8 +77,7 @@ public class Game implements IService {
 		try {
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			Player player = gameDataManager.getRoomByName(roomName)
-					.getPlayerByName(username);
+			Player player = gameDataManager.getRoomByName(roomName).getPlayerByName(username);
 
 			Room room = gameDataManager.getRoomByName(roomName);
 			room.removePlayer(player);
@@ -92,15 +91,14 @@ public class Game implements IService {
 		} catch (NoSuchRoomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	protected void playerReady() {
 		try {
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			Player player = gameDataManager.getRoomByName(roomName)
-					.getPlayerByName(username);
+			Player player = gameDataManager.getRoomByName(roomName).getPlayerByName(username);
 
 			player.setStatus(jsonRequest.getBoolean(FieldsNames.GAME_READY));
 			jsonResponse = null;
@@ -126,10 +124,8 @@ public class Game implements IService {
 				e.printStackTrace();
 			}
 
-			JSONObject posObject = jsonRequest
-					.getJSONObject(FieldsNames.GAME_POSITION);
-			JSONObject dirObject = jsonRequest
-					.getJSONObject(FieldsNames.GAME_DIRECTION);
+			JSONObject posObject = jsonRequest.getJSONObject(FieldsNames.GAME_POSITION);
+			JSONObject dirObject = jsonRequest.getJSONObject(FieldsNames.GAME_DIRECTION);
 			float xPos = (float) posObject.getDouble(FieldsNames.GAME_X);
 			float yPos = (float) posObject.getDouble(FieldsNames.GAME_Y);
 			float zPos = (float) posObject.getDouble(FieldsNames.GAME_Z);
@@ -143,8 +139,7 @@ public class Game implements IService {
 			player.getPlayerStatus().setPosition(xPos, yPos, zPos);
 			player.getPlayerStatus().setDirection(xDir, yDir, zDir);
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			jsonResponse.put(FieldsNames.SERVICE_TYPE,
-					FieldsNames.GAME_POSITIONS);
+			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS);
 
 			JSONArray jPlayers = new JSONArray();
 
@@ -159,19 +154,13 @@ public class Game implements IService {
 
 				JSONObject jPlayer = new JSONObject();
 				JSONObject jObjectPos = new JSONObject();
-				jObjectPos.put(FieldsNames.GAME_X, p.getPlayerStatus()
-						.getxPosition());
-				jObjectPos.put(FieldsNames.GAME_Y, p.getPlayerStatus()
-						.getyPosition());
-				jObjectPos.put(FieldsNames.GAME_Z, p.getPlayerStatus()
-						.getzPosition());
+				jObjectPos.put(FieldsNames.GAME_X, p.getPlayerStatus().getxPosition());
+				jObjectPos.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyPosition());
+				jObjectPos.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzPosition());
 				JSONObject jObjectDir = new JSONObject();
-				jObjectDir.put(FieldsNames.GAME_X, p.getPlayerStatus()
-						.getxDirection());
-				jObjectDir.put(FieldsNames.GAME_Y, p.getPlayerStatus()
-						.getyDirection());
-				jObjectDir.put(FieldsNames.GAME_Z, p.getPlayerStatus()
-						.getzDirection());
+				jObjectDir.put(FieldsNames.GAME_X, p.getPlayerStatus().getxDirection());
+				jObjectDir.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyDirection());
+				jObjectDir.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzDirection());
 				jPlayer.put(FieldsNames.GAME_POSITION, jObjectPos);
 				jPlayer.put(FieldsNames.GAME_DIRECTION, jObjectDir);
 				jPlayer.put(FieldsNames.USERNAME, p.getUsername());
@@ -194,22 +183,10 @@ public class Game implements IService {
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
 			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
 
-			JSONArray items = new JSONArray();
-
-			ArrayList<MapObject> mapObjects = mapGenerator.generate();
-
-			for (MapObject o : mapObjects) {
-				JSONObject jObject = new JSONObject();
-				jObject.put(FieldsNames.GAME_OBJECT, o.object);
-				jObject.put(FieldsNames.GAME_TEXTURE, o.texture);
-				jObject.put(FieldsNames.GAME_POSITION, o.position);
-				jObject.put(FieldsNames.GAME_SIZE, o.size);
-				items.put(jObject);
-			}
-
-			jsonResponse.put(FieldsNames.GAME_WIDTH, mapGenerator.getWidth());
-			jsonResponse.put(FieldsNames.GAME_HEIGHT, mapGenerator.getHeight());
-			jsonResponse.put(FieldsNames.GAME_ITEMS, items);
+			MapAdapter mapAdapter = new MapAdapter(mapGenerator.generateMap());
+			jsonResponse.put(FieldsNames.GAME_WIDTH, mapAdapter.getAdaptedWidth());
+			jsonResponse.put(FieldsNames.GAME_HEIGHT, mapAdapter.getAdaptedHeight());
+			jsonResponse.put(FieldsNames.GAME_ITEMS, mapAdapter.getAdaptedItems());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -220,7 +197,11 @@ public class Game implements IService {
 	public void setRequest(JSONObject request) {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
+
 		mapGenerator = new SimpleMapGenerator();
+		// mapGenerator = new TestMapGenerator();
+		// mapGenerator = new DivisionMapGenerator(new Dimension(20, 20, 20));
+		// mapGenerator = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
 	}
 
 }

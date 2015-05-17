@@ -1,4 +1,4 @@
-package game.map_BETA;
+package game.map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,6 +6,8 @@ import java.util.Random;
 import org.json.JSONObject;
 
 /**
+ * It generate a random map starting from previously loaded segments.
+ * 
  * @author Noris
  * @date 2015/04/24
  */

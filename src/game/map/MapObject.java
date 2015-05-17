@@ -1,11 +1,13 @@
-package game.map_BETA;
+package game.map;
 
 /**
+ * MapObject describes a map item.
+ * 
  * @author Noris
  * @date 2015/04/23
  */
 
-public class MapObject {
+public class MapObject implements Comparable<MapObject> {
 
 	private String objectName;
 	private String textureName;
@@ -13,8 +15,7 @@ public class MapObject {
 	private Dimension position;
 	private Dimension size;
 
-	public MapObject(String objectName, String textureName, Dimension position,
-			Dimension size) {
+	public MapObject(String objectName, String textureName, Dimension position, Dimension size) {
 
 		this.objectName = objectName;
 		this.textureName = textureName;
@@ -36,6 +37,12 @@ public class MapObject {
 
 	public Dimension getSize() {
 		return size;
+	}
+
+	@Override
+	public int compareTo(MapObject other) {
+		return objectName.compareTo(other.objectName) + textureName.compareTo(other.textureName)
+				+ position.compareTo(other.position) + size.compareTo(other.size);
 	}
 
 }

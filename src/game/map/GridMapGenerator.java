@@ -1,4 +1,4 @@
-package game.map_BETA;
+package game.map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,20 +6,23 @@ import java.util.Random;
 import org.json.JSONObject;
 
 /**
+ * Generate a maze by construct a default grid and by open random ports.
+ * 
  * @author Noris
  * @date 2015/04/23
  */
 
-public class LinearMapGenerator implements MapGenerator {
+public class GridMapGenerator implements MapGenerator {
 
-	private static final int SCRAP = 2;
+	private static final int PLAYER_SIZE = 2;
+	private static final int SCRAP = PLAYER_SIZE + 2;
 
 	private MapJSONizer mapJSONizer;
 	private Dimension mapSize;
 
 	private ArrayList<Double> coordinates;
 
-	public LinearMapGenerator() {
+	public GridMapGenerator() {
 		mapJSONizer = new MapJSONizer();
 		mapSize = new Dimension(20, 20, 20);
 		coordinates = new ArrayList<Double>();
@@ -66,8 +69,7 @@ public class LinearMapGenerator implements MapGenerator {
 	}
 
 	private int getGridNumber(int size) {
-		return new Random().nextInt(size - 1 + (size + SCRAP / 2))
-				+ (size + SCRAP / 2);
+		return new Random().nextInt(size - 1 + (size + SCRAP / 2)) + (size + SCRAP / 2);
 	}
 
 	private void generateDoors() {
