@@ -24,10 +24,10 @@ public class TestMapGenerator implements MapGenerator {
 
 		mapJSONizer.setMapSize(new Dimension(10, 10, 10));
 
-		MapObject o1 = new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, 10),
-				new Dimension(20, 1, 0.2));
+		MapObject o1 = new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(-10, -1, 0),
+				new Dimension(0.2, 1, 20));
 
-		MapObject o2 = new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, 8),
+		MapObject o2 = new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, 10),
 				new Dimension(20, 1, 0.2));
 
 		MapObject o3 = new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, -10),
@@ -43,6 +43,7 @@ public class TestMapGenerator implements MapGenerator {
 				new Dimension(1, 5, 1));
 
 		mapJSONizer.addMapObjects(o1, o2, o3, o4, o5, o6);
+		// mapJSONizer.addMapObjects(o1);
 
 		return mapJSONizer.getJSONMap();
 	}

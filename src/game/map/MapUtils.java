@@ -13,6 +13,8 @@ import java.util.Random;
 
 public class MapUtils {
 
+	public static final double PLAYER_SIZE = 2;
+
 	/**
 	 * Generate a random double between min an max.
 	 * 
@@ -25,6 +27,20 @@ public class MapUtils {
 	 */
 	public static double getRandomDouble(double min, double max) {
 		return min + (new Random().nextDouble()) * (max - min);
+	}
+	
+	/**
+	 * Generate a random int between min an max.
+	 * 
+	 * @param min
+	 *            the minimum value that the random number can assume
+	 * @param max
+	 *            the maximum value that the random number can assume
+	 * 
+	 * @return a random int number between min and max
+	 */
+	public static int getRandomInt(int min, int max) {
+		return min + new Random().nextInt((max - min) + 1);
 	}
 
 	/**
@@ -106,6 +122,31 @@ public class MapUtils {
 
 		double width1 = position.getWidth() + size.getWidth() / 2;
 		double width2 = position.getWidth() - size.getWidth() / 2;
+
+		points.add(new Dimension(width1, 0, length1));
+		points.add(new Dimension(width2, 0, length2));
+
+		return points;
+
+	}
+
+	/**
+	 * @param position
+	 *            of the wall
+	 * @param size
+	 *            of the wall
+	 * 
+	 * @return the extremes point of the wall segment, without the wall size
+	 */
+	public static ArrayList<Dimension> getWallPointsOnLine(Dimension position, Dimension size) {
+
+		ArrayList<Dimension> points = new ArrayList<Dimension>(2);
+
+		double length1 = position.getLength() + size.getLength() / 2;
+		double length2 = position.getLength() - size.getLength() / 2;
+
+		double width1 = position.getWidth();
+		double width2 = position.getWidth();
 
 		points.add(new Dimension(width1, 0, length1));
 		points.add(new Dimension(width2, 0, length2));

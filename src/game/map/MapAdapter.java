@@ -70,7 +70,7 @@ public class MapAdapter {
 		}
 
 		// TODO DEBUG: map items
-		// System.out.println("Map Items: " + adaptedItems);
+		System.out.println("Map Items: " + adaptedItems);
 
 		return adaptedItems;
 

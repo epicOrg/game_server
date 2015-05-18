@@ -201,10 +201,11 @@ public class Game implements IService {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
 
-		mapGenerator = new SimpleMapGenerator();
-		// mapGenerator = new TestMapGenerator();
+		// mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10));
 		// mapGenerator = new DivisionMapGenerator(new Dimension(20, 20, 20));
 		// mapGenerator = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
+		mapGenerator = new SimpleMapGenerator();
+		// mapGenerator = new TestMapGenerator();
 	}
 
 }
