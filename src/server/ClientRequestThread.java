@@ -51,7 +51,7 @@ public class ClientRequestThread implements Runnable {
 					return;
 
 				// TODO DEBUG: client request
-				System.out.println("CLIENT: " + request);
+				//System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
 				JSONObject jsonRequest = secureConnection
@@ -80,7 +80,7 @@ public class ClientRequestThread implements Runnable {
 					out.println(response);
 
 					// TODO DEBUG: server response
-					System.out.println("SERVER: " + response);
+					//System.out.println("SERVER: " + response);
 				} else {
 					// System.out.println("SERVER: " + "No response.");
 				}

@@ -13,8 +13,8 @@ import java.util.TimerTask;
 
 public class ForwardingThread extends Thread {
 
-	private static final int RATE = 1;
-	private static final int DELAY = 1;
+	private static final int RATE = 5;
+	private static final int DELAY = 0;
 
 	private ArrayList<Forwarder> forwarders = new ArrayList<>();
 	private Timer timer;

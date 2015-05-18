@@ -43,6 +43,8 @@ public class MixingPipedInputStream extends PipedInputStream {
 		byte[] mixed = b;
 		short streamSize = (short) streams.size();
 		short[] coded = new short[byteToRead];
+
+
 		for (PipedInputStream stream : streams) {
 			byte[] data = new byte[byteToRead];
 			stream.read(data);
