@@ -43,7 +43,7 @@ public class SimpleMapGenerator implements MapGenerator {
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, -20), new Dimension(40, 2, 2)));
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(20, -1, 0), new Dimension(2, 2, 40)));
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(-20, -1, 0), new Dimension(2, 2, 40)));
-		mapJSONizer.addMapObject(new MapObject(Item.OBSTACLE, Texture.WALL2, new Dimension(0, -1, 18), new Dimension(0.3, 2.5, 0)));
+		mapJSONizer.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, new Dimension(0, -1, 18), new Dimension(0.3, 1, 0)));
 
 		return mapJSONizer.getJSONMap();
 	}

@@ -12,5 +12,6 @@ public class Item {
 
 	public static final String OBSTACLE = "Obstacle";
 	public static final String WALL = "Wall";
+	public static final String VASE = "Vase";
 
 }
