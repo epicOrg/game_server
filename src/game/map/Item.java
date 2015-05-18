@@ -5,13 +5,13 @@ package game.map;
  * 
  * @author Noris
  * @date 2015/05/17
- * @version 1
+ * @version 2
  */
 
 public class Item {
 
 	public static final String OBSTACLE = "Obstacle";
-	public static final String WALL = "Wall";
 	public static final String VASE = "Vase";
+	public static final String WALL = "Wall";
 
 }
