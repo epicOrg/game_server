@@ -140,8 +140,7 @@ public class RegisterChecker extends ServiceChecker {
 
 	}
 
-	public boolean checkAlreadyUsedUsername(DataManager dataManager,
-			String username) {
+	public boolean checkAlreadyUsedUsername(DataManager dataManager, String username) {
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
 			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);

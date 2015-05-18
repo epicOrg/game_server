@@ -36,6 +36,7 @@ public class ServiceChecker {
 	 *            username of the user
 	 * @param hashCode
 	 *            hashcode of the user
+	 * 
 	 * @return true if the hashCode sent by the user corresponds to the hashCode
 	 *         generated and saved by the server in the login, false otherwise
 	 * @throws UserNotOnlineException
@@ -66,6 +67,7 @@ public class ServiceChecker {
 	 * 
 	 * @param username
 	 *            the username of the user
+	 * 
 	 * @return true if the username is online, false otherwise
 	 */
 	public boolean isUserOnline(String username) {
@@ -80,8 +82,7 @@ public class ServiceChecker {
 		return true;
 	}
 
-	public OnlineUser getOnlineUser(String username)
-			throws UserNotOnlineException {
+	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException {
 		return onlineManager.getOnlineUserByUsername(username);
 	}
 

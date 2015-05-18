@@ -17,8 +17,7 @@ public class FieldsValues {
 	public static final int PASSWORD_MAX_LENGTH = 30;
 	// public static final String PASSWORD_FORBIDDEN_CHARS = "";
 	// public static final String PASSWORD_ONLY_CHARS = "";
-	public static final String PASSWORD_NEEDED_CHARS = "^"
-			+ "([a-zA-Z]+[0-9][a-zA-Z0-9]*)" + "|"
+	public static final String PASSWORD_NEEDED_CHARS = "^" + "([a-zA-Z]+[0-9][a-zA-Z0-9]*)" + "|"
 			+ "([0-9]+[a-zA-Z][a-zA-Z0-9]*)" + "$";
 
 	// public static final String[] PASSWORD_FORBIDDEN = {"password", "qwerty",

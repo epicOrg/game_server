@@ -1,7 +1,5 @@
 package check_fields;
 
-import java.util.Collection;
-
 /**
  * @author Noris
  * @version 24

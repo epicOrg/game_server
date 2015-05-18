@@ -30,8 +30,7 @@ public class ConnectionEncrypter {
 	}
 
 	public void setAsymmetricKey(String wrappedSymmetricKey) {
-		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(
-				keysGenerator.getPrivateKey());
+		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(keysGenerator.getPrivateKey());
 		keyUnwrapper.unwrapKey(wrappedSymmetricKey);
 		Key symmetricKey = keyUnwrapper.getUnwrappedKey();
 		encrypter = new Encrypter(symmetricKey);

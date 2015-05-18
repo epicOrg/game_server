@@ -22,8 +22,7 @@ public class AsymmetricKeysGenerator implements KeysGenerator {
 
 		try {
 
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator
-					.getInstance("RSA");
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 			SecureRandom secureRandom = new SecureRandom();
 
 			keyPairGenerator.initialize(KEYSIZE, secureRandom);

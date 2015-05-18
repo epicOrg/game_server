@@ -22,7 +22,7 @@ public class RoomChecker extends ServiceChecker {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void getFullRoomError() {
 		try {
 
