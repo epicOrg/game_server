@@ -9,6 +9,8 @@ import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import voip.audio_forwarder.Forwarder;
 import voip.audio_forwarder.ForwardingThread;
@@ -31,7 +33,7 @@ public class TeamAudioCall {
 	// TODO decidere dove preparare e iniziare la chiamata
 
 	private static final int DATA_LENTH = 160;
-	private static final int BUFFER_SIZE = DATA_LENTH * 200;
+	private static final int BUFFER_SIZE = DATA_LENTH * 100;
 
 	private Team team;
 	private HashMap<Player, SingleParticipantSession> sessions = new HashMap<>();
@@ -101,7 +103,7 @@ public class TeamAudioCall {
 	private SingleParticipantSession createSession(Player player) {
 		RtpParticipant server = RtpParticipant.createReceiver(NetUtils
 				.getLocalIpAddress(), player.getAudioData().getLocalPort(),
-				player.getAudioData().getLocalPort() + 1);
+				player.getAudioData().getLocalControlPort());
 		RtpParticipant client = RtpParticipant.createReceiver(player
 				.getAudioData().getIp(), player.getAudioData().getRemotePort(),
 				player.getAudioData().getRemotePort() + 1);
@@ -119,12 +121,19 @@ public class TeamAudioCall {
 	 * 
 	 */
 	public void startCall() {
-
 		thread.start();
 
-		Collection<SingleParticipantSession> sessios = sessions.values();
-		for (SingleParticipantSession singleParticipantSession : sessios) {
-			singleParticipantSession.init();
+		ExecutorService executor = Executors.newFixedThreadPool(sessions.size());
+		
+		Collection<SingleParticipantSession> tmp = sessions.values();
+		for (final SingleParticipantSession singleParticipantSession : tmp) {
+			executor.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					singleParticipantSession.init();
+				}
+			});
 		}
 	}
 
@@ -142,8 +151,10 @@ public class TeamAudioCall {
 		for (SingleParticipantSession singleParticipantSession : sessios) {
 			singleParticipantSession.terminate();
 		}
+		
 		for (Player player : team.getPlayers()) {
-			NetUtils.releasePort(player.getAudioData().getRemotePort());
+			NetUtils.releasePort(player.getAudioData().getLocalPort());
+			NetUtils.releasePort(player.getAudioData().getLocalControlPort());
 		}
 	}
 }

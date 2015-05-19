@@ -3,7 +3,10 @@ package services;
 import game.Player;
 import game.Room;
 import game.Team;
+import game.map.Dimension;
 import game.map.MapAdapter;
+import game.map.generation.DivisionMapGenerator;
+import game.map.generation.GridMapGenerator;
 import game.map.generation.MapGenerator;
 import game.map.generation.SimpleMapGenerator;
 
@@ -201,10 +204,10 @@ public class Game implements IService {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
 
-		// mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10));
+		mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10));
 		// mapGenerator = new DivisionMapGenerator(new Dimension(20, 20, 20));
 		// mapGenerator = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
-		mapGenerator = new SimpleMapGenerator();
+		// mapGenerator = new SimpleMapGenerator();
 		// mapGenerator = new TestMapGenerator();
 	}
 

@@ -38,6 +38,8 @@ public class Audio implements IService {
 			AudioData audioData = player.getAudioData();
 			int localPort = NetUtils.findFreePort();
 			audioData.setLocalPort(localPort);
+			int localControlPort = NetUtils.findFreePort();
+			audioData.setLocalControlPort(localControlPort);
 			audioData.setRemotePort(playerAudioPort);
 
 			response.put(FieldsNames.SERVICE, FieldsNames.AUDIO);

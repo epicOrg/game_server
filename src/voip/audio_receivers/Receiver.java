@@ -28,7 +28,7 @@ public class Receiver implements RtpSessionDataListener {
 		super();
 		this.pipedOutputStreams = pipedOutputStreams;
 
-		executor = Executors.newSingleThreadExecutor();
+		executor = Executors.newFixedThreadPool(pipedOutputStreams.size());
 	}
 
 	@Override

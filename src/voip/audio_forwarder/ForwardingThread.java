@@ -3,6 +3,8 @@ package voip.audio_forwarder;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Task that try to forward data if there are any.
@@ -13,29 +15,38 @@ import java.util.TimerTask;
 
 public class ForwardingThread extends Thread {
 
-	private static final int RATE = 5;
+	private static final int RATE = 20;
 	private static final int DELAY = 0;
 
 	private ArrayList<Forwarder> forwarders = new ArrayList<>();
 	private Timer timer;
 
+	private ExecutorService executor;
+
 	public ForwardingThread(ArrayList<Forwarder> forwarders) {
 		super();
+
 		this.forwarders = forwarders;
-		this.setPriority(MAX_PRIORITY);
+
+		executor = Executors.newFixedThreadPool(forwarders.size());
 	}
 
 	@Override
 	public void run() {
-
 		TimerTask forwardingTask = new TimerTask() {
 
 			@Override
 			public void run() {
-				for (Forwarder forwarder : forwarders) {
-					forwarder.forwardData();
+				for (final Forwarder forwarder : forwarders) {
+					executor.execute(new Runnable() {
+						@Override
+						public void run() {
+							forwarder.forwardData();
+						}						
+					});
 				}
 			}
+
 		};
 
 		timer = new Timer();
@@ -46,4 +57,5 @@ public class ForwardingThread extends Thread {
 		if (timer != null)
 			timer.cancel();
 	}
+
 }
