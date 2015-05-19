@@ -3,12 +3,6 @@ package services;
 import game.Player;
 import game.Room;
 import game.Team;
-import game.map.Dimension;
-import game.map.MapAdapter;
-import game.map.generation.DivisionMapGenerator;
-import game.map.generation.GridMapGenerator;
-import game.map.generation.MapGenerator;
-import game.map.generation.SimpleMapGenerator;
 
 import java.util.ArrayList;
 
@@ -33,7 +27,7 @@ public class Game implements IService {
 	private JSONObject jsonResponse;
 
 	private GameDataManager gameDataManager;
-	private MapGenerator mapGenerator;
+	private Room room;
 
 	public Game() {
 		gameDataManager = GameDataManager.getInstance();
@@ -119,8 +113,9 @@ public class Game implements IService {
 
 	private void generatePositionsResponse() {
 		try {
+
 			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
-			Room room = null;
+
 			try {
 				room = gameDataManager.getRoomByName(roomName);
 			} catch (NoSuchRoomException e) {
@@ -184,15 +179,21 @@ public class Game implements IService {
 	}
 
 	private void generateMapResponse() {
+
 		try {
 
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
 			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
 
-			MapAdapter mapAdapter = new MapAdapter(mapGenerator.generateMap());
-			jsonResponse.put(FieldsNames.GAME_WIDTH, mapAdapter.getAdaptedWidth());
-			jsonResponse.put(FieldsNames.GAME_HEIGHT, mapAdapter.getAdaptedHeight());
-			jsonResponse.put(FieldsNames.GAME_ITEMS, mapAdapter.getAdaptedItems());
+			jsonResponse = new JSONObject(jsonResponse, JSONObject.getNames(jsonResponse));
+
+			JSONObject map = room.getMap();
+			for (String key : JSONObject.getNames(map)) {
+				jsonResponse.put(key, map.get(key));
+			}
+
+			jsonResponse.put(FieldsNames.GAME_PLAYER_POSITION, room.getSpawnPoint()
+					.toStringPosition());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -203,12 +204,6 @@ public class Game implements IService {
 	public void setRequest(JSONObject request) {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
-
-		mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10));
-		// mapGenerator = new DivisionMapGenerator(new Dimension(20, 20, 20));
-		// mapGenerator = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
-		// mapGenerator = new SimpleMapGenerator();
-		// mapGenerator = new TestMapGenerator();
 	}
 
 }

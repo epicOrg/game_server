@@ -28,7 +28,7 @@ public class MapUtils {
 	public static double getRandomDouble(double min, double max) {
 		return min + (new Random().nextDouble()) * (max - min);
 	}
-	
+
 	/**
 	 * Generate a random int between min an max.
 	 * 
@@ -147,6 +147,31 @@ public class MapUtils {
 
 		double width1 = position.getWidth();
 		double width2 = position.getWidth();
+
+		points.add(new Dimension(width1, 0, length1));
+		points.add(new Dimension(width2, 0, length2));
+
+		return points;
+
+	}
+
+	/**
+	 * @param position
+	 *            of the wall
+	 * @param size
+	 *            of the wall
+	 * 
+	 * @return the extremes point of the wall segment
+	 */
+	public static ArrayList<Dimension> getWallPointsOnWidth(Dimension position, Dimension size) {
+
+		ArrayList<Dimension> points = new ArrayList<Dimension>(2);
+
+		double length1 = position.getLength();
+		double length2 = position.getLength();
+
+		double width1 = position.getWidth() + size.getWidth() / 2;
+		double width2 = position.getWidth() - size.getWidth() / 2;
 
 		points.add(new Dimension(width1, 0, length1));
 		points.add(new Dimension(width2, 0, length2));
@@ -319,4 +344,23 @@ public class MapUtils {
 				* (point1.getHeight() - point2.getHeight()));
 	}
 
+	public static Dimension getRandomPosition(Dimension mapSize) {
+
+		Random random = new Random();
+
+		return new Dimension((-1 * mapSize.getWidth() / 2)
+				+ (mapSize.getWidth() / 2 - (-1 * mapSize.getWidth() / 2)) * random.nextDouble(),
+				-1, (-1 * mapSize.getHeight() / 2)
+						+ (mapSize.getHeight() / 2 - (-1 * mapSize.getHeight() / 2))
+						* random.nextDouble());
+
+	}
+
+	public static Dimension getRandomSpawnPoint(Dimension mapSize) {
+
+		Dimension position = getRandomSpawnPoint(mapSize);
+
+		return new Dimension(position.getWidth(), 0.5, position.getLength());
+
+	}
 }

@@ -1,5 +1,9 @@
 package game.map;
 
+import game.PlayerStatus;
+
+import java.util.LinkedList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,9 +74,80 @@ public class MapAdapter {
 		}
 
 		// TODO DEBUG: map items
-		System.out.println("Map Items: " + adaptedItems);
+		// System.out.println("MAP ITEMS: " + adaptedItems);
 
 		return adaptedItems;
+
+	}
+
+	/**
+	 * @return all the spawn points
+	 */
+	public LinkedList<PlayerStatus> getAdaptedSpawnPoints() {
+
+		LinkedList<PlayerStatus> spawnPoints = new LinkedList<PlayerStatus>();
+
+		try {
+
+			JSONArray originalSpawnPoints = jsonMap.getJSONArray(FieldsNames.GAME_STATUS);
+
+			for (int i = 0; i < originalSpawnPoints.length(); i++) {
+
+				JSONObject original = originalSpawnPoints.getJSONObject(i);
+
+				JSONObject jsonPosition = original.getJSONObject(FieldsNames.GAME_POSITION);
+
+				JSONObject jsonDirection = original.getJSONObject(FieldsNames.GAME_SIZE);
+
+				PlayerStatus spawnPoint = new PlayerStatus(
+						jsonPosition.getDouble(FieldsNames.GAME_WIDTH) + PHASE,
+						jsonPosition.getDouble(FieldsNames.GAME_HEIGHT),
+						jsonPosition.getDouble(FieldsNames.GAME_LENGTH) + PHASE,
+						jsonDirection.getDouble(FieldsNames.GAME_WIDTH),
+						jsonDirection.getDouble(FieldsNames.GAME_HEIGHT),
+						jsonDirection.getDouble(FieldsNames.GAME_LENGTH));
+
+				spawnPoints.add(spawnPoint);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return spawnPoints;
+
+	}
+
+	/**
+	 * @return all the adapted items
+	 */
+	public Dimension getAdaptedWinPoint() {
+
+		JSONArray adaptedWinPoints = new JSONArray();
+
+		try {
+
+			JSONArray originalWinPoints = jsonMap.getJSONArray(FieldsNames.GAME_WIN);
+
+			// TODO
+
+			for (int i = 0; i < originalWinPoints.length(); i++) {
+
+				JSONObject original = originalWinPoints.getJSONObject(i);
+				JSONObject adapted = new JSONObject();
+
+				JSONObject jsonPosition = original.getJSONObject(FieldsNames.GAME_POSITION);
+
+				return new Dimension(jsonPosition.getDouble(FieldsNames.GAME_WIDTH) + PHASE,
+						jsonPosition.getDouble(FieldsNames.GAME_HEIGHT),
+						jsonPosition.getDouble(FieldsNames.GAME_LENGTH) + PHASE);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 
 	}
 
