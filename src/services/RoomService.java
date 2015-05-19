@@ -8,6 +8,7 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.messages.RoomsMessagesCreator;
 import voip.NetUtils;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;
@@ -34,9 +35,11 @@ public class RoomService implements IService {
 	private JSONObject jsonResponse;
 
 	private RoomChecker roomChecker;
+	private RoomsMessagesCreator messagesCreator;
 
 	public RoomService() {
 		gameDataManager = GameDataManager.getInstance();
+		messagesCreator = new RoomsMessagesCreator();
 	}
 
 	@Override
@@ -83,37 +86,11 @@ public class RoomService implements IService {
 
 			case FieldsNames.ROOM_CREATE:
 
-				try {
-
-					String roomName;
-					try {
-						roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
-					} catch (JSONException e) {
-						throw new MissingFieldException();
-					}
-
-					if (!roomChecker.checkRoomName(roomName)) {
-						jsonResponse.put(FieldsNames.SERVICE_TYPE,
-								FieldsNames.ROOM_CREATE);
-						break;
-					}
-
-					gameDataManager.newRoom(roomName);
-
-				} catch (RoomAlreadyExistsException e) {
-					roomChecker.getRoomAlreadyExistsError();
-					jsonResponse.put(FieldsNames.SERVICE_TYPE,
-							FieldsNames.ROOM_CREATE);
-					break;
-				}
-
-				jsonResponse.put(FieldsNames.SERVICE_TYPE,
-						FieldsNames.ROOMS_LIST);
-				addRoomsList();
+				createRoom();
 				break;
 
 			case FieldsNames.ROOMS_LIST:
-				addRoomsList();
+				messagesCreator.addRoomsList(jsonResponse, gameDataManager.getRooms());
 				jsonResponse.put(FieldsNames.SERVICE_TYPE,
 						FieldsNames.ROOMS_LIST);
 				break;
@@ -129,6 +106,37 @@ public class RoomService implements IService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected void createRoom() throws MissingFieldException, JSONException {
+		try {
+
+			String roomName;
+			try {
+				roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			} catch (JSONException e) {
+				throw new MissingFieldException();
+			}
+
+			if (!roomChecker.checkRoomName(roomName)) {
+				jsonResponse.put(FieldsNames.SERVICE_TYPE,
+						FieldsNames.ROOM_CREATE);
+				return;
+			}
+
+			gameDataManager.newRoom(roomName);
+
+		} catch (RoomAlreadyExistsException e) {
+			roomChecker.getRoomAlreadyExistsError();
+			jsonResponse.put(FieldsNames.SERVICE_TYPE,
+					FieldsNames.ROOM_CREATE);
+			return;
+		}
+
+		jsonResponse.put(FieldsNames.SERVICE_TYPE,
+				FieldsNames.ROOMS_LIST);
+		messagesCreator.addRoomsList(jsonResponse, gameDataManager.getRooms());
+		return;
 	}
 
 	private void addPlayer() throws MissingFieldException {
@@ -172,29 +180,6 @@ public class RoomService implements IService {
 		try {
 
 			jsonResponse.put(FieldsNames.RESULT, false);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void addRoomsList() {
-		JSONObject roomsList = new JSONObject();
-
-		ArrayList<Room> rooms = gameDataManager.getRooms();
-
-		try {
-
-			for (Room room : rooms) {
-				JSONObject roomDescription = new JSONObject();
-				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
-						Room.MAX_PLAYERS);
-				roomDescription.put(FieldsNames.ROOM_CURRENT_PLAYERS,
-						room.getSize());
-				roomsList.put(room.getName(), roomDescription);
-			}
-
-			jsonResponse.put(FieldsNames.ROOMS_LIST, roomsList);
 
 		} catch (JSONException e) {
 			e.printStackTrace();

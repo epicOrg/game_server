@@ -8,20 +8,34 @@ import java.util.Iterator;
 /**
  * Mixing stream for ulaw audio byte.
  * 
+ * 
  * @author Luca
  * @date 2015/04/28
+ * @see PipedInputStream
  */
 
-public class MixingPipedInputStream extends PipedInputStream {
+public class MixingPipedInputStream{
 
 	private Collection<PipedInputStream> streams;
 
+	/**
+	 * 
+	 * Generates a new MixingiInputStream.
+	 * 
+	 * @param streams a <code>Collection</code> of <code>PipedInputStream</code> containing data to mixing  
+	 */
 	public MixingPipedInputStream(Collection<PipedInputStream> streams) {
 		super();
 		this.streams = streams;
 	}
 
-	@Override
+	/**
+	 * 
+	 * Finds the minimum number of byte available for all the streams
+	 * 
+	 * @return the number of byte available 
+	 * @throws IOException
+	 */
 	public synchronized int available() throws IOException {
 		Iterator<PipedInputStream> iterator = streams.iterator();
 		int available = iterator.next().available();
@@ -33,7 +47,16 @@ public class MixingPipedInputStream extends PipedInputStream {
 		return available;
 	}
 
-	@Override
+	/**
+	 * 
+	 * Mixes the audio data from the <code>PipedInputStreams</code>.
+	 * 
+	 * The bytes mixed are a 
+	 * 
+	 * @param b
+	 * @return
+	 * @throws IOException
+	 */
 	public int read(byte[] b) throws IOException {
 		int byteToRead = b.length;
 		byte[] mixed = b;

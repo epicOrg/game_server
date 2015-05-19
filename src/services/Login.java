@@ -51,7 +51,7 @@ public class Login implements IService {
 		if (noErrors)
 			saveFields();
 
-		generatetResponse();
+		generateResponse();
 		return jsonResponse;
 
 	}
@@ -88,7 +88,7 @@ public class Login implements IService {
 		hashCode = onlineManager.setOnline(user.getUsername(), ipAddress, printWriter);
 	}
 
-	private void generatetResponse() {
+	private void generateResponse() {
 		try {
 			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
 
