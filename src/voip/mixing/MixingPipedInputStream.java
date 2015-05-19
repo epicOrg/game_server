@@ -5,6 +5,8 @@ import java.io.PipedInputStream;
 import java.util.Collection;
 import java.util.Iterator;
 
+import voip.audio_forwarder.Forwarder;
+
 /**
  * Mixing stream for ulaw audio byte.
  * 
@@ -35,28 +37,33 @@ public class MixingPipedInputStream extends PipedInputStream {
 
 	@Override
 	public int read(byte[] b) throws IOException {
-		// TODO Auto-generated method stub
-
 		int byteToRead = b.length;
-		if (b.length == 0)
-			return 0;
 		byte[] mixed = b;
 		short streamSize = (short) streams.size();
 		short[] coded = new short[byteToRead];
 
+		boolean found = false;
 
 		for (PipedInputStream stream : streams) {
-			byte[] data = new byte[byteToRead];
-			stream.read(data);
-			for (int i = 0; i < data.length; i++) {
-				short linear = (short) (TConversionTool.ulaw2linear(data[i]) / streamSize);
-				coded[i] += linear;
+			if(stream.available() > Forwarder.DATA_LENTH){
+				found = true;
+
+				byte[] data = new byte[byteToRead];
+				stream.read(data);
+				for (int i = 0; i < data.length; i++) {
+					short linear = (short) (TConversionTool.ulaw2linear(data[i]) / streamSize);
+					coded[i] += linear;
+				}
 			}
 		}
+
+		if(found)
+			return 1;
 
 		for (int i = 0; i < mixed.length; i++) {
 			mixed[i] = TConversionTool.linear2ulaw((int) coded[i]);
 		}
-		return byteToRead;
+
+		return 0;
 	}
 }
