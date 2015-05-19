@@ -39,10 +39,10 @@ public class SimpleMapGenerator implements MapGenerator {
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new Dimension(4.75, -1, 4.75), new Dimension(5.5, 2.5, 1.5)));
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new Dimension(-3.75, -1, 4.75), new Dimension(7.5, 2.5, 1.5)));
 		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new Dimension(0, -1, 1.25), new Dimension(10, 2.5, 1.5)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, 20), new Dimension(40, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(0, -1, -20), new Dimension(40, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(20, -1, 0), new Dimension(2, 2, 40)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE3, new Dimension(-20, -1, 0), new Dimension(2, 2, 40)));
+		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, new Dimension(0, -1, 20), new Dimension(40, 2, 2)));
+		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, new Dimension(0, -1, -20), new Dimension(40, 2, 2)));
+		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, new Dimension(20, -1, 0), new Dimension(2, 2, 40)));
+		mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, new Dimension(-20, -1, 0), new Dimension(2, 2, 40)));
 		mapJSONizer.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, new Dimension(0, -1, 18), new Dimension(0.5, 1, 0)));
 
 		return mapJSONizer.getJSONMap();
