@@ -358,7 +358,7 @@ public class MapUtils {
 
 	public static Dimension getRandomSpawnPoint(Dimension mapSize) {
 
-		Dimension position = getRandomSpawnPoint(mapSize);
+		Dimension position = getRandomPosition(mapSize);
 
 		return new Dimension(position.getWidth(), 0.5, position.getLength());
 

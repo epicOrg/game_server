@@ -1,17 +1,18 @@
 package game;
 
-import java.util.LinkedList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.map.Dimension;
 import game.map.MapAdapter;
 import game.map.generation.GridMapGenerator;
 import game.map.generation.MapGenerator;
+
+import java.util.LinkedList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import check_fields.FieldsNames;
 
 /**
  * @author Micieli
@@ -21,7 +22,7 @@ import game.map.generation.MapGenerator;
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 3;
+	public static final int MAX_PLAYERS = 2;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
@@ -152,7 +153,7 @@ public class Room {
 
 	private void generateMap() {
 
-		MapGenerator mapGenerator = new GridMapGenerator(new Dimension(20, 20, 20), MAX_PLAYERS);
+		MapGenerator mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10), MAX_PLAYERS);
 
 		// MapGenerator mapGenerator
 		// = new DivisionMapGenerator(new Dimension(20, 20, 20));
@@ -190,6 +191,9 @@ public class Room {
 	}
 
 	public PlayerStatus getSpawnPoint() {
+
+		// TODO: decommentare per simpleMap
+		// spawnPoints.add(new PlayerStatus(10, 20, 10, 10, 10, 10));
 
 		if (spawnPoints.size() == 1)
 			return spawnPoints.getFirst();

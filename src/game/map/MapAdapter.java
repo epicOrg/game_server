@@ -90,6 +90,7 @@ public class MapAdapter {
 		try {
 
 			JSONArray originalSpawnPoints = jsonMap.getJSONArray(FieldsNames.GAME_STATUS);
+			System.out.println(originalSpawnPoints);
 
 			for (int i = 0; i < originalSpawnPoints.length(); i++) {
 
@@ -97,7 +98,7 @@ public class MapAdapter {
 
 				JSONObject jsonPosition = original.getJSONObject(FieldsNames.GAME_POSITION);
 
-				JSONObject jsonDirection = original.getJSONObject(FieldsNames.GAME_SIZE);
+				JSONObject jsonDirection = original.getJSONObject(FieldsNames.GAME_DIRECTION);
 
 				PlayerStatus spawnPoint = new PlayerStatus(
 						jsonPosition.getDouble(FieldsNames.GAME_WIDTH) + PHASE,
@@ -137,6 +138,8 @@ public class MapAdapter {
 				JSONObject adapted = new JSONObject();
 
 				JSONObject jsonPosition = original.getJSONObject(FieldsNames.GAME_POSITION);
+				
+				
 
 				return new Dimension(jsonPosition.getDouble(FieldsNames.GAME_WIDTH) + PHASE,
 						jsonPosition.getDouble(FieldsNames.GAME_HEIGHT),

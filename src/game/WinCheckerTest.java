@@ -1,5 +1,7 @@
 package game;
 
+import game.map.Dimension;
+
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,27 @@ public class WinCheckerTest implements IWinChecher {
 	private float yWin = -1;
 	private float zWin = 17;
 	private float ray = 3;
+	
+	public WinCheckerTest() {
+
+	}
+
+	public WinCheckerTest(float xWin, float yWin, float zWin, float ray) {
+		super();
+		this.xWin = xWin;
+		this.yWin = yWin;
+		this.zWin = zWin;
+		this.ray = ray;
+	}
+
+	public WinCheckerTest(Dimension position, float ray) {
+		super();
+		this.xWin = (float) position.getWidth();
+		this.yWin = (float) position.getHeight();
+		this.zWin = (float) position.getLength();
+		this.ray = ray;
+
+	}
 
 	@Override
 	public boolean checkWin(Team team) {
@@ -41,4 +64,5 @@ public class WinCheckerTest implements IWinChecher {
 
 		return false;
 	}
+
 }

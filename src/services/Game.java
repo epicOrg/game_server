@@ -186,6 +186,13 @@ public class Game implements IService {
 			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
 
 			jsonResponse = new JSONObject(jsonResponse, JSONObject.getNames(jsonResponse));
+			
+			try {
+				room = gameDataManager.getRoomByName(jsonRequest.getString(FieldsNames.ROOM_NAME));
+			} catch (NoSuchRoomException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			JSONObject map = room.getMap();
 			for (String key : JSONObject.getNames(map)) {

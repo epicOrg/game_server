@@ -18,11 +18,15 @@ public class MapJSONizer {
 
 	private JSONObject jsonMap;
 	private JSONArray mapObjects;
+	private JSONArray spawnPoints;
+	private JSONArray winPoints;
 	private int numObjects = 0;
 
 	public MapJSONizer() {
 		jsonMap = new JSONObject();
 		mapObjects = new JSONArray();
+		spawnPoints = new JSONArray();
+		winPoints = new JSONArray();
 	}
 
 	public void setMapSize(Dimension dimension) {
@@ -83,6 +87,62 @@ public class MapJSONizer {
 		}
 	}
 
+	public void addSpawnPoint(Dimension position, Dimension direction) {
+
+		JSONObject jsonObject = new JSONObject();
+
+		try {
+
+			JSONObject jsonPosition = new JSONObject();
+			jsonPosition.put(FieldsNames.GAME_WIDTH, position.getWidth());
+			jsonPosition.put(FieldsNames.GAME_LENGTH, position.getLength());
+			jsonPosition.put(FieldsNames.GAME_HEIGHT, position.getHeight());
+
+			JSONObject jsonDirection = new JSONObject();
+			jsonDirection.put(FieldsNames.GAME_WIDTH, direction.getWidth());
+			jsonDirection.put(FieldsNames.GAME_LENGTH, direction.getLength());
+			jsonDirection.put(FieldsNames.GAME_HEIGHT, direction.getHeight());
+
+			jsonObject.put(FieldsNames.GAME_POSITION, jsonPosition);
+			jsonObject.put(FieldsNames.GAME_DIRECTION, jsonDirection);
+
+			spawnPoints.put(jsonObject);
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addWinPoint(MapObject mapObject) {
+
+		JSONObject jsonObject = new JSONObject();
+
+		try {
+
+			jsonObject.put(FieldsNames.GAME_TEXTURE, mapObject.getTextureName());
+			jsonObject.put(FieldsNames.GAME_OBJECT, mapObject.getObjectName());
+
+			JSONObject jsonPosition = new JSONObject();
+			jsonPosition.put(FieldsNames.GAME_WIDTH, mapObject.getPosition().getWidth());
+			jsonPosition.put(FieldsNames.GAME_LENGTH, mapObject.getPosition().getLength());
+			jsonPosition.put(FieldsNames.GAME_HEIGHT, mapObject.getPosition().getHeight());
+
+			JSONObject jsonSize = new JSONObject();
+			jsonSize.put(FieldsNames.GAME_WIDTH, mapObject.getSize().getWidth());
+			jsonSize.put(FieldsNames.GAME_LENGTH, mapObject.getSize().getLength());
+			jsonSize.put(FieldsNames.GAME_HEIGHT, mapObject.getSize().getHeight());
+
+			jsonObject.put(FieldsNames.GAME_POSITION, jsonPosition);
+			jsonObject.put(FieldsNames.GAME_SIZE, jsonSize);
+
+			winPoints.put(jsonObject);
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	private void JSONizeMap() {
 
 		try {
@@ -91,6 +151,8 @@ public class MapJSONizer {
 				return;
 
 			jsonMap.put(FieldsNames.GAME_ITEMS, mapObjects);
+			jsonMap.put(FieldsNames.GAME_STATUS, spawnPoints);
+			jsonMap.put(FieldsNames.GAME_WIN, winPoints);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -98,7 +160,7 @@ public class MapJSONizer {
 	}
 
 	public JSONObject getJSONMap() {
-		JSONizeMap();		
+		JSONizeMap();
 		return jsonMap;
 	}
 

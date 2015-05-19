@@ -20,8 +20,8 @@ public class PlayerStatus {
 	private float yDirection;
 	private float zDirection;
 
-	public PlayerStatus(float xPosition, float yPosition, float zPosition,
-			float xDirection, float yDirection, float zDirection) {
+	public PlayerStatus(float xPosition, float yPosition, float zPosition, float xDirection,
+			float yDirection, float zDirection) {
 
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
@@ -30,6 +30,18 @@ public class PlayerStatus {
 		this.xDirection = xDirection;
 		this.yDirection = yDirection;
 		this.zDirection = zDirection;
+	}
+
+	public PlayerStatus(double xPosition, double yPosition, double zPosition, double xDirection,
+			double yDirection, double zDirection) {
+
+		this.xPosition = (float) xPosition;
+		this.yPosition = (float) yPosition;
+		this.zPosition = (float) zPosition;
+
+		this.xDirection = (float) xDirection;
+		this.yDirection = (float) yDirection;
+		this.zDirection = (float) zDirection;
 	}
 
 	public void setPosition(float xPosition, float yPosition, float zPosition) {
@@ -62,8 +74,7 @@ public class PlayerStatus {
 		this.zPosition = zPosition;
 	}
 
-	public void setDirection(float xDirection, float yDirection,
-			float zDirection) {
+	public void setDirection(float xDirection, float yDirection, float zDirection) {
 		this.xDirection = xDirection;
 		this.yDirection = yDirection;
 		this.zDirection = zDirection;
@@ -117,6 +128,14 @@ public class PlayerStatus {
 		}
 
 		return playerStatus;
+	}
+
+	public String toStringPosition() {
+		return xPosition + " " + yPosition + " " + zPosition;
+	}
+
+	public String toStringDirection() {
+		return xDirection + " " + yDirection + " " + zDirection;
 	}
 
 }

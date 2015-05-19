@@ -5,8 +5,6 @@ import exceptions.RoomAlreadyExistsException;
 import game.Room;
 import game.RoomEventListener;
 import game.RoomPlayersUpdater;
-import game.RoomThread;
-import game.WinCheckerTest;
 
 import java.util.ArrayList;
 
@@ -43,7 +41,6 @@ public class GameDataManager {
 		} catch (NoSuchRoomException e) {
 			Room room = new Room(name);
 			RoomEventListener listener = new RoomPlayersUpdater(room);
-			RoomThread roomThread = new RoomThread(room, new WinCheckerTest());
 			room.setEventListener(listener);
 			rooms.add(room);
 			return;

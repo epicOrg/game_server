@@ -151,7 +151,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			}
 		}
 		
-		roomThread = new RoomThread(room, new WinCheckerTest());
+		roomThread = new RoomThread(room, new WinCheckerTest(room.getWinPoint(), 3));
 		roomThread.start();
 
 		

@@ -37,8 +37,7 @@ public class ClientRequestThread implements Runnable {
 	public void run() {
 		try {
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
 			// TODO DEBUG: port
@@ -51,21 +50,18 @@ public class ClientRequestThread implements Runnable {
 					return;
 
 				// TODO DEBUG: client request
-				//System.out.println("CLIENT: " + request);
+				// System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
-				JSONObject jsonRequest = secureConnection
-						.decrypt(jsonEncryptedRequest);
+				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);
 
 				InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
 						.getRemoteSocketAddress();
-				jsonRequest.put(FieldsNames.IP_ADDRESS,
-						inetSocketAddress.getHostName());
+				jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
 				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
 
 				IService service;
-				if (jsonRequest.getString(FieldsNames.SERVICE).equals(
-						FieldsNames.LOGIN)) {
+				if (jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.LOGIN)) {
 					service = new Login(out);
 					service.setRequest(jsonRequest);
 				} else {
@@ -74,15 +70,14 @@ public class ClientRequestThread implements Runnable {
 
 				JSONObject jResponse;
 				if ((jResponse = service.start()) != null) {
-					String response = secureConnection.encrypt(jResponse)
-							.toString();
+					String response = secureConnection.encrypt(jResponse).toString();
 
 					out.println(response);
 
 					// TODO DEBUG: server response
-					//System.out.println("SERVER: " + response);
+					// System.out.println("SERVER: " + response);
 				} else {
-					// System.out.println("SERVER: " + "No response.");
+					System.out.println("SERVER: " + "No response.");
 				}
 
 				request = in.readLine();
