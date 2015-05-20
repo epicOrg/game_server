@@ -31,10 +31,10 @@ public class Room {
 		// MapDimension(15, 15, 15), MAX_PLAYERS));
 
 		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
-		// Dimension(20, 20, 20)));
+		// MapDimension(20, 20, 20)));
 
 		// roomMapSelector = new RoomMapSelector(new ForestMapGenerator(new
-		// Dimension(20, 20, 20), 30));
+		// MapDimension(20, 20, 20), 30));
 
 		roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
 

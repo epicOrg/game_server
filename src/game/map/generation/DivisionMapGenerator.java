@@ -200,7 +200,7 @@ public class DivisionMapGenerator implements MapGenerator {
 	// -tmpPositionWidth;
 	// double width = 2 * (availableSize.getWidth() - positionWidth);
 	//
-	// size = new Dimension(width, 2, 0.5);
+	// size = new MapDimension(width, 2, 0.5);
 	// }
 
 	private void generateVerticalSize() {
