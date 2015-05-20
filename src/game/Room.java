@@ -2,7 +2,8 @@ package game;
 
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
-import game.map.generation.SimpleMapGenerator;
+import game.map.MapDimension;
+import game.map.generation.GridMapGenerator;
 
 /**
  * @author Micieli
@@ -12,7 +13,7 @@ import game.map.generation.SimpleMapGenerator;
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 2;
+	public static final int MAX_PLAYERS = 1;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
@@ -27,8 +28,8 @@ public class Room {
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
 
-		// roomMapSelector = new RoomMapSelector(new GridMapGenerator(new
-		// MapDimension(15, 15, 15), MAX_PLAYERS));
+		 roomMapSelector = new RoomMapSelector(new GridMapGenerator(new
+		 MapDimension(20, 20, 20), MAX_PLAYERS));
 
 		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
 		// MapDimension(20, 20, 20)));
@@ -36,7 +37,7 @@ public class Room {
 		// roomMapSelector = new RoomMapSelector(new ForestMapGenerator(new
 		// MapDimension(20, 20, 20), 30));
 
-		roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
+		// roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
 
 		// roomMapSelector = new RoomMapSelector(new TestMapGenerator());
 

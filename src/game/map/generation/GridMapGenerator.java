@@ -24,7 +24,7 @@ public class GridMapGenerator implements MapGenerator {
 
 	private static final double PLAYER_SIZE = 2;
 	private static final double WALL_SIZE = 0.2;
-	private static final double GRID_TOLERANCE = PLAYER_SIZE;
+	private static final double GRID_TOLERANCE = PLAYER_SIZE * 2;
 
 	private static final int MIN_DOORS = 1;
 	private static final int MAX_DOORS = 4;
@@ -43,7 +43,7 @@ public class GridMapGenerator implements MapGenerator {
 	private boolean isNotVertical = true;
 
 	public GridMapGenerator(MapDimension mapSize, int numberOfPlayers) {
-		super();
+
 		this.mapSize = mapSize;
 		mapConstructor = new MapConstructor();
 		spawnPoints = new ArrayList<MapDimension>();
@@ -58,7 +58,7 @@ public class GridMapGenerator implements MapGenerator {
 	public MapConstructor generateMap() {
 
 		mapConstructor.setMapSize(mapSize);
-		MapDefault.constructBorders(mapConstructor, mapSize, Texture.WALL3);
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE4);
 
 		generateSpawnPoints();
 		generateWin();
@@ -71,15 +71,17 @@ public class GridMapGenerator implements MapGenerator {
 
 	private void generateSpawnPoints() {
 
-		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE
-				/ 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE / 2);
+		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE
+				- PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
+				- PLAYER_SIZE / 2);
 
 		for (int i = 0; i < numberOfPlayers; i++) {
-			MapDimension tmp = MapPosition.getRandomSpawnPoint(mapSize);
+			MapDimension tmp = MapPosition.getRandomSpawnPoint(mapSizeWithTolerance);
 			spawnPoints.add(tmp);
 			mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
-			System.out.println("PLAYER: " + tmp);
 
+			// TODO DEBUG
+			System.out.println("Player Position: " + tmp);
 		}
 
 	}
@@ -126,14 +128,13 @@ public class GridMapGenerator implements MapGenerator {
 
 			winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
 
-			System.out.println("Win: " + winPoint);
+			// TODO DEBUG
+			System.out.println("Win Position: " + winPoint);
 
 		} while (MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
 
-		mapConstructor.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
 				new MapDimension(0.5, 1, 0)));
-		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint, new MapDimension(
-				0.5, 1, 0)));
 
 	}
 
@@ -165,8 +166,8 @@ public class GridMapGenerator implements MapGenerator {
 				for (int j = 0; j < segments.size() - 1; j++) {
 
 					if (!(i == 0 || i == loop - 1))
-						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, segments
-								.get(j), segments.get(segments.size() - 1)));
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4,
+								segments.get(j), segments.get(segments.size() - 1)));
 				}
 
 			}
@@ -261,8 +262,8 @@ public class GridMapGenerator implements MapGenerator {
 				for (int j = 0; j < segments.size() - 1; j++) {
 
 					if (i != 0)
-						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
-								.get(j), segments.get(segments.size() - 1)));
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3,
+								segments.get(j), segments.get(segments.size() - 1)));
 				}
 
 			}
@@ -300,8 +301,8 @@ public class GridMapGenerator implements MapGenerator {
 								points.get(1))) {
 
 					if (i != 0)
-						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
-								.get(j), segments.get(segments.size() - 1)));
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3,
+								segments.get(j), segments.get(segments.size() - 1)));
 				}
 
 			}
