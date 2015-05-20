@@ -1,3 +1,4 @@
+
 package services;
 
 import org.json.JSONException;
@@ -35,14 +36,9 @@ public class Register implements IService {
 	public JSONObject start(JSONObject request) {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
-		registerChecker = new RegisterChecker();
-	
+		registerChecker = new RegisterChecker();	
 
-		try {
-			readFields();
-		} catch (MissingFieldException e) {
-			return new MissingFieldException().getMissingFieldError();
-		}
+		readFields();
 
 		checkFields();
 		if (registerChecker.noErrors())
@@ -53,7 +49,7 @@ public class Register implements IService {
 
 	}
 
-	private void readFields() throws MissingFieldException {
+	private void readFields() {
 
 		try {
 
@@ -63,7 +59,7 @@ public class Register implements IService {
 			registeredUser = new RegisteredUser(username, password, email);
 
 		} catch (JSONException e) {
-			throw new MissingFieldException();
+			e.printStackTrace();
 		}
 	}
 
@@ -74,11 +70,8 @@ public class Register implements IService {
 		registerChecker.checkEmail(registeredUser.getEmail());
 
 		if (registerChecker.noErrors()) {
-
-			registerChecker.checkAlreadyUsedUsername(dataManager,
-					registeredUser.getUsername());
-			registerChecker.checkAlreadyUsedEmail(dataManager,
-					registeredUser.getEmail());
+			registerChecker.checkAlreadyUsedUsername(dataManager,registeredUser.getUsername());
+			registerChecker.checkAlreadyUsedEmail(dataManager,	registeredUser.getEmail());
 		}
 	}
 
@@ -95,6 +88,7 @@ public class Register implements IService {
 				registerChecker.addError();
 
 			} catch (JSONException e1) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -108,7 +102,7 @@ public class Register implements IService {
 			jsonResponse.put(FieldsNames.ERRORS, registerChecker.getErrors());
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
-
 }
