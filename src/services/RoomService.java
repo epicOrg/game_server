@@ -43,7 +43,10 @@ public class RoomService implements IService {
 	}
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		roomChecker = new RoomChecker();
 
 		try {
 
@@ -55,7 +58,6 @@ public class RoomService implements IService {
 			e.printStackTrace();
 		}
 		return jsonResponse;
-
 	}
 
 	private void checkFields() {
@@ -149,12 +151,5 @@ public class RoomService implements IService {
 			jsonResponse = messagesCreator.generateJoinResponse(false, roomName);
 			e.printStackTrace();
 		} 
-	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.jsonRequest = request;
-		jsonResponse = new JSONObject();
-		roomChecker = new RoomChecker();
 	}
 }

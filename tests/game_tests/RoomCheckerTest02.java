@@ -40,9 +40,8 @@ class RoomCheckerTest02 {
 			System.out.println("Request: " + jsonRequest);
 			
 			RoomService roomService = new RoomService();
-			roomService.setRequest(jsonRequest);
 			System.out.println("Response: "
-					+ roomService.start());
+					+ roomService.start(jsonRequest));
 
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block

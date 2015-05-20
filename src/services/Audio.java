@@ -22,8 +22,9 @@ public class Audio implements IService {
 	private JSONObject request;
 
 	@Override
-	public JSONObject start() {
-
+	public JSONObject start(JSONObject request) {
+		this.request = request;
+		
 		JSONObject response = new JSONObject();
 
 		GameDataManager dataManager = GameDataManager.getInstance();
@@ -55,10 +56,5 @@ public class Audio implements IService {
 			e.printStackTrace();
 		}
 		return response;
-	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.request = request;
 	}
 }

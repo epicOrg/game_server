@@ -37,9 +37,8 @@ class Test03 {
 
 		// SERVER: Register the user
 		Register register = new Register();
-		register.setRequest(jsonRegFromClient);
 		System.out.println("SERVER Registration Message: "
-				+ register.start() + "\n");
+				+ register.start(jsonRegFromClient) + "\n");
 
 		// CLIENT: Try to register with the same email
 		JSONObject jsonRegFromClientCopy = new JSONObject();
@@ -51,10 +50,9 @@ class Test03 {
 		System.out.println("CLIENT Registration Message: " + jsonRegFromClient);
 
 		// SERVER: Try to register the user
-		register.setRequest(jsonRegFromClientCopy);
 		System.out.println("SERVER Registration Message: "
 				+ register
-				.start() + "\n");
+				.start(jsonRegFromClientCopy) + "\n");
 
 	}
 

@@ -18,7 +18,9 @@ public class Logout implements IService {
 	private JSONObject request;
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.request = request;
+		
 
 		OnlineManager onlineManager = OnlineManager.getInstance();
 
@@ -36,10 +38,5 @@ public class Logout implements IService {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.request = request;
 	}
 }

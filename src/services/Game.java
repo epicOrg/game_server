@@ -34,7 +34,9 @@ public class Game implements IService {
 	}
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
 
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
@@ -206,11 +208,4 @@ public class Game implements IService {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.jsonRequest = request;
-		jsonResponse = new JSONObject();
-	}
-
 }

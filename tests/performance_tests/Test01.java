@@ -46,9 +46,8 @@ class Test01 {
 
 			// SERVER: Register the user
 			Register register = new Register();
-			register.setRequest(jsonRegFromClient);
 			System.out.println("[" + i + "] SERVER Registration Message: "
-					+ register.start() + "\n");
+					+ register.start(jsonRegFromClient) + "\n");
 
 			// CLIENT: Send message to go online
 			JSONObject jsonLoginFromClient = new JSONObject();
@@ -62,8 +61,7 @@ class Test01 {
 
 			// SERVER: Set the user online
 			IService login = new Login(null);
-			login.setRequest(jsonLoginFromClient);
-			String stringLoginFromServer = login.start().toString();
+			String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
 			System.out.println("[" + i + "] SERVER Login Message: "
 					+ stringLoginFromServer + "\n");
 

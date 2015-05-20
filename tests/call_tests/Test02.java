@@ -46,8 +46,7 @@ class Test02 {
 		jsonRegFromClient.put(FieldsNames.PASSWORD, "AufhebungRulezL0L");
 		jsonRegFromClient.put(FieldsNames.EMAIL, randomUsername + "@lol.com");
 		Register register = new Register();
-		register.setRequest(jsonRegFromClient);
-		System.out.println("Registration Client Message: " + register.start());
+		System.out.println("Registration Client Message: " + register.start(jsonRegFromClient));
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
@@ -59,8 +58,7 @@ class Test02 {
 
 		// SERVER: Set the user online
 		IService login = new Login(null);
-		login.setRequest(jsonLoginFromClient);
-		String stringLoginFromServer = login.start().toString();
+		String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);
 
 		// CLIENT: Read response from server
@@ -78,8 +76,7 @@ class Test02 {
 
 		// SERVER: Read call request
 		IService call = new Call();
-		call.setRequest(jsonCallFromClient);
-		String stringCallFromServer = call.start().toString();
+		String stringCallFromServer = call.start(jsonCallFromClient).toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 
 		// Deleted registration file for a clean test

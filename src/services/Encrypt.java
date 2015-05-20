@@ -17,14 +17,9 @@ public class Encrypt implements IService {
 	private JSONObject jsonResponse;
 
 	@Override
-	public void setRequest(JSONObject jsonRequest) {
+	public JSONObject start(JSONObject jsonRequest) {
 		this.jsonRequest = jsonRequest;
 		jsonResponse = new JSONObject();
-	}
-
-	@Override
-	public JSONObject start() {
-
 		runService();
 		generateResponse();
 

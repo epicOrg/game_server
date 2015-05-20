@@ -33,8 +33,7 @@ class Test04 {
 
 		// SERVER: Read call request
 		IService call = new Call();
-		call.setRequest(jsonCallFromClient);
-		String stringCallFromServer = call.start().toString();
+		String stringCallFromServer = call.start(jsonCallFromClient).toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 	}
 

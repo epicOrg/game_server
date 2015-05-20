@@ -15,12 +15,9 @@ import check_fields.FieldsNames;
 
 public class Unknown implements IService {
 
-	@Override
-	public void setRequest(JSONObject request) {
-	}
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
 		return getResponse();
 	}
 

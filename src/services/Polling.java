@@ -19,7 +19,9 @@ public class Polling implements IService {
 	private JSONObject request;
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.request = request;
+		
 		
 		String username = null;
 		try {
@@ -40,10 +42,4 @@ public class Polling implements IService {
 		}		
 		return null;
 	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.request = request;
-	}
-
 }

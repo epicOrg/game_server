@@ -60,7 +60,6 @@ public class RequestElaborator {
 		if (service == null)
 			service = services.get(FieldsNames.UNKNOWN);
 
-		service.setRequest(json);
 		return service;
 	}
 

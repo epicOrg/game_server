@@ -40,9 +40,8 @@ class CreateRoomTest02 {
 
 		// SERVER: Register the user
 		Register register = new Register();
-		register.setRequest(jsonRegFromClient);
 		System.out.println("SERVER Registration Message: "
-				+ register.start() + "\n");
+				+ register.start(jsonRegFromClient) + "\n");
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
@@ -55,8 +54,7 @@ class CreateRoomTest02 {
 
 		// SERVER: Set the user online
 		IService login = new Login(null);
-		login.setRequest(jsonLoginFromClient);
-		String stringLoginFromServer = login.start().toString();
+		String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
 		System.out.println("SERVER Login Message: " + stringLoginFromServer
 				+ "\n");
 
@@ -77,9 +75,8 @@ class CreateRoomTest02 {
 
 		// SERVER: Send a response with the list of the online rooms
 		RoomService roomService = new RoomService();
-		roomService.setRequest(jsonRoomCreateFromClient);
 		System.out.println("SERVER RoomCreate Message: "
-				+ roomService.start() + "\n");
+				+ roomService.start(jsonRoomCreateFromClient) + "\n");
 
 		// CLIENT: Send a duplicate Room Create request
 		JSONObject jsonRoomCreateFromClientCopy = new JSONObject();
@@ -95,9 +92,8 @@ class CreateRoomTest02 {
 				+ jsonRoomCreateFromClientCopy);
 
 		// SERVER: Send an error
-		roomService.setRequest(jsonRoomCreateFromClientCopy);
 		System.out.println("SERVER RoomCreate Message: "
-				+ roomService.start());
+				+ roomService.start(jsonRoomCreateFromClientCopy));
 	}
 
 }

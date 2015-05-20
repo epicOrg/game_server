@@ -38,8 +38,7 @@ class RoomsServiceTest01 {
 		}
 
 		RoomService roomService = new RoomService();
-		roomService.setRequest(request);
-		System.out.println(roomService.start());
+		System.out.println(roomService.start(request));
 
 	}
 

@@ -35,8 +35,7 @@ class Test03 {
 
 		// SERVER: Set the user online
 		IService login = new Login(null);
-		login.setRequest(jsonLoginFromClient);
-		String stringLoginFromServer = login.start().toString();
+		String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);
 
 		// CLIENT: Read response from server
@@ -54,8 +53,7 @@ class Test03 {
 
 		// SERVER: Read call request
 		IService call = new Call();
-		call.setRequest(jsonCallFromClient);
-		String stringCallFromServer = call.start().toString();
+		String stringCallFromServer = call.start(jsonCallFromClient).toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 	}
 

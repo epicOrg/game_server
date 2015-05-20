@@ -32,7 +32,11 @@ public class Register implements IService {
 	}
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
+		registerChecker = new RegisterChecker();
+	
 
 		try {
 			readFields();
@@ -107,10 +111,4 @@ public class Register implements IService {
 		}
 	}
 
-	@Override
-	public void setRequest(JSONObject request) {
-		this.jsonRequest = request;
-		jsonResponse = new JSONObject();
-		registerChecker = new RegisterChecker();
-	}
 }

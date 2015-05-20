@@ -39,7 +39,9 @@ public class Login implements IService {
 	}
 
 	@Override
-	public JSONObject start() {
+	public JSONObject start(JSONObject request) {
+		this.jsonRequest = request;
+		jsonResponse = new JSONObject();
 
 		try {
 			readFields();
@@ -99,11 +101,5 @@ public class Login implements IService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void setRequest(JSONObject request) {
-		this.jsonRequest = request;
-		jsonResponse = new JSONObject();
 	}
 }

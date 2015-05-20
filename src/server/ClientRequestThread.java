@@ -63,13 +63,12 @@ public class ClientRequestThread implements Runnable {
 				IService service;
 				if (jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.LOGIN)) {
 					service = new Login(out);
-					service.setRequest(jsonRequest);
 				} else {
 					service = requestElaborator.chooseService(jsonRequest);
 				}
 
 				JSONObject jResponse;
-				if ((jResponse = service.start()) != null) {
+				if ((jResponse = service.start(jsonRequest)) != null) {
 					String response = secureConnection.encrypt(jResponse).toString();
 
 					out.println(response);

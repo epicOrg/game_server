@@ -36,8 +36,7 @@ public class Test01 {
 		jsonFromClient.put(FieldsNames.EMAIL, "arthur@paralipomena.org");
 
 		Register register = new Register();
-		register.setRequest(jsonFromClient);
-		String response = register.start().toString();
+		String response = register.start(jsonFromClient).toString();
 
 		/*
 		 * Console print "fake" control: it can not work because "An object is

@@ -50,9 +50,8 @@ class Test01 {
 		
 		// SERVER: Register the user
 		Register register = new Register();
-		register.setRequest(jsonRegFromClient);
 		System.out.println("Registration Server Message: "
-				+ register.start());
+				+ register.start(jsonRegFromClient));
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
@@ -64,8 +63,7 @@ class Test01 {
 
 		// SERVER: Set the user online
 		IService login = new Login(null);
-		login.setRequest(jsonLoginFromClient);
-		String stringLoginFromServer = login.start().toString();
+		String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
 		System.out.println("Login Server Message: " + stringLoginFromServer);
 
 		// CLIENT: Read response from server
@@ -83,8 +81,7 @@ class Test01 {
 
 		// SERVER: Read call request
 		IService call = new Call();
-		call.setRequest(jsonCallFromClient);
-		String stringCallFromServer = call.start().toString();
+		String stringCallFromServer = call.start(jsonCallFromClient).toString();
 		System.out.println("Call Server Message:  " + stringCallFromServer);
 
 		// Deleted registration file for a clean test
