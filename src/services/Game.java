@@ -186,7 +186,7 @@ public class Game implements IService {
 			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
 
 			jsonResponse = new JSONObject(jsonResponse, JSONObject.getNames(jsonResponse));
-			
+
 			try {
 				room = gameDataManager.getRoomByName(jsonRequest.getString(FieldsNames.ROOM_NAME));
 			} catch (NoSuchRoomException e) {
@@ -194,13 +194,13 @@ public class Game implements IService {
 				e.printStackTrace();
 			}
 
-			JSONObject map = room.getMap();
+			JSONObject map = room.getRoomMapSelector().getMap();
 			for (String key : JSONObject.getNames(map)) {
 				jsonResponse.put(key, map.get(key));
 			}
 
-			jsonResponse.put(FieldsNames.GAME_PLAYER_POSITION, room.getSpawnPoint()
-					.toStringPosition());
+			jsonResponse.put(FieldsNames.GAME_PLAYER_POSITION, room.getRoomMapSelector()
+					.getSpawnPoint().toStringPosition());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

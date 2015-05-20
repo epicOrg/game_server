@@ -5,10 +5,10 @@ import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.maze.Coordinate2D;
+import game.map.maze.Maze;
+import game.map.maze.Node;
 import game.map.utils.MapDefault;
-import maze.Coordinate2D;
-import maze.Maze;
-import maze.Node;
 
 /**
  * @author Hermann Tom

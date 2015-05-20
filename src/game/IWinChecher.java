@@ -1,13 +1,13 @@
 package game;
 
 /**
- * Interface for algorithms that checks for a winner team.
+ * Interface for the algorithms who checks for the winner team.
  * 
  * @see Team
  * @see Room
  * @see RoomThread
  * 
- * @author Luca
+ * @author Micieli
  * @date 2015/05/05
  */
 

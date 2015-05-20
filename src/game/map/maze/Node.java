@@ -1,4 +1,4 @@
-package maze;
+package game.map.maze;
 
 import java.util.ArrayList;
 import java.util.Arrays;

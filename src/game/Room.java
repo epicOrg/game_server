@@ -2,17 +2,7 @@ package game;
 
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
-import game.map.Dimension;
-import game.map.MapJSONizer;
-import game.map.generation.MapGenerator;
 import game.map.generation.SimpleMapGenerator;
-
-import java.util.LinkedList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * @author Micieli
@@ -30,14 +20,14 @@ public class Room {
 	private boolean inPlay = false;
 	private RoomThread roomThread;
 
-	private JSONObject map;
-	private LinkedList<PlayerStatus> spawnPoints;
-	private Dimension winPoint;
+	private RoomMapSelector roomMapSelector;
 
 	public Room(String roomName) {
+
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
-		generateMap();
+
+		roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
 	}
 
 	/**
@@ -62,13 +52,13 @@ public class Room {
 	 * @param player
 	 */
 	public void removePlayer(Player player) {
+
 		if (inPlay) {
 			playersUpdater.onExtingFromGame();
 			setInPlay(false);
 			System.out.println("Game interrupted.");
 
 		} else {
-
 			player.getTeam().removePlayer(player);
 			player.setRoom(null);
 			playersUpdater.onPlayerRemoved(player);
@@ -151,56 +141,8 @@ public class Room {
 		return roomThread;
 	}
 
-	private void generateMap() {
-
-		//MapGenerator mapGenerator = new GridMapGenerator(new Dimension(15, 15, 15), MAX_PLAYERS);
-
-		// MapGenerator mapGenerator
-		// = new DivisionMapGenerator(new Dimension(20, 20, 20));
-
-		// MapGenerator mapGenerator
-		// = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
-
-		MapGenerator mapGenerator = new SimpleMapGenerator();
-
-		// MapGenerator mapGenerator = new TestMapGenerator();
-
-		MapJSONizer mapAdapter = new MapJSONizer(mapGenerator.generateMap());
-
-		try {
-
-			JSONObject jsonMap = new JSONObject();
-			jsonMap.put(FieldsNames.GAME_WIDTH, mapAdapter.getAdaptedWidth());
-			jsonMap.put(FieldsNames.GAME_HEIGHT, mapAdapter.getAdaptedHeight());
-			jsonMap.put(FieldsNames.GAME_ITEMS, mapAdapter.getAdaptedItems());
-
-			map = jsonMap;
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		spawnPoints = mapAdapter.getAdaptedSpawnPoints();
-
-		winPoint = mapAdapter.getAdaptedWinPoint();
-
-	}
-
-	public JSONObject getMap() {
-		return map;
-	}
-
-	public PlayerStatus getSpawnPoint() {
-
-		if (spawnPoints.size() == 1)
-			return spawnPoints.getFirst();
-
-		return spawnPoints.remove();
-
-	}
-
-	public Dimension getWinPoint() {
-		return winPoint;
+	public RoomMapSelector getRoomMapSelector() {
+		return roomMapSelector;
 	}
 
 }

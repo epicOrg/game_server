@@ -27,7 +27,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
-	private RoomThread roomThread ;
+	private RoomThread roomThread;
 
 	public RoomPlayersUpdater(Room room) {
 		super();
@@ -40,8 +40,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 		try {
 
-			PrintWriter writer = onlineManager.getOnlineUserByUsername(
-					player.getUsername()).getOutStream();
+			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
+					.getOutStream();
 			writers.put(player, writer);
 
 			player.setPlayerEventListener(this);
@@ -70,9 +70,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		JSONObject message = generatePlayerList();
 		updatePlayers(player, message);
 	}
-	
+
 	@Override
-	public void onGameEnded() {	
+	public void onGameEnded() {
 		writers = new HashMap<>();
 	}
 
@@ -144,17 +144,17 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onPlayerStatusChanged() {
 		System.out.println("Player Ready");
-		for(Team t : room.getTeamGenerator().getTeams()){
-			for(Player p : t.getPlayers()){
-				if(p.getStatus() != true)
+		for (Team t : room.getTeamGenerator().getTeams()) {
+			for (Player p : t.getPlayers()) {
+				if (p.getStatus() != true)
 					return;
 			}
 		}
-		
-		roomThread = new RoomThread(room, new WinCheckerTest(room.getWinPoint(), 3));
+
+		roomThread = new RoomThread(room, new WinCheckerTest(room.getRoomMapSelector()
+				.getWinPoint(), 3));
 		roomThread.start();
 
-		
 		JSONObject message = new JSONObject();
 		try {
 			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
@@ -172,9 +172,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			roomAudioCall.prepare();				
+			roomAudioCall.prepare();
 			roomAudioCall.startCall();
 			System.out.println("Call Started");
 		} catch (IOException e) {
@@ -193,8 +193,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			e.printStackTrace();
 		}
 		JSONObject message = generateExitMessage();
-		updatePlayers(null, message);	
-		
+		updatePlayers(null, message);
+
 	}
 
 	private JSONObject generateExitMessage() {
@@ -205,7 +205,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			message.put(FieldsNames.GAME_END, FieldsNames.GAME_INTERRUPTED);
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}		
+		}
 		return message;
 	}
 }

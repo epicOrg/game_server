@@ -1,4 +1,4 @@
-package maze;
+package game.map.maze;
 
 import java.awt.Color;
 import java.awt.Graphics;

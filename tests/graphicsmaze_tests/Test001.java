@@ -1,11 +1,11 @@
 package graphicsmaze_tests;
 
+import game.map.maze.DrawMaze;
+import game.map.maze.Maze;
+
 import java.awt.Color;
 
 import javax.swing.JFrame;
-
-import maze.DrawMaze;
-import maze.Maze;
 
 /**
  * @author Hermann Tom
