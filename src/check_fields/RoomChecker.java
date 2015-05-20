@@ -1,7 +1,5 @@
 package check_fields;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 
 /**
  * @author Noris
