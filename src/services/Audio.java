@@ -13,22 +13,20 @@ import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 
 /**
+ * 
+ * Audio Service acquires audio data needed to initiate Voip communication between client end server.
+ * Gets back to the client the connection details and reserves the necessary net resources necessary
+ * 
  * @author Luca
  * @date 2015/05/03
  */
-
 public class Audio implements IService {
-
-	private JSONObject request;
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		this.request = request;
-		
-		JSONObject response = new JSONObject();
 
 		GameDataManager dataManager = GameDataManager.getInstance();
-
+		int localPort = NetUtils.findFreePort();
 		try {
 
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
@@ -36,15 +34,11 @@ public class Audio implements IService {
 			Player player = dataManager.getRoomByName(roomName)
 					.getPlayerByName(username);
 			int playerAudioPort = request.getInt(FieldsNames.AUDIO_PORT_CLIENT);
-			AudioData audioData = player.getAudioData();
-			int localPort = NetUtils.findFreePort();
+			AudioData audioData = player.getAudioData();			
 			audioData.setLocalPort(localPort);
 			int localControlPort = NetUtils.findFreePort();
 			audioData.setLocalControlPort(localControlPort);
-			audioData.setRemotePort(playerAudioPort);
-
-			response.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
-			response.put(FieldsNames.AUDIO_PORT_SERVER, localPort);
+			audioData.setRemotePort(playerAudioPort);			
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -52,6 +46,18 @@ public class Audio implements IService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchRoomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return generateResponse( localPort);
+	}
+
+	protected JSONObject generateResponse(int localPort){
+		JSONObject response = new JSONObject();
+		try {
+			response.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
+			response.put(FieldsNames.AUDIO_PORT_SERVER, localPort);
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.messages.CurrentRoomMessagesCreator;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.MissingFieldException;
@@ -24,161 +25,101 @@ public class CurrentRoom implements IService {
 	private JSONObject jsonResponse;
 
 	private GameDataManager gameDataManager;
+	private CurrentRoomMessagesCreator messagesCreator;
 
 	public CurrentRoom() {
 		gameDataManager = GameDataManager.getInstance();
+		messagesCreator = new CurrentRoomMessagesCreator();
 	}
 
 	@Override
 	public JSONObject start(JSONObject request) {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
-
 		try {
 			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
-		} catch (JSONException | MissingFieldException e) {
-			//TODO IL SERVICE TYPE NON VIENE INSERTIO E L'APP ESPLODE
-			return new MissingFieldException().getMissingFieldError();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return jsonResponse;
 	}
 
-	private void runService(String serviceType) throws MissingFieldException {
+	private void runService(String serviceType) {
 
 		switch (serviceType) {
 		case FieldsNames.ROOM_PLAYER_LIST:
-			generatePlayerListResponse();
+			playerList();
 			break;
 		case FieldsNames.ROOM_ACTIONS:
-			generateActionsResponse();
+			executeAction();
 			break;
 		}
-
 	}
 
-	private void generatePlayerListResponse() throws MissingFieldException {
+	private void playerList() {
 
-		String roomName;
 		try {
-			roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			Room room = gameDataManager.getRoomByName(roomName);
+			jsonResponse = messagesCreator.generatePlayersListMessage(room);
 		} catch (JSONException e) {
-			throw new MissingFieldException();
-		}
-
-		Room room = null;
-		try {
-			room = gameDataManager.getRoomByName(roomName);
+			e.printStackTrace();
 		} catch (NoSuchRoomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		try {
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			jsonResponse.put(FieldsNames.SERVICE_TYPE,
-					FieldsNames.ROOM_PLAYER_LIST);
-
-			jsonResponse.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
-
-			JSONArray teams = new JSONArray();
-
-			for (Team t : room.getTeamGenerator().getTeams()) {
-				JSONObject team = new JSONObject();
-				JSONArray players = new JSONArray();
-
-				for (Player p : t.getPlayers()) {
-					JSONObject jObject = new JSONObject();
-					jObject.put(FieldsNames.USERNAME, p.getUsername());
-					players.put(jObject);
-				}
-
-				team.put(FieldsNames.ROOM_TEAM_COLOR, t.getTeamColor().getRGB());
-				team.put(FieldsNames.ROOM_NAME, t.getTeamName());
-				team.put(FieldsNames.LIST, players);
-				teams.put(team);
-			}
-
-			jsonResponse.put(FieldsNames.ROOM_TEAM, teams);
-		} catch (JSONException e) {
-		}
 	}
 
-	private void generateActionsResponse() throws MissingFieldException {
+	private void executeAction() {
 
+		String roomAction = null;
 		try {
-
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			jsonResponse
-			.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-
-			String roomAction = null;
-			try {
-				roomAction = jsonRequest.getString(FieldsNames.ROOM_ACTION);
-			} catch (JSONException e) {
-				throw new MissingFieldException();
-			}
-
-			switch (roomAction) {
-			case FieldsNames.ROOM_EXIT:
-				generateActionExitResponse();
-				break;
-			case FieldsNames.ROOM_LIST_RECEIVED:
-				generateListReceivedResponse();
-				break;
-			}
-
-		} catch (JSONException e) {
-		}
-	}
-
-	private void generateActionExitResponse() throws MissingFieldException {
-
-		try {
-			jsonResponse.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT);
-
-			try {
-
-				String playerName = null;
-				String roomName = null;
-				try {
-					playerName = jsonRequest.getString(FieldsNames.USERNAME);
-					roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
-				} catch (JSONException e) {
-					throw new MissingFieldException();
-				}
-
-				Room room = gameDataManager.getRoomByName(roomName);
-
-				room.removePlayer(room.getPlayerByName(playerName));
-				jsonResponse.put(FieldsNames.NO_ERRORS, true);
-
-			} catch (NoSuchRoomException | NoSuchPlayerException e) {
-				jsonResponse.put(FieldsNames.NO_ERRORS, false);
-			}
-
+			roomAction = jsonRequest.getString(FieldsNames.ROOM_ACTION);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+		switch (roomAction) {
+		case FieldsNames.ROOM_EXIT:
+			actionExit();
+			break;
+		case FieldsNames.ROOM_LIST_RECEIVED:
+			actionListReceived();
+			break;
+		}
+	}
+	
+	private void actionExit() {
+
+		try {
+			String playerName = jsonRequest.getString(FieldsNames.USERNAME);
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
+			Room room = gameDataManager.getRoomByName(roomName);
+			room.removePlayer(room.getPlayerByName(playerName));
+			jsonResponse = messagesCreator.generateExitResponse(true);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (NoSuchRoomException | NoSuchPlayerException e) {
+			jsonResponse = messagesCreator.generateExitResponse(false);
+		}
 	}
 
-	private void generateListReceivedResponse() throws MissingFieldException {
+	private void actionListReceived() {
 		jsonResponse = null;
 
 		try {
-			//String playerName = null;
-			String roomName = null;
-			try {
-				//playerName = jsonRequest.getString(FieldsNames.USERNAME);
-				roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
-			} catch (JSONException e) {
-				throw new MissingFieldException();
-			}
-
+			// String playerName = jsonRequest.getString(FieldsNames.USERNAME);
+			String roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			Room room = gameDataManager.getRoomByName(roomName);
 
-			room.checkIfFull();				
+			room.checkIfFull();
+		} catch (JSONException e) {
+			e.printStackTrace();
 		} catch (NoSuchRoomException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
