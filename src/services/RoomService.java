@@ -1,6 +1,7 @@
 package services;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 
 import online_management.OnlineManager;
 
@@ -50,18 +51,14 @@ public class RoomService implements IService {
 			if (roomChecker.noErrors())
 				runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 
-		} catch (JSONException | MissingFieldException e) {
-			return new MissingFieldException().getMissingFieldError();
+		} catch (JSONException  e) {
+			e.printStackTrace();
 		}
-
-		generateResponse();
 		return jsonResponse;
 
 	}
 
-	private void checkFields() throws MissingFieldException {
-
-		// TODO Mettere a posto
+	private void checkFields() {
 
 		try {
 
@@ -72,76 +69,62 @@ public class RoomService implements IService {
 			roomChecker.checkHashCode(username, hashCode);
 
 		} catch (JSONException e) {
-			throw new MissingFieldException();
-		}
-
-	}
-
-	private void runService(String serviceType) throws MissingFieldException {
-
-		try {
-
-			switch (serviceType) {
-
-			case FieldsNames.ROOM_CREATE:
-
-				createRoom();
-				break;
-
-			case FieldsNames.ROOMS_LIST:
-				messagesCreator.addRoomsList(jsonResponse, gameDataManager.getRooms());
-				jsonResponse.put(FieldsNames.SERVICE_TYPE,
-						FieldsNames.ROOMS_LIST);
-				break;
-			case FieldsNames.ROOM_JOIN:
-				jsonResponse.put(FieldsNames.SERVICE_TYPE,
-						FieldsNames.ROOM_JOIN);
-				addPlayer();
-				break;
-			default:
-				break;
-			}
-
-		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 	}
 
-	protected void createRoom() throws MissingFieldException, JSONException {
+	private void runService(String serviceType) {
+
+		switch (serviceType) {
+
+		case FieldsNames.ROOM_CREATE:
+			createRoom();
+			break;
+
+		case FieldsNames.ROOMS_LIST:
+			jsonResponse = messagesCreator.generateRommListMessage(gameDataManager.getRooms());
+			break;
+			
+		case FieldsNames.ROOM_JOIN:
+			addPlayer();
+			break;
+			
+		default:
+			break;
+		}
+	}
+
+	protected void createRoom() {
 		try {
 
-			String roomName;
+			String roomName = null;
 			try {
 				roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 			} catch (JSONException e) {
-				throw new MissingFieldException();
+				e.printStackTrace();
 			}
 
 			if (!roomChecker.checkRoomName(roomName)) {
-				jsonResponse.put(FieldsNames.SERVICE_TYPE,
-						FieldsNames.ROOM_CREATE);
+				jsonResponse = messagesCreator.generateNameInvalidRespose();
 				return;
 			}
 
 			gameDataManager.newRoom(roomName);
 
 		} catch (RoomAlreadyExistsException e) {
-			roomChecker.getRoomAlreadyExistsError();
-			jsonResponse.put(FieldsNames.SERVICE_TYPE,
-					FieldsNames.ROOM_CREATE);
+			jsonResponse = messagesCreator.generateRoomExistMessage();
 			return;
 		}
-
-		jsonResponse.put(FieldsNames.SERVICE_TYPE,
-				FieldsNames.ROOMS_LIST);
-		messagesCreator.addRoomsList(jsonResponse, gameDataManager.getRooms());
+		
+		jsonResponse = messagesCreator.generateRommListMessage(gameDataManager.getRooms());
 		return;
 	}
 
-	private void addPlayer() throws MissingFieldException {
+	private void addPlayer(){
 
-		Player player;
-		String roomName;
+		Player player = null;
+		String roomName = null;
 
 		try {
 
@@ -152,51 +135,20 @@ public class RoomService implements IService {
 			roomName = jsonRequest.getString(FieldsNames.ROOM_NAME);
 
 		} catch (JSONException e) {
-			throw new MissingFieldException();
+			e.printStackTrace();
 		}
 
 		try {
 
-			Room room = gameDataManager.getRoomByName(roomName);
-			jsonResponse.put(FieldsNames.ROOM_NAME, roomName);
+			Room room = gameDataManager.getRoomByName(roomName);			
 			room.addPlayer(player);
-			jsonResponse.put(FieldsNames.RESULT, true);
+			jsonResponse = messagesCreator.generateJoinResponse(true, roomName);
 
-		} catch (JSONException e) {
-		} catch (NoSuchRoomException e) {
+		} catch (NoSuchRoomException | FullRoomException e ) {
 			// TODO Auto-generated catch block
-			joinFailed();
+			jsonResponse = messagesCreator.generateJoinResponse(false, roomName);
 			e.printStackTrace();
-		} catch (FullRoomException e) {
-			// TODO Auto-generated catch block
-			roomChecker.getFullRoomError();
-			joinFailed();
-			e.printStackTrace();
-		}
-	}
-
-	private void joinFailed() {
-		try {
-
-			jsonResponse.put(FieldsNames.RESULT, false);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void generateResponse() {
-		try {
-
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			jsonResponse.put(FieldsNames.NO_ERRORS, roomChecker.noErrors());
-
-			if (!roomChecker.noErrors())
-				jsonResponse.put(FieldsNames.ERRORS, roomChecker.getErrors());
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 
 	@Override
