@@ -1,5 +1,6 @@
 package game.map.generation;
 
+import game.PlayerStatus;
 import game.map.Dimension;
 import game.map.Item;
 import game.map.MapConstructor;
@@ -43,6 +44,7 @@ public class SimpleMapGenerator implements MapGenerator {
 		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new Dimension(-3.75, -1, 4.75), new Dimension(7.5, 2.5, 1.5)));
 		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new Dimension(0, -1, 1.25), new Dimension(10, 2.5, 1.5)));
 
+		mapConstructor.addSpawnPoint(new PlayerStatus(5, 0.5f, -7, -1, -0.25f, 0));
 		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, new Dimension(0, -1, 18), new Dimension(0.5, 1, 0)));
 
 		return mapConstructor;
