@@ -4,8 +4,9 @@ import game.map.Dimension;
 import game.map.Item;
 import game.map.MapJSONizer;
 import game.map.MapObject;
-import game.map.MapUtils;
 import game.map.Texture;
+import game.map.utils.MapGeometric;
+import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
 
@@ -66,9 +67,9 @@ public class DivisionMapGenerator implements MapGenerator {
 			generatePosition();
 			generateSize();
 
-			points = MapUtils.getWallPoints(position, size);
+			points = MapGeometric.getWallPoints(position, size);
 
-		} while (MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
+		} while (MapGeometric.isCircleOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
 				points.get(1)));
 
 		MapObject randomWall = new MapObject(Item.WALL, Texture.WALL3, position, size);
@@ -79,9 +80,9 @@ public class DivisionMapGenerator implements MapGenerator {
 			generateNextSize();
 			generateNextPosition();
 
-			points = MapUtils.getWallPoints(nextPosition, nextSize);
+			points = MapGeometric.getWallPoints(nextPosition, nextSize);
 
-		} while (MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
+		} while (MapGeometric.isCircleOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
 				points.get(1)));
 
 		MapObject nextRandomWall = new MapObject(Item.WALL, Texture.HEDGE3, nextPosition, nextSize);
@@ -92,9 +93,9 @@ public class DivisionMapGenerator implements MapGenerator {
 			generateVerticalPosition();
 			generateVerticalSize();
 
-			points = MapUtils.getWallPoints(position, size);
+			points = MapGeometric.getWallPoints(position, size);
 
-		} while (MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
+		} while (MapGeometric.isCircleOnSegment(spawnPoints, WALL_TOLERANCE, points.get(0),
 				points.get(1)));
 
 		MapObject randomVerticalWall = new MapObject(Item.WALL, Texture.WALL3, position, size);
@@ -135,12 +136,12 @@ public class DivisionMapGenerator implements MapGenerator {
 	private void generatePosition() {
 
 		double maxWidth = availableSize.getWidth() - BORDER_TOLERANCE;
-		double randomWidth = MapUtils.getRandomDouble(CENTER_TOLERANCE, maxWidth)
-				* MapUtils.getRandomSign();
+		double randomWidth = MapRandom.getRandomDouble(CENTER_TOLERANCE, maxWidth)
+				* MapRandom.getRandomSign();
 
 		double maxLength = availableSize.getLength() - BORDER_TOLERANCE;
-		double randomLength = MapUtils.getRandomDouble(CENTER_TOLERANCE, maxLength)
-				* MapUtils.getRandomSign();
+		double randomLength = MapRandom.getRandomDouble(CENTER_TOLERANCE, maxLength)
+				* MapRandom.getRandomSign();
 
 		position = new Dimension(randomWidth, -1, randomLength);
 	}
@@ -206,8 +207,8 @@ public class DivisionMapGenerator implements MapGenerator {
 		double width = (availableSize.getWidth() - position.getWidth()) / 2;
 
 		double maxLength = position.getLength() - BORDER_TOLERANCE;
-		double randomLength = MapUtils.getRandomDouble(CENTER_TOLERANCE, maxLength)
-				* MapUtils.getRandomSign();
+		double randomLength = MapRandom.getRandomDouble(CENTER_TOLERANCE, maxLength)
+				* MapRandom.getRandomSign();
 
 		verticalPosition = new Dimension(width, -1, randomLength);
 
@@ -228,7 +229,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		Dimension wallWidth = new Dimension(availableSize.getWidth() - position.getWidth(), -1, 0);
 		Dimension borderWidth = new Dimension(availableSize.getWidth(), -1, 0);
 
-		size = new Dimension(MapUtils.getPointsDistance2D(wallWidth, borderWidth), 2, 0.5);
+		size = new Dimension(MapGeometric.getDistance(wallWidth, borderWidth), 2, 0.5);
 	}
 
 }

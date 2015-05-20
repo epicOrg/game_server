@@ -4,8 +4,9 @@ import game.map.Dimension;
 import game.map.Item;
 import game.map.MapJSONizer;
 import game.map.MapObject;
-import game.map.MapUtils;
 import game.map.Texture;
+import game.map.utils.MapGeometric;
+import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
 
@@ -61,10 +62,10 @@ public class ForestMapGenerator implements MapGenerator {
 
 			if (i == 0) {
 
-				double width = MapUtils.getRandomDouble(-mapSize.getWidth() + diameter,
+				double width = MapRandom.getRandomDouble(-mapSize.getWidth() + diameter,
 						mapSize.getWidth() - diameter);
 
-				double length = MapUtils.getRandomDouble(-mapSize.getLength() + diameter,
+				double length = MapRandom.getRandomDouble(-mapSize.getLength() + diameter,
 						mapSize.getLength() - diameter);
 
 				position = new Dimension(width, -1, length);
@@ -96,12 +97,12 @@ public class ForestMapGenerator implements MapGenerator {
 
 		double width = 0, length = 0;
 
-		while (MapUtils.checkIfUsed(actualPosition, positions, DISTANCE)) {
+		while (MapGeometric.checkIfUsed(actualPosition, positions, DISTANCE)) {
 
-			width = MapUtils.getRandomDouble(-mapSize.getWidth() + diameter, mapSize.getWidth()
+			width = MapRandom.getRandomDouble(-mapSize.getWidth() + diameter, mapSize.getWidth()
 					- diameter);
 
-			length = MapUtils.getRandomDouble(-mapSize.getLength() + diameter, mapSize.getLength()
+			length = MapRandom.getRandomDouble(-mapSize.getLength() + diameter, mapSize.getLength()
 					- diameter);
 
 			actualPosition = new Dimension(width, -1, length);
@@ -113,7 +114,7 @@ public class ForestMapGenerator implements MapGenerator {
 	}
 
 	private void setRandomSize() {
-		size = new Dimension(MapUtils.getRandomDouble(MIN_RAY, MAX_RAY), MapUtils.getRandomDouble(
+		size = new Dimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY), MapRandom.getRandomDouble(
 				MIN_HEIGHT, MAX_HEIGHT), 0);
 	}
 

@@ -4,8 +4,10 @@ import game.map.Dimension;
 import game.map.Item;
 import game.map.MapJSONizer;
 import game.map.MapObject;
-import game.map.MapUtils;
 import game.map.Texture;
+import game.map.utils.MapGeometric;
+import game.map.utils.MapPosition;
+import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
 
@@ -89,7 +91,7 @@ public class GridMapGenerator implements MapGenerator {
 				/ 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE / 2);
 
 		for (int i = 0; i < numberOfPlayers; i++) {
-			Dimension tmp = MapUtils.getRandomSpawnPoint(mapSize);
+			Dimension tmp = MapPosition.getRandomSpawnPoint(mapSize);
 			spawnPoints.add(tmp);
 			mapJSONizer.addSpawnPoint(tmp, new Dimension(0, 0, 0));
 			System.out.println("PLAYER: " + tmp);
@@ -138,11 +140,11 @@ public class GridMapGenerator implements MapGenerator {
 				mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE, mapSize.getHeight(),
 				mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE);
 
-		winPoint = MapUtils.getRandomPosition(mapSizeWithTolerance);
+		winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
 
 		System.out.println("Win: " + winPoint);
 		
-		} while(MapUtils.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
+		} while(MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
 
 		mapJSONizer.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
 				new Dimension(0.5, 1, 0)));
@@ -166,15 +168,15 @@ public class GridMapGenerator implements MapGenerator {
 			wallsPosition.add(position);
 			wallsSize.add(size);
 
-			ArrayList<Dimension> points = MapUtils.getWallPoints(position, size);
+			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
 
-			if (!MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
+			if (!MapGeometric.isCircleOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
 					points.get(1))
-					&& !MapUtils.isCircleOnSegment(winPoint, PLAYER_SIZE, points.get(0),
+					&& !MapGeometric.isCircleOnSegment(winPoint, PLAYER_SIZE, points.get(0),
 							points.get(1))) {
 
 				ArrayList<Dimension> segments = generateDoors(position, size,
-						MapUtils.getRandomInt(MIN_DOORS, MAX_DOORS));
+						MapRandom.getRandomInt(MIN_DOORS, MAX_DOORS));
 
 				for (int j = 0; j < segments.size() - 1; j++) {
 
@@ -197,14 +199,14 @@ public class GridMapGenerator implements MapGenerator {
 		ArrayList<Dimension> points;
 
 		if (isNotVertical)
-			points = MapUtils.getWallPointsOnLine(position, size);
+			points = MapGeometric.getWallPointsOnLength(position, size);
 		else
-			points = MapUtils.getWallPointsOnWidth(position, size);
+			points = MapGeometric.getWallPointsOnWidth(position, size);
 
 		Dimension p1 = points.get(0);
 		Dimension p2 = points.get(1);
 
-		double totalSize = MapUtils.getPointsDistance2D(p1, p2);
+		double totalSize = MapGeometric.getDistance(p1, p2);
 		double dividedSize = (totalSize - PLAYER_SIZE * num) / (num + 1);
 
 		if (p1.getWidth() == p2.getWidth()) {
@@ -262,15 +264,15 @@ public class GridMapGenerator implements MapGenerator {
 
 			Dimension size = new Dimension(mapSize.getLength() * 2, 2, WALL_SIZE);
 
-			ArrayList<Dimension> points = MapUtils.getWallPoints(position, size);
+			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
 
-			if (!MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
+			if (!MapGeometric.isCircleOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
 					points.get(1))
-					&& !MapUtils.isOneCircleAtLeastOnSegment(doors, PLAYER_SIZE, points.get(0),
+					&& !MapGeometric.isCircleOnSegment(doors, PLAYER_SIZE, points.get(0),
 							points.get(1))) {
 
 				ArrayList<Dimension> segments = generateDoors(position, size,
-						MapUtils.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
+						MapRandom.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
 
 				for (int j = 0; j < segments.size() - 1; j++) {
 
@@ -301,16 +303,16 @@ public class GridMapGenerator implements MapGenerator {
 
 			Dimension size = new Dimension(mapSize.getLength() * 2, 2, WALL_SIZE);
 
-			ArrayList<Dimension> points = MapUtils.getWallPoints(position, size);
+			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
 
 			ArrayList<Dimension> segments = generateDoors(position, size,
-					MapUtils.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
+					MapRandom.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
 
 			for (int j = 0; j < segments.size() - 1; j++) {
 
-				if (!MapUtils.isOneCircleAtLeastOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
+				if (!MapGeometric.isCircleOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
 						points.get(1))
-						&& !MapUtils.isOneCircleAtLeastOnSegment(doors, PLAYER_SIZE, points.get(0),
+						&& !MapGeometric.isCircleOnSegment(doors, PLAYER_SIZE, points.get(0),
 								points.get(1))) {
 
 					if (i != 0)

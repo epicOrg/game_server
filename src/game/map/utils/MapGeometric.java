@@ -1,60 +1,18 @@
-package game.map;
+package game.map.utils;
+
+import game.map.Dimension;
 
 import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author Noris
- * @date 2015/05/17
+ * @date 2015/05/20
  */
 
-public class MapUtils {
-
-	public static final double PLAYER_SIZE = 2;
-
-	/**
-	 * Generate a random double between min an max.
-	 * 
-	 * @param min
-	 *            the minimum value that the random number can assume
-	 * @param max
-	 *            the maximum value that the random number can assume
-	 * 
-	 * @return a random double number between min and max
-	 */
-	public static double getRandomDouble(double min, double max) {
-		return min + (new Random().nextDouble()) * (max - min);
-	}
-
-	/**
-	 * Generate a random int between min an max.
-	 * 
-	 * @param min
-	 *            the minimum value that the random number can assume
-	 * @param max
-	 *            the maximum value that the random number can assume
-	 * 
-	 * @return a random int number between min and max
-	 */
-	public static int getRandomInt(int min, int max) {
-		return min + new Random().nextInt((max - min) + 1);
-	}
-
-	/**
-	 * Generate a random sign.
-	 * 
-	 * @return a random sign (1 or -1)
-	 */
-	public static int getRandomSign() {
-
-		if (new Random().nextBoolean())
-			return -1;
-
-		return 1;
-	}
+public class MapGeometric {
 
 	/**
 	 * @param position
@@ -113,8 +71,6 @@ public class MapUtils {
 	 */
 	public static ArrayList<Dimension> getWallPoints(Dimension position, Dimension size) {
 
-		// TODO 3th dimension
-
 		ArrayList<Dimension> points = new ArrayList<Dimension>(2);
 
 		double length1 = position.getLength() + size.getLength() / 2;
@@ -138,7 +94,7 @@ public class MapUtils {
 	 * 
 	 * @return the extremes point of the wall segment, without the wall size
 	 */
-	public static ArrayList<Dimension> getWallPointsOnLine(Dimension position, Dimension size) {
+	public static ArrayList<Dimension> getWallPointsOnLength(Dimension position, Dimension size) {
 
 		ArrayList<Dimension> points = new ArrayList<Dimension>(2);
 
@@ -211,8 +167,7 @@ public class MapUtils {
 	 * @return true if at least one point of the array is on the line, false
 	 *         otherwise
 	 */
-	public static boolean isOnePointAtLeastOnLine(ArrayList<Dimension> points, Dimension l1,
-			Dimension l2) {
+	public static boolean isPointOnLine(ArrayList<Dimension> points, Dimension l1, Dimension l2) {
 
 		for (Dimension p : points) {
 			if (isPointOnLine(p, l1, l2))
@@ -252,8 +207,7 @@ public class MapUtils {
 	 * @return true if at least one point of the array is on the segment, false
 	 *         otherwise
 	 */
-	public static boolean isOnePointAtLeastOnSegment(ArrayList<Dimension> points, Dimension l1,
-			Dimension l2) {
+	public static boolean isPointOnSegment(ArrayList<Dimension> points, Dimension l1, Dimension l2) {
 
 		for (Dimension p : points) {
 			if (isPointOnSegment(p, l1, l2))
@@ -303,7 +257,7 @@ public class MapUtils {
 	 * @return true if at least one circle of the array intersects the segment,
 	 *         false otherwise
 	 */
-	public static boolean isOneCircleAtLeastOnSegment(ArrayList<Dimension> centers, double radius,
+	public static boolean isCircleOnSegment(ArrayList<Dimension> centers, double radius,
 			Dimension l1, Dimension l2) {
 
 		for (Dimension c : centers) {
@@ -322,7 +276,7 @@ public class MapUtils {
 	 * 
 	 * @return the distance between p1 and p2
 	 */
-	public static double getPointsDistance2D(Dimension p1, Dimension p2) {
+	public static double getDistance(Dimension p1, Dimension p2) {
 		return Point.distance(p1.getWidth(), p1.getLength(), p2.getWidth(), p2.getLength());
 	}
 
@@ -334,7 +288,7 @@ public class MapUtils {
 	 * 
 	 * @return the distance between p1 and p2
 	 */
-	public static double getPointsDistance3D(Dimension point1, Dimension point2) {
+	public static double getDistance3D(Dimension point1, Dimension point2) {
 
 		return Math.sqrt((point1.getWidth() - point2.getWidth())
 				* (point1.getWidth() - point2.getWidth())
@@ -344,23 +298,4 @@ public class MapUtils {
 				* (point1.getHeight() - point2.getHeight()));
 	}
 
-	public static Dimension getRandomPosition(Dimension mapSize) {
-
-		Random random = new Random();
-
-		return new Dimension((-1 * mapSize.getWidth() / 2)
-				+ (mapSize.getWidth() / 2 - (-1 * mapSize.getWidth() / 2)) * random.nextDouble(),
-				-1, (-1 * mapSize.getHeight() / 2)
-						+ (mapSize.getHeight() / 2 - (-1 * mapSize.getHeight() / 2))
-						* random.nextDouble());
-
-	}
-
-	public static Dimension getRandomSpawnPoint(Dimension mapSize) {
-
-		Dimension position = getRandomPosition(mapSize);
-
-		return new Dimension(position.getWidth(), 0.5, position.getLength());
-
-	}
 }
