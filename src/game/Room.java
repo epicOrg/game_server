@@ -28,7 +28,7 @@ public class Room {
 		teamGenerator = new TeamGenerator();
 
 		// roomMapSelector = new RoomMapSelector(new GridMapGenerator(new
-		// Dimension(15, 15, 15), MAX_PLAYERS));
+		// MapDimension(15, 15, 15), MAX_PLAYERS));
 
 		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
 		// Dimension(20, 20, 20)));

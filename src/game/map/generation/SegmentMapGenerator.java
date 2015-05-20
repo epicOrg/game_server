@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.MapConstructor;
 import game.map.MapObject;
 
@@ -36,7 +36,7 @@ public class SegmentMapGenerator implements MapGenerator {
 		return mapConstructor;
 	}
 
-	public void setMapSize(Dimension size) {
+	public void setMapSize(MapDimension size) {
 		mapConstructor.setMapSize(size);
 	}
 

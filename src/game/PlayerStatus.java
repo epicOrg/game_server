@@ -1,6 +1,6 @@
 package game;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,7 +57,7 @@ public class PlayerStatus {
 		this.zDirection = (float) zDirection;
 	}
 
-	public PlayerStatus(Dimension position, Dimension direction) {
+	public PlayerStatus(MapDimension position, MapDimension direction) {
 
 		this.xPosition = (float) position.getWidth();
 		this.yPosition = (float) position.getHeight();
@@ -74,7 +74,7 @@ public class PlayerStatus {
 		this.zPosition = zPosition;
 	}
 
-	public void setPosition(Dimension position) {
+	public void setPosition(MapDimension position) {
 		this.xPosition = (float) position.getWidth();
 		this.yPosition = (float) position.getHeight();
 		this.zPosition = (float) position.getLength();
@@ -110,7 +110,7 @@ public class PlayerStatus {
 		this.zDirection = zDirection;
 	}
 
-	public void setDirection(Dimension direction) {
+	public void setDirection(MapDimension direction) {
 		this.xPosition = (float) direction.getWidth();
 		this.yPosition = (float) direction.getHeight();
 		this.zPosition = (float) direction.getLength();

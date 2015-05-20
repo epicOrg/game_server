@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
@@ -21,15 +21,15 @@ public class RandomMapGenerator implements MapGenerator {
 
 	private MapConstructor mapConstructor;
 
-	private Dimension mapSize;
+	private MapDimension mapSize;
 	private int numObjects;
 
 	private String actualObject;
 	private String actualTexture;
-	private Dimension actualPosition;
-	private Dimension actualSize;
+	private MapDimension actualPosition;
+	private MapDimension actualSize;
 
-	public RandomMapGenerator(Dimension mapSize, int numObjects) {
+	public RandomMapGenerator(MapDimension mapSize, int numObjects) {
 		super();
 		this.mapSize = mapSize;
 		this.numObjects = numObjects;
@@ -109,7 +109,7 @@ public class RandomMapGenerator implements MapGenerator {
 
 		Random random = new Random();
 
-		actualPosition = new Dimension((-1 * mapSize.getWidth() / 2)
+		actualPosition = new MapDimension((-1 * mapSize.getWidth() / 2)
 				+ (mapSize.getWidth() / 2 - (-1 * mapSize.getWidth() / 2)) * random.nextDouble(),
 				-1, (-1 * mapSize.getHeight() / 2)
 						+ (mapSize.getHeight() / 2 - (-1 * mapSize.getHeight() / 2))
@@ -130,7 +130,7 @@ public class RandomMapGenerator implements MapGenerator {
 			break;
 		}
 
-		actualSize = new Dimension((mapSize.getWidth() / resizing) * random.nextDouble(),
+		actualSize = new MapDimension((mapSize.getWidth() / resizing) * random.nextDouble(),
 				(mapSize.getLength() / resizing) * random.nextDouble(), third);
 
 	}

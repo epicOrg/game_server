@@ -1,6 +1,6 @@
 package game;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
 
@@ -22,7 +22,7 @@ public class RoomMapSelector {
 	private JSONObject map;
 
 	private LinkedList<PlayerStatus> spawnPoints;
-	private Dimension winPoint;
+	private MapDimension winPoint;
 
 	public RoomMapSelector(MapGenerator mapGenerator) {
 		this.mapGenerator = mapGenerator;
@@ -65,7 +65,7 @@ public class RoomMapSelector {
 
 	}
 
-	public Dimension getWinPoint() {
+	public MapDimension getWinPoint() {
 		return winPoint;
 	}
 

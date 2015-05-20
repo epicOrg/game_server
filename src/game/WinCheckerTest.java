@@ -1,6 +1,6 @@
 package game;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class WinCheckerTest implements IWinChecher {
 		this.ray = ray;
 	}
 
-	public WinCheckerTest(Dimension position, float ray) {
+	public WinCheckerTest(MapDimension position, float ray) {
 		super();
 		this.xWin = (float) position.getWidth();
 		this.yWin = (float) position.getHeight();

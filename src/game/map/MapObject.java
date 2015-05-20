@@ -12,10 +12,10 @@ public class MapObject implements Comparable<MapObject> {
 	private String objectName;
 	private String textureName;
 
-	private Dimension position;
-	private Dimension size;
+	private MapDimension position;
+	private MapDimension size;
 
-	public MapObject(String objectName, String textureName, Dimension position, Dimension size) {
+	public MapObject(String objectName, String textureName, MapDimension position, MapDimension size) {
 
 		this.objectName = objectName;
 		this.textureName = textureName;
@@ -31,11 +31,11 @@ public class MapObject implements Comparable<MapObject> {
 		return textureName;
 	}
 
-	public Dimension getPosition() {
+	public MapDimension getPosition() {
 		return position;
 	}
 
-	public Dimension getSize() {
+	public MapDimension getSize() {
 		return size;
 	}
 

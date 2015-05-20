@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class DivisionMapGenerator implements MapGenerator {
 
-	private Dimension mapSize;
+	private MapDimension mapSize;
 	private MapConstructor mapConstructor;
 
 	private static final double PLAYER_SIZE = 2;
@@ -27,26 +27,26 @@ public class DivisionMapGenerator implements MapGenerator {
 	private static final double WALL_TOLERANCE = PLAYER_SIZE;
 	private static final double BORDER_TOLERANCE = PLAYER_SIZE * 2;
 
-	private ArrayList<Dimension> spawnPoints;
+	private ArrayList<MapDimension> spawnPoints;
 
-	private Dimension availableSize;
+	private MapDimension availableSize;
 
-	private Dimension position;
-	private Dimension size;
+	private MapDimension position;
+	private MapDimension size;
 
-	private Dimension nextPosition;
-	private Dimension nextSize;
+	private MapDimension nextPosition;
+	private MapDimension nextSize;
 
-	private Dimension verticalPosition;
-	private Dimension verticalSize;
+	private MapDimension verticalPosition;
+	private MapDimension verticalSize;
 
 	private double doorCenter;
 
-	public DivisionMapGenerator(Dimension mapSize) {
+	public DivisionMapGenerator(MapDimension mapSize) {
 		super();
 		this.mapSize = mapSize;
 		mapConstructor = new MapConstructor();
-		spawnPoints = new ArrayList<Dimension>();
+		spawnPoints = new ArrayList<MapDimension>();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class DivisionMapGenerator implements MapGenerator {
 
 		availableSize = mapSize;
 
-		ArrayList<Dimension> points;
+		ArrayList<MapDimension> points;
 
 		do {
 
@@ -104,7 +104,7 @@ public class DivisionMapGenerator implements MapGenerator {
 
 	private void generateSpawnPoints() {
 		// TODO add spawn points generation
-		spawnPoints.add(new Dimension(5, 0.5, -7));
+		spawnPoints.add(new MapDimension(5, 0.5, -7));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		double randomLength = MapRandom.getRandomDouble(CENTER_TOLERANCE, maxLength)
 				* MapRandom.getRandomSign();
 
-		position = new Dimension(randomWidth, -1, randomLength);
+		position = new MapDimension(randomWidth, -1, randomLength);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		double positionLength = tmpPositionLength > 0 ? tmpPositionLength : -tmpPositionLength;
 		double length = 2 * (availableSize.getLength() - positionLength);
 
-		size = new Dimension(0.5, 2, length);
+		size = new MapDimension(0.5, 2, length);
 	}
 
 	private void generateNextSize() {
@@ -149,7 +149,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		double nextSizeLength = oldWallCenter + oldWallSize / 2 + PLAYER_SIZE;
 		nextSizeLength = (availableSize.getLength() - nextSizeLength);
 
-		nextSize = new Dimension(0.5, 2, nextSizeLength);
+		nextSize = new MapDimension(0.5, 2, nextSizeLength);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class DivisionMapGenerator implements MapGenerator {
 			doorCenter = oldWallCenter - oldWallSize / 2 - PLAYER_SIZE / 2;
 		}
 
-		nextPosition = new Dimension(position.getWidth(), -1, nextPositionLength);
+		nextPosition = new MapDimension(position.getWidth(), -1, nextPositionLength);
 	}
 
 	private void generateVerticalPosition() {
@@ -189,7 +189,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		double randomLength = MapRandom.getRandomDouble(CENTER_TOLERANCE, maxLength)
 				* MapRandom.getRandomSign();
 
-		verticalPosition = new Dimension(width, -1, randomLength);
+		verticalPosition = new MapDimension(width, -1, randomLength);
 
 	}
 
@@ -205,10 +205,10 @@ public class DivisionMapGenerator implements MapGenerator {
 
 	private void generateVerticalSize() {
 
-		Dimension wallWidth = new Dimension(availableSize.getWidth() - position.getWidth(), -1, 0);
-		Dimension borderWidth = new Dimension(availableSize.getWidth(), -1, 0);
+		MapDimension wallWidth = new MapDimension(availableSize.getWidth() - position.getWidth(), -1, 0);
+		MapDimension borderWidth = new MapDimension(availableSize.getWidth(), -1, 0);
 
-		size = new Dimension(MapGeometric.getDistance(wallWidth, borderWidth), 2, 0.5);
+		size = new MapDimension(MapGeometric.getDistance(wallWidth, borderWidth), 2, 0.5);
 	}
 
 }

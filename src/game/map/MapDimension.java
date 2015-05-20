@@ -10,13 +10,13 @@ import java.text.DecimalFormat;
  * @date 2015/04/23
  */
 
-public class Dimension implements Comparable<Dimension> {
+public class MapDimension implements Comparable<MapDimension> {
 
 	private double width;
 	private double height;
 	private double length;
 
-	public Dimension(double width, double height, double length) {
+	public MapDimension(double width, double height, double length) {
 		this.width = width;
 		this.height = height;
 		this.length = length;
@@ -69,7 +69,7 @@ public class Dimension implements Comparable<Dimension> {
 	}
 
 	@Override
-	public int compareTo(Dimension other) {
+	public int compareTo(MapDimension other) {
 		return Double.compare(width, other.width) + Double.compare(height, other.height)
 				+ Double.compare(length, other.length);
 	}

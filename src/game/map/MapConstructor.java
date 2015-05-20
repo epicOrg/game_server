@@ -16,26 +16,26 @@ import java.util.LinkedList;
 
 public class MapConstructor {
 
-	private Dimension mapSize;
+	private MapDimension mapSize;
 
 	private ArrayList<MapObject> items;
 	private int numItems = 0;
 
 	private LinkedList<PlayerStatus> spawnPoints;
 
-	private ArrayList<Dimension> winPoints;
+	private ArrayList<MapDimension> winPoints;
 
 	public MapConstructor() {
 		items = new ArrayList<MapObject>();
 		spawnPoints = new LinkedList<PlayerStatus>();
-		winPoints = new ArrayList<Dimension>();
+		winPoints = new ArrayList<MapDimension>();
 	}
 
-	public void setMapSize(Dimension mapSize) {
+	public void setMapSize(MapDimension mapSize) {
 		this.mapSize = mapSize;
 	}
 
-	public Dimension getMapSize() {
+	public MapDimension getMapSize() {
 		return mapSize;
 	}
 
@@ -73,7 +73,7 @@ public class MapConstructor {
 		addMapObject(mapObject);
 	}
 
-	public ArrayList<Dimension> getWinPoints() {
+	public ArrayList<MapDimension> getWinPoints() {
 		return winPoints;
 	}
 

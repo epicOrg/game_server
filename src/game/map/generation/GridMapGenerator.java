@@ -1,7 +1,7 @@
 package game.map.generation;
 
 import game.PlayerStatus;
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
@@ -30,28 +30,28 @@ public class GridMapGenerator implements MapGenerator {
 	private static final int MAX_DOORS = 4;
 
 	private MapConstructor mapConstructor;
-	private Dimension mapSize;
+	private MapDimension mapSize;
 	private int numberOfPlayers;
 
-	private ArrayList<Dimension> spawnPoints;
-	private ArrayList<Dimension> doors;
-	private Dimension winPoint;
+	private ArrayList<MapDimension> spawnPoints;
+	private ArrayList<MapDimension> doors;
+	private MapDimension winPoint;
 
-	private ArrayList<Dimension> wallsPosition;
-	private ArrayList<Dimension> wallsSize;
+	private ArrayList<MapDimension> wallsPosition;
+	private ArrayList<MapDimension> wallsSize;
 
 	private boolean isNotVertical = true;
 
-	public GridMapGenerator(Dimension mapSize, int numberOfPlayers) {
+	public GridMapGenerator(MapDimension mapSize, int numberOfPlayers) {
 		super();
 		this.mapSize = mapSize;
 		mapConstructor = new MapConstructor();
-		spawnPoints = new ArrayList<Dimension>();
-		doors = new ArrayList<Dimension>();
+		spawnPoints = new ArrayList<MapDimension>();
+		doors = new ArrayList<MapDimension>();
 		this.numberOfPlayers = numberOfPlayers;
 
-		wallsPosition = new ArrayList<Dimension>();
-		wallsSize = new ArrayList<Dimension>();
+		wallsPosition = new ArrayList<MapDimension>();
+		wallsSize = new ArrayList<MapDimension>();
 	}
 
 	@Override
@@ -71,11 +71,11 @@ public class GridMapGenerator implements MapGenerator {
 
 	private void generateSpawnPoints() {
 
-		Dimension mapSizeWithTolerance = new Dimension(mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE
+		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE
 				/ 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE / 2);
 
 		for (int i = 0; i < numberOfPlayers; i++) {
-			Dimension tmp = MapPosition.getRandomSpawnPoint(mapSize);
+			MapDimension tmp = MapPosition.getRandomSpawnPoint(mapSize);
 			spawnPoints.add(tmp);
 			mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
 			System.out.println("PLAYER: " + tmp);
@@ -120,7 +120,7 @@ public class GridMapGenerator implements MapGenerator {
 
 		do {
 
-			Dimension mapSizeWithTolerance = new Dimension(mapSize.getWidth() - WALL_SIZE
+			MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE
 					- PLAYER_SIZE, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
 					- PLAYER_SIZE);
 
@@ -131,8 +131,8 @@ public class GridMapGenerator implements MapGenerator {
 		} while (MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
 
 		mapConstructor.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
-				new Dimension(0.5, 1, 0)));
-		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint, new Dimension(
+				new MapDimension(0.5, 1, 0)));
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint, new MapDimension(
 				0.5, 1, 0)));
 
 	}
@@ -145,21 +145,21 @@ public class GridMapGenerator implements MapGenerator {
 
 		for (int i = 0; i < loop; i++) {
 
-			Dimension position = new Dimension(newLenght, -1, 0);
+			MapDimension position = new MapDimension(newLenght, -1, 0);
 
-			Dimension size = new Dimension(WALL_SIZE, 2, mapSize.getWidth() * 2);
+			MapDimension size = new MapDimension(WALL_SIZE, 2, mapSize.getWidth() * 2);
 
 			wallsPosition.add(position);
 			wallsSize.add(size);
 
-			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
+			ArrayList<MapDimension> points = MapGeometric.getWallPoints(position, size);
 
 			if (!MapGeometric.isCircleOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
 					points.get(1))
 					&& !MapGeometric.isCircleOnSegment(winPoint, PLAYER_SIZE, points.get(0),
 							points.get(1))) {
 
-				ArrayList<Dimension> segments = generateDoors(position, size,
+				ArrayList<MapDimension> segments = generateDoors(position, size,
 						MapRandom.getRandomInt(MIN_DOORS, MAX_DOORS));
 
 				for (int j = 0; j < segments.size() - 1; j++) {
@@ -176,19 +176,19 @@ public class GridMapGenerator implements MapGenerator {
 
 	}
 
-	private ArrayList<Dimension> generateDoors(Dimension position, Dimension size, int num) {
+	private ArrayList<MapDimension> generateDoors(MapDimension position, MapDimension size, int num) {
 
-		ArrayList<Dimension> walls = new ArrayList<Dimension>();
+		ArrayList<MapDimension> walls = new ArrayList<MapDimension>();
 
-		ArrayList<Dimension> points;
+		ArrayList<MapDimension> points;
 
 		if (isNotVertical)
 			points = MapGeometric.getWallPointsOnLength(position, size);
 		else
 			points = MapGeometric.getWallPointsOnWidth(position, size);
 
-		Dimension p1 = points.get(0);
-		Dimension p2 = points.get(1);
+		MapDimension p1 = points.get(0);
+		MapDimension p2 = points.get(1);
 
 		double totalSize = MapGeometric.getDistance(p1, p2);
 		double dividedSize = (totalSize - PLAYER_SIZE * num) / (num + 1);
@@ -203,13 +203,13 @@ public class GridMapGenerator implements MapGenerator {
 			for (int i = 0; i < num + 1; i++) {
 
 				length += (dividedSize / 2);
-				walls.add(new Dimension(position.getWidth(), position.getHeight(), length));
+				walls.add(new MapDimension(position.getWidth(), position.getHeight(), length));
 				length += (dividedSize / 2 + PLAYER_SIZE);
 
-				doors.add(new Dimension(position.getWidth(), position.getHeight(), length / 2));
+				doors.add(new MapDimension(position.getWidth(), position.getHeight(), length / 2));
 			}
 
-			walls.add(new Dimension(size.getWidth(), size.getHeight(), dividedSize));
+			walls.add(new MapDimension(size.getWidth(), size.getHeight(), dividedSize));
 
 		}
 
@@ -223,11 +223,11 @@ public class GridMapGenerator implements MapGenerator {
 			for (int i = 0; i < num + 1; i++) {
 
 				width += (dividedSize / 2);
-				walls.add(new Dimension(width, position.getHeight(), position.getLength()));
+				walls.add(new MapDimension(width, position.getHeight(), position.getLength()));
 				width += (dividedSize / 2 + PLAYER_SIZE);
 			}
 
-			walls.add(new Dimension(dividedSize, size.getHeight(), size.getLength()));
+			walls.add(new MapDimension(dividedSize, size.getHeight(), size.getLength()));
 
 		}
 
@@ -244,18 +244,18 @@ public class GridMapGenerator implements MapGenerator {
 
 		for (int i = 0; i < loop; i++) {
 
-			Dimension position = new Dimension(0, -1, newWidth);
+			MapDimension position = new MapDimension(0, -1, newWidth);
 
-			Dimension size = new Dimension(mapSize.getLength() * 2, 2, WALL_SIZE);
+			MapDimension size = new MapDimension(mapSize.getLength() * 2, 2, WALL_SIZE);
 
-			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
+			ArrayList<MapDimension> points = MapGeometric.getWallPoints(position, size);
 
 			if (!MapGeometric.isCircleOnSegment(spawnPoints, PLAYER_SIZE, points.get(0),
 					points.get(1))
 					&& !MapGeometric.isCircleOnSegment(doors, PLAYER_SIZE, points.get(0),
 							points.get(1))) {
 
-				ArrayList<Dimension> segments = generateDoors(position, size,
+				ArrayList<MapDimension> segments = generateDoors(position, size,
 						MapRandom.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
 
 				for (int j = 0; j < segments.size() - 1; j++) {
@@ -283,13 +283,13 @@ public class GridMapGenerator implements MapGenerator {
 
 		for (int i = 0; i < loop; i++) {
 
-			Dimension position = new Dimension(0, -1, newWidth);
+			MapDimension position = new MapDimension(0, -1, newWidth);
 
-			Dimension size = new Dimension(mapSize.getLength() * 2, 2, WALL_SIZE);
+			MapDimension size = new MapDimension(mapSize.getLength() * 2, 2, WALL_SIZE);
 
-			ArrayList<Dimension> points = MapGeometric.getWallPoints(position, size);
+			ArrayList<MapDimension> points = MapGeometric.getWallPoints(position, size);
 
-			ArrayList<Dimension> segments = generateDoors(position, size,
+			ArrayList<MapDimension> segments = generateDoors(position, size,
 					MapRandom.getRandomInt(MAX_DOORS - 1, MAX_DOORS + 1));
 
 			for (int j = 0; j < segments.size() - 1; j++) {

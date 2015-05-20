@@ -1,6 +1,6 @@
 package game.map.utils;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 
 import java.util.Random;
 
@@ -22,11 +22,11 @@ public class MapPosition {
 	 * 
 	 * @return a random position inside the map
 	 */
-	public static Dimension getRandomPosition(Dimension mapSize) {
+	public static MapDimension getRandomPosition(MapDimension mapSize) {
 
 		Random random = new Random();
 
-		return new Dimension((-1 * mapSize.getWidth() / 2)
+		return new MapDimension((-1 * mapSize.getWidth() / 2)
 				+ (mapSize.getWidth() / 2 - (-1 * mapSize.getWidth() / 2)) * random.nextDouble(),
 				OBJECT_FLOOR, (-1 * mapSize.getLength() / 2)
 						+ (mapSize.getLength() / 2 - (-1 * mapSize.getLength() / 2))
@@ -42,11 +42,11 @@ public class MapPosition {
 	 * 
 	 * @return a random player position inside the map
 	 */
-	public static Dimension getRandomSpawnPoint(Dimension mapSize) {
+	public static MapDimension getRandomSpawnPoint(MapDimension mapSize) {
 
-		Dimension position = getRandomPosition(mapSize);
+		MapDimension position = getRandomPosition(mapSize);
 
-		return new Dimension(position.getWidth(), PLAYER_FLOOR, position.getLength());
+		return new MapDimension(position.getWidth(), PLAYER_FLOOR, position.getLength());
 
 	}
 

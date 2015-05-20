@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import game.map.Dimension;
+import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
@@ -30,21 +30,21 @@ public class ForestMapGenerator implements MapGenerator {
 
 	private MapConstructor mapConstructor;
 
-	private Dimension mapSize;
+	private MapDimension mapSize;
 	private int numTrees;
 
-	private ArrayList<Dimension> positions;
+	private ArrayList<MapDimension> positions;
 
-	private Dimension position;
-	private Dimension size;
+	private MapDimension position;
+	private MapDimension size;
 	private double diameter;
 
-	public ForestMapGenerator(Dimension mapSize, int numTrees) {
+	public ForestMapGenerator(MapDimension mapSize, int numTrees) {
 		super();
 		this.mapSize = mapSize;
 		this.numTrees = numTrees;
 		mapConstructor = new MapConstructor();
-		positions = new ArrayList<Dimension>(numTrees);
+		positions = new ArrayList<MapDimension>(numTrees);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class ForestMapGenerator implements MapGenerator {
 				double length = MapRandom.getRandomDouble(-mapSize.getLength() + diameter,
 						mapSize.getLength() - diameter);
 
-				position = new Dimension(width, -1, length);
+				position = new MapDimension(width, -1, length);
 				positions.add(position);
 			}
 
@@ -92,7 +92,7 @@ public class ForestMapGenerator implements MapGenerator {
 
 	private void setRandomPosition() {
 
-		Dimension actualPosition = position;
+		MapDimension actualPosition = position;
 
 		double width = 0, length = 0;
 
@@ -104,21 +104,21 @@ public class ForestMapGenerator implements MapGenerator {
 			length = MapRandom.getRandomDouble(-mapSize.getLength() + diameter, mapSize.getLength()
 					- diameter);
 
-			actualPosition = new Dimension(width, -1, length);
+			actualPosition = new MapDimension(width, -1, length);
 		}
 
-		position = new Dimension(width, -1, length);
+		position = new MapDimension(width, -1, length);
 		positions.add(position);
 
 	}
 
 	private void setRandomSize() {
-		size = new Dimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY), MapRandom.getRandomDouble(
+		size = new MapDimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY), MapRandom.getRandomDouble(
 				MIN_HEIGHT, MAX_HEIGHT), 0);
 	}
 
 	private void setSpawnPoint() {
-		positions.add(new Dimension(-7, 0.5, 5));
+		positions.add(new MapDimension(-7, 0.5, 5));
 	}
 
 }
