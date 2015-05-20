@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 
+/**
+ * @author Micieli
+ * @date 2015/05/19
+ */
+
 public class RoomsMessagesCreator {
 
 	public JSONObject generateNameInvalidRespose() {

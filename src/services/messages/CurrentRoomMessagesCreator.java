@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 
+/**
+ * @author Micieli
+ * @date 2015/05/20
+ */
+
 public class CurrentRoomMessagesCreator {
 
 	public JSONObject generatePlayersListMessage(Room room) {
@@ -40,7 +45,6 @@ public class CurrentRoomMessagesCreator {
 			response.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT);
 			response.put(FieldsNames.NO_ERRORS, result);	
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
 		
