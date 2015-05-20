@@ -1,5 +1,8 @@
 package services;
 
+import game.Player;
+import game.Room;
+
 import java.net.InetAddress;
 
 import online_management.OnlineManager;
@@ -15,10 +18,14 @@ import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
-import game.Player;
-import game.Room;
 
 /**
+ * 
+ * <code>RoomService</code> manages {@link Room} actions.
+ * Allows Room creation with a specific name request from client.
+ * Provides current available <code>Rooms</code>.
+ * Enable the client to enter in a specific existing <code>Room</code>
+ * 
  * @author Micieli
  * @author Noris
  * @author Torlaschi
@@ -95,7 +102,7 @@ public class RoomService implements IService {
 		}
 	}
 
-	protected void createRoom() {
+	private void createRoom() {
 		try {
 
 			String roomName = null;

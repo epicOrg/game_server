@@ -1,7 +1,5 @@
 package services;
 
-import game.Room;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,10 +8,22 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
+import game.PlayerEventListener;
+import game.Room;
+import game.RoomPlayersUpdater;
 
 /**
+ * CurrentRoom Service provides information about the <code>Room</code> in which the client is entered.
+ * Gives the complete Players list currently in the <code>Room</code> updated in real time according to 
+ * Player getting in or out from the <code>Room</code>
+ * It elaborates also the client request to exit from a particular <code>Room</code>
+ * 
+ * 
  * @author Torlaschi
+ * @author Luca
  * @date 2015/04/18
+ * @see PlayerEventListener
+ * @see RoomPlayersUpdater
  */
 
 public class CurrentRoom implements IService {

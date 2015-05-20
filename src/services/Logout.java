@@ -9,18 +9,16 @@ import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
 
 /**
+ * Elaborates explicit Logout requests setting the applicant offline
+ * 
  * @author Micieli
  * @date 2015/05/17
  */
 
 public class Logout implements IService {
 
-	private JSONObject request;
-
 	@Override
 	public JSONObject start(JSONObject request) {
-		this.request = request;
-		
 
 		OnlineManager onlineManager = OnlineManager.getInstance();
 
@@ -28,7 +26,6 @@ public class Logout implements IService {
 
 			String username = request.getString(FieldsNames.USERNAME);
 			int hashCode = request.getInt(FieldsNames.HASHCODE);
-
 			onlineManager.setOffline(username, hashCode);
 
 		} catch (JSONException e) {

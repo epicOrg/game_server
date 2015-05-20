@@ -6,8 +6,7 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 
 /**
- * If the Service selected from the client not exists, it generate an Unknown
- * Service message.
+ * Default Service started when the Requested service from the client isn't supported.
  * 
  * @author Noris
  * @date 2015/03/26
@@ -18,19 +17,13 @@ public class Unknown implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		return getResponse();
-	}
-
-	private JSONObject getResponse() {
-
-		JSONObject jsonResponse = new JSONObject();
+		JSONObject response = new JSONObject();
 
 		try {
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
+			response.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
 		} catch (JSONException e) {
 		}
 
-		return jsonResponse;
+		return response;
 	}
-
 }
