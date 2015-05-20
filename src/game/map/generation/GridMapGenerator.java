@@ -1,17 +1,17 @@
 package game.map.generation;
 
+import game.PlayerStatus;
 import game.map.Dimension;
 import game.map.Item;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapDefault;
 import game.map.utils.MapGeometric;
 import game.map.utils.MapPosition;
 import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
-
-import org.json.JSONObject;
 
 /**
  * Generate a maze by construct a default grid and by open random ports.
@@ -29,7 +29,7 @@ public class GridMapGenerator implements MapGenerator {
 	private static final int MIN_DOORS = 1;
 	private static final int MAX_DOORS = 4;
 
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 	private Dimension mapSize;
 	private int numberOfPlayers;
 
@@ -45,7 +45,7 @@ public class GridMapGenerator implements MapGenerator {
 	public GridMapGenerator(Dimension mapSize, int numberOfPlayers) {
 		super();
 		this.mapSize = mapSize;
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 		spawnPoints = new ArrayList<Dimension>();
 		doors = new ArrayList<Dimension>();
 		this.numberOfPlayers = numberOfPlayers;
@@ -55,10 +55,10 @@ public class GridMapGenerator implements MapGenerator {
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
-		mapJSONizer.setMapSize(mapSize);
-		setBorders();
+		mapConstructor.setMapSize(mapSize);
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.WALL3);
 
 		generateSpawnPoints();
 		generateWin();
@@ -66,23 +66,7 @@ public class GridMapGenerator implements MapGenerator {
 		generateGrid();
 		// generateVerticalWall();
 
-		return mapJSONizer.getJSONMap();
-	}
-
-	private void setBorders() {
-
-		String bordersTexture = Texture.HEDGE4;
-
-		double mapWidth = mapSize.getWidth();
-
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth), new Dimension(mapWidth * 2, 2, WALL_SIZE)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth * -1), new Dimension(mapWidth * 2, 2, WALL_SIZE)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth,
-				-1, 0), new Dimension(WALL_SIZE, 2, mapWidth * 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth
-				* -1, -1, 0), new Dimension(WALL_SIZE, 2, mapWidth * 2)));
+		return mapConstructor;
 	}
 
 	private void generateSpawnPoints() {
@@ -93,7 +77,7 @@ public class GridMapGenerator implements MapGenerator {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Dimension tmp = MapPosition.getRandomSpawnPoint(mapSize);
 			spawnPoints.add(tmp);
-			mapJSONizer.addSpawnPoint(tmp, new Dimension(0, 0, 0));
+			mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
 			System.out.println("PLAYER: " + tmp);
 
 		}
@@ -135,21 +119,21 @@ public class GridMapGenerator implements MapGenerator {
 	private void generateWin() {
 
 		do {
-		
-		Dimension mapSizeWithTolerance = new Dimension(
-				mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE, mapSize.getHeight(),
-				mapSize.getWidth() - WALL_SIZE - PLAYER_SIZE);
 
-		winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
+			Dimension mapSizeWithTolerance = new Dimension(mapSize.getWidth() - WALL_SIZE
+					- PLAYER_SIZE, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
+					- PLAYER_SIZE);
 
-		System.out.println("Win: " + winPoint);
-		
-		} while(MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
+			winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
 
-		mapJSONizer.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
+			System.out.println("Win: " + winPoint);
+
+		} while (MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE));
+
+		mapConstructor.addMapObject(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
 				new Dimension(0.5, 1, 0)));
-		mapJSONizer.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
-				new Dimension(0.5, 1, 0)));
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint, new Dimension(
+				0.5, 1, 0)));
 
 	}
 
@@ -181,7 +165,7 @@ public class GridMapGenerator implements MapGenerator {
 				for (int j = 0; j < segments.size() - 1; j++) {
 
 					if (!(i == 0 || i == loop - 1))
-						mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, segments
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, segments
 								.get(j), segments.get(segments.size() - 1)));
 				}
 
@@ -277,7 +261,7 @@ public class GridMapGenerator implements MapGenerator {
 				for (int j = 0; j < segments.size() - 1; j++) {
 
 					if (i != 0)
-						mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
 								.get(j), segments.get(segments.size() - 1)));
 				}
 
@@ -316,7 +300,7 @@ public class GridMapGenerator implements MapGenerator {
 								points.get(1))) {
 
 					if (i != 0)
-						mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, segments
 								.get(j), segments.get(segments.size() - 1)));
 				}
 

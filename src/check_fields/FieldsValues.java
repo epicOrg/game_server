@@ -26,7 +26,7 @@ public class FieldsValues {
 	// public static final String[] EMAIL_FORBIDDEN_DOMAIN = {"@example.com"};
 
 	public static final int ROOMNAME_MIN_LENGTH = 3;
-	public static final int ROOMNAME_MAX_LENGTH = 20;
+	public static final int ROOMNAME_MAX_LENGTH = 30;
 	// public static final String ROOMNAME_FORBIDDEN_CHARS =
 
 }

@@ -2,15 +2,13 @@ package game.map.generation;
 
 import game.map.Dimension;
 import game.map.Item;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
 import game.map.utils.MapGeometric;
 import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
-
-import org.json.JSONObject;
 
 /**
  * It generates a maze using a division algorithm.
@@ -22,7 +20,7 @@ import org.json.JSONObject;
 public class DivisionMapGenerator implements MapGenerator {
 
 	private Dimension mapSize;
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 
 	private static final double PLAYER_SIZE = 2;
 	private static final double CENTER_TOLERANCE = 3;
@@ -47,15 +45,15 @@ public class DivisionMapGenerator implements MapGenerator {
 	public DivisionMapGenerator(Dimension mapSize) {
 		super();
 		this.mapSize = mapSize;
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 		spawnPoints = new ArrayList<Dimension>();
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
-		mapJSONizer.setMapSize(mapSize);
-		// constructBorders();
+		mapConstructor.setMapSize(mapSize);
+		// MapDefault.constructBorders(mapJSONizer, mapSize, Texture.WALL3);
 		generateSpawnPoints();
 
 		availableSize = mapSize;
@@ -73,7 +71,7 @@ public class DivisionMapGenerator implements MapGenerator {
 				points.get(1)));
 
 		MapObject randomWall = new MapObject(Item.WALL, Texture.WALL3, position, size);
-		mapJSONizer.addMapObject(randomWall);
+		mapConstructor.addMapObject(randomWall);
 
 		do {
 
@@ -86,7 +84,7 @@ public class DivisionMapGenerator implements MapGenerator {
 				points.get(1)));
 
 		MapObject nextRandomWall = new MapObject(Item.WALL, Texture.HEDGE3, nextPosition, nextSize);
-		mapJSONizer.addMapObject(nextRandomWall);
+		mapConstructor.addMapObject(nextRandomWall);
 
 		do {
 
@@ -99,28 +97,9 @@ public class DivisionMapGenerator implements MapGenerator {
 				points.get(1)));
 
 		MapObject randomVerticalWall = new MapObject(Item.WALL, Texture.WALL3, position, size);
-		mapJSONizer.addMapObject(randomVerticalWall);
+		mapConstructor.addMapObject(randomVerticalWall);
 
-		return mapJSONizer.getJSONMap();
-	}
-
-	/**
-	 * It constructs the borders of the map.
-	 */
-	private void constructBorders() {
-
-		String bordersTexture = Texture.WALL3;
-
-		double mapWidth = mapSize.getWidth();
-
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth), new Dimension(mapWidth * 2, 2, 1)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth * -1), new Dimension(mapWidth * 2, 2, 1)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth,
-				-1, 0), new Dimension(1, 2, mapWidth * 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth
-				* -1, -1, 0), new Dimension(1, 2, mapWidth * 2)));
+		return mapConstructor;
 	}
 
 	private void generateSpawnPoints() {

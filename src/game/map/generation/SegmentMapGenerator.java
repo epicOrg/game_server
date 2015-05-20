@@ -1,13 +1,11 @@
 package game.map.generation;
 
 import game.map.Dimension;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.json.JSONObject;
 
 /**
  * It generate a random map starting from previously loaded segments.
@@ -19,27 +17,27 @@ import org.json.JSONObject;
 public class SegmentMapGenerator implements MapGenerator {
 
 	private ArrayList<ArrayList<MapObject>> segments;
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 
 	public SegmentMapGenerator() {
 		super();
 		this.segments = new ArrayList<ArrayList<MapObject>>();
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
 		for (ArrayList<MapObject> segment : segments) {
 			int random = new Random().nextInt(segment.size());
-			mapJSONizer.addMapObject(segment.get(random));
+			mapConstructor.addMapObject(segment.get(random));
 		}
 
-		return mapJSONizer.getJSONMap();
+		return mapConstructor;
 	}
 
 	public void setMapSize(Dimension size) {
-		mapJSONizer.setMapSize(size);
+		mapConstructor.setMapSize(size);
 	}
 
 	public void loadObject(MapObject mapObject, int segment) {

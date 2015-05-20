@@ -25,7 +25,7 @@ public class Player {
 		super();
 		this.username = username;
 
-		playerStatus = new PlayerStatus(5, 0.5f, -7, -1, -0.25f, 0);
+		playerStatus = new PlayerStatus();
 	}
 
 	public void setPlayerEventListener(PlayerEventListener playerEventListener) {

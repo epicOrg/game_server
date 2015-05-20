@@ -3,9 +3,9 @@ package game;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.map.Dimension;
-import game.map.MapAdapter;
-import game.map.generation.GridMapGenerator;
+import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
+import game.map.generation.SimpleMapGenerator;
 
 import java.util.LinkedList;
 
@@ -153,7 +153,7 @@ public class Room {
 
 	private void generateMap() {
 
-		MapGenerator mapGenerator = new GridMapGenerator(new Dimension(10, 10, 10), MAX_PLAYERS);
+		//MapGenerator mapGenerator = new GridMapGenerator(new Dimension(15, 15, 15), MAX_PLAYERS);
 
 		// MapGenerator mapGenerator
 		// = new DivisionMapGenerator(new Dimension(20, 20, 20));
@@ -161,11 +161,11 @@ public class Room {
 		// MapGenerator mapGenerator
 		// = new ForestMapGenerator(new Dimension(20, 20, 20), 30);
 
-		// MapGenerator mapGenerator = new SimpleMapGenerator();
+		MapGenerator mapGenerator = new SimpleMapGenerator();
 
 		// MapGenerator mapGenerator = new TestMapGenerator();
 
-		MapAdapter mapAdapter = new MapAdapter(mapGenerator.generateMap());
+		MapJSONizer mapAdapter = new MapJSONizer(mapGenerator.generateMap());
 
 		try {
 
@@ -191,9 +191,6 @@ public class Room {
 	}
 
 	public PlayerStatus getSpawnPoint() {
-
-		// TODO: decommentare per simpleMap
-		// spawnPoints.add(new PlayerStatus(10, 20, 10, 10, 10, 10));
 
 		if (spawnPoints.size() == 1)
 			return spawnPoints.getFirst();

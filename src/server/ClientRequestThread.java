@@ -75,7 +75,7 @@ public class ClientRequestThread implements Runnable {
 					out.println(response);
 
 					// TODO DEBUG: server response
-					// System.out.println("SERVER: " + response);
+					System.out.println("SERVER: " + response);
 				} else {
 					System.out.println("SERVER: " + "No response.");
 				}

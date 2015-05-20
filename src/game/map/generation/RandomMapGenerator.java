@@ -2,14 +2,13 @@ package game.map.generation;
 
 import game.map.Dimension;
 import game.map.Item;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapDefault;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.json.JSONObject;
 
 /**
  * It generates a totally random map.
@@ -20,7 +19,7 @@ import org.json.JSONObject;
 
 public class RandomMapGenerator implements MapGenerator {
 
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 
 	private Dimension mapSize;
 	private int numObjects;
@@ -34,14 +33,14 @@ public class RandomMapGenerator implements MapGenerator {
 		super();
 		this.mapSize = mapSize;
 		this.numObjects = numObjects;
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
-		mapJSONizer.setMapSize(mapSize);
-		setBorders();
+		mapConstructor.setMapSize(mapSize);
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE3);
 
 		for (int i = 0; i < numObjects; i++) {
 
@@ -52,10 +51,10 @@ public class RandomMapGenerator implements MapGenerator {
 
 			MapObject mapObject = new MapObject(actualObject, actualTexture, actualPosition,
 					actualSize);
-			mapJSONizer.addMapObject(mapObject);
+			mapConstructor.addMapObject(mapObject);
 		}
 
-		return mapJSONizer.getJSONMap();
+		return mapConstructor;
 	}
 
 	private void setRandomObject() {
@@ -134,22 +133,6 @@ public class RandomMapGenerator implements MapGenerator {
 		actualSize = new Dimension((mapSize.getWidth() / resizing) * random.nextDouble(),
 				(mapSize.getLength() / resizing) * random.nextDouble(), third);
 
-	}
-
-	private void setBorders() {
-
-		String bordersTexture = Texture.HEDGE3;
-
-		double mapWidth = mapSize.getWidth();
-
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth), new Dimension(mapWidth * 2, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth * -1), new Dimension(mapWidth * 2, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth,
-				-1, 0), new Dimension(2, 2, mapWidth * 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth
-				* -1, -1, 0), new Dimension(2, 2, mapWidth * 2)));
 	}
 
 }

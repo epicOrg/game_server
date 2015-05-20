@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import org.json.JSONObject;
+import game.map.MapConstructor;
 
 /**
  * Interface for the map generators.
@@ -16,6 +16,6 @@ public interface MapGenerator {
 	 * 
 	 * @return a map in json format
 	 */
-	public JSONObject generateMap();
+	public MapConstructor generateMap();
 
 }

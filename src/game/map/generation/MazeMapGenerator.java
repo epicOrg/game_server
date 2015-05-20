@@ -2,14 +2,13 @@ package game.map.generation;
 
 import game.map.Dimension;
 import game.map.Item;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapDefault;
 import maze.Coordinate2D;
 import maze.Maze;
 import maze.Node;
-
-import org.json.JSONObject;
 
 /**
  * @author Hermann Tom
@@ -19,7 +18,7 @@ import org.json.JSONObject;
 public class MazeMapGenerator implements MapGenerator {
 
 	private Dimension mapSize;
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 
 	private Dimension position;
 	private Dimension size;
@@ -29,14 +28,14 @@ public class MazeMapGenerator implements MapGenerator {
 	public MazeMapGenerator(Dimension mapSize) {
 		super();
 		this.mapSize = mapSize;
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
-		mapJSONizer.setMapSize(mapSize);
-		constructBorders();
+		mapConstructor.setMapSize(mapSize);
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.WALL3);
 
 		for (int i = 0; i < maze.getxSize(); i++) {
 
@@ -55,7 +54,7 @@ public class MazeMapGenerator implements MapGenerator {
 								+ (y2 - 19) / 2);
 						size = new Dimension(10, 1, 1.5);
 
-						mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, position,
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, position,
 								size));
 					}
 				}
@@ -67,7 +66,7 @@ public class MazeMapGenerator implements MapGenerator {
 								+ (y2 - 19) / 2);
 						size = new Dimension(1.5, 1, 9);
 
-						mapJSONizer.addMapObject(new MapObject(Item.WALL, Texture.WALL3, position,
+						mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, position,
 								size));
 
 					}
@@ -76,26 +75,7 @@ public class MazeMapGenerator implements MapGenerator {
 
 		}
 
-		return mapJSONizer.getJSONMap();
-	}
-
-	/**
-	 * It constructs the borders of the map.
-	 */
-	private void constructBorders() {
-
-		String bordersTexture = Texture.WALL3;
-
-		double mapWidth = mapSize.getWidth();
-
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth), new Dimension(mapWidth * 2, 2, 1)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth * -1), new Dimension(mapWidth * 2, 2, 1)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth,
-				-1, 0), new Dimension(1, 2, mapWidth * 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth
-				* -1, -1, 0), new Dimension(1, 2, mapWidth * 2)));
+		return mapConstructor;
 	}
 
 }

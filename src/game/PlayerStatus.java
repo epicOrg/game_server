@@ -1,5 +1,7 @@
 package game;
 
+import game.map.Dimension;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,17 @@ public class PlayerStatus {
 	private float xDirection;
 	private float yDirection;
 	private float zDirection;
+
+	public PlayerStatus() {
+
+		this.xPosition = 5;
+		this.yPosition = 0.5f;
+		this.zPosition = -7;
+
+		this.xDirection = -1;
+		this.yDirection = -0.25f;
+		this.zDirection = 0;
+	}
 
 	public PlayerStatus(float xPosition, float yPosition, float zPosition, float xDirection,
 			float yDirection, float zDirection) {
@@ -44,10 +57,27 @@ public class PlayerStatus {
 		this.zDirection = (float) zDirection;
 	}
 
+	public PlayerStatus(Dimension position, Dimension direction) {
+
+		this.xPosition = (float) position.getWidth();
+		this.yPosition = (float) position.getHeight();
+		this.zPosition = (float) position.getLength();
+
+		this.xPosition = (float) direction.getWidth();
+		this.yPosition = (float) direction.getHeight();
+		this.zPosition = (float) direction.getLength();
+	}
+
 	public void setPosition(float xPosition, float yPosition, float zPosition) {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 		this.zPosition = zPosition;
+	}
+
+	public void setPosition(Dimension position) {
+		this.xPosition = (float) position.getWidth();
+		this.yPosition = (float) position.getHeight();
+		this.zPosition = (float) position.getLength();
 	}
 
 	public float getxPosition() {
@@ -78,6 +108,12 @@ public class PlayerStatus {
 		this.xDirection = xDirection;
 		this.yDirection = yDirection;
 		this.zDirection = zDirection;
+	}
+
+	public void setDirection(Dimension direction) {
+		this.xPosition = (float) direction.getWidth();
+		this.yPosition = (float) direction.getHeight();
+		this.zPosition = (float) direction.getLength();
 	}
 
 	public float getxDirection() {

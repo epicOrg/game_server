@@ -1,5 +1,10 @@
 package game.map;
 
+import game.PlayerStatus;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,165 +12,89 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 
 /**
- * MapJSONizer can be used to create a map in JSON format, starting from single
- * mapObjects (one, more, or none) and the size of the map.
+ * Adapt a server map to a client map.
  * 
  * @author Noris
- * @date 2015/04/23
+ * @date 2015/05/17
  */
 
 public class MapJSONizer {
 
-	private JSONObject jsonMap;
-	private JSONArray mapObjects;
-	private JSONArray spawnPoints;
-	private JSONArray winPoints;
-	private int numObjects = 0;
+	private static final int PHASE = -1;
 
-	public MapJSONizer() {
-		jsonMap = new JSONObject();
-		mapObjects = new JSONArray();
-		spawnPoints = new JSONArray();
-		winPoints = new JSONArray();
+	private MapConstructor mapConstructor;
+
+	public MapJSONizer(MapConstructor mapConstructor) {
+		this.mapConstructor = mapConstructor;
 	}
 
-	public void setMapSize(Dimension dimension) {
+	/**
+	 * @return all the adapted items
+	 */
+	public JSONArray getAdaptedItems() {
 
-		if (jsonMap.has(FieldsNames.GAME_SIZE))
-			jsonMap.remove(FieldsNames.GAME_SIZE);
-
-		JSONObject jsonMapSize = new JSONObject();
+		JSONArray adaptedItems = new JSONArray();
 
 		try {
 
-			jsonMapSize.put(FieldsNames.GAME_WIDTH, dimension.getWidth());
-			jsonMapSize.put(FieldsNames.GAME_LENGTH, dimension.getLength());
-			jsonMapSize.put(FieldsNames.GAME_HEIGHT, dimension.getHeight());
+			ArrayList<MapObject> items = mapConstructor.getItems();
 
-			jsonMap.put(FieldsNames.GAME_SIZE, jsonMapSize);
+			for (MapObject i : items) {
+
+				JSONObject adapted = new JSONObject();
+
+				adapted.put(FieldsNames.GAME_OBJECT, i.getObjectName());
+				adapted.put(FieldsNames.GAME_TEXTURE, i.getTextureName());
+
+				String position = new Dimension(i.getPosition().getWidth() + PHASE, i.getPosition()
+						.getHeight(), i.getPosition().getLength() + PHASE).toString();
+				adapted.put(FieldsNames.GAME_POSITION, position);
+
+				String size = new Dimension(i.getSize().getWidth(), i.getSize().getHeight(), i
+						.getSize().getLength()).toString();
+				adapted.put(FieldsNames.GAME_SIZE, size);
+
+				adaptedItems.put(adapted);
+			}
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void addMapObject(MapObject mapObject) {
-
-		JSONObject jsonObject = new JSONObject();
-
-		try {
-
-			jsonObject.put(FieldsNames.GAME_TEXTURE, mapObject.getTextureName());
-			jsonObject.put(FieldsNames.GAME_OBJECT, mapObject.getObjectName());
-
-			JSONObject jsonPosition = new JSONObject();
-			jsonPosition.put(FieldsNames.GAME_WIDTH, mapObject.getPosition().getWidth());
-			jsonPosition.put(FieldsNames.GAME_LENGTH, mapObject.getPosition().getLength());
-			jsonPosition.put(FieldsNames.GAME_HEIGHT, mapObject.getPosition().getHeight());
-
-			JSONObject jsonSize = new JSONObject();
-			jsonSize.put(FieldsNames.GAME_WIDTH, mapObject.getSize().getWidth());
-			jsonSize.put(FieldsNames.GAME_LENGTH, mapObject.getSize().getLength());
-			jsonSize.put(FieldsNames.GAME_HEIGHT, mapObject.getSize().getHeight());
-
-			jsonObject.put(FieldsNames.GAME_POSITION, jsonPosition);
-			jsonObject.put(FieldsNames.GAME_SIZE, jsonSize);
-
-			mapObjects.put(jsonObject);
-			numObjects++;
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		return adaptedItems;
 
 	}
 
-	public void addMapObjects(MapObject... mapObjects) {
-		for (MapObject mapObject : mapObjects) {
-			addMapObject(mapObject);
-		}
+	/**
+	 * @return all the spawn points
+	 */
+	public LinkedList<PlayerStatus> getAdaptedSpawnPoints() {
+		return mapConstructor.getSpawnPoints();
 	}
 
-	public void addSpawnPoint(Dimension position, Dimension direction) {
+	/**
+	 * @return all the adapted win points
+	 */
+	public Dimension getAdaptedWinPoint() {
 
-		JSONObject jsonObject = new JSONObject();
+		ArrayList<Dimension> winPoints = mapConstructor.getWinPoints();
 
-		try {
+		return new Dimension(winPoints.get(0).getWidth() + PHASE, winPoints.get(0).getHeight(),
+				winPoints.get(0).getLength() + PHASE);
 
-			JSONObject jsonPosition = new JSONObject();
-			jsonPosition.put(FieldsNames.GAME_WIDTH, position.getWidth());
-			jsonPosition.put(FieldsNames.GAME_LENGTH, position.getLength());
-			jsonPosition.put(FieldsNames.GAME_HEIGHT, position.getHeight());
-
-			JSONObject jsonDirection = new JSONObject();
-			jsonDirection.put(FieldsNames.GAME_WIDTH, direction.getWidth());
-			jsonDirection.put(FieldsNames.GAME_LENGTH, direction.getLength());
-			jsonDirection.put(FieldsNames.GAME_HEIGHT, direction.getHeight());
-
-			jsonObject.put(FieldsNames.GAME_POSITION, jsonPosition);
-			jsonObject.put(FieldsNames.GAME_DIRECTION, jsonDirection);
-
-			spawnPoints.put(jsonObject);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void addWinPoint(MapObject mapObject) {
-
-		JSONObject jsonObject = new JSONObject();
-
-		try {
-
-			jsonObject.put(FieldsNames.GAME_TEXTURE, mapObject.getTextureName());
-			jsonObject.put(FieldsNames.GAME_OBJECT, mapObject.getObjectName());
-
-			JSONObject jsonPosition = new JSONObject();
-			jsonPosition.put(FieldsNames.GAME_WIDTH, mapObject.getPosition().getWidth());
-			jsonPosition.put(FieldsNames.GAME_LENGTH, mapObject.getPosition().getLength());
-			jsonPosition.put(FieldsNames.GAME_HEIGHT, mapObject.getPosition().getHeight());
-
-			JSONObject jsonSize = new JSONObject();
-			jsonSize.put(FieldsNames.GAME_WIDTH, mapObject.getSize().getWidth());
-			jsonSize.put(FieldsNames.GAME_LENGTH, mapObject.getSize().getLength());
-			jsonSize.put(FieldsNames.GAME_HEIGHT, mapObject.getSize().getHeight());
-
-			jsonObject.put(FieldsNames.GAME_POSITION, jsonPosition);
-			jsonObject.put(FieldsNames.GAME_SIZE, jsonSize);
-
-			winPoints.put(jsonObject);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		// TODO: multiple win points
+		// for (Dimension w : winPoints) {
+		//
+		// }
 
 	}
 
-	private void JSONizeMap() {
-
-		try {
-
-			if (jsonMap.has(FieldsNames.GAME_ITEMS))
-				return;
-
-			jsonMap.put(FieldsNames.GAME_ITEMS, mapObjects);
-			jsonMap.put(FieldsNames.GAME_STATUS, spawnPoints);
-			jsonMap.put(FieldsNames.GAME_WIN, winPoints);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	public String getAdaptedWidth() {
+		return new Double(mapConstructor.getMapSize().getWidth()).toString();
 	}
 
-	public JSONObject getJSONMap() {
-		JSONizeMap();
-		return jsonMap;
-	}
-
-	public int getNumObjects() {
-		return numObjects;
+	public String getAdaptedHeight() {
+		return new Double(mapConstructor.getMapSize().getHeight()).toString();
 	}
 
 }

@@ -2,15 +2,14 @@ package game.map.generation;
 
 import game.map.Dimension;
 import game.map.Item;
-import game.map.MapJSONizer;
+import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapDefault;
 import game.map.utils.MapGeometric;
 import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
-
-import org.json.JSONObject;
 
 /**
  * Generate a map with N trees, like a forest.
@@ -29,7 +28,7 @@ public class ForestMapGenerator implements MapGenerator {
 
 	private static final double DISTANCE = 3;
 
-	private MapJSONizer mapJSONizer;
+	private MapConstructor mapConstructor;
 
 	private Dimension mapSize;
 	private int numTrees;
@@ -44,15 +43,15 @@ public class ForestMapGenerator implements MapGenerator {
 		super();
 		this.mapSize = mapSize;
 		this.numTrees = numTrees;
-		mapJSONizer = new MapJSONizer();
+		mapConstructor = new MapConstructor();
 		positions = new ArrayList<Dimension>(numTrees);
 	}
 
 	@Override
-	public JSONObject generateMap() {
+	public MapConstructor generateMap() {
 
-		mapJSONizer.setMapSize(mapSize);
-		setBorders();
+		mapConstructor.setMapSize(mapSize);
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE4);
 		setSpawnPoint();
 
 		for (int i = 0; i < numTrees; i++) {
@@ -77,7 +76,7 @@ public class ForestMapGenerator implements MapGenerator {
 			}
 
 			MapObject trunk = new MapObject(Item.OBSTACLE, Texture.WOOD1, position, size);
-			mapJSONizer.addMapObject(trunk);
+			mapConstructor.addMapObject(trunk);
 
 			// MapObject foliage = new MapObject(Item.WALL, Texture.HEDGE, new
 			// Dimension(
@@ -88,7 +87,7 @@ public class ForestMapGenerator implements MapGenerator {
 
 		}
 
-		return mapJSONizer.getJSONMap();
+		return mapConstructor;
 	}
 
 	private void setRandomPosition() {
@@ -116,22 +115,6 @@ public class ForestMapGenerator implements MapGenerator {
 	private void setRandomSize() {
 		size = new Dimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY), MapRandom.getRandomDouble(
 				MIN_HEIGHT, MAX_HEIGHT), 0);
-	}
-
-	private void setBorders() {
-
-		String bordersTexture = Texture.WALL2;
-
-		double mapWidth = mapSize.getWidth();
-
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth), new Dimension(mapWidth * 2, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(0, -1,
-				mapWidth * -1), new Dimension(mapWidth * 2, 2, 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth,
-				-1, 0), new Dimension(2, 2, mapWidth * 2)));
-		mapJSONizer.addMapObject(new MapObject(Item.WALL, bordersTexture, new Dimension(mapWidth
-				* -1, -1, 0), new Dimension(2, 2, mapWidth * 2)));
 	}
 
 	private void setSpawnPoint() {
