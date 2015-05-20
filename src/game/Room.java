@@ -24,12 +24,15 @@ public class Room {
 	private RoomMapSelector roomMapSelector;
 
 	public Room(String roomName) {
-
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
+		generateMap();
+	}
 
-		 roomMapSelector = new RoomMapSelector(new GridMapGenerator(new
-		 MapDimension(20, 20, 20), MAX_PLAYERS));
+	public void generateMap() {
+
+		roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),
+				MAX_PLAYERS));
 
 		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
 		// MapDimension(20, 20, 20)));
@@ -40,7 +43,6 @@ public class Room {
 		// roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
 
 		// roomMapSelector = new RoomMapSelector(new TestMapGenerator());
-
 	}
 
 	/**

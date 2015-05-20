@@ -118,6 +118,7 @@ public class RoomThread extends Thread {
 		}
 		
 		room.setInPlay(false);
+		room.generateMap();
 	}
 
 	private JSONObject generateLoseMessage() {
