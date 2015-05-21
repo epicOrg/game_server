@@ -10,11 +10,8 @@ import java.net.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sun.org.apache.xml.internal.serialize.XHTMLSerializer;
-
 import services.IService;
 import services.Login;
-import check_fields.ClientIdentityCecker;
 import check_fields.FieldsNames;
 import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
@@ -87,8 +84,10 @@ public class ClientRequestThread implements Runnable {
 
 	private JSONObject elaborateRequest(JSONObject jsonRequest)
 			throws JSONException {
+		
 		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
 				.getRemoteSocketAddress();
+		
 		jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
 		jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
 

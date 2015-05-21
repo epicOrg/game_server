@@ -2,17 +2,13 @@ package check_fields;
 
 import online_management.OnlineManager;
 import online_management.OnlineUser;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
  * 
- * <code>ClientIdentityCecker</code> check user real identity according to his username and his hascode
- * that the user must send everytime in his request.
+ * <code>ClientIdentityCecker</code> check user real identity according to his
+ * username and his hascode that the user must send everytime in his request.
  * 
  * 
  * @author Noris
@@ -36,8 +32,10 @@ public class ClientIdentityCecker {
 	 * @param hashCode
 	 *            hashcode of the user
 	 * 
-	 * @return true if the hashCode  corresponds to one saved by the server , false otherwise
-	 * @throws UserNotOnlineException		if the user doesn't result to be online
+	 * @return true if the hashCode corresponds to one saved by the server ,
+	 *         false otherwise
+	 * @throws UserNotOnlineException
+	 *             if the user doesn't result to be online
 	 */
 	public boolean checkHashCode(String username, int hashCode) {
 
@@ -71,8 +69,7 @@ public class ClientIdentityCecker {
 		return true;
 	}
 
-	public OnlineUser getOnlineUser(String username)
-			throws UserNotOnlineException {
+	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException {
 		return onlineManager.getOnlineUserByUsername(username);
 	}
 }
