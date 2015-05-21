@@ -1,5 +1,10 @@
 package server;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import check_fields.FieldsNames;
+import check_fields.RequestFieldChecher;
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.ConnectionEncrypter;
 import data_management.DataManager;
@@ -23,10 +28,24 @@ import database.writer.UserLineFormatter;
 
 public class ServerInitializer {
 
-	public void initDataManager() {
+	public void init() {
+		
+		initEncryption();
+		initdataManager();	
+		String[] services = {FieldsNames.ENCRYPT, FieldsNames.LOGIN, FieldsNames.REGISTER, FieldsNames.UNKNOWN, FieldsNames.GAME};
+		ArrayList<String> arrayList = new ArrayList<>();
+		Collections.addAll(arrayList, services);
+		RequestFieldChecher.setServiceNotToBeChecked(arrayList);	
+	}
 
+	private void initEncryption() {
 		ConnectionEncrypter.setKeysGenerator(new AsymmetricKeysGenerator());
+		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
+				new SHA512StringEncrypter()));
+		
+	}
 
+	private void initdataManager() {
 		DataManager dataManager = DataManager.getInstance();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
@@ -38,9 +57,6 @@ public class ServerInitializer {
 		dataManager.setChecker(new FileChecker(Paths.getUsersPath(), Paths.getEmailsPath()));
 
 		dataManager.setLoginChecker(new LoginChecker(Paths.getUsersPath()));
-
-		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
-				new SHA512StringEncrypter()));
 	}
 
 }

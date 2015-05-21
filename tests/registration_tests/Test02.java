@@ -22,7 +22,7 @@ class Test02 {
 	public static void main(String[] args) throws JSONException {
 
 		// Initialize the server
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 
 		// Generate a random username
 		String randomUsername = "Democrito" + new Random().nextInt(10000);

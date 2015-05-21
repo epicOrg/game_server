@@ -28,7 +28,7 @@ class Test01 {
 	public static void main(String[] args) throws JSONException {
 
 		// Initialize the server
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 
 		for (int i = 0; i < NUMBER_OF_USERS; i++) {
 

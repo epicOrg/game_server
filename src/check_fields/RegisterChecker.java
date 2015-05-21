@@ -3,6 +3,7 @@ package check_fields;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import data_management.DataManager;
 
@@ -11,7 +12,10 @@ import data_management.DataManager;
  * @date 2015/03/28
  */
 
-public class RegisterChecker extends ServiceChecker {
+public class RegisterChecker {
+	
+	private JSONObject errors = new JSONObject();
+	private boolean noErrors = true;
 
 	/**
 	 * Check if the user name is valid.
@@ -173,6 +177,18 @@ public class RegisterChecker extends ServiceChecker {
 		}
 
 		return true;
+	}
+	
+	public void addError(){
+		this.noErrors = false;
+	}
+	
+	public JSONObject getErrors() {
+		return errors;
+	}
+	
+	public boolean noErrors() {
+		return noErrors;
 	}
 
 }

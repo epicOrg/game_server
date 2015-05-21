@@ -21,7 +21,7 @@ class Test04 {
 	public static void main(String[] args) throws UnknownHostException,
 			JSONException {
 
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 		// CLIENT: Send an invalid call request (caller is not online)
 		JSONObject jsonCallFromClient = new JSONObject();
 		jsonCallFromClient.put(FieldsNames.SERVICE, FieldsNames.CALL);

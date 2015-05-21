@@ -16,7 +16,7 @@ class Test03 {
 
 	public static void main(String[] args) throws RegistrationFailedException {
 
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 
 		DataManager dataManager = DataManager.getInstance();
 

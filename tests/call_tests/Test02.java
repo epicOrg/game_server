@@ -31,7 +31,7 @@ class Test02 {
 			JSONException {
 
 		// SERVER: Set online "JohnLocke"
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("192.168.1.131");
 		onlineManager.setOnline("JohnLocke", ipAddress, null);

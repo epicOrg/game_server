@@ -13,23 +13,9 @@ import exceptions.UserNotOnlineException;
  * @date 2015/04/19
  */
 
-public class ServiceChecker {
+public class ClientIdentityCecker {
 
 	protected OnlineManager onlineManager = OnlineManager.getInstance();
-	protected JSONObject errors = new JSONObject();
-	protected boolean noErrors = true;
-
-	public boolean noErrors() {
-		return noErrors;
-	}
-
-	public void addError() {
-		noErrors = false;
-	}
-
-	public JSONObject getErrors() {
-		return errors;
-	}
 
 	/**
 	 * @param username
@@ -49,17 +35,11 @@ public class ServiceChecker {
 				return true;
 
 		} catch (UserNotOnlineException e) {
-			isUserOnline(username);
 			e.printStackTrace();
+			return false;
 		}
 
-		try {
-			errors.put(FieldsNames.HASHCODE, FieldsNames.INVALID);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return noErrors = false;
+		return false;
 	}
 
 	/**
@@ -71,19 +51,16 @@ public class ServiceChecker {
 	 * @return true if the username is online, false otherwise
 	 */
 	public boolean isUserOnline(String username) {
-		try {
-			if (!onlineManager.checkIfOnline(username)) {
-				errors.put(FieldsNames.USERNAME, FieldsNames.OFFLINE);
-				return noErrors = false;
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+
+		if (!onlineManager.checkIfOnline(username)) {
+			return false;
 		}
+
 		return true;
 	}
 
-	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException {
+	public OnlineUser getOnlineUser(String username)
+			throws UserNotOnlineException {
 		return onlineManager.getOnlineUserByUsername(username);
 	}
-
 }

@@ -10,9 +10,13 @@ import java.net.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sun.org.apache.xml.internal.serialize.XHTMLSerializer;
+
 import services.IService;
 import services.Login;
+import check_fields.ClientIdentityCecker;
 import check_fields.FieldsNames;
+import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
 
 /**
@@ -24,13 +28,16 @@ public class ClientRequestThread implements Runnable {
 
 	private Socket socket;
 	private SecureConnectionApplicator secureConnection;
-	private RequestElaborator requestElaborator;
+	private ServiceChooser serviceChooser;
+	private RequestFieldChecher cecker;
+	private PrintWriter out;
 
 	public ClientRequestThread(Socket socket) {
 		super();
 		this.socket = socket;
 		secureConnection = new SecureConnectionApplicator();
-		requestElaborator = new RequestElaborator();
+		serviceChooser = new ServiceChooser();
+		cecker = new RequestFieldChecher();
 	}
 
 	@Override
@@ -38,10 +45,7 @@ public class ClientRequestThread implements Runnable {
 		try {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
-			// TODO DEBUG: port
-			System.out.println("Local Port: " + socket.getLocalPort());
+			out = new PrintWriter(socket.getOutputStream(), true);
 
 			String request = in.readLine();
 
@@ -50,31 +54,23 @@ public class ClientRequestThread implements Runnable {
 					return;
 
 				// TODO DEBUG: client request
-				// System.out.println("CLIENT: " + request);
+				System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
 				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);
-
-				InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
-						.getRemoteSocketAddress();
-				jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
-				jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
-
-				IService service;
-				if (jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.LOGIN)) {
-					service = new Login(out);
-				} else {
-					service = requestElaborator.chooseService(jsonRequest);
+				JSONObject jResponse = null;
+				
+				if(cecker.checkRequest(jsonRequest)){
+					jResponse = elaborateRequest(jsonRequest);
 				}
-
-				JSONObject jResponse;
-				if ((jResponse = service.start(jsonRequest)) != null) {
+				
+				if (jResponse != null) {
 					String response = secureConnection.encrypt(jResponse).toString();
 
 					out.println(response);
 
 					// TODO DEBUG: server response
-					System.out.println("SERVER: " + response);
+					//System.out.println("SERVER: " + response);
 				} else {
 					System.out.println("SERVER: " + "No response.");
 				}
@@ -87,6 +83,24 @@ public class ClientRequestThread implements Runnable {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private JSONObject elaborateRequest(JSONObject jsonRequest)
+			throws JSONException {
+		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
+				.getRemoteSocketAddress();
+		jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
+		jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
+
+		IService service;
+		if (jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.LOGIN)) {
+			service = new Login(out);
+		} else {
+			service = serviceChooser.chooseService(jsonRequest);
+		}
+
+		JSONObject jResponse = service.start(jsonRequest);
+		return jResponse;
 	}
 
 }

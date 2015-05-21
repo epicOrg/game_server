@@ -27,7 +27,7 @@ public class Test01 {
 	public void test() throws JSONException {
 
 		// Initialize the server
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 
 		JSONObject jsonFromClient = new JSONObject();
 		jsonFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);

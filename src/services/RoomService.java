@@ -54,31 +54,12 @@ public class RoomService implements IService {
 		roomChecker = new RoomChecker();
 
 		try {
-
-			checkFields();
-			if (roomChecker.noErrors())
-				runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
+			runService(jsonRequest.getString(FieldsNames.SERVICE_TYPE));
 
 		} catch (JSONException  e) {
 			e.printStackTrace();
 		}
 		return jsonResponse;
-	}
-
-	private void checkFields() {
-
-		try {
-
-			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			int hashCode = jsonRequest.getInt(FieldsNames.HASHCODE);
-
-			roomChecker.isUserOnline(username);
-			roomChecker.checkHashCode(username, hashCode);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private void runService(String serviceType) {

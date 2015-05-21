@@ -1,13 +1,17 @@
 package check_fields;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author Noris
  * @date 2015/04/03
  */
 
-public class CallChecker extends ServiceChecker {
+public class CallChecker extends ClientIdentityCecker {
+	
+	private JSONObject errors = new JSONObject();
+	private boolean noErrors = true;
 
 	/**
 	 * @param callee
@@ -48,6 +52,18 @@ public class CallChecker extends ServiceChecker {
 		}
 
 		return noErrors = false;
+	}
+	
+	public void addError(){
+		this.noErrors = false;
+	}
+	
+	public JSONObject getErrors() {
+		return errors;
+	}
+	
+	public boolean noErrors() {
+		return noErrors;
 	}
 
 }

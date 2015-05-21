@@ -18,7 +18,7 @@ public class ServerLauncher {
 			
 			@SuppressWarnings("resource")
 			ServerSocket ServerSocket = new ServerSocket(PORT);
-			new ServerInitializer().initDataManager();
+			new ServerInitializer().init();
 
 			while (true) {
 				Socket socket = ServerSocket.accept();

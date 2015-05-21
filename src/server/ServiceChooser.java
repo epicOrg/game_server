@@ -24,11 +24,11 @@ import check_fields.FieldsNames;
  * @date 2015/03/26
  */
 
-public class RequestElaborator {
+public class ServiceChooser {
 
 	private HashMap<String, IService> services = new HashMap<>();
 
-	public RequestElaborator() {
+	public ServiceChooser() {
 		initMap();
 	}
 

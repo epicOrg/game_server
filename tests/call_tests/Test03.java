@@ -24,7 +24,7 @@ class Test03 {
 			JSONException {
 
 		// CLIENT: Send message to go online
-		new ServerInitializer().initDataManager();
+		new ServerInitializer().init();
 
 		JSONObject jsonLoginFromClient = new JSONObject();
 		jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);

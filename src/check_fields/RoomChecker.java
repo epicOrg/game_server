@@ -6,7 +6,8 @@ package check_fields;
  * @date 2015/04/19
  */
 
-public class RoomChecker extends ServiceChecker {
+public class RoomChecker {
+	
 
 	/**
 	 * Check if the room name is valid.
@@ -24,10 +25,6 @@ public class RoomChecker extends ServiceChecker {
 
 		if (roomName.length() > FieldsValues.ROOMNAME_MAX_LENGTH) {
 			fieldIsOk = false;
-		}
-
-		if (!fieldIsOk) {
-			noErrors = false;
 		}
 
 		return fieldIsOk;
