@@ -1,12 +1,15 @@
 package game.map.generation;
 
+import game.PlayerStatus;
 import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapConst;
 import game.map.utils.MapDefault;
 import game.map.utils.MapGeometric;
+import game.map.utils.MapPosition;
 import game.map.utils.MapRandom;
 
 import java.util.ArrayList;
@@ -20,18 +23,21 @@ import java.util.ArrayList;
 
 public class ForestMapGenerator implements MapGenerator {
 
-	private static final double MIN_RAY = 0.1;
-	private static final double MAX_RAY = 1;
+	private static final double MIN_RAY = 0.4;
+	private static final double MAX_RAY = 0.4;
 
-	private static final double MIN_HEIGHT = 1;
-	private static final double MAX_HEIGHT = 6;
+	private static final double MIN_HEIGHT = 2;
+	private static final double MAX_HEIGHT = 2;
 
-	private static final double DISTANCE = 3;
+	private static final double DISTANCE = MapConst.PLAYER_SIZE * 2;
+
+	private static final double FOLIAGE_TOLERANCE = -0.1;
 
 	private MapConstructor mapConstructor;
 
 	private MapDimension mapSize;
-	private int numTrees;
+	private int numberOfPlayers;
+	private int numberOfTrees;
 
 	private ArrayList<MapDimension> positions;
 
@@ -39,22 +45,23 @@ public class ForestMapGenerator implements MapGenerator {
 	private MapDimension size;
 	private double diameter;
 
-	public ForestMapGenerator(MapDimension mapSize, int numTrees) {
-		super();
+	public ForestMapGenerator(MapDimension mapSize, int numberOfTrees, int numberOfPlayers) {
+
 		this.mapSize = mapSize;
-		this.numTrees = numTrees;
+		this.numberOfTrees = numberOfTrees;
+		this.numberOfPlayers = numberOfPlayers;
+
 		mapConstructor = new MapConstructor();
-		positions = new ArrayList<MapDimension>(numTrees);
+		positions = new ArrayList<MapDimension>(numberOfTrees + numberOfPlayers);
 	}
 
 	@Override
 	public MapConstructor generateMap() {
 
 		mapConstructor.setMapSize(mapSize);
-		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE4);
-		setSpawnPoint();
+		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE3);
 
-		for (int i = 0; i < numTrees; i++) {
+		for (int i = 0; i < numberOfTrees; i++) {
 
 			setRandomSize();
 			diameter = size.getWidth() * 2 + DISTANCE;
@@ -73,19 +80,24 @@ public class ForestMapGenerator implements MapGenerator {
 
 			else {
 				setRandomPosition();
+				positions.add(position);
 			}
 
 			MapObject trunk = new MapObject(Item.OBSTACLE, Texture.WOOD1, position, size);
 			mapConstructor.addMapObject(trunk);
 
-			// MapObject foliage = new MapObject(Item.WALL, Texture.HEDGE, new
-			// Dimension(
-			// position.getWidth(), size.getHeigh(), position.getLength()), new
-			// Dimension(
-			// diameter * 2, size.getHeigh() / 3, diameter * 2));
-			// mapJSONizer.addMapObject(foliage);
+			double foliageHeight = size.getHeight() / 2;
+
+			MapObject foliage = new MapObject(Item.VASE, Texture.HEDGE4, new MapDimension(
+					position.getWidth(), size.getHeight() - foliageHeight - 0.1,
+					position.getLength() + FOLIAGE_TOLERANCE), new MapDimension(diameter / 4,
+					foliageHeight * 4, 0));
+			mapConstructor.addMapObject(foliage);
 
 		}
+
+		generateSpawnPoints();
+		generateWin();
 
 		return mapConstructor;
 	}
@@ -108,17 +120,53 @@ public class ForestMapGenerator implements MapGenerator {
 		}
 
 		position = new MapDimension(width, -1, length);
-		positions.add(position);
 
 	}
 
 	private void setRandomSize() {
-		size = new MapDimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY), MapRandom.getRandomDouble(
-				MIN_HEIGHT, MAX_HEIGHT), 0);
+		size = new MapDimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY),
+				MapRandom.getRandomDouble(MIN_HEIGHT, MAX_HEIGHT), 0);
 	}
 
-	private void setSpawnPoint() {
-		positions.add(new MapDimension(-7, 0.5, 5));
+	private void generateSpawnPoints() {
+
+		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth()
+				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth()
+				- MapConst.PLAYER_SIZE / 2);
+
+		for (int i = 0; i < numberOfPlayers; i++) {
+
+			MapDimension tmp;
+
+			do {
+
+				tmp = MapPosition.getRandomSpawnPoint(mapSizeWithTolerance);
+
+			} while (MapGeometric.checkIfUsed(tmp, positions, DISTANCE));
+
+			mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
+			positions.add(tmp);
+		}
+
+	}
+
+	private void generateWin() {
+
+		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth()
+				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth()
+				- MapConst.PLAYER_SIZE / 2);
+
+		MapDimension tmp;
+
+		do {
+
+			tmp = MapPosition.getRandomPosition(mapSizeWithTolerance);
+
+		} while (MapGeometric.checkIfUsed(tmp, positions, DISTANCE));
+
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, tmp,
+				new MapDimension(0.5, 1, 0)));
+
 	}
 
 }

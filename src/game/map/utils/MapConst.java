@@ -8,5 +8,7 @@ package game.map.utils;
 public class MapConst {
 
 	public static final double PLAYER_SIZE = 2;
+	public static final double WIN_RADIUS = 3;
+	
 
 }
