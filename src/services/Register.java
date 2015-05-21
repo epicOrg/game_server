@@ -69,8 +69,8 @@ public class Register implements IService {
 		registerChecker.checkEmail(registeredUser.getEmail());
 
 		if (registerChecker.noErrors()) {
-			registerChecker.checkAlreadyUsedUsername(dataManager,registeredUser.getUsername());
-			registerChecker.checkAlreadyUsedEmail(dataManager,	registeredUser.getEmail());
+			registerChecker.checkAlreadyUsedUsername(registeredUser.getUsername());
+			registerChecker.checkAlreadyUsedEmail(registeredUser.getEmail());
 		}
 	}
 

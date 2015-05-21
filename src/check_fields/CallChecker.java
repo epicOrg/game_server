@@ -1,5 +1,7 @@
 package check_fields;
 
+import online_management.OnlineManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,6 +12,7 @@ import org.json.JSONObject;
 
 public class CallChecker extends ClientIdentityCecker {
 	
+	private OnlineManager onlineManager = OnlineManager.getInstance();
 	private JSONObject errors = new JSONObject();
 	private boolean noErrors = true;
 

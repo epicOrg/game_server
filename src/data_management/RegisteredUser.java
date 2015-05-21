@@ -5,6 +5,11 @@ import java.util.GregorianCalendar;
 import data_management.password_encrypter.PasswordEncrypter;
 
 /**
+ * 
+ * A not complete description of an user data that has an account in the server.
+ * 
+ * The user Password is encrypted whit a {@link PasswordEncrypter} 
+ * 
  * @author Noris
  * @date 2015/04/14
  */
@@ -65,5 +70,4 @@ public class RegisteredUser {
 	public static void setPasswordEncrypter(PasswordEncrypter passwordEncrypter) {
 		RegisteredUser.passwordEncrypter = passwordEncrypter;
 	}
-
 }

@@ -17,12 +17,12 @@ import data_management.RegisteredUser;
  * @date 2015/04/14
  * 
  */
-public class UserCreator implements IDataSaver {
+public class UserSaver implements IDataSaver {
 
 	private String path;
 	private ILineFormatter lineFormatter;
 
-	public UserCreator(String path, ILineFormatter lineFormatter) {
+	public UserSaver(String path, ILineFormatter lineFormatter) {
 		super();
 		this.path = path;
 		this.lineFormatter = lineFormatter;

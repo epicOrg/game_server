@@ -2,18 +2,32 @@ package data_management;
 
 import java.io.IOException;
 
+import database.writer.EmailSaver;
 import database.writer.IDataSaver;
+import database.writer.UserSaver;
 
 /**
+ * 
+ * An implementation of {@link IDataSaver} that use two other <code>IDataSaver</code> to save fields.
+ * In order to speed up the checking phase emails are also saved in a separated file 
+ * 
  * @author Micieli
  * @date 2015/04/17
+ * @see EmailSaver
+ * @see UserSaver
  */
 
 public class RegisterDataSaver implements IDataSaver {
 
 	private IDataSaver userSaver;
 	private IDataSaver emailSaver;
-
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param userSaver		 a <code>IDataSaver</code> that saves emails
+	 * @param emailSaver	 a <code>IDataSaver</code> that saves user data
+	 */
 	public RegisterDataSaver(IDataSaver userSaver, IDataSaver emailSaver) {
 		super();
 		this.userSaver = userSaver;
@@ -25,5 +39,4 @@ public class RegisterDataSaver implements IDataSaver {
 		userSaver.saveData(user);
 		emailSaver.saveData(user);
 	}
-
 }

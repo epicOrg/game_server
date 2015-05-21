@@ -17,7 +17,7 @@ import database.loader.FileChecker;
 import database.loader.LoginChecker;
 import database.writer.EmailFormatter;
 import database.writer.EmailSaver;
-import database.writer.UserCreator;
+import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
 
 /**
@@ -49,7 +49,7 @@ public class ServerInitializer {
 		DataManager dataManager = DataManager.getInstance();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
-				new UserCreator(Paths.getUsersPath(), new UserLineFormatter()),
+				new UserSaver(Paths.getUsersPath(), new UserLineFormatter()),
 				new EmailSaver(Paths.getEmailsPath(), new EmailFormatter()));
 
 		dataManager.setRegisterDataSaver(registerDataSaver);

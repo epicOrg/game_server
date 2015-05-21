@@ -6,26 +6,38 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
+ * 
+ * <code>ClientIdentityCecker</code> check user real identity according to his username and his hascode
+ * that the user must send everytime in his request.
+ * 
+ * 
  * @author Noris
+ * @author Luca
  * @date 2015/04/19
+ * @see Login
+ * @see OnlineManager
+ * @see OnlineUser
  */
 
 public class ClientIdentityCecker {
 
-	protected OnlineManager onlineManager = OnlineManager.getInstance();
+	private OnlineManager onlineManager = OnlineManager.getInstance();
 
 	/**
+	 * 
+	 * Checks if the hashCode given matches with one provided during Login.
+	 * 
 	 * @param username
 	 *            username of the user
 	 * @param hashCode
 	 *            hashcode of the user
 	 * 
-	 * @return true if the hashCode sent by the user corresponds to the hashCode
-	 *         generated and saved by the server in the login, false otherwise
-	 * @throws UserNotOnlineException
+	 * @return true if the hashCode  corresponds to one saved by the server , false otherwise
+	 * @throws UserNotOnlineException		if the user doesn't result to be online
 	 */
 	public boolean checkHashCode(String username, int hashCode) {
 

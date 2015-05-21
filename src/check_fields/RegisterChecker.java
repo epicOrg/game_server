@@ -5,11 +5,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.Register;
 import data_management.DataManager;
 
 /**
+ * 
+ * Contains methods to check registration field during a client request to have an account on the server.
+ * The data choose by the user must be compatible with ones defined in {@link FieldsValues}
+ * 
  * @author Noris
  * @date 2015/03/28
+ * @see Register
  */
 
 public class RegisterChecker {
@@ -18,10 +24,10 @@ public class RegisterChecker {
 	private boolean noErrors = true;
 
 	/**
-	 * Check if the user name is valid.
+	 * Check if the username is valid.
 	 * 
 	 * @param username
-	 * @return true if the user name is valid, false if it's invalid
+	 * @return true if the username is valid, false if it's invalid
 	 */
 	public boolean checkUsername(String username) {
 
@@ -143,8 +149,16 @@ public class RegisterChecker {
 		return fieldIsOk;
 
 	}
-
-	public boolean checkAlreadyUsedUsername(DataManager dataManager, String username) {
+	
+	/**
+	 * 
+	 * Checks if exist another user registered with the same username
+	 * 
+	 * @param username  the username to check
+	 * @return true if the username is available, false otherwise
+	 */
+	public boolean checkAlreadyUsedUsername( String username) {
+		DataManager dataManager = DataManager.getInstance();
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
 			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);
@@ -162,7 +176,15 @@ public class RegisterChecker {
 		return true;
 	}
 
-	public boolean checkAlreadyUsedEmail(DataManager dataManager, String email) {
+	/**
+	 * 
+	 * Checks if exist another user registered with the same email
+	 * 
+	 * @param email the email to check
+	 * @return true if the aren't user registered with the given email
+	 */
+	public boolean checkAlreadyUsedEmail(String email) {
+		DataManager dataManager = DataManager.getInstance();
 		if (!dataManager.checkEmail(email)) {
 			JSONArray emailErrors = new JSONArray();
 			emailErrors.put(FieldsNames.REGISTER_ALREADY_USED);

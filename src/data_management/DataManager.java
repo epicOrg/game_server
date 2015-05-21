@@ -2,6 +2,8 @@ package data_management;
 
 import java.io.IOException;
 
+import services.Login;
+import services.Register;
 import database.loader.ILoginChecker;
 import database.loader.IRegistrationChecker;
 import database.writer.IDataSaver;
@@ -11,6 +13,10 @@ import exceptions.RegistrationFailedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
+ * 
+ * <code>DataManager</code> provides methods to manages users data.
+ * Allows {@link Register} <code>Service</code> to save users data and to check them.
+ * 
  * @author Noris
  * @author Micieli
  * @date 2015/03/27
@@ -26,7 +32,15 @@ public class DataManager {
 
 	private DataManager() {
 	}
-
+	
+	/**
+	 * 
+	 * Checks if exist another user registered with the same username
+	 * 
+	 * @param username  the username to check
+	 * @return true if the username is available, false otherwise
+	 * @see IRegistrationChecker#checkUsername(String)
+	 */
 	public boolean checkUsername(String username) {
 		try {
 
@@ -38,6 +52,14 @@ public class DataManager {
 		return true;
 	}
 
+	/**
+	 * 
+	 * Checks if exist another user registered with the same email
+	 * 
+	 * @param 		 email the email to check
+	 * @return		 true if the aren't user registered with the given email
+	 * @see IRegistrationChecker#checkEmail(String)
+	 */
 	public boolean checkEmail(String email) {
 		try {
 
@@ -52,6 +74,15 @@ public class DataManager {
 		return true;
 	}
 
+	/**
+	 * 
+	 * Checks if the password given by the user mathes with the one provided during registration
+	 * 
+	 * @param registeredUser
+	 * @return
+	 * @see ILoginChecker#checkUser(RegisteredUser)
+	 * @see Login
+	 */
 	public boolean checkPassword(RegisteredUser registeredUser) {
 		try {
 
@@ -64,6 +95,25 @@ public class DataManager {
 		}
 
 		return true;
+	}
+	
+	/**
+	 * 
+	 * Permanently saves user data (username, email and password) in the server database.
+	 * 
+	 * @param user								the registered user to be saved
+	 * @throws RegistrationFailedException		if an error occurred during writing into database
+	 * @see RegisteredUser
+	 * @see IDataSaver
+	 */
+	public void saveRegistrationFields(RegisteredUser user)
+			throws RegistrationFailedException {
+
+		try {
+			registerDataSaver.saveData(user);
+		} catch (IOException e) {
+			throw new RegistrationFailedException("Writing error");
+		}
 	}
 
 	public static DataManager getInstance() {
@@ -78,18 +128,7 @@ public class DataManager {
 		this.checker = checker;
 	}
 
-	public void saveRegistrationFields(RegisteredUser user)
-			throws RegistrationFailedException {
-
-		try {
-			registerDataSaver.saveData(user);
-		} catch (IOException e) {
-			throw new RegistrationFailedException("Writing error");
-		}
-	}
-
 	public void setLoginChecker(ILoginChecker loginChecker) {
 		this.loginChecker = loginChecker;
 	}
-
 }
