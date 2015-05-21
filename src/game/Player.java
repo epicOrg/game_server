@@ -13,9 +13,6 @@ public class Player {
 	private String username;
 	private boolean status;
 
-	private Room room;
-	private Team team;
-
 	private AudioData audioData ;
 
 	private PlayerStatus playerStatus;
@@ -34,22 +31,6 @@ public class Player {
 
 	public String getUsername() {
 		return username;
-	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
 	}
 
 	public PlayerStatus getPlayerStatus() {

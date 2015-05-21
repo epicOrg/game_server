@@ -29,7 +29,7 @@ public class Room {
 	public static final int MAX_PLAYERS = 2;
 
 	private String roomName;
-	private TeamGenerator teamGenerator;
+	private TeamManager teamManager;
 	private RoomEventListener playersUpdater;
 	private boolean inPlay = false;
 
@@ -42,7 +42,7 @@ public class Room {
 	 */	
 	public Room(String roomName) {
 		this.roomName = roomName;
-		teamGenerator = new TeamGenerator();
+		teamManager = new TeamManager();
 		generateMap();
 	}
 
@@ -78,7 +78,7 @@ public class Room {
 			throw new FullRoomException();
 		}
 
-		teamGenerator.getRandomTeam().addPlayer(player);
+		teamManager.getRandomTeam().addPlayer(player);
 		playersUpdater.onNewPlayerAdded(player);
 	}
 
@@ -97,15 +97,14 @@ public class Room {
 			System.out.println("Game interrupted.");
 
 		} else {
-			player.getTeam().removePlayer(player);
-			player.setRoom(null);
+			teamManager.removePlayer(player);
 			playersUpdater.onPlayerRemoved(player);
 		}
 	}
 
 	public Player getPlayerByName(String name) throws NoSuchPlayerException {
 
-		for (Team t : teamGenerator.getTeams()) {
+		for (Team t : teamManager.getTeams()) {
 			for (Player p : t.getPlayers()) {
 				if (p.getUsername().equals(name))
 					return p;
@@ -120,21 +119,14 @@ public class Room {
 	 *         false otherwise (there are more users slot).
 	 */
 	private boolean isFull() {
-
-		int size = 0;
-
-		for (Team team : teamGenerator.getTeams()) {
-			size += team.getSize();
-		}
-
-		return size >= MAX_PLAYERS;
+		return getSize() >= MAX_PLAYERS;
 	}
 
 	public int getSize() {
 
 		int size = 0;
 
-		for (Team team : teamGenerator.getTeams()) {
+		for (Team team : teamManager.getTeams()) {
 			size += team.getSize();
 		}
 
@@ -145,8 +137,8 @@ public class Room {
 		return roomName;
 	}
 
-	public TeamGenerator getTeamGenerator() {
-		return teamGenerator;
+	public TeamManager getTeamGenerator() {
+		return teamManager;
 	}
 
 	public void setEventListener(RoomEventListener roomPlayersUpdater) {
@@ -169,7 +161,7 @@ public class Room {
 	public void setInPlay(boolean inPlay) {
 		if (this.inPlay && !inPlay) {
 			playersUpdater.onGameEnded();
-			teamGenerator.emptyTeams();
+			teamManager.emptyTeams();
 		}
 
 		this.inPlay = inPlay;

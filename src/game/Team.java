@@ -22,7 +22,7 @@ public class Team {
 	private ArrayList<Player> players = new ArrayList<Player>();
 
 	public static final int MAX_PLAYERS = Room.MAX_PLAYERS
-			/ TeamGenerator.NUMBER_OF_TEAMS;
+			/ TeamManager.NUMBER_OF_TEAMS;
 
 	public Team() {
 		super();
@@ -54,7 +54,6 @@ public class Team {
 		// throw new FullTeamException();
 		// }
 
-		player.setTeam(this);
 		players.add(player);
 	}
 
@@ -64,7 +63,6 @@ public class Team {
 	 * @param player
 	 */
 	public void removePlayer(Player player) {
-		player.setTeam(null);
 		players.remove(player);
 	}
 

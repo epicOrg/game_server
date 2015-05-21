@@ -3,19 +3,21 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import exceptions.NoSuchPlayerException;
+
 /**
  * @author Noris
  * @author Torlaschi
  * @date 2015/04/20
  */
 
-public class TeamGenerator {
+public class TeamManager {
 
 	public static final int NUMBER_OF_TEAMS = 1;
 
 	private ArrayList<Team> teams = new ArrayList<Team>();
 
-	public TeamGenerator() {
+	public TeamManager() {
 		generateTeams();
 	}
 
@@ -69,6 +71,13 @@ public class TeamGenerator {
 		}
 
 		return t;
+	}
+	
+	public void removePlayer(Player player){
+		for (Team team : teams) {
+			if(team.getPlayers().contains(player))
+				team.removePlayer(player); 
+		}
 	}
 
 	/**
