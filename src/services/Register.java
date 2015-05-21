@@ -8,7 +8,6 @@ import check_fields.FieldsNames;
 import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
-import exceptions.MissingFieldException;
 import exceptions.RegistrationFailedException;
 
 /**
