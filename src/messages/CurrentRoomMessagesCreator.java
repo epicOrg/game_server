@@ -1,4 +1,4 @@
-package services.messages;
+package messages;
 
 import game.Player;
 import game.Room;
@@ -74,6 +74,4 @@ public class CurrentRoomMessagesCreator {
 		}
 		return players;
 	}
-	
-	
 }

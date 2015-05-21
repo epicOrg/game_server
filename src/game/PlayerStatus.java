@@ -5,11 +5,17 @@ import game.map.MapDimension;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.Game;
 import check_fields.FieldsNames;
 
 /**
+ * 
+ * <code>PlayerStatus</code> defines the current status of the player in the game map.
+ * It provides information about position and direction.
+ * 
  * @author Noris
  * @date 2015/04/19
+ * @see Game
  */
 
 public class PlayerStatus {
@@ -138,32 +144,6 @@ public class PlayerStatus {
 
 	public void setzDirection(float zDirection) {
 		this.zDirection = zDirection;
-	}
-
-	public JSONObject toJSONObject() {
-
-		JSONObject playerStatus = new JSONObject();
-
-		try {
-
-			JSONObject position = new JSONObject();
-			position.put(FieldsNames.GAME_X, xPosition);
-			position.put(FieldsNames.GAME_Y, yPosition);
-			position.put(FieldsNames.GAME_Z, zPosition);
-
-			JSONObject direction = new JSONObject();
-			position.put(FieldsNames.GAME_X, xDirection);
-			position.put(FieldsNames.GAME_Y, yDirection);
-			position.put(FieldsNames.GAME_Z, zDirection);
-
-			playerStatus.put(FieldsNames.GAME_POSITION, position);
-			playerStatus.put(FieldsNames.GAME_DIRECTION, direction);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return playerStatus;
 	}
 
 	public String toStringPosition() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import messages.GameEndMessagesCreator;
 import online_management.OnlineManager;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class RoomThread extends Thread {
 	private IWinChecher winChecker;
 	private Timer timer;
 	private Room room;
+	private GameEndMessagesCreator messagesCreator;
 
 	/**
 	 * @param room
@@ -41,6 +43,7 @@ public class RoomThread extends Thread {
 		this.room = room;
 		this.winChecker = winChecker;
 		timer = new Timer();
+		messagesCreator = new GameEndMessagesCreator();
 	}
 
 	@Override
@@ -103,13 +106,13 @@ public class RoomThread extends Thread {
 
 			if (winner.size() > 1) {
 				for (Team team : winner) {
-					updatePlayers(team.getPlayers(), generateDrawMessage());
+					updatePlayers(team.getPlayers(), messagesCreator.generateDrawMessage());
 				}
 			} else {
-				updatePlayers(winner.get(0).getPlayers(), generateWinMessage());
+				updatePlayers(winner.get(0).getPlayers(), messagesCreator.generateWinMessage());
 			}
 			for (Team team : losers) {
-				updatePlayers(team.getPlayers(), generateLoseMessage());
+				updatePlayers(team.getPlayers(), messagesCreator.generateLoseMessage());
 			}
 
 		} catch (UserNotOnlineException e) {
@@ -119,57 +122,6 @@ public class RoomThread extends Thread {
 		
 		room.setInPlay(false);
 		room.generateMap();
-	}
-
-	private JSONObject generateLoseMessage() {
-
-		JSONObject loseMessage = new JSONObject();
-
-		try {
-
-			loseMessage.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			loseMessage.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			loseMessage.put(FieldsNames.GAME_END, FieldsNames.GAME_LOSE);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return loseMessage;
-	}
-
-	private JSONObject generateWinMessage() {
-
-		JSONObject winMessage = new JSONObject();
-
-		try {
-
-			winMessage.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			winMessage.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			winMessage.put(FieldsNames.GAME_END, FieldsNames.GAME_WIN);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return winMessage;
-	}
-
-	private JSONObject generateDrawMessage() {
-
-		JSONObject message = new JSONObject();
-
-		try {
-
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_END, FieldsNames.GAME_DRAW);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return message;
 	}
 
 	private void updatePlayers(ArrayList<Player> players, JSONObject message)

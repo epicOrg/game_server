@@ -16,7 +16,7 @@ public class Player {
 	private Room room;
 	private Team team;
 
-	private AudioData audioData = new AudioData();
+	private AudioData audioData ;
 
 	private PlayerStatus playerStatus;
 	private PlayerEventListener playerEventListener;
@@ -25,6 +25,7 @@ public class Player {
 		super();
 		this.username = username;
 		playerStatus = new PlayerStatus();
+		audioData = new AudioData();
 	}
 
 	public void setPlayerEventListener(PlayerEventListener playerEventListener) {

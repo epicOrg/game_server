@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import messages.CurrentRoomMessagesCreator;
+import messages.UpdatingMessagesCreator;
 import online_management.OnlineManager;
 
 import org.json.JSONArray;
@@ -17,8 +19,13 @@ import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
 
 /**
+ * An implementation of {@link RoomEventListener} and {@link PlayerEventListener}.
+ * Updates player about room event sending them messages in real time, 
+ * breaking the Request/Reply pattern provided by <code>Service</code>.
+ * 
  * @author Micieli
  * @date 2015/04/25
+ * @see Room
  */
 
 public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
@@ -28,37 +35,34 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
 	private RoomThread roomThread;
+	private UpdatingMessagesCreator messagesCreator;
 
 	public RoomPlayersUpdater(Room room) {
 		super();
 		this.room = room;
 		this.onlineManager = OnlineManager.getInstance();
+		messagesCreator = new UpdatingMessagesCreator();
 	}
 
 	@Override
 	public void onNewPlayerAdded(Player player) {
-
 		try {
 
-			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
-					.getOutStream();
+			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername()).getOutStream();
 			writers.put(player, writer);
-
 			player.setPlayerEventListener(this);
 
 		} catch (UserNotOnlineException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		JSONObject message = generatePlayerList();
+		
+		JSONObject message = messagesCreator.generatePlayersListMessage(room);
 		updatePlayers(player, message);
-
 	}
 
 	@Override
 	public void onRoomFull() {
-		JSONObject message = generateStartMessage();
+		JSONObject message = messagesCreator.generateStartMessage();
 		updatePlayers(null, message);
 		room.setInPlay(true);
 		GameDataManager.getInstance().newAudioCallForRoom(room);
@@ -67,78 +71,13 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onPlayerRemoved(Player player) {
 		writers.remove(player);
-		JSONObject message = generatePlayerList();
+		JSONObject message = messagesCreator.generatePlayersListMessage(room);
 		updatePlayers(player, message);
 	}
 
 	@Override
 	public void onGameEnded() {
 		writers = new HashMap<>();
-	}
-
-	private JSONObject generateStartMessage() {
-
-		JSONObject message = new JSONObject();
-
-		try {
-
-			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-			message.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_START);
-			message.put(FieldsNames.NO_ERRORS, true);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return message;
-	}
-
-	private JSONObject generatePlayerList() {
-
-		JSONObject message = new JSONObject();
-
-		try {
-
-			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
-			message.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
-
-			JSONArray teams = new JSONArray();
-
-			for (Team t : room.getTeamGenerator().getTeams()) {
-				JSONObject team = new JSONObject();
-				JSONArray players = new JSONArray();
-
-				for (Player p : t.getPlayers()) {
-					JSONObject jObject = new JSONObject();
-					jObject.put(FieldsNames.USERNAME, p.getUsername());
-					players.put(jObject);
-				}
-
-				team.put(FieldsNames.ROOM_TEAM_COLOR, t.getTeamColor().getRGB());
-				team.put(FieldsNames.ROOM_NAME, t.getTeamName());
-				team.put(FieldsNames.LIST, players);
-				teams.put(team);
-			}
-
-			message.put(FieldsNames.ROOM_TEAM, teams);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return message;
-	}
-
-	private void updatePlayers(Player excludedPlayer, JSONObject message) {
-		String strMessage = message.toString();
-
-		for (Player p : writers.keySet()) {
-			if (p != excludedPlayer) {
-				writers.get(p).println(strMessage);
-			}
-		}
 	}
 
 	@Override
@@ -151,20 +90,20 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			}
 		}
 
-		roomThread = new RoomThread(room, new WinCheckerTest(room.getRoomMapSelector()
-				.getWinPoint(), 3));
+		allPlayerReady();
+	}
+
+	private void allPlayerReady() {
+		roomThread = new RoomThread(room, new WinCheckerTest(room.getRoomMapSelector().getWinPoint(), 3));
 		roomThread.start();
 
-		JSONObject message = new JSONObject();
-		try {
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_GO, true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		JSONObject message = messagesCreator.generateGoMessage();
 		updatePlayers(null, message);
 
+		startAudioConversation();
+	}
+
+	private void startAudioConversation() {
 		RoomAudioCall roomAudioCall = null;
 		try {
 			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
@@ -192,20 +131,18 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JSONObject message = generateExitMessage();
+		JSONObject message = messagesCreator.generateExitMessage();
 		updatePlayers(null, message);
 
 	}
+	
+	private void updatePlayers(Player excludedPlayer, JSONObject message) {
+		String strMessage = message.toString();
 
-	private JSONObject generateExitMessage() {
-		JSONObject message = new JSONObject();
-		try {
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_END, FieldsNames.GAME_INTERRUPTED);
-		} catch (JSONException e) {
-			e.printStackTrace();
+		for (Player p : writers.keySet()) {
+			if (p != excludedPlayer) {
+				writers.get(p).println(strMessage);
+			}
 		}
-		return message;
 	}
 }

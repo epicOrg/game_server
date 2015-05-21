@@ -1,9 +1,10 @@
 package services;
 
+import messages.CurrentRoomMessagesCreator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.messages.CurrentRoomMessagesCreator;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;

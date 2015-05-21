@@ -2,11 +2,11 @@ package services;
 
 import game.Player;
 import game.Room;
+import messages.GameMessagesCreator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.messages.GameMessagesCreator;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;

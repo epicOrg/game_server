@@ -2,7 +2,9 @@ package game;
 
 /**
  * 
- * Interfaccia che definisce la gestione degli eventi della Room.
+ * Interface that define listener for player status changing.
+ * During the game a player have to send a "ready" message when
+ * he has finished to load the game and is ready to start playing.
  * 
  * @author Micieli
  * @date 2015/04/25
@@ -11,6 +13,10 @@ package game;
 
 public interface PlayerEventListener {
 
+	/**
+	 * Called when a player change his status in order to allow to react to that event.
+	 * 
+	 */
 	public void onPlayerStatusChanged();
 
 }

@@ -1,41 +1,53 @@
 package game;
 
+import services.CurrentRoom;
+import services.Game;
+import services.RoomService;
+
 /**
  * 
- * Interfaccia che definisce la gestione degli eventi della Room.
+ * Defines a generic interface for an implementation of a components that react to Room Event.
  * 
  * @author Micieli
  * @date 2015/04/25
- *
+ * @see Room
  */
 
 public interface RoomEventListener {
 
 	/**
-	 * Metodo chiamato quando un nuovo giocatore entra nella stanza aggiorna
-	 * tuti i giocatori del nuovo ingresso.
+	 * Reacts to an entrance of a new player in a <code>Room</code>.
 	 * 
-	 * @param player
-	 *            il giocatore nuovo entrato
+	 * @param player		the player just entered
+	 * @see RoomService
 	 */
 	public void onNewPlayerAdded(Player player);
 
 	/**
-	 * Metodo chiamato quando la room è piena da il segnale di inizio gioco ai
-	 * giocatori presenti.
+	 * 
+	 * Reacts to the room full event, starting the game.
+	 * @see Game
 	 */
 	public void onRoomFull();
 
 	/**
-	 * Metodo chiamato qundo un gioctre esce dalla stanza, aggiorna tutti gli
-	 * altri giocatori presenti dell'evento.
+	 * Reacts to the exit of a player from a Room.
 	 * 
-	 * @param player
+	 * @param player	the player removed
+	 * @see CurrentRoom
 	 */
 	public void onPlayerRemoved(Player player);
 
+	/**
+	 * 
+	 * Reacts to a forced game stops.
+	 * @see Game
+	 */
 	public void onExtingFromGame();
 	
+	/**
+	 * Reacts to the end of the game preparing the room for another round.
+	 * 
+	 */
 	public void onGameEnded();
-
 }

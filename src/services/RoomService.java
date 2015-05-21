@@ -5,12 +5,12 @@ import game.Room;
 
 import java.net.InetAddress;
 
+import messages.RoomsMessagesCreator;
 import online_management.OnlineManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.messages.RoomsMessagesCreator;
 import voip.NetUtils;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;

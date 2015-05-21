@@ -1,34 +1,55 @@
 package game;
 
+import services.CurrentRoom;
+import services.Game;
+import services.RoomService;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.map.MapDimension;
 import game.map.generation.GridMapGenerator;
 
 /**
+ * 
+ * <code>Room</code> is the fundamental piece of the multiplayer game.
+ * Players can come in and go out from the it, finding other players and waiting from 
+ * the player number is sufficient to start the game.
+ * While entering a <code>Room</code> a player is assigned to a random team
+ * A {@link RoomEventListener} is advised of everything that happens
+ * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/18
+ * @see CurrentRoom
+ * @see RoomService
+ * @see Game
  */
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 1;
+	public static final int MAX_PLAYERS = 2;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;
 	private RoomEventListener playersUpdater;
 	private boolean inPlay = false;
-	private RoomThread roomThread;
 
 	private RoomMapSelector roomMapSelector;
 
+	/**
+	 * Create a room with the given name
+	 * 
+	 * @param roomName		the name of the room
+	 */	
 	public Room(String roomName) {
 		this.roomName = roomName;
 		teamGenerator = new TeamGenerator();
 		generateMap();
 	}
 
+	/**
+	 * Generates a random map in which the player will move
+	 * 
+	 */
 	public void generateMap() {
 
 		roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),
@@ -46,10 +67,10 @@ public class Room {
 	}
 
 	/**
-	 * Add a player to the room, and then to a random team.
+	 * Add a player to the room, and then into a random team.
 	 * 
-	 * @param player
-	 * @throws FullRoomException
+	 * @param player				the player to be added
+	 * @throws FullRoomException	if the room is already full
 	 */
 	public void addPlayer(Player player) throws FullRoomException {
 
@@ -63,8 +84,10 @@ public class Room {
 
 	/**
 	 * Remove the player from the room (and from the team).
+	 * If a player is removed from a room while playing then the game is 
+	 * interrupted and all participants removed from the room.
 	 * 
-	 * @param player
+	 * @param player		the player to be removed
 	 */
 	public void removePlayer(Player player) {
 
@@ -93,7 +116,7 @@ public class Room {
 	}
 
 	/**
-	 * @return true if the team is full (no more players can join the room),
+	 * @return true if the teams are full (no more players can join the room),
 	 *         false otherwise (there are more users slot).
 	 */
 	private boolean isFull() {
@@ -129,12 +152,20 @@ public class Room {
 	public void setEventListener(RoomEventListener roomPlayersUpdater) {
 		this.playersUpdater = roomPlayersUpdater;
 	}
-
+	
+	/**
+	 * Provides an asynchronous check for room full not only while entering a player
+	 */
 	public void checkIfFull() {
 		if (isFull())
 			playersUpdater.onRoomFull();
 	}
 
+	/**
+	 * Set room status defining if the game is started, or finished
+	 * 
+	 * @param inPlay		true if the Player are playing, false otherwise
+	 */
 	public void setInPlay(boolean inPlay) {
 		if (this.inPlay && !inPlay) {
 			playersUpdater.onGameEnded();
@@ -146,14 +177,6 @@ public class Room {
 
 	public boolean isInPlayng() {
 		return inPlay;
-	}
-
-	public void setRoomThread(RoomThread roomThread) {
-		this.roomThread = roomThread;
-	}
-
-	public RoomThread getRoomThread() {
-		return roomThread;
 	}
 
 	public RoomMapSelector getRoomMapSelector() {

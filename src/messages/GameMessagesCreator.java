@@ -1,4 +1,4 @@
-package services.messages;
+package messages;
 
 import game.Player;
 import game.PlayerStatus;
