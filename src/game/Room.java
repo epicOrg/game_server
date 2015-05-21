@@ -13,7 +13,7 @@ import game.map.generation.GridMapGenerator;
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 1;
+	public static final int MAX_PLAYERS = 2;
 
 	private String roomName;
 	private TeamGenerator teamGenerator;

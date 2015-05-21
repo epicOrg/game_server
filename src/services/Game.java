@@ -159,25 +159,14 @@ public class Game implements IService {
 
 		try {
 
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			jsonResponse.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
-
-			jsonResponse = new JSONObject(jsonResponse, JSONObject.getNames(jsonResponse));
-
 			try {
 				room = gameDataManager.getRoomByName(jsonRequest.getString(FieldsNames.ROOM_NAME));
 			} catch (NoSuchRoomException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			JSONObject map = room.getRoomMapSelector().getMap();
-			for (String key : JSONObject.getNames(map)) {
-				jsonResponse.put(key, map.get(key));
-			}
-
-			jsonResponse.put(FieldsNames.GAME_PLAYER_POSITION, room.getRoomMapSelector()
-					.getSpawnPoint().toStringPosition());
+			jsonResponse = messagesCreator.generateMapMessage(room.getRoomMapSelector().getMap(), 
+					room.getRoomMapSelector().getSpawnPoint());			
 
 		} catch (JSONException e) {
 			e.printStackTrace();
