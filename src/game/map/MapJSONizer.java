@@ -46,8 +46,8 @@ public class MapJSONizer {
 				adapted.put(FieldsNames.GAME_OBJECT, i.getObjectName());
 				adapted.put(FieldsNames.GAME_TEXTURE, i.getTextureName());
 
-				String position = new MapDimension(i.getPosition().getWidth() + PHASE, i.getPosition()
-						.getHeight(), i.getPosition().getLength() + PHASE).toString();
+				String position = new MapDimension(i.getPosition().getWidth() + PHASE, i
+						.getPosition().getHeight(), i.getPosition().getLength() + PHASE).toString();
 				adapted.put(FieldsNames.GAME_POSITION, position);
 
 				String size = new MapDimension(i.getSize().getWidth(), i.getSize().getHeight(), i
@@ -78,6 +78,10 @@ public class MapJSONizer {
 	public MapDimension getAdaptedWinPoint() {
 
 		ArrayList<MapDimension> winPoints = mapConstructor.getWinPoints();
+
+		// TODO add default win point
+		if (winPoints.isEmpty())
+			winPoints.add(new MapDimension(0, 0, 0));
 
 		return new MapDimension(winPoints.get(0).getWidth() + PHASE, winPoints.get(0).getHeight(),
 				winPoints.get(0).getLength() + PHASE);
