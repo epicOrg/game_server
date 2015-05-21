@@ -38,6 +38,35 @@ public class MapRandom {
 	}
 
 	/**
+	 * It generates a random int between min an max, but different from
+	 * forbidden.
+	 * 
+	 * @param min
+	 *            the minimum value that the random number can assume
+	 * @param max
+	 *            the maximum value that the random number can assume
+	 * @param forbidden
+	 *            forbidden numbers
+	 * 
+	 * @return a random int number between min and max and different from
+	 *         forbidden
+	 */
+	public static int getRandomInt(int min, int max, int... forbidden) {
+
+		int random = getRandomInt(min, max);
+
+		for (int i = 0; i < forbidden.length; i++) {
+
+			if (forbidden[i] == random) {
+				random = getRandomInt(min, max);
+				i = 0;
+			}
+		}
+
+		return random;
+	}
+
+	/**
 	 * It generates a random sign.
 	 * 
 	 * @return a random sign (1 or -1)

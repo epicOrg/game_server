@@ -27,7 +27,7 @@ public class GridMapGenerator implements MapGenerator {
 	private static final double GRID_TOLERANCE = PLAYER_SIZE * 2;
 
 	private static final int MIN_DOORS = 1;
-	private static final int MAX_DOORS = 4;
+	private static final int MAX_DOORS = 5;
 
 	private MapConstructor mapConstructor;
 	private MapDimension mapSize;
@@ -154,7 +154,7 @@ public class GridMapGenerator implements MapGenerator {
 		boolean isOK;
 
 		do {
-			
+
 			isOK = true;
 
 			winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
@@ -190,6 +190,8 @@ public class GridMapGenerator implements MapGenerator {
 
 		int loop = (int) Math.round(mapSize.getLength() * 2 / GRID_TOLERANCE) + 1;
 
+		int random = 0;
+
 		for (int i = 0; i < loop; i++) {
 
 			MapDimension position = new MapDimension(newLenght, -1, 0);
@@ -199,8 +201,9 @@ public class GridMapGenerator implements MapGenerator {
 			wallsPositions.add(position);
 			wallsSizes.add(size);
 
-			ArrayList<MapDimension> segments = generateDoors(position, size,
-					MapRandom.getRandomInt(MIN_DOORS, MAX_DOORS));
+			random = MapRandom.getRandomInt(MIN_DOORS, MAX_DOORS, random);
+
+			ArrayList<MapDimension> segments = generateDoors(position, size, random);
 
 			for (int j = 0; j < segments.size() - 1; j++) {
 
