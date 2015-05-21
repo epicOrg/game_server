@@ -144,6 +144,7 @@ public class RegisterChecker extends ServiceChecker {
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
 			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);
+			
 
 			try {
 				errors.put(FieldsNames.USERNAME, usernameErrors);

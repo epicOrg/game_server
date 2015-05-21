@@ -35,7 +35,7 @@ public class ServerInitializer {
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager.setChecker(new FileChecker(Paths.getEmailsPath()));
+		dataManager.setChecker(new FileChecker(Paths.getUsersPath(), Paths.getEmailsPath()));
 
 		dataManager.setLoginChecker(new LoginChecker(Paths.getUsersPath()));
 

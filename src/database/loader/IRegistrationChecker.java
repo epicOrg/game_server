@@ -22,7 +22,7 @@ public interface IRegistrationChecker {
 	 * @throws UsernameAlreadyUsedException
 	 */
 	public void checkUsername(String username)
-			throws UsernameAlreadyUsedException;
+				throws UsernameAlreadyUsedException;
 
 	/**
 	 * 

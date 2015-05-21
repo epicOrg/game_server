@@ -19,22 +19,24 @@ import exceptions.UsernameAlreadyUsedException;
  */
 public class FileChecker implements IRegistrationChecker {
 
-	private String path;
+	private String userPath;
+	private String emailsFile;
 
 	/**
 	 * @param path
 	 *            the path of the file
 	 */
-	public FileChecker(String path) {
+	public FileChecker(String userPath, String emailsFile) {
 		super();
-		this.path = path;
+		this.userPath = userPath;
+		this.emailsFile = emailsFile;
 	}
 
 	@Override
 	public void checkUsername(String username)
 			throws UsernameAlreadyUsedException {
 
-		File file = new File(path + username);
+		File file = new File(userPath + username);
 		boolean exsist = file.exists();
 		if (exsist) {
 			throw new UsernameAlreadyUsedException();
@@ -48,7 +50,7 @@ public class FileChecker implements IRegistrationChecker {
 		BufferedReader reader;
 
 		try {
-			reader = new BufferedReader(new FileReader(path));
+			reader = new BufferedReader(new FileReader(emailsFile));
 			String line = reader.readLine();
 			while (line != null) {
 
@@ -60,7 +62,7 @@ public class FileChecker implements IRegistrationChecker {
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
-			File file = new File(path);
+			File file = new File(emailsFile);
 			file.createNewFile();
 		}
 
