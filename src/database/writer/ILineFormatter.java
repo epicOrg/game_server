@@ -13,11 +13,10 @@ import data_management.RegisteredUser;
 public interface ILineFormatter {
 
 	/**
-	 * It formats file's lines.
+	 * Formats line to be directly written in a file
 	 * 
-	 * @param username
-	 * @param password
-	 * @param email
+	 * @param user		the <code>RegisteredUser</code> that contains data to format
+	 * @return			a formatted string containing user information
 	 */
 	public String formatLine(RegisteredUser user);
 

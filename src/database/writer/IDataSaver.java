@@ -6,24 +6,23 @@ import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
 /**
- * Data export interface, regardless of saving support type.
+ * Interface for user data saving.
+ * It allows to switch painless to different data managing systems 
  * 
  * @author Micieli
- * @date 2015/04/14
- * 
+ * @author Noris
+ * @date 2015/04/17
  */
 
 public interface IDataSaver {
 
 	/**
-	 * Data exporter.
 	 * 
-	 * @param username
-	 * @param password
-	 * @param email
-	 * @throws IOException
-	 * @throws RegistrationFailedException
+	 * Permanently save user data 
+	 * 
+	 * @param user				the user to be saved
+	 * @throws IOException		if there is a problem communicating with the data managing system
 	 */
-	public abstract void saveData(RegisteredUser user) throws IOException;
+	public void saveData(RegisteredUser user) throws IOException;
 
 }

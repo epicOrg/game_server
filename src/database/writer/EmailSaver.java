@@ -8,6 +8,9 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
+ * 
+ * Save emails during registration using a file
+ * 
  * @author Micieli
  * @date 2015/04/17
  */
@@ -17,6 +20,11 @@ public class EmailSaver implements IDataSaver {
 	private String filename;
 	private ILineFormatter lineFormatter;
 
+	/**
+	 * 
+	 * @param filename			the name of the file where to write emails list
+	 * @param lineFormatter		a line formatter 
+	 */
 	public EmailSaver(String filename, ILineFormatter lineFormatter) {
 		super();
 		this.filename = filename;

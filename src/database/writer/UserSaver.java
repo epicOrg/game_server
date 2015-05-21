@@ -8,7 +8,9 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
- * Implementation of @see ICreatoreRapporto that saves users on a file.
+ * 
+ * Save all user data during registration using a file.
+ * In order to speed up the checking phase each user have is own file
  * 
  * @author Micieli
  * @author Gavina
@@ -22,6 +24,11 @@ public class UserSaver implements IDataSaver {
 	private String path;
 	private ILineFormatter lineFormatter;
 
+	/**
+	 * 
+	 * @param path				the path in which user files are saved
+	 * @param lineFormatter		a line formatter
+	 */
 	public UserSaver(String path, ILineFormatter lineFormatter) {
 		super();
 		this.path = path;

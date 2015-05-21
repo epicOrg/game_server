@@ -10,8 +10,7 @@ import exceptions.EmailAlreadyUsedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
- * Implementation of @see {@link IRegistrationChecker}: this class check the
- * registration fields: if the username or the email already exists.
+ * An implementation of {@link IRegistrationChecker} that use files to manages data
  * 
  * @author Modica
  * @author Gavina
@@ -22,9 +21,11 @@ public class FileChecker implements IRegistrationChecker {
 	private String userPath;
 	private String emailsFile;
 
+
 	/**
-	 * @param path
-	 *            the path of the file
+	 * 
+	 * @param userPath		the path in which the user data are saved
+	 * @param emailsFile	the file in which emails list are located
 	 */
 	public FileChecker(String userPath, String emailsFile) {
 		super();

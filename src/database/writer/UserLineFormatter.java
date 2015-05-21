@@ -3,7 +3,8 @@ package database.writer;
 import data_management.RegisteredUser;
 
 /**
- * Implementation of @see ILineFormatter. It formats file's lines.
+ * 
+ * It formats file's lines for saving all user data
  * 
  * @author Micieli
  * @author Noris
