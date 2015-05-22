@@ -21,8 +21,7 @@ public class Team {
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 
-	public static final int MAX_PLAYERS = Room.MAX_PLAYERS
-			/ TeamManager.NUMBER_OF_TEAMS;
+	public static final int MAX_PLAYERS = 3;
 
 	public Team() {
 		super();

@@ -26,7 +26,7 @@ import game.map.generation.GridMapGenerator;
 
 public class Room {
 
-	public static final int MAX_PLAYERS = 2;
+	public static final int MAX_PLAYERS = Team.MAX_PLAYERS * TeamManager.NUMBER_OF_TEAMS;
 
 	private String roomName;
 	private TeamManager teamManager;
