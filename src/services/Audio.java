@@ -1,6 +1,6 @@
 package services;
 
-import game.Player;
+import game.model.Player;
 
 import org.json.JSONException;
 import org.json.JSONObject;

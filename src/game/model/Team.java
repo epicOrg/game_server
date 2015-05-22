@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import java.awt.Color;
 import java.util.ArrayList;

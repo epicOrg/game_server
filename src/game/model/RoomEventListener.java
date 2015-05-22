@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import services.CurrentRoom;
 import services.Game;

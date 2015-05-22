@@ -1,6 +1,10 @@
 package voip;
 
 /**
+ * 
+ * Contains Audio data for each player.
+ * Server and client must interchange communication port and the IP for sending audio packets.
+ * 
  * @author Luca
  * @date 2015/05/03
  */
@@ -12,7 +16,10 @@ public class AudioData {
 	private int localControlPort;
 	private int remoteControlPort;
 	private String ip;
-	
+
+	public AudioData() {
+		super();
+	}
 	
 	public int getLocalPort() {
 		return localPort;
@@ -53,19 +60,11 @@ public class AudioData {
 		this.remoteControlPort = remoteControlPort;
 	}
 
-
 	public String getIp() {
 		return ip;
 	}
 
-
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
-
-	public AudioData() {
-		super();
-	}
-
 }

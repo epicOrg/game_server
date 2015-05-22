@@ -1,6 +1,5 @@
 package game.map.generation;
 
-import game.PlayerStatus;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapDimension;
@@ -11,6 +10,7 @@ import game.map.utils.MapDefault;
 import game.map.utils.MapGeometric;
 import game.map.utils.MapPosition;
 import game.map.utils.MapRandom;
+import game.model.PlayerStatus;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package game.map;
 
-import game.PlayerStatus;
+import game.model.PlayerStatus;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

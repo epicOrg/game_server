@@ -1,7 +1,7 @@
 package services;
 
-import game.Player;
-import game.Room;
+import game.model.Player;
+import game.model.Room;
 import messages.GameMessagesCreator;
 
 import org.json.JSONException;

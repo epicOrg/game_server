@@ -1,7 +1,7 @@
 package messages;
 
 
-import game.Room;
+import game.model.Room;
 
 import org.json.JSONException;
 import org.json.JSONObject;

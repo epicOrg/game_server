@@ -3,6 +3,7 @@ package game;
 import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
+import game.model.PlayerStatus;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

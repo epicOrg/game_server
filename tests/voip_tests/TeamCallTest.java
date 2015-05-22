@@ -6,8 +6,8 @@ import data_management.GameDataManager;
 import voip.RoomAudioCall;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
-import game.Player;
-import game.Room;
+import game.model.Player;
+import game.model.Room;
 
 public class TeamCallTest {
 

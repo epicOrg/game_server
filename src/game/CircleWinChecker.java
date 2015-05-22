@@ -1,6 +1,10 @@
 package game;
 
 import game.map.MapDimension;
+import game.model.IWinChecher;
+import game.model.Player;
+import game.model.PlayerStatus;
+import game.model.Team;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import game.map.MapDimension;
 import services.Game;

@@ -1,6 +1,6 @@
 package messages;
 
-import game.Room;
+import game.model.Room;
 
 import java.util.ArrayList;
 

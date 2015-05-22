@@ -2,9 +2,9 @@ package data_management;
 
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
-import game.Room;
-import game.RoomEventListener;
 import game.RoomPlayersUpdater;
+import game.model.Room;
+import game.model.RoomEventListener;
 
 import java.util.ArrayList;
 

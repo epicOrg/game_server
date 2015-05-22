@@ -1,4 +1,5 @@
-package game;
+package game.model;
+
 
 /**
  * Interface for the algorithms that checks for the winner team.

@@ -1,10 +1,10 @@
 package messages;
 
-import game.Player;
-import game.PlayerStatus;
-import game.Room;
-import game.Team;
 import game.map.MapJSONizer;
+import game.model.Player;
+import game.model.PlayerStatus;
+import game.model.Room;
+import game.model.Team;
 
 import java.util.ArrayList;
 

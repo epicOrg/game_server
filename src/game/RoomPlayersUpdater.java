@@ -13,6 +13,12 @@ import voip.RoomAudioCall;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
+import game.model.Player;
+import game.model.PlayerEventListener;
+import game.model.Room;
+import game.model.RoomEventListener;
+import game.model.RoomThread;
+import game.model.Team;
 
 /**
  * An implementation of {@link RoomEventListener} and

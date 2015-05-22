@@ -1,10 +1,11 @@
-package game;
+package game.model;
 
 import services.CurrentRoom;
 import services.Game;
 import services.RoomService;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
+import game.RoomMapSelector;
 import game.map.MapDimension;
 import game.map.generation.GridMapGenerator;
 

@@ -1,12 +1,12 @@
 package game.map.generation;
 
-import game.PlayerStatus;
 import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
 import game.map.utils.MapDefault;
+import game.model.PlayerStatus;
 
 /**
  * It generate an example map.

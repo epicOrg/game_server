@@ -3,8 +3,8 @@ package voip;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import game.Room;
-import game.Team;
+import game.model.Room;
+import game.model.Team;
 
 /**
  * 
@@ -52,6 +52,10 @@ public class RoomAudioCall {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	public void endCall() {
 		System.out.println("Call ended");
 		for (TeamAudioCall teamAudioCall : teamAudioCalls) {

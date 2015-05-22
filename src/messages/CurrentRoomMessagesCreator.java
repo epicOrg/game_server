@@ -1,8 +1,8 @@
 package messages;
 
-import game.Player;
-import game.Room;
-import game.Team;
+import game.model.Player;
+import game.model.Room;
+import game.model.Team;
 
 import org.json.JSONArray;
 import org.json.JSONException;

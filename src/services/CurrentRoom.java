@@ -9,9 +9,9 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
-import game.PlayerEventListener;
-import game.Room;
 import game.RoomPlayersUpdater;
+import game.model.PlayerEventListener;
+import game.model.Room;
 
 /**
  * CurrentRoom Service provides information about the <code>Room</code> in which the client is entered.

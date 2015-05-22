@@ -1,7 +1,7 @@
 package voip;
 
-import game.Player;
-import game.Team;
+import game.model.Player;
+import game.model.Team;
 
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -21,16 +21,19 @@ import com.biasedbit.efflux.participant.RtpParticipant;
 import com.biasedbit.efflux.session.SingleParticipantSession;
 
 /**
+ * Team Audio Call defines RTP audio conversation between server end clients.
+ * Client must send his audio data to the granted port and the server mixes all 
+ * other player audio end sends back it to the client.
+ * 
+ * The supported audio format is the Payload type 0 of the RFC 2198.
+ * A PCMU (u-law) format at 8kHz and sending period of 20 ms according to android audioStream. 
+ * 
+ * 
  * @author Luca
  * @date 2015/05/03
  */
 
 public class TeamAudioCall {
-
-	// TODO prendere la porta dal client
-	// TODO gestire le porte vuote
-	// TODO prendere l'ip dall'online user
-	// TODO decidere dove preparare e iniziare la chiamata
 
 	private static final int DATA_LENTH = 160;
 	private static final int BUFFER_SIZE = DATA_LENTH * 100;
@@ -143,6 +146,12 @@ public class TeamAudioCall {
 		}
 	}
 
+	/**
+	 * 
+	 * Ends call stopping receiving packets and the forwarding thread.
+	 * Frees resources: buffers and srver port
+	 * 
+	 */
 	public void endCall() {
 
 		thread.stopTask();

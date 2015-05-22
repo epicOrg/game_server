@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
