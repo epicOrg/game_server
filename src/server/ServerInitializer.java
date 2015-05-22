@@ -13,8 +13,8 @@ import data_management.RegisteredUser;
 import data_management.password_encrypter.PasswordEncrypter;
 import data_management.password_encrypter.SHA512StringEncrypter;
 import database.Paths;
-import database.loader.FileChecker;
-import database.loader.LoginChecker;
+import database.loader.RegistrationFileChecker;
+import database.loader.LoginFileChecker;
 import database.writer.EmailFormatter;
 import database.writer.EmailSaver;
 import database.writer.UserSaver;
@@ -54,9 +54,9 @@ public class ServerInitializer {
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager.setChecker(new FileChecker(Paths.getUsersPath(), Paths.getEmailsPath()));
+		dataManager.setChecker(new RegistrationFileChecker(Paths.getUsersPath(), Paths.getEmailsPath()));
 
-		dataManager.setLoginChecker(new LoginChecker(Paths.getUsersPath()));
+		dataManager.setLoginChecker(new LoginFileChecker(Paths.getUsersPath()));
 	}
 
 }

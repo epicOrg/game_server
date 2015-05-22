@@ -17,11 +17,11 @@ import exceptions.LoginFailedException;
  * @date 2015/04/17
  */
 
-public class LoginChecker implements ILoginChecker {
+public class LoginFileChecker implements ILoginChecker {
 
 	private String path;
 
-	public LoginChecker(String path) {
+	public LoginFileChecker(String path) {
 		super();
 		this.path = path;
 	}

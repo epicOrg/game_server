@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="database.loader.FileChecker" project="game_server" 
-    file="/game_server/src/database/loader/FileChecker.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="database.loader.RegistrationFileChecker" project="game_server" 
+    file="/game_server/src/database/loader/RegistrationFileChecker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="188" x="250" y="298"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="database.loader.LoginChecker" project="game_server" 
-    file="/game_server/src/database/loader/LoginChecker.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="database.loader.LoginFileChecker" project="game_server" 
+    file="/game_server/src/database/loader/LoginFileChecker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="571" y="357"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,24 +46,32 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <realization id="6">    
+  <association id="6">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="7" name="checker">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="9">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
-  <association id="7">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="8" name="loginChecker"/>      
-      <multiplicity id="9" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="10">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="11" name="checker"/>      
-      <multiplicity id="12" minimum="0" maximum="1"/>    
+      <attribute id="11" name="loginChecker">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="13">    
@@ -72,8 +80,12 @@
   </realization>  
   <association id="14">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="15" name="instance"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
+      <attribute id="15" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

@@ -16,7 +16,7 @@ import exceptions.UsernameAlreadyUsedException;
  * @author Gavina
  * @date 2015/04/17
  */
-public class FileChecker implements IRegistrationChecker {
+public class RegistrationFileChecker implements IRegistrationChecker {
 
 	private String userPath;
 	private String emailsFile;
@@ -27,7 +27,7 @@ public class FileChecker implements IRegistrationChecker {
 	 * @param userPath		the path in which the user data are saved
 	 * @param emailsFile	the file in which emails list are located
 	 */
-	public FileChecker(String userPath, String emailsFile) {
+	public RegistrationFileChecker(String userPath, String emailsFile) {
 		super();
 		this.userPath = userPath;
 		this.emailsFile = emailsFile;

@@ -3,11 +3,11 @@ package data_management_tests;
 import server.ServerInitializer;
 import data_management.DataManager;
 import data_management.RegisteredUser;
-import database.loader.FileChecker;
+import database.loader.RegistrationFileChecker;
 import exceptions.RegistrationFailedException;
 
 /**
- * Test @see {@link FileChecker}.
+ * Test @see {@link RegistrationFileChecker}.
  * 
  * @author Modica
  * @author Gavina
