@@ -15,7 +15,7 @@ public class OnlineUser {
 	private InetAddress ipAddress;
 	private PrintWriter writer;
 	private GregorianCalendar connectionDate;
-	private boolean polled;
+	private volatile boolean polled;
 
 	public OnlineUser(String username, InetAddress ipAddress) {
 		super();

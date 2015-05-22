@@ -8,15 +8,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.CurrentRoom;
 import check_fields.FieldsNames;
 
 /**
+ * 
+ * Generate messages related to Current Room services
+ * 
  * @author Micieli
  * @date 2015/05/20
+ * @see CurrentRoom
  */
 
 public class CurrentRoomMessagesCreator {
 
+	/**
+	 * Generate Player list informing client about players currently in the <code>Room</code>.
+	 * 
+	 * @param romm		the room from which take player list
+	 * @return			the message to be send
+	 */
 	public JSONObject generatePlayersListMessage(Room room) {
 		JSONObject response = new JSONObject();
 
@@ -35,6 +46,12 @@ public class CurrentRoomMessagesCreator {
 		return response;
 	}
 	
+	/**
+	 * Generates response after an exit request from a player.
+	 * 
+	 * @param result		true if the exit succeeded, false otherwise
+	 * @return				the response to send
+	 */
 	public JSONObject generateExitResponse(boolean result){
 		JSONObject response = new JSONObject();
 		

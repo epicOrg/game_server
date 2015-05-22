@@ -65,16 +65,11 @@ public class GameMessagesCreator {
 	private JSONObject formatPlayer(Player p){
 		
 		JSONObject jPlayer = new JSONObject();
-		JSONObject jObjectPos = new JSONObject();
+		PlayerStatus status = p.getPlayerStatus();		
 		
 		try {
-			jObjectPos.put(FieldsNames.GAME_X, p.getPlayerStatus().getxPosition());
-			jObjectPos.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyPosition());
-			jObjectPos.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzPosition());
-			JSONObject jObjectDir = new JSONObject();
-			jObjectDir.put(FieldsNames.GAME_X, p.getPlayerStatus().getxDirection());
-			jObjectDir.put(FieldsNames.GAME_Y, p.getPlayerStatus().getyDirection());
-			jObjectDir.put(FieldsNames.GAME_Z, p.getPlayerStatus().getzDirection());
+			JSONObject jObjectPos = formatPosition(status);
+			JSONObject jObjectDir = formatDirection(status);
 			jPlayer.put(FieldsNames.GAME_POSITION, jObjectPos);
 			jPlayer.put(FieldsNames.GAME_DIRECTION, jObjectDir);
 			jPlayer.put(FieldsNames.USERNAME, p.getUsername());
@@ -84,6 +79,23 @@ public class GameMessagesCreator {
 		}
 		
 		return jPlayer;
+	}
+
+	private JSONObject formatDirection(PlayerStatus status)
+			throws JSONException {
+		JSONObject jObjectDir = new JSONObject();
+		jObjectDir.put(FieldsNames.GAME_X, status.getxDirection());
+		jObjectDir.put(FieldsNames.GAME_Y, status.getyDirection());
+		jObjectDir.put(FieldsNames.GAME_Z, status.getzDirection());
+		return jObjectDir;
+	}
+
+	private JSONObject formatPosition(PlayerStatus status) throws JSONException {
+		JSONObject jObjectPos = new JSONObject();
+		jObjectPos.put(FieldsNames.GAME_X, status.getxPosition());
+		jObjectPos.put(FieldsNames.GAME_Y, status.getyPosition());
+		jObjectPos.put(FieldsNames.GAME_Z, status.getzPosition());
+		return jObjectPos;
 	}
 	/**
 	 * 

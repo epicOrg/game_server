@@ -15,9 +15,9 @@ import exceptions.UserNotOnlineException;
 public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
-	
-	private HashMap<Integer,PrintWriter> streams  = new HashMap<>();
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
+	
+	private OnlineManager(){}
 
 	/**
 	 * @return the instance of onlineManager
@@ -29,7 +29,7 @@ public class OnlineManager {
 	/**
 	 * Set the user online and starts the {@link PollingThread}
 	 * 
-	 * @return user's hashCode
+	 * @return 			user's hashCode
 	 * @see OnlineUser
 	 */
 	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
@@ -109,13 +109,5 @@ public class OnlineManager {
 				return entry.getValue().getUsername();
 		}
 		return null;
-	}
-	
-	public void addStream(int port,PrintWriter outputStream){
-		streams.put(port, outputStream);
-	}
-	
-	public PrintWriter getStream(int port){
-		return streams.get(port);
 	}
 }
