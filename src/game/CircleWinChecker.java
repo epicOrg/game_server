@@ -9,27 +9,27 @@ import java.util.ArrayList;
  * @date 2015/05/05
  */
 
-public class WinCheckerTest implements IWinChecher {
+public class CircleWinChecker implements IWinChecher {
 
 	private ArrayList<MapDimension> winPoints;
 
 	private float radius;
 
-	public WinCheckerTest(float xWin, float yWin, float zWin, float ray) {
+	public CircleWinChecker(float xWin, float yWin, float zWin, float ray) {
 
 		winPoints = new ArrayList<MapDimension>();
 		winPoints.add(new MapDimension((float) xWin, (float) yWin, (float) zWin));
 		this.radius = ray;
 	}
 
-	public WinCheckerTest(MapDimension winPoint, float ray) {
+	public CircleWinChecker(MapDimension winPoint, float ray) {
 
 		winPoints = new ArrayList<MapDimension>();
 		winPoints.add(winPoint);
 		this.radius = ray;
 	}
 
-	public WinCheckerTest(ArrayList<MapDimension> winPoints, float ray) {
+	public CircleWinChecker(ArrayList<MapDimension> winPoints, float ray) {
 		this.winPoints = winPoints;
 		this.radius = ray;
 	}

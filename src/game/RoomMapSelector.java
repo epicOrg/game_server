@@ -48,7 +48,6 @@ public class RoomMapSelector {
 		}
 
 		spawnPoints = mapJSONizer.getAdaptedSpawnPoints();
-
 		winPoints = mapJSONizer.getAdaptedWinPoint();
 
 	}
