@@ -21,7 +21,7 @@ public class Team {
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 
-	public static final int MAX_PLAYERS = 3;
+	public static final int MAX_PLAYERS = 1;
 
 	public Team() {
 		super();

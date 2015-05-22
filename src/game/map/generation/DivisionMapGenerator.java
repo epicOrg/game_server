@@ -5,6 +5,7 @@ import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.map.utils.MapConst;
 import game.map.utils.MapGeometric;
 import game.map.utils.MapRandom;
 
@@ -22,10 +23,9 @@ public class DivisionMapGenerator implements MapGenerator {
 	private MapDimension mapSize;
 	private MapConstructor mapConstructor;
 
-	private static final double PLAYER_SIZE = 2;
 	private static final double CENTER_TOLERANCE = 3;
-	private static final double WALL_TOLERANCE = PLAYER_SIZE;
-	private static final double BORDER_TOLERANCE = PLAYER_SIZE * 2;
+	private static final double WALL_TOLERANCE = MapConst.PLAYER_SIZE;
+	private static final double BORDER_TOLERANCE = MapConst.PLAYER_SIZE * 2;
 
 	private ArrayList<MapDimension> spawnPoints;
 
@@ -146,7 +146,7 @@ public class DivisionMapGenerator implements MapGenerator {
 
 		double oldWallSize = size.getLength();
 
-		double nextSizeLength = oldWallCenter + oldWallSize / 2 + PLAYER_SIZE;
+		double nextSizeLength = oldWallCenter + oldWallSize / 2 + MapConst.PLAYER_SIZE;
 		nextSizeLength = (availableSize.getLength() - nextSizeLength);
 
 		nextSize = new MapDimension(0.5, 2, nextSizeLength);
@@ -165,17 +165,17 @@ public class DivisionMapGenerator implements MapGenerator {
 		double nextPositionLength;
 
 		if (oldWallCenter < 0) {
-			nextPositionLength = oldWallCenter + oldWallSize / 2 + PLAYER_SIZE
+			nextPositionLength = oldWallCenter + oldWallSize / 2 + MapConst.PLAYER_SIZE
 					+ nextSize.getLength() / 2;
 
-			doorCenter = oldWallCenter + oldWallSize / 2 + PLAYER_SIZE / 2;
+			doorCenter = oldWallCenter + oldWallSize / 2 + MapConst.PLAYER_SIZE / 2;
 		}
 
 		else {
-			nextPositionLength = oldWallCenter - oldWallSize / 2 - PLAYER_SIZE
+			nextPositionLength = oldWallCenter - oldWallSize / 2 - MapConst.PLAYER_SIZE
 					- nextSize.getLength() / 2;
 
-			doorCenter = oldWallCenter - oldWallSize / 2 - PLAYER_SIZE / 2;
+			doorCenter = oldWallCenter - oldWallSize / 2 - MapConst.PLAYER_SIZE / 2;
 		}
 
 		nextPosition = new MapDimension(position.getWidth(), -1, nextPositionLength);

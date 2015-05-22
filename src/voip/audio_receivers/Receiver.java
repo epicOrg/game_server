@@ -14,7 +14,7 @@ import com.biasedbit.efflux.session.RtpSessionDataListener;
 /**
  * Listen to a RTPSession and stores audio bytes in streams.
  * 
- * @author Luca
+ * @author Micieli
  * @date 2015/04/28
  */
 

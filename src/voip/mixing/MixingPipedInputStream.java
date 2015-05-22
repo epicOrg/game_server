@@ -8,21 +8,21 @@ import java.util.Iterator;
 /**
  * Mixing stream for ulaw audio byte.
  * 
- * 
- * @author Luca
+ * @author Micieli
  * @date 2015/04/28
  * @see PipedInputStream
  */
 
-public class MixingPipedInputStream{
+public class MixingPipedInputStream {
 
 	private Collection<PipedInputStream> streams;
 
 	/**
-	 * 
 	 * Generates a new MixingiInputStream.
 	 * 
-	 * @param streams a <code>Collection</code> of <code>PipedInputStream</code> containing data to mixing  
+	 * @param streams
+	 *            a <code>Collection</code> of <code>PipedInputStream</code>
+	 *            containing data to mixing
 	 */
 	public MixingPipedInputStream(Collection<PipedInputStream> streams) {
 		super();
@@ -30,10 +30,9 @@ public class MixingPipedInputStream{
 	}
 
 	/**
-	 * 
 	 * Finds the minimum number of byte available for all the streams
 	 * 
-	 * @return the number of byte available 
+	 * @return the number of byte available
 	 * @throws IOException
 	 */
 	public synchronized int available() throws IOException {
@@ -48,13 +47,11 @@ public class MixingPipedInputStream{
 	}
 
 	/**
-	 * 
 	 * Mixes the audio data from the <code>PipedInputStreams</code>.
 	 * 
-	 * The bytes mixed are a 
+	 * The bytes mixed are a
 	 * 
 	 * @param b
-	 * @return
 	 * @throws IOException
 	 */
 	public int read(byte[] b) throws IOException {
@@ -65,7 +62,7 @@ public class MixingPipedInputStream{
 		int found = 0;
 
 		for (PipedInputStream stream : streams) {
-			if(stream.available() > byteToRead){
+			if (stream.available() > byteToRead) {
 				found++;
 
 				byte[] data = new byte[byteToRead];
@@ -77,7 +74,7 @@ public class MixingPipedInputStream{
 			}
 		}
 
-		if(found == 0)
+		if (found == 0)
 			return 0;
 
 		for (int i = 0; i < mixed.length; i++) {

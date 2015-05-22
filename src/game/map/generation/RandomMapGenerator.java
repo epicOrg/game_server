@@ -1,11 +1,12 @@
 package game.map.generation;
 
-import game.map.MapDimension;
 import game.map.Item;
 import game.map.MapConstructor;
+import game.map.MapDimension;
 import game.map.MapObject;
 import game.map.Texture;
 import game.map.utils.MapDefault;
+import game.map.utils.MapPosition;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -46,7 +47,7 @@ public class RandomMapGenerator implements MapGenerator {
 
 			setRandomObject();
 			setRandomTexture();
-			setRandomPosition();
+			actualPosition = MapPosition.getRandomPosition(mapSize);
 			setRandomSize();
 
 			MapObject mapObject = new MapObject(actualObject, actualTexture, actualPosition,
@@ -103,18 +104,6 @@ public class RandomMapGenerator implements MapGenerator {
 		// }
 
 		actualTexture = textures.get(new Random().nextInt(textures.size()));
-	}
-
-	private void setRandomPosition() {
-
-		Random random = new Random();
-
-		actualPosition = new MapDimension((-1 * mapSize.getWidth() / 2)
-				+ (mapSize.getWidth() / 2 - (-1 * mapSize.getWidth() / 2)) * random.nextDouble(),
-				-1, (-1 * mapSize.getHeight() / 2)
-						+ (mapSize.getHeight() / 2 - (-1 * mapSize.getHeight() / 2))
-						* random.nextDouble());
-
 	}
 
 	private void setRandomSize() {
