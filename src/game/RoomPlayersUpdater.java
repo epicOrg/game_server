@@ -4,24 +4,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import messages.CurrentRoomMessagesCreator;
 import messages.UpdatingMessagesCreator;
 import online_management.OnlineManager;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import voip.RoomAudioCall;
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
 
 /**
- * An implementation of {@link RoomEventListener} and {@link PlayerEventListener}.
- * Updates player about room event sending them messages in real time, 
- * breaking the Request/Reply pattern provided by <code>Service</code>.
+ * An implementation of {@link RoomEventListener} and
+ * {@link PlayerEventListener}. Updates player about room event sending them
+ * messages in real time, breaking the Request/Reply pattern provided by
+ * <code>Service</code>.
  * 
  * @author Micieli
  * @date 2015/04/25
@@ -48,14 +45,15 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	public void onNewPlayerAdded(Player player) {
 		try {
 
-			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername()).getOutStream();
+			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
+					.getOutStream();
 			writers.put(player, writer);
 			player.setPlayerEventListener(this);
 
 		} catch (UserNotOnlineException e) {
 			e.printStackTrace();
 		}
-		
+
 		JSONObject message = messagesCreator.generatePlayersListMessage(room);
 		updatePlayers(player, message);
 	}
@@ -94,7 +92,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	}
 
 	private void allPlayerReady() {
-		roomThread = new RoomThread(room, new WinCheckerTest(room.getRoomMapSelector().getWinPoint(), 3));
+		roomThread = new RoomThread(room, new WinCheckerTest(room.getRoomMapSelector()
+				.getWinPoint(), 3));
 		roomThread.start();
 
 		JSONObject message = messagesCreator.generateGoMessage();
@@ -135,7 +134,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		updatePlayers(null, message);
 
 	}
-	
+
 	private void updatePlayers(Player excludedPlayer, JSONObject message) {
 		String strMessage = message.toString();
 

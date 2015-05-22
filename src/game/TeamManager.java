@@ -3,8 +3,6 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
-import exceptions.NoSuchPlayerException;
-
 /**
  * @author Noris
  * @author Torlaschi
@@ -33,11 +31,11 @@ public class TeamManager {
 			teams.add(team);
 		}
 	}
-	
+
 	/**
 	 * Empties all teams removing all players
 	 */
-	public void emptyTeams(){
+	public void emptyTeams() {
 		for (Team team : teams) {
 			team.empty();
 		}
@@ -72,11 +70,11 @@ public class TeamManager {
 
 		return t;
 	}
-	
-	public void removePlayer(Player player){
+
+	public void removePlayer(Player player) {
 		for (Team team : teams) {
-			if(team.getPlayers().contains(player))
-				team.removePlayer(player); 
+			if (team.getPlayers().contains(player))
+				team.removePlayer(player);
 		}
 	}
 

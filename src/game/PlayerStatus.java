@@ -1,17 +1,12 @@
 package game;
 
 import game.map.MapDimension;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import services.Game;
-import check_fields.FieldsNames;
 
 /**
  * 
- * <code>PlayerStatus</code> defines the current status of the player in the game map.
- * It provides information about position and direction.
+ * <code>PlayerStatus</code> defines the current status of the player in the
+ * game map. It provides information about position and direction.
  * 
  * @author Noris
  * @date 2015/04/19

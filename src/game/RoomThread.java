@@ -8,10 +8,8 @@ import java.util.TimerTask;
 import messages.GameEndMessagesCreator;
 import online_management.OnlineManager;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
@@ -119,7 +117,7 @@ public class RoomThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		room.setInPlay(false);
 		room.generateMap();
 	}
