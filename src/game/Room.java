@@ -49,8 +49,7 @@ public class Room {
 	}
 
 	/**
-	 * Generates a random map in which the player will move
-	 * 
+	 * Generates a random map in which the player will move.
 	 */
 	public void generateMap() {
 
@@ -152,7 +151,7 @@ public class Room {
 
 	/**
 	 * Provides an asynchronous check for room full not only while entering a
-	 * player
+	 * player.
 	 */
 	public void checkIfFull() {
 		if (isFull())
