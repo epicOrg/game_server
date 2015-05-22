@@ -60,6 +60,16 @@ public class ForestMapGenerator implements MapGenerator {
 
 		mapConstructor.setMapSize(mapSize);
 		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE3);
+		
+		generateTrees();
+
+		generateSpawnPoints();
+		generateWin();
+
+		return mapConstructor;
+	}
+
+	private void generateTrees() {
 
 		for (int i = 0; i < numberOfTrees; i++) {
 
@@ -96,10 +106,6 @@ public class ForestMapGenerator implements MapGenerator {
 
 		}
 
-		generateSpawnPoints();
-		generateWin();
-
-		return mapConstructor;
 	}
 
 	private void setRandomPosition() {

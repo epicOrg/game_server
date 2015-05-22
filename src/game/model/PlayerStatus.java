@@ -4,7 +4,6 @@ import game.map.MapDimension;
 import services.Game;
 
 /**
- * 
  * <code>PlayerStatus</code> defines the current status of the player in the
  * game map. It provides information about position and direction.
  * 

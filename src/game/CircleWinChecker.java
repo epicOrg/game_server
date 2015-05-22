@@ -47,7 +47,9 @@ public class CircleWinChecker implements IWinChecher {
 				return false;
 		}
 
+		// TODO DEBUG
 		System.out.println("Winner: " + team.getTeamName());
+
 		return true;
 
 	}
@@ -66,7 +68,10 @@ public class CircleWinChecker implements IWinChecher {
 			float zWin = (float) w.getLength();
 
 			if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= radius * radius) {
+
+				// TODO DEBUG
 				System.out.println(player.getUsername() + " in win position.");
+
 				return true;
 			}
 		}
