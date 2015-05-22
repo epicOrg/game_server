@@ -75,22 +75,20 @@ public class MapJSONizer {
 	/**
 	 * @return all the adapted win points
 	 */
-	public MapDimension getAdaptedWinPoint() {
+	public ArrayList<MapDimension> getAdaptedWinPoint() {
 
 		ArrayList<MapDimension> winPoints = mapConstructor.getWinPoints();
 
-		// TODO add default win point
+		if (PHASE != 0)
+			for (int i = 0; i < winPoints.size(); i++) {
+				winPoints.set(i, new MapDimension(winPoints.get(i).getWidth() + PHASE, winPoints
+						.get(i).getHeight(), winPoints.get(i).getLength() + PHASE));
+			}
+
 		if (winPoints.isEmpty())
 			winPoints.add(new MapDimension(0, 0, 0));
 
-		return new MapDimension(winPoints.get(0).getWidth() + PHASE, winPoints.get(0).getHeight(),
-				winPoints.get(0).getLength() + PHASE);
-
-		// TODO: multiple win points
-		// for (Dimension w : winPoints) {
-		//
-		// }
-
+		return winPoints;
 	}
 
 	public String getAdaptedWidth() {

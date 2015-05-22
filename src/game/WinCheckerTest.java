@@ -11,30 +11,27 @@ import java.util.ArrayList;
 
 public class WinCheckerTest implements IWinChecher {
 
-	private float xWin = 0;
-	private float yWin = -1;
-	private float zWin = 17;
-	private float ray = 3;
-	
-	public WinCheckerTest() {
+	private ArrayList<MapDimension> winPoints;
 
-	}
+	private float radius;
 
 	public WinCheckerTest(float xWin, float yWin, float zWin, float ray) {
-		super();
-		this.xWin = xWin;
-		this.yWin = yWin;
-		this.zWin = zWin;
-		this.ray = ray;
+
+		winPoints = new ArrayList<MapDimension>();
+		winPoints.add(new MapDimension((float) xWin, (float) yWin, (float) zWin));
+		this.radius = ray;
 	}
 
-	public WinCheckerTest(MapDimension position, float ray) {
-		super();
-		this.xWin = (float) position.getWidth();
-		this.yWin = (float) position.getHeight();
-		this.zWin = (float) position.getLength();
-		this.ray = ray;
+	public WinCheckerTest(MapDimension winPoint, float ray) {
 
+		winPoints = new ArrayList<MapDimension>();
+		winPoints.add(winPoint);
+		this.radius = ray;
+	}
+
+	public WinCheckerTest(ArrayList<MapDimension> winPoints, float ray) {
+		this.winPoints = winPoints;
+		this.radius = ray;
 	}
 
 	@Override
@@ -52,14 +49,22 @@ public class WinCheckerTest implements IWinChecher {
 	}
 
 	private boolean isInPosition(Player player) {
+
 		PlayerStatus status = player.getPlayerStatus();
 		float x = status.getxPosition();
-		float y = status.getyPosition();
+		// float y = status.getyPosition();
 		float z = status.getzPosition();
 
-		if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= ray * ray) {
-			System.out.println(player.getUsername() + " in position.");
-			return true;
+		for (MapDimension w : winPoints) {
+
+			float xWin = (float) w.getWidth();
+			// float yWin = (float) w.getHeight();
+			float zWin = (float) w.getLength();
+
+			if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= radius * radius) {
+				System.out.println(player.getUsername() + " in win position.");
+				return true;
+			}
 		}
 
 		return false;

@@ -4,6 +4,7 @@ import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ public class RoomMapSelector {
 	private JSONObject map;
 
 	private LinkedList<PlayerStatus> spawnPoints;
-	private MapDimension winPoint;
+	private ArrayList<MapDimension> winPoints;
 
 	public RoomMapSelector(MapGenerator mapGenerator) {
 		this.mapGenerator = mapGenerator;
@@ -48,7 +49,7 @@ public class RoomMapSelector {
 
 		spawnPoints = mapJSONizer.getAdaptedSpawnPoints();
 
-		winPoint = mapJSONizer.getAdaptedWinPoint();
+		winPoints = mapJSONizer.getAdaptedWinPoint();
 
 	}
 
@@ -65,8 +66,8 @@ public class RoomMapSelector {
 
 	}
 
-	public MapDimension getWinPoint() {
-		return winPoint;
+	public ArrayList<MapDimension> getWinPoint() {
+		return winPoints;
 	}
 
 }
