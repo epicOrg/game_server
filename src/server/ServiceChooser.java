@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.Audio;
-import services.Call;
 import services.CurrentRoom;
 import services.Encrypt;
 import services.Game;
@@ -35,7 +34,6 @@ public class ServiceChooser {
 	private void initMap() {
 		addService(FieldsNames.ENCRYPT, new Encrypt());
 		addService(FieldsNames.REGISTER, new Register());
-		addService(FieldsNames.CALL, new Call());
 		addService(FieldsNames.ROOMS, new RoomService());
 		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
 		addService(FieldsNames.GAME, new Game());
