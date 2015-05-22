@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 /**
- * It can be used to create a map, starting from single mapObjects (one, more,
- * or none), the size of the map, spawn points and win point(s).
+ * It can be used to create a map, starting from single {@link MapObject} (one, more,
+ * or none), the size of the map, spawn point(s) and win point(s).
  * 
  * @author Noris
  * @date 2015/04/23
@@ -52,6 +52,12 @@ public class MapConstructor {
 		return numItems;
 	}
 
+	/**
+	 * Add multiple {@link MapObject} to the list of the objects.
+	 * 
+	 * @param items
+	 *            an array of {@link MapObject}
+	 */
 	public void addMapObjects(MapObject... items) {
 		Collections.addAll(this.items, items);
 	}
@@ -60,6 +66,12 @@ public class MapConstructor {
 		spawnPoints.add(playerStatus);
 	}
 
+	/**
+	 * It gets all the spawn points. If there aren't spawn points it return a
+	 * single default spawn point (set in {@link PlayerStatus}).
+	 * 
+	 * @return the spawn points
+	 */
 	public LinkedList<PlayerStatus> getSpawnPoints() {
 
 		if (spawnPoints.isEmpty())
@@ -68,6 +80,13 @@ public class MapConstructor {
 		return spawnPoints;
 	}
 
+	/**
+	 * It add a spawn point to the spawn points list. It also add the win point
+	 * object to the objects list.
+	 * 
+	 * @param mapObject
+	 *            the {@link MapObject} who represents a win point.
+	 */
 	public void addWinPoint(MapObject mapObject) {
 		winPoints.add(mapObject.getPosition());
 		addMapObject(mapObject);

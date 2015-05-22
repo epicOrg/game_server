@@ -8,6 +8,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
+ * Geometric methods for the map generations.
+ * 
  * @author Noris
  * @date 2015/05/20
  */

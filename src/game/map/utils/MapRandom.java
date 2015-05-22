@@ -3,6 +3,8 @@ package game.map.utils;
 import java.util.Random;
 
 /**
+ * Random numbers generation.
+ * 
  * @author Noris
  * @date 2015/05/20
  */

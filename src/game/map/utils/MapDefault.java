@@ -6,6 +6,8 @@ import game.map.MapConstructor;
 import game.map.MapObject;
 
 /**
+ * Common map generation constructions methods.
+ * 
  * @author Noris
  * @date 2015/05/20
  */
@@ -42,7 +44,8 @@ public class MapDefault {
 	/**
 	 * It constructs the borders of the map with the default wall size.
 	 */
-	public static void constructBorders(MapConstructor mapJSONizer, MapDimension mapSize, String texture) {
+	public static void constructBorders(MapConstructor mapJSONizer, MapDimension mapSize,
+			String texture) {
 		constructBorders(mapJSONizer, mapSize, WALL_SIZE, texture);
 
 	}

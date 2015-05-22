@@ -14,7 +14,7 @@ public interface MapGenerator {
 	/**
 	 * It generate a map.
 	 * 
-	 * @return a map in json format
+	 * @return a description of the map
 	 */
 	public MapConstructor generateMap();
 

@@ -15,7 +15,8 @@ import game.model.PlayerStatus;
 import java.util.ArrayList;
 
 /**
- * Generate a maze by construct a default grid and by open random ports.
+ * Generate a maze by construct a default (random) grid and by open random
+ * doors.
  * 
  * @author Noris
  * @date 2015/04/23
@@ -23,9 +24,19 @@ import java.util.ArrayList;
 
 public class GridMapGenerator implements MapGenerator {
 
+	/*
+	 * The size of every wall of the map.
+	 */
 	private static final double WALL_SIZE = 0.2;
+
+	/*
+	 * Minimum distance between objects (trees, spawn points, win points...).
+	 */
 	private static final double GRID_TOLERANCE = MapConst.PLAYER_SIZE * 2;
 
+	/*
+	 * Maximum and minimum number of doors for every wall.
+	 */
 	private static final int MIN_DOORS = 1;
 	private static final int MAX_DOORS = 5;
 
@@ -184,6 +195,14 @@ public class GridMapGenerator implements MapGenerator {
 
 	}
 
+	/*
+	 * It generates a grid of walls in the total size of the map. Every wall go
+	 * from one end of the map to the other, and it's distance from the closest
+	 * walls is always equal to GRID_TOLERANCE. Than the number of these walls
+	 * is equal to the length of the map divided by GRID_TOLERANCE. After the
+	 * creation of a wall, it is split into N+1 segment, where N is the (random)
+	 * number of the doors. Every segment has the same length.
+	 */
 	private void generateGrid() {
 
 		double newLenght = -mapSize.getLength();
@@ -221,6 +240,11 @@ public class GridMapGenerator implements MapGenerator {
 		}
 	}
 
+	/*
+	 * It split a wall into num+1 segments, where num is the number of the
+	 * doors. Every segment is on the same line of the original wall. The doors
+	 * aperture is equal to PLAYER_SIZE.
+	 */
 	private ArrayList<MapDimension> generateDoors(MapDimension position, MapDimension size, int num) {
 
 		ArrayList<MapDimension> walls = new ArrayList<MapDimension>();
@@ -246,6 +270,11 @@ public class GridMapGenerator implements MapGenerator {
 				walls.add(new MapDimension(position.getWidth(), position.getHeight(), length));
 				length += (dividedSize / 2 + MapConst.PLAYER_SIZE);
 
+				/*
+				 * Add the center of every generated segment to an array. This
+				 * array was used in generateVerticalWall method to not generate
+				 * a wall inside a door.
+				 */
 				doors.add(new MapDimension(position.getWidth(), position.getHeight(), length
 						- (MapConst.PLAYER_SIZE / 2)));
 			}
@@ -255,8 +284,6 @@ public class GridMapGenerator implements MapGenerator {
 		}
 
 		else if (p1.getLength() == p2.getLength()) {
-
-			System.out.println("LOL");
 
 			double w1 = p1.getWidth();
 			double w2 = p2.getWidth();
@@ -280,6 +307,10 @@ public class GridMapGenerator implements MapGenerator {
 		return walls;
 	}
 
+	/*
+	 * It generate the walls in the opposite direction of the generateGrid
+	 * method. Every wall starts from the center of a wall of the grid.
+	 */
 	private void generateVerticalWall() {
 
 		for (MapDimension w : wallSegments) {

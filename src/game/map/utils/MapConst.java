@@ -1,6 +1,8 @@
 package game.map.utils;
 
 /**
+ * Constants used in the map generation.
+ * 
  * @author Noris
  * @date 2015/05/20
  */

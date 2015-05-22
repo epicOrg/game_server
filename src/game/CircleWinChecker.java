@@ -9,6 +9,9 @@ import game.model.Team;
 import java.util.ArrayList;
 
 /**
+ * It defines a circle area in which all the players of a team must get in for
+ * win the game.
+ * 
  * @author Micieli
  * @date 2015/05/05
  */

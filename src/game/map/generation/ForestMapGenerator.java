@@ -23,15 +23,34 @@ import java.util.ArrayList;
 
 public class ForestMapGenerator implements MapGenerator {
 
-	private static final double MIN_RAY = 0.4;
-	private static final double MAX_RAY = 0.4;
+	/*
+	 * Minimum and maximum radius of the trunk.
+	 */
+	private static final double MIN_RADIUS = 0.4;
+	private static final double MAX_RADIUS = 0.4;
 
+	/*
+	 * Minimum and maximum height of the trunk (not of the tree). To get the
+	 * total height of the tree (called generally HEIGHT) use this formula:
+	 * TotalHeight = FOLIAGE_HEIGHT_FACTOR * HEIGHT / 2.
+	 */
 	private static final double MIN_HEIGHT = 2;
 	private static final double MAX_HEIGHT = 2;
 
+	/*
+	 * Minimum distance between objects (trees, spawn points, win points...).
+	 */
 	private static final double DISTANCE = MapConst.PLAYER_SIZE * 2;
 
+	/*
+	 * Tolerance of the center of the foliage compared to the trunk.
+	 */
 	private static final double FOLIAGE_TOLERANCE = -0.1;
+
+	/*
+	 * Increase/decrease this value to increase/decrease foliage height.
+	 */
+	private static final double FOLIAGE_HEIGHT_FACTOR = 4;
 
 	private MapConstructor mapConstructor;
 
@@ -60,7 +79,7 @@ public class ForestMapGenerator implements MapGenerator {
 
 		mapConstructor.setMapSize(mapSize);
 		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE3);
-		
+
 		generateTrees();
 
 		generateSpawnPoints();
@@ -69,6 +88,14 @@ public class ForestMapGenerator implements MapGenerator {
 		return mapConstructor;
 	}
 
+	/*
+	 * It generate the trees. A tree is made of a column with a woody texture
+	 * (that form the trunk of the tree) and a vase with a leaves texture (for
+	 * the foliage). The radius and the height of the tree are random (the
+	 * random value is generated between min and max, see the constants at the
+	 * beginning of this class: MIN_RADIUS and MAX_RADIUS for the radius of the
+	 * trunk, MIN_HEIGHT and MIN_HEIGHT for the height of the trunk).
+	 */
 	private void generateTrees() {
 
 		for (int i = 0; i < numberOfTrees; i++) {
@@ -101,13 +128,16 @@ public class ForestMapGenerator implements MapGenerator {
 			MapObject foliage = new MapObject(Item.VASE, Texture.HEDGE4, new MapDimension(
 					position.getWidth(), size.getHeight() - foliageHeight - 0.1,
 					position.getLength() + FOLIAGE_TOLERANCE), new MapDimension(diameter / 4,
-					foliageHeight * 4, 0));
+					foliageHeight * FOLIAGE_HEIGHT_FACTOR, 0));
 			mapConstructor.addMapObject(foliage);
 
 		}
 
 	}
 
+	/*
+	 * Generate a random position for every tree.
+	 */
 	private void setRandomPosition() {
 
 		MapDimension actualPosition = position;
@@ -129,8 +159,11 @@ public class ForestMapGenerator implements MapGenerator {
 
 	}
 
+	/*
+	 * Generate a random size (radius and height of the trunk) for every tree.
+	 */
 	private void setRandomSize() {
-		size = new MapDimension(MapRandom.getRandomDouble(MIN_RAY, MAX_RAY),
+		size = new MapDimension(MapRandom.getRandomDouble(MIN_RADIUS, MAX_RADIUS),
 				MapRandom.getRandomDouble(MIN_HEIGHT, MAX_HEIGHT), 0);
 	}
 

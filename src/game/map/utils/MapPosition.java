@@ -3,6 +3,8 @@ package game.map.utils;
 import game.map.MapDimension;
 
 /**
+ * Random positions generation.
+ * 
  * @author Noris
  * @date 2015/05/20
  */

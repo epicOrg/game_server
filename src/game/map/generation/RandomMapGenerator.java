@@ -79,6 +79,7 @@ public class RandomMapGenerator implements MapGenerator {
 		textures.add(Texture.HEDGE1);
 		textures.add(Texture.HEDGE2);
 		textures.add(Texture.HEDGE3);
+		textures.add(Texture.HEDGE4);
 		textures.add(Texture.WALL1);
 		textures.add(Texture.WALL2);
 		textures.add(Texture.WALL3);
@@ -96,6 +97,7 @@ public class RandomMapGenerator implements MapGenerator {
 		// textures.add(Texture.HEDGE1);
 		// textures.add(Texture.HEDGE2);
 		// textures.add(Texture.HEDGE3);
+		// textures.add(Texture.HEDGE4);
 		// break;
 		// case Item.OBSTACLE:
 		// textures.add(Texture.OBSTACLE);
@@ -106,6 +108,9 @@ public class RandomMapGenerator implements MapGenerator {
 		actualTexture = textures.get(new Random().nextInt(textures.size()));
 	}
 
+	/**
+	 * It generates a totally random size for the object.
+	 */
 	private void setRandomSize() {
 
 		Random random = new Random();

@@ -102,12 +102,15 @@ public class DivisionMapGenerator implements MapGenerator {
 		return mapConstructor;
 	}
 
+	/*
+	 * It generate random spawn points.
+	 */
 	private void generateSpawnPoints() {
 		// TODO add spawn points generation
 		spawnPoints.add(new MapDimension(5, 0.5, -7));
 	}
 
-	/**
+	/*
 	 * It generate a random position into the boundaries of the available size.
 	 * A tolerance value is subtracted for saving the random generation to the
 	 * creation of a position extremely near to the edge of the actual segment.
@@ -125,7 +128,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		position = new MapDimension(randomWidth, -1, randomLength);
 	}
 
-	/**
+	/*
 	 * It generate a random value for the first segment's size of the random
 	 * wall. The size is equal to the distance from the actual position of the
 	 * center of the wall to the edge of the segment.
@@ -152,7 +155,7 @@ public class DivisionMapGenerator implements MapGenerator {
 		nextSize = new MapDimension(0.5, 2, nextSizeLength);
 	}
 
-	/**
+	/*
 	 * It generate the position of the second and last segment of the actual
 	 * wall. This position is generated based on the center of the previous wall
 	 * segment and the door (equal to the player size).
@@ -205,7 +208,8 @@ public class DivisionMapGenerator implements MapGenerator {
 
 	private void generateVerticalSize() {
 
-		MapDimension wallWidth = new MapDimension(availableSize.getWidth() - position.getWidth(), -1, 0);
+		MapDimension wallWidth = new MapDimension(availableSize.getWidth() - position.getWidth(),
+				-1, 0);
 		MapDimension borderWidth = new MapDimension(availableSize.getWidth(), -1, 0);
 
 		size = new MapDimension(MapGeometric.getDistance(wallWidth, borderWidth), 2, 0.5);
