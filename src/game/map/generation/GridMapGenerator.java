@@ -97,16 +97,18 @@ public class GridMapGenerator implements MapGenerator {
 	// }
 	//
 	// }
+	
+	private MapDimension getMapSizeWithTolerance() {
+		return new MapDimension(mapSize.getWidth() - WALL_SIZE
+				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
+				- MapConst.PLAYER_SIZE / 2);
+	}
 
 	private void generateSpawnPoints() {
 
-		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2);
-
 		for (int i = 0; i < numberOfPlayers; i++) {
 
-			MapDimension tmp = MapPosition.getRandomSpawnPoint(mapSizeWithTolerance);
+			MapDimension tmp = MapPosition.getRandomSpawnPoint(getMapSizeWithTolerance());
 
 			boolean isOK = true;
 
@@ -158,17 +160,13 @@ public class GridMapGenerator implements MapGenerator {
 
 	private void generateWin() {
 
-		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2);
-
 		boolean isOK;
 
 		do {
 
 			isOK = true;
 
-			winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
+			winPoint = MapPosition.getRandomPosition(getMapSizeWithTolerance());
 
 			for (int j = 0; j < wallsPositions.size(); j++) {
 

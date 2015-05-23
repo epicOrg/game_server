@@ -169,17 +169,13 @@ public class ForestMapGenerator implements MapGenerator {
 
 	private void generateSpawnPoints() {
 
-		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth()
-				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth()
-				- MapConst.PLAYER_SIZE / 2);
-
 		for (int i = 0; i < numberOfPlayers; i++) {
 
 			MapDimension tmp;
 
 			do {
 
-				tmp = MapPosition.getRandomSpawnPoint(mapSizeWithTolerance);
+				tmp = MapPosition.getRandomSpawnPoint(getMapSizeWithTolerance());
 
 			} while (MapGeometric.checkIfUsed(tmp, positions, DISTANCE));
 
@@ -191,21 +187,22 @@ public class ForestMapGenerator implements MapGenerator {
 
 	private void generateWin() {
 
-		MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth()
-				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth()
-				- MapConst.PLAYER_SIZE / 2);
-
 		MapDimension tmp;
 
 		do {
 
-			tmp = MapPosition.getRandomPosition(mapSizeWithTolerance);
+			tmp = MapPosition.getRandomPosition(getMapSizeWithTolerance());
 
 		} while (MapGeometric.checkIfUsed(tmp, positions, DISTANCE));
 
 		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, tmp,
 				new MapDimension(0.5, 1, 0)));
 
+	}
+	
+	private MapDimension getMapSizeWithTolerance() {
+		return new MapDimension(mapSize.getWidth() - MapConst.PLAYER_SIZE / 2, mapSize.getHeight(),
+				mapSize.getWidth() - MapConst.PLAYER_SIZE / 2);
 	}
 
 }
