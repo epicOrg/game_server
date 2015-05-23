@@ -1,19 +1,21 @@
 package check_fields;
 
-
 /**
+ * Checking of the room's creation client request fields.
+ * 
  * @author Noris
  * @date 2015/04/19
+ * @see RoomService
  */
 
 public class RoomChecker {
-	
 
 	/**
 	 * Check if the room name is valid.
 	 * 
 	 * @param roomName
-	 * @return true if the room name is valid, false otherwise
+	 *            the name of the room
+	 * @return true if the room's name is valid, false otherwise
 	 */
 	public boolean checkRoomName(String roomName) {
 

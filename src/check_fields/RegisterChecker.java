@@ -9,9 +9,9 @@ import services.Register;
 import data_management.DataManager;
 
 /**
- * 
- * Contains methods to check registration field during a client request to have an account on the server.
- * The data choose by the user must be compatible with ones defined in {@link FieldsValues}
+ * Contains methods for check registration fields sending in client request to
+ * create an account on the server. The data choose by the user must be
+ * compatible with the ones defined in {@link FieldsValues}.
  * 
  * @author Noris
  * @date 2015/03/28
@@ -19,7 +19,7 @@ import data_management.DataManager;
  */
 
 public class RegisterChecker {
-	
+
 	private JSONObject errors = new JSONObject();
 	private boolean noErrors = true;
 
@@ -149,20 +149,20 @@ public class RegisterChecker {
 		return fieldIsOk;
 
 	}
-	
+
 	/**
 	 * 
 	 * Checks if exist another user registered with the same username
 	 * 
-	 * @param username  the username to check
+	 * @param username
+	 *            the username to check
 	 * @return true if the username is available, false otherwise
 	 */
-	public boolean checkAlreadyUsedUsername( String username) {
+	public boolean checkAlreadyUsedUsername(String username) {
 		DataManager dataManager = DataManager.getInstance();
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
 			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);
-			
 
 			try {
 				errors.put(FieldsNames.USERNAME, usernameErrors);
@@ -180,7 +180,8 @@ public class RegisterChecker {
 	 * 
 	 * Checks if exist another user registered with the same email
 	 * 
-	 * @param email the email to check
+	 * @param email
+	 *            the email to check
 	 * @return true if the aren't user registered with the given email
 	 */
 	public boolean checkAlreadyUsedEmail(String email) {
@@ -200,15 +201,15 @@ public class RegisterChecker {
 
 		return true;
 	}
-	
-	public void addError(){
+
+	public void addError() {
 		this.noErrors = false;
 	}
-	
+
 	public JSONObject getErrors() {
 		return errors;
 	}
-	
+
 	public boolean noErrors() {
 		return noErrors;
 	}

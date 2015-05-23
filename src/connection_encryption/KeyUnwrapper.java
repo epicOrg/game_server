@@ -11,6 +11,8 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
 /**
+ * Use it to unwrap a symmetric key crypted with a public asymmetric key.
+ * 
  * @author Noris
  * @date 2015/03/30
  */
@@ -40,8 +42,7 @@ public class KeyUnwrapper {
 
 			Cipher cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.UNWRAP_MODE, privateKey);
-			symmetricKey = cipher.unwrap(wrappedKeyData, "AES",
-					Cipher.SECRET_KEY);
+			symmetricKey = cipher.unwrap(wrappedKeyData, "AES", Cipher.SECRET_KEY);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block

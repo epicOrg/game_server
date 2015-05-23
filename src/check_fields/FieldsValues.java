@@ -7,8 +7,13 @@ package check_fields;
 
 public class FieldsValues {
 
+	/**
+	 * Minimum and maximum length for the user name that an user must be insert
+	 * for the registration on the server.
+	 */
 	public static final int USERNAME_MIN_LENGTH = 5;
 	public static final int USERNAME_MAX_LENGTH = 20;
+
 	public static final String USERNAME_FORBIDDEN_CHARS = ".*[ ]+.*";
 	// public static final String USERNAME_ONLY_CHARS = "";
 	public static final String USERNAME_NEEDED_CHARS = ".*[a-zA-Z]+.*";

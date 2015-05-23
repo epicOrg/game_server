@@ -6,9 +6,8 @@ import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
- * 
  * <code>ClientIdentityCecker</code> check user real identity according to his
- * username and his hascode that the user must send everytime in his request.
+ * username and his hascode, that the user must send every time in his request.
  * 
  * 
  * @author Noris
