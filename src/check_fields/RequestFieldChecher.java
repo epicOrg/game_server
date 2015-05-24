@@ -53,14 +53,10 @@ public class RequestFieldChecher {
 
 				String username = request.getString(FieldsNames.USERNAME);
 				int hashCode = request.getInt(FieldsNames.HASHCODE);
-//				System.out.println(serviceName + " " + username + " " + hashCode + " "
-//						+ cecker.isUserOnline(username) + " "
-//						+ cecker.checkHashCode(username, hashCode));
 				return cecker.isUserOnline(username) && cecker.checkHashCode(username, hashCode);
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

@@ -47,7 +47,8 @@ public class Team {
 	 * @param player
 	 * @throws FullTeamException
 	 */
-	public void addPlayer(Player player) { // throws FullTeamException {
+	public void addPlayer(Player player) { 
+		// throws FullTeamException {
 		// if (isFull()) {
 		// throw new FullTeamException();
 		// }

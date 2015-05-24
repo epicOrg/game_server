@@ -59,15 +59,12 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		} catch (UserNotOnlineException e) {
 			e.printStackTrace();
 		}
-
-		JSONObject message = messagesCreator.generatePlayersListMessage(room);
-		updatePlayers(player, message);
+		updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
 	}
 
 	@Override
 	public void onRoomFull() {
-		JSONObject message = messagesCreator.generateStartMessage();
-		updatePlayers(null, message);
+		updatePlayers(null, messagesCreator.generateStartMessage());
 		room.setInPlay(true);
 		GameDataManager.getInstance().newAudioCallForRoom(room);
 	}
@@ -75,8 +72,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onPlayerRemoved(Player player) {
 		writers.remove(player);
-		JSONObject message = messagesCreator.generatePlayersListMessage(room);
-		updatePlayers(player, message);
+		updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
 	}
 
 	@Override
@@ -86,7 +82,6 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onPlayerStatusChanged() {
-		System.out.println("Player Ready");
 		for (Team t : room.getTeamGenerator().getTeams()) {
 			for (Player p : t.getPlayers()) {
 				if (p.getStatus() != true)
@@ -101,10 +96,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		roomThread = new RoomThread(room, new CircleWinChecker(room.getRoomMapSelector()
 				.getWinPoint(), 3));
 		roomThread.start();
-
-		JSONObject message = messagesCreator.generateGoMessage();
-		updatePlayers(null, message);
-
+		updatePlayers(null, messagesCreator.generateGoMessage());
 		startAudioConversation();
 	}
 
@@ -112,17 +104,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		RoomAudioCall roomAudioCall = null;
 		try {
 			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
-		} catch (NoSuchRoomException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
 			roomAudioCall.prepare();
 			roomAudioCall.startCall();
-			System.out.println("Call Started");
+		} catch (NoSuchRoomException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -133,11 +119,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		try {
 			GameDataManager.getInstance().stopCallForRoom(room.getName());
 		} catch (NoSuchRoomException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JSONObject message = messagesCreator.generateExitMessage();
-		updatePlayers(null, message);
+		updatePlayers(null, messagesCreator.generateExitMessage());
 
 	}
 

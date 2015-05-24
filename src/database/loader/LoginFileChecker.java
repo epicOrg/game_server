@@ -26,11 +26,6 @@ public class LoginFileChecker implements ILoginChecker {
 		this.path = path;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see loader.ILoginChecker#checkUser(data_management.RegisteredUser)
-	 */
 	@Override
 	public void checkUser(RegisteredUser registeredUser) throws LoginFailedException, IOException {
 

@@ -85,7 +85,6 @@ public class RoomThread extends Thread {
 				GameDataManager gameDataManager = GameDataManager.getInstance();
 				gameDataManager.stopCallForRoom(room.getName());
 			} catch (NoSuchRoomException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -114,7 +113,6 @@ public class RoomThread extends Thread {
 			}
 
 		} catch (UserNotOnlineException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

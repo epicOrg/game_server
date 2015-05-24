@@ -179,5 +179,4 @@ public class Room {
 	public RoomMapSelector getRoomMapSelector() {
 		return roomMapSelector;
 	}
-
 }

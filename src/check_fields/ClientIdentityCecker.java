@@ -11,7 +11,7 @@ import exceptions.UserNotOnlineException;
  * request.
  * 
  * @author Noris
- * @author Luca
+ * @author Micieli
  * @date 2015/04/19
  * @see Login
  * @see OnlineManager
