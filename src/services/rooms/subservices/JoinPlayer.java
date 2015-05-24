@@ -18,8 +18,13 @@ import check_fields.FieldsNames;
 import services.IService;
 import voip.NetUtils;
 
-public class JoinPlayer implements IService{
-	
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
+public class JoinPlayer implements IService {
+
 	private RoomsMessagesCreator messagesCreator;
 
 	public JoinPlayer() {
@@ -29,6 +34,7 @@ public class JoinPlayer implements IService{
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
 		System.out.println(getName());
 		Player player = null;
 		String roomName = null;
@@ -36,8 +42,8 @@ public class JoinPlayer implements IService{
 		try {
 
 			player = new Player(request.getString(FieldsNames.USERNAME));
-			InetAddress address = OnlineManager.getInstance()
-					.getIpAddressByUsername(player.getUsername());
+			InetAddress address = OnlineManager.getInstance().getIpAddressByUsername(
+					player.getUsername());
 			player.getAudioData().setIp(NetUtils.getIpByInetAddress(address));
 			roomName = request.getString(FieldsNames.ROOM_NAME);
 
@@ -47,14 +53,14 @@ public class JoinPlayer implements IService{
 
 		try {
 
-			Room room = GameDataManager.getInstance().getRoomByName(roomName);			
+			Room room = GameDataManager.getInstance().getRoomByName(roomName);
 			room.addPlayer(player);
 			return messagesCreator.generateJoinResponse(true, roomName);
 
-		} catch (NoSuchRoomException | FullRoomException e ) {
+		} catch (NoSuchRoomException | FullRoomException e) {
 			e.printStackTrace();
-			return messagesCreator.generateJoinResponse(false, roomName);	
-		} 
+			return messagesCreator.generateJoinResponse(false, roomName);
+		}
 	}
 
 	@Override

@@ -8,8 +8,13 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import services.IService;
 
-public class RoomsList implements IService{
-	
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
+public class RoomsList implements IService {
+
 	private RoomsMessagesCreator messagesCreator;
 
 	public RoomsList() {

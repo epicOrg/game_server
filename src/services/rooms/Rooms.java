@@ -12,11 +12,10 @@ import services.IService;
 import check_fields.FieldsNames;
 
 /**
- * 
- * <code>RoomService</code> manages {@link Room} actions.
- * Allows Room creation with a specific name request from client.
- * Provides current available <code>Rooms</code>.
- * Enable the client to enter in a specific existing <code>Room</code>
+ * <code>RoomService</code> manages {@link Room} actions. Allows {@link Room}
+ * creation with a specific name request from the client. It provides current
+ * available {@link Room}s. It enables the client to join a specific existing
+ * {@link Room}.
  * 
  * @author Micieli
  * @author Noris
@@ -38,13 +37,13 @@ public class Rooms implements IExtendedService {
 		try {
 			serviceType = request.getString(FieldsNames.SERVICE_TYPE);
 			System.out.println(serviceType);
-		} catch (JSONException  e) {
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+
 		IService subService = subServices.get(serviceType);
-		return subService == null? null : subService.start(request);
-		
+		return subService == null ? null : subService.start(request);
+
 	}
 
 	@Override
@@ -57,6 +56,6 @@ public class Rooms implements IExtendedService {
 		for (IService service : subservices) {
 			this.subServices.put(service.getName(), service);
 		}
-		
+
 	}
 }

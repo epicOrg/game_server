@@ -1,7 +1,9 @@
 package services.current_room;
 
 import game.RoomPlayersUpdater;
+import game.model.Player;
 import game.model.PlayerEventListener;
+import game.model.Room;
 
 import java.util.HashMap;
 
@@ -13,14 +15,14 @@ import services.IService;
 import check_fields.FieldsNames;
 
 /**
- * CurrentRoom Service provides information about the <code>Room</code> in which the client is entered.
- * Gives the complete Players list currently in the <code>Room</code> updated in real time according to 
- * Player getting in or out from the <code>Room</code>
- * It elaborates also the client request to exit from a particular <code>Room</code>
- * 
+ * CurrentRoom service provides information about the {@link Room} joined by the
+ * client. It gives the complete {@link Player}s list currently in the
+ * {@link Room}, updated in real time according to Player getting in or out from
+ * the {@link Room}. It also elaborates the client request to exit from a
+ * specific {@link Room}.
  * 
  * @author Torlaschi
- * @author Luca
+ * @author Micieli
  * @date 2015/04/18
  * @see PlayerEventListener
  * @see RoomPlayersUpdater
@@ -39,21 +41,21 @@ public class CurrentRoom implements IExtendedService {
 		String serviceType = null;
 		try {
 			serviceType = request.getString(FieldsNames.SERVICE_TYPE);
-			//System.out.println(serviceType);
+			// System.out.println(serviceType);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		IService subService = subServices.get(serviceType);
-		
-		return subService == null? null : subService.start(request);
+
+		return subService == null ? null : subService.start(request);
 	}
 
 	@Override
 	public void addSubService(IService... subservices) {
 		for (IService subService : subservices) {
-			System.out.println(subService.getName() + " " + "added" );
-			this.subServices.put(subService.getName()	, subService);
-		}		
+			System.out.println(subService.getName() + " " + "added");
+			this.subServices.put(subService.getName(), subService);
+		}
 	}
 
 	@Override

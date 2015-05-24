@@ -12,6 +12,11 @@ import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
 public class RoomExit implements IService {
 	
 	private CurrentRoomMessagesCreator messagesCreator;

@@ -5,3 +5,4 @@ Known security issues
 - [ ] An attacker can create an arbitrary number of accounts with the same IP
       address. See the [account_creator.sh](account_creator.sh)
       script.
+- [ ] An attacker can send a fake position to the server.

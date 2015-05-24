@@ -5,11 +5,16 @@ import messages.RoomsMessagesCreator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.IService;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
-import services.IService;
+
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
 
 public class CreateRoom implements IService {
 

@@ -10,13 +10,21 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
 public class ListReceived implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
 
 		try {
-			System.out.println("Listreceived");
+
+			// TODO DEBUG
+			System.out.println("List received.");
+
 			// String playerName = jsonRequest.getString(FieldsNames.USERNAME);
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);

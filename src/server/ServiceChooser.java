@@ -6,16 +6,7 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.Audio;
-import services.Encrypt;
-import services.Game;
 import services.IService;
-import services.Logout;
-import services.Polling;
-import services.Register;
-import services.Unknown;
-import services.current_room.CurrentRoom;
-import services.rooms.Rooms;
 import check_fields.FieldsNames;
 
 /**
@@ -36,7 +27,7 @@ public class ServiceChooser {
 	}
 
 	private void initMap() {
-		
+
 		ArrayList<IService> services = initializer.getServices();
 		for (IService service : services) {
 			addService(service.getName(), service);

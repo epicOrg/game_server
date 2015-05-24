@@ -9,8 +9,13 @@ import services.IExtendedService;
 import services.IService;
 import check_fields.FieldsNames;
 
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
 public class RoomActions implements IService, IExtendedService {
-	
+
 	private HashMap<String, IService> subServices;
 
 	public RoomActions() {
@@ -20,15 +25,18 @@ public class RoomActions implements IService, IExtendedService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
 		String roomAction = null;
+
 		try {
 			roomAction = request.getString(FieldsNames.ROOM_ACTION);
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}		
+		}
+
 		IService subService = subServices.get(roomAction);
-		
-		if(subService != null)
+
+		if (subService != null)
 			return subService.start(request);
 
 		return null;
@@ -38,7 +46,7 @@ public class RoomActions implements IService, IExtendedService {
 	public void addSubService(IService... subservices) {
 		for (IService subService : subservices) {
 			this.subServices.put(subService.getName(), subService);
-		}		
+		}
 	}
 
 	@Override
