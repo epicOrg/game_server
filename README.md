@@ -3,7 +3,7 @@ Messages Exchange
 
 The messages exchange between the client and the server it's build on the
 interface [IService](src/services/IService.java). Every service provided by the
-server must implements this interface. In the additional package `messages`
+server must implements this interface. In the additional package [messages](src/messages)
 there are more specific classes who create the server messages.
 
 Every message use the [JSON](http://www.json.org/) format. More specifically we
@@ -122,8 +122,9 @@ If all the fields are ok the response is the following:
 
 	{"username":"USERNAME","service":"login","hashcode":HASHCODE,"noErrors":true}
 
-In which the hashCode is a login-created code who identify an user. The
-hashCode is generated in [OnlineUser](src/online_management/OnlineUser.java).
+In which the hashCode is a login-created code who identify an user. Any user
+has a different account that change at any login. The hashCode is generated in
+[OnlineUser](src/online_management/OnlineUser.java).
 
 If a field is wrong, the server send always this response:
 
