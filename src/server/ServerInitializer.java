@@ -21,6 +21,8 @@ import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
 
 /**
+ * Initializes some classes used by the server.
+ * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17

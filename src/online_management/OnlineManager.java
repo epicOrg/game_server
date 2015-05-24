@@ -5,11 +5,19 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
+import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
+ * This class is responsible for the online users managing. A client login
+ * message is decoded by the {@link Login} service who, with its method
+ * <code>setUserOnline</code>, calls the <code>setOnline</code> method of this
+ * class. Then the user is added to <code>onlineUsers</code> HashMap, that
+ * contains all the online users at any moment.
+ * 
  * @author Noris
  * @date 2015/03/30
+ * @see OnlineUser
  */
 
 public class OnlineManager {
