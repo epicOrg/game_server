@@ -38,51 +38,73 @@ If a field is wrong, an error occurs:
 
   - Too long
 
-    	{"errors":{"username":["long"]},"service":"register","noErrors":false}
-
+	```
+    {"errors":{"username":["long"]},"service":"register","noErrors":false}
+    ```
+    
   - Invalid character
-
-    	{"errors":{"username":["invalidChar"]},"service":"register","noErrors":false}
+  
+	```
+    {"errors":{"username":["invalidChar"]},"service":"register","noErrors":false}
+    ```
 
   - It not contains a needed character (actually not implemented)
-
-    	{"errors":{"username":["invalidChar"]},"service":"register","noErrors":false}
+    	  
+	```
+    {"errors":{"username":["invalidChar"]},"service":"register","noErrors":false}
+    ```
 
   - Already used
-
-    	{"errors":{"username":["alreadyUsed"]},"service":"register","noErrors":false}
+  
+    ```
+    {"errors":{"username":["alreadyUsed"]},"service":"register","noErrors":false}
+    ```
 
 * Invalid password
 
   - Too short
-
-    	{"errors":{"password":["short"]},"service":"register","noErrors":false}
+    
+    ```
+    {"errors":{"password":["short"]},"service":"register","noErrors":false}
+    ```
 
   - Too long
-
-    	{"errors":{"password":["long"]},"service":"register","noErrors":false}
+    
+    ```
+    {"errors":{"password":["long"]},"service":"register","noErrors":false}
+    ```
 
   - Invalid character (actually not implemented)
 
-    	{"errors":{"password":["invalidChar"]},"service":"register","noErrors":false}
+    ```
+    {"errors":{"password":["invalidChar"]},"service":"register","noErrors":false}
+    ```
 
   - It not contains a needed character
 
-    	{"errors":{"password":["invalidChar"]},"service":"register","noErrors":false}
+    ```
+    {"errors":{"password":["invalidChar"]},"service":"register","noErrors":false}
+    ```
 
 * Invalid email
 
   - Invalid format
 
-    	{"errors":{"email":["invalidField"]},"service":"register","noErrors":false}
+    ```
+    {"errors":{"email":["invalidField"]},"service":"register","noErrors":false}
+    ```
 
   - Invalid domain
 
-    	{"errors":{"email":["invalidDomain"]},"service":"register","noErrors":false}
+    ```
+    {"errors":{"email":["invalidDomain"]},"service":"register","noErrors":false}
+    ```
 
   - Already used
 
-    	{"errors":{"email":["alreadyUsed"]},"service":"register","noErrors":false}
+    ```
+    {"errors":{"email":["alreadyUsed"]},"service":"register","noErrors":false}
+    ```
 
 Multiple errors can obviously occurs, like the following example:
 
