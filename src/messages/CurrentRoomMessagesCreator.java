@@ -12,8 +12,7 @@ import services.CurrentRoom;
 import check_fields.FieldsNames;
 
 /**
- * 
- * Generate messages related to Current Room services
+ * Generate messages related to the {@link CurrentRoom} service.
  * 
  * @author Micieli
  * @date 2015/05/20
@@ -23,49 +22,55 @@ import check_fields.FieldsNames;
 public class CurrentRoomMessagesCreator {
 
 	/**
-	 * Generate Player list informing client about players currently in the <code>Room</code>.
+	 * Generate a players list, informing client about the players that are in
+	 * the <code>Room</code>.
 	 * 
-	 * @param romm		the room from which take player list
-	 * @return			the message to be send
+	 * @param room
+	 *            the room from which take the players list
+	 * 
+	 * @return the message to send
 	 */
 	public JSONObject generatePlayersListMessage(Room room) {
 		JSONObject response = new JSONObject();
 
 		try {
+
 			response.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
 			response.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
 
 			JSONArray teams = formatTeams(room);
 			response.put(FieldsNames.ROOM_TEAM, teams);
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
-	 * Generates response after an exit request from a player.
+	 * Generate the response after an exit request from a player.
 	 * 
-	 * @param result		true if the exit succeeded, false otherwise
-	 * @return				the response to send
+	 * @param result
+	 *            true if the exit succeeded, false otherwise
+	 * 
+	 * @return the response to send
 	 */
-	public JSONObject generateExitResponse(boolean result){
+	public JSONObject generateExitResponse(boolean result) {
 		JSONObject response = new JSONObject();
-		
+
 		try {
-			
+
 			response.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
 			response.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT);
-			response.put(FieldsNames.NO_ERRORS, result);	
+			response.put(FieldsNames.NO_ERRORS, result);
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}			
-		
-		return response;		
+		}
+
+		return response;
 	}
 
 	private JSONArray formatTeams(Room room) throws JSONException {

@@ -29,32 +29,33 @@ import database.writer.UserLineFormatter;
 public class ServerInitializer {
 
 	public void init() {
-		
+
 		initEncryption();
-		initdataManager();	
-		String[] services = {FieldsNames.ENCRYPT, FieldsNames.LOGIN, FieldsNames.REGISTER, FieldsNames.UNKNOWN, FieldsNames.GAME};
+		initdataManager();
+		String[] services = { FieldsNames.ENCRYPT, FieldsNames.LOGIN, FieldsNames.REGISTER,
+				FieldsNames.UNKNOWN, FieldsNames.GAME };
 		ArrayList<String> arrayList = new ArrayList<>();
 		Collections.addAll(arrayList, services);
-		RequestFieldChecher.setServiceNotToBeChecked(arrayList);	
+		RequestFieldChecher.setServiceNotToBeChecked(arrayList);
 	}
 
 	private void initEncryption() {
 		ConnectionEncrypter.setKeysGenerator(new AsymmetricKeysGenerator());
-		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
-				new SHA512StringEncrypter()));
-		
+		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(new SHA512StringEncrypter()));
+
 	}
 
 	private void initdataManager() {
 		DataManager dataManager = DataManager.getInstance();
 
-		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
-				new UserSaver(Paths.getUsersPath(), new UserLineFormatter()),
-				new EmailSaver(Paths.getEmailsPath(), new EmailFormatter()));
+		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserSaver(
+				Paths.getUsersPath(), new UserLineFormatter()), new EmailSaver(
+				Paths.getEmailsPath(), new EmailFormatter()));
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager.setChecker(new RegistrationFileChecker(Paths.getUsersPath(), Paths.getEmailsPath()));
+		dataManager.setChecker(new RegistrationFileChecker(Paths.getUsersPath(), Paths
+				.getEmailsPath()));
 
 		dataManager.setLoginChecker(new LoginFileChecker(Paths.getUsersPath()));
 	}

@@ -13,9 +13,9 @@ import server.ClientRequestThread;
 import check_fields.FieldsNames;
 
 /**
- * Thread that polls the user each polling-time to verify if the user is yet
- * online. It verify if the {@link OnlineUser} replied to the polling request,
- * else it sets the user offline and terminate the related {@link ClientRequestThread}
+ * Thread who polls the user each polling-time to check if the user is yet
+ * online. It checks if the {@link OnlineUser} replied to the polling request,
+ * else it sets the user offline and stop the related {@link ClientRequestThread}.
  * 
  * @author Micieli
  * @date 2015/05/11

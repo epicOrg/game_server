@@ -7,19 +7,20 @@ import org.json.JSONObject;
 
 import check_fields.FieldsNames;
 
-
 /**
- * Provides constructor for messages that the server have to send while the game ends.
+ * Provides a builder for messages that the server has to send while the game is
+ * over.
  * 
  * @author Micieli
+ * @date 2015/05/21
  * @see RoomThread
  */
 public class GameEndMessagesCreator {
-	
+
 	/**
-	 * Generates message to communicates players that they lose the game
+	 * Generates message to inform about players who lose the game.
 	 * 
-	 * @return		the message to send
+	 * @return the message to send
 	 */
 	public JSONObject generateLoseMessage() {
 
@@ -39,9 +40,9 @@ public class GameEndMessagesCreator {
 	}
 
 	/**
-	 * Generates message to communicates players that they win the game
+	 * Generates message to inform about players who win the game.
 	 * 
-	 * @return		the message to send
+	 * @return the message to send
 	 */
 	public JSONObject generateWinMessage() {
 
@@ -61,9 +62,9 @@ public class GameEndMessagesCreator {
 	}
 
 	/**
-	 * Generates message to communicates players that they draw the game
+	 * Generates message to inform about players who draw the game.
 	 * 
-	 * @return		the message to send
+	 * @return the message to send
 	 */
 	public JSONObject generateDrawMessage() {
 

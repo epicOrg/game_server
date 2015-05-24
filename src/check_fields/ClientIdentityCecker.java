@@ -6,9 +6,9 @@ import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
- * <code>ClientIdentityCecker</code> check user real identity according to his
- * username and his hascode, that the user must send every time in his request.
- * 
+ * <code>ClientIdentityCecker</code> check the user real identity according to
+ * his username and his hascode, that the user must send every time in his
+ * request.
  * 
  * @author Noris
  * @author Luca
@@ -23,15 +23,14 @@ public class ClientIdentityCecker {
 	private OnlineManager onlineManager = OnlineManager.getInstance();
 
 	/**
-	 * 
-	 * Checks if the hashCode given matches with one provided during Login.
+	 * Check if the hashCode given matches with one provided during the login.
 	 * 
 	 * @param username
 	 *            username of the user
 	 * @param hashCode
 	 *            hashcode of the user
 	 * 
-	 * @return true if the hashCode corresponds to one saved by the server ,
+	 * @return true if the hashCode corresponds to the one saved in the server,
 	 *         false otherwise
 	 * @throws UserNotOnlineException
 	 *             if the user doesn't result to be online
@@ -57,7 +56,7 @@ public class ClientIdentityCecker {
 	 * @param username
 	 *            the username of the user
 	 * 
-	 * @return true if the username is online, false otherwise
+	 * @return true if the user is online, false otherwise
 	 */
 	public boolean isUserOnline(String username) {
 

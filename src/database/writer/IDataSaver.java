@@ -16,14 +16,13 @@ import data_management.RegisteredUser;
 public interface IDataSaver {
 
 	/**
-	 * 
-	 * Permanently save user data
+	 * Permanently save user data.
 	 * 
 	 * @param user
-	 *            the user to be saved
+	 *            the user to save
 	 * @throws IOException
-	 *             if there is a problem communicating with the data managing
-	 *             system
+	 *             throw if there is a communication problem with the data
+	 *             managing system
 	 */
 	public void saveData(RegisteredUser user) throws IOException;
 

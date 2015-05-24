@@ -3,7 +3,7 @@ package database.writer;
 import data_management.RegisteredUser;
 
 /**
- * Formatts lines to be written in the emails file
+ * Formats lines to be written in the e-mails file.
  * 
  * @author Micieli
  * @date 2015/04/17

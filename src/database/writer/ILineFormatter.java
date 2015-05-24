@@ -7,16 +7,16 @@ import data_management.RegisteredUser;
  * 
  * @author Micieli
  * @date 2015/04/14
- * 
  */
 
 public interface ILineFormatter {
 
 	/**
-	 * Formats line to be directly written in a file
+	 * Formats lines for the file writing.
 	 * 
-	 * @param user		the <code>RegisteredUser</code> that contains data to format
-	 * @return			a formatted string containing user information
+	 * @param user
+	 *            the {@link RegisteredUser} that contains data to format
+	 * @return a formatted string containing user information
 	 */
 	public String formatLine(RegisteredUser user);
 

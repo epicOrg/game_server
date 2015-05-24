@@ -15,24 +15,20 @@ import exceptions.UsernameAlreadyUsedException;
 public interface IRegistrationChecker {
 
 	/**
-	 * 
-	 * Check if username already exist
+	 * Check if username already exists.
 	 * 
 	 * @param username
 	 * @throws UsernameAlreadyUsedException
 	 */
-	public void checkUsername(String username)
-				throws UsernameAlreadyUsedException;
+	public void checkUsername(String username) throws UsernameAlreadyUsedException;
 
 	/**
-	 * 
-	 * Check if email already exist
+	 * Check if email already exists.
 	 * 
 	 * @param email
 	 * @throws EmailAlreadyUsedException
 	 * @throws IOException
 	 */
-	public void checkEmail(String email) throws EmailAlreadyUsedException,
-			IOException;
+	public void checkEmail(String email) throws EmailAlreadyUsedException, IOException;
 
 }

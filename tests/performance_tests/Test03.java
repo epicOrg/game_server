@@ -14,7 +14,7 @@ import database.Paths;
  * This test registers and logins NUMBER_OF_USERS users (login after the
  * registration). Before run this test, you must start the server on the same
  * machine. Remember to restore the e-mails database after this test (it already
- * remove users registration file, nut not the e-mails in the database).
+ * removes users registration files, but not the e-mails in the database).
  * 
  * @author Noris
  * @date 2015/04/21

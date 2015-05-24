@@ -3,13 +3,11 @@ package database.writer;
 import data_management.RegisteredUser;
 
 /**
- * 
- * It formats file's lines for saving all user data
+ * It formats file's lines for saving all user data.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/14
- * 
  */
 
 public class UserLineFormatter implements ILineFormatter {

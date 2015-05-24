@@ -16,8 +16,9 @@ public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
-	
-	private OnlineManager(){}
+
+	private OnlineManager() {
+	}
 
 	/**
 	 * @return the instance of onlineManager
@@ -27,18 +28,20 @@ public class OnlineManager {
 	}
 
 	/**
-	 * Set the user online and starts the {@link PollingThread}
+	 * Set the user online and starts the {@link PollingThread}.
 	 * 
-	 * @return 			user's hashCode
+	 * @return user's hashCode
 	 * @see OnlineUser
 	 */
 	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
+
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
-		PollingThread pollingThread = new PollingThread(onlineUser);
-		//pollingThread.start();
+		// TODO
+		// PollingThread pollingThread = new PollingThread(onlineUser);
+		// pollingThread.start();
 		onlineUser.setOutStream(printWriter);
 		onlineUsers.put(username, onlineUser);
-		
+
 		return onlineUsers.get(username).hashCode();
 	}
 
@@ -47,7 +50,7 @@ public class OnlineManager {
 	 * 
 	 * @param username
 	 * @param hashCode
-	 * @throws UserNotOnlineException 
+	 * @throws UserNotOnlineException
 	 */
 	public void setOffline(String username, int hashCode) throws UserNotOnlineException {
 		if (getHashCodeByUsername(username) == hashCode)
@@ -71,11 +74,11 @@ public class OnlineManager {
 
 	/**
 	 * @param username
-	 * @return the OnlineUser instance object of the user
-	 * @throws UserNotOnlineException 
+	 * @return the {@link OnlineUser} instance object of the user
+	 * @throws UserNotOnlineException
 	 */
 	public OnlineUser getOnlineUserByUsername(String username) throws UserNotOnlineException {
-		if(!checkIfOnline(username))
+		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
 		return onlineUsers.get(username);
 	}
@@ -91,17 +94,17 @@ public class OnlineManager {
 	/**
 	 * @param username
 	 * @return hashCode of the user
-	 * @throws UserNotOnlineException 
+	 * @throws UserNotOnlineException
 	 */
 	public int getHashCodeByUsername(String username) throws UserNotOnlineException {
-		if(!checkIfOnline(username))
+		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
 		return onlineUsers.get(username).hashCode();
 	}
 
 	/**
 	 * @param hashCode
-	 * @return username
+	 * @return the username of the user
 	 */
 	public String getUsernameByHashCode(int hashCode) {
 		for (Map.Entry<String, OnlineUser> entry : onlineUsers.entrySet()) {

@@ -10,7 +10,8 @@ import exceptions.EmailAlreadyUsedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
- * An implementation of {@link IRegistrationChecker} that use files to manages data
+ * An implementation of {@link IRegistrationChecker} that use files to manages
+ * data.
  * 
  * @author Modica
  * @author Gavina
@@ -21,11 +22,11 @@ public class RegistrationFileChecker implements IRegistrationChecker {
 	private String userPath;
 	private String emailsFile;
 
-
 	/**
-	 * 
-	 * @param userPath		the path in which the user data are saved
-	 * @param emailsFile	the file in which emails list are located
+	 * @param userPath
+	 *            the path in which the user data is saved
+	 * @param emailsFile
+	 *            the file in which e-mails list is located
 	 */
 	public RegistrationFileChecker(String userPath, String emailsFile) {
 		super();
@@ -34,8 +35,7 @@ public class RegistrationFileChecker implements IRegistrationChecker {
 	}
 
 	@Override
-	public void checkUsername(String username)
-			throws UsernameAlreadyUsedException {
+	public void checkUsername(String username) throws UsernameAlreadyUsedException {
 
 		File file = new File(userPath + username);
 		boolean exsist = file.exists();
@@ -45,8 +45,7 @@ public class RegistrationFileChecker implements IRegistrationChecker {
 	}
 
 	@Override
-	public void checkEmail(String email) throws EmailAlreadyUsedException,
-			IOException {
+	public void checkEmail(String email) throws EmailAlreadyUsedException, IOException {
 
 		BufferedReader reader;
 

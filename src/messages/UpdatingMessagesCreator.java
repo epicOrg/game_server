@@ -1,6 +1,5 @@
 package messages;
 
-
 import game.model.Room;
 
 import org.json.JSONException;
@@ -9,25 +8,24 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 
 /**
+ * Generate messages to update the player on room/game events.
  * 
- * Generate messages to update player on room/game events
- * 
- * @author Luca
- *
+ * @author Micieli
+ * @date 2015/05/21
  */
 public class UpdatingMessagesCreator {
-	
+
 	private CurrentRoomMessagesCreator currentRoomMessagesCreator;
-	
+
 	public UpdatingMessagesCreator() {
 		super();
 		this.currentRoomMessagesCreator = new CurrentRoomMessagesCreator();
 	}
 
 	/**
-	 * Creates the message informing player that the game is started
+	 * Creates the message who informs the player that the game is started.
 	 * 
-	 * @return		the complete message
+	 * @return the message
 	 */
 	public JSONObject generateStartMessage() {
 
@@ -46,22 +44,24 @@ public class UpdatingMessagesCreator {
 
 		return message;
 	}
-	
+
 	/**
-	 * Creates the message informing player about a changing in Room player list
+	 * Creates the message who informs the player about a changing in
+	 * {@link Room} players list.
 	 * 
-	 * @return		the complete message
+	 * @return the message
 	 */
 	public JSONObject generatePlayersListMessage(Room room) {
 		return currentRoomMessagesCreator.generatePlayersListMessage(room);
 	}
-	
+
 	/**
-	 * Creates the message informing player that all other player are ready to play, so the game can really starts
+	 * Creates the message who inform the player that all the others player are
+	 * ready to play, so the game can really starts.
 	 * 
-	 * @return		the complete message
+	 * @return the message
 	 */
-	public JSONObject generateGoMessage(){
+	public JSONObject generateGoMessage() {
 		JSONObject message = new JSONObject();
 		try {
 			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
@@ -72,11 +72,11 @@ public class UpdatingMessagesCreator {
 		}
 		return message;
 	}
-	
+
 	/**
 	 * Creates the message informing player that the game was interrupted
 	 * 
-	 * @return		the complete message
+	 * @return the complete message
 	 */
 	public JSONObject generateExitMessage() {
 		JSONObject message = new JSONObject();

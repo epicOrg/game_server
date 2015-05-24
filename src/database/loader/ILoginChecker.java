@@ -6,8 +6,8 @@ import data_management.RegisteredUser;
 import exceptions.LoginFailedException;
 
 /**
- * Interface for user checking during login.
- * It allows to switch painless to different data managing systems 
+ * Interface for user checking in the login. It allows to switch painless to
+ * different data managing systems.
  * 
  * @author Micieli
  * @author Noris
@@ -17,15 +17,17 @@ import exceptions.LoginFailedException;
 public interface ILoginChecker {
 
 	/**
+	 * Check if the user password matches with the one saved during the
+	 * registration.
 	 * 
-	 * Check if the user password matches with the one saved during registration. 
-	 * 
-	 * 
-	 * @param registeredUser			the user to check
-	 * @throws LoginFailedException		if the username and password doesn't match
-	 * @throws IOException				if there is a problem communicating with the data managing system
+	 * @param registeredUser
+	 *            the user to check
+	 * @throws LoginFailedException
+	 *             if the username and the password doesn't match
+	 * @throws IOException
+	 *             if there is a communication problem with the data managing
+	 *             system
 	 */
-	public void checkUser(RegisteredUser registeredUser)
-			throws LoginFailedException, IOException;
+	public void checkUser(RegisteredUser registeredUser) throws LoginFailedException, IOException;
 
 }

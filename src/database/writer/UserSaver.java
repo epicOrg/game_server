@@ -8,16 +8,14 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
- * 
- * Save all user data during registration using a file.
- * In order to speed up the checking phase each user have is own file
+ * Save all user data of the registration in a file. In order to speed up the
+ * checking phase, each user has its own file.
  * 
  * @author Micieli
  * @author Gavina
  * @author Modica
  * @author Noris
  * @date 2015/04/14
- * 
  */
 public class UserSaver implements IDataSaver {
 
@@ -25,9 +23,10 @@ public class UserSaver implements IDataSaver {
 	private ILineFormatter lineFormatter;
 
 	/**
-	 * 
-	 * @param path				the path in which user files are saved
-	 * @param lineFormatter		a line formatter
+	 * @param path
+	 *            the path in which user files are saved
+	 * @param lineFormatter
+	 *            a line formatter
 	 */
 	public UserSaver(String path, ILineFormatter lineFormatter) {
 		super();
