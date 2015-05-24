@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.Game;
+import services.game.Game;
 import check_fields.FieldsNames;
 
 /**

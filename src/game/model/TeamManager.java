@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class TeamManager {
 
-	public static final int NUMBER_OF_TEAMS = 2;
+	public static final int NUMBER_OF_TEAMS = 1;
 
 	private ArrayList<Team> teams = new ArrayList<Team>();
 

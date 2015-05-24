@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import services.Audio;
 import services.Encrypt;
-import services.Game;
 import services.IExtendedService;
 import services.IService;
 import services.Logout;
@@ -16,6 +15,12 @@ import services.current_room.subservices.ListReceived;
 import services.current_room.subservices.PlayerListService;
 import services.current_room.subservices.RoomActions;
 import services.current_room.subservices.RoomExit;
+import services.game.Game;
+import services.game.subservices.GameExit;
+import services.game.subservices.GameMap;
+import services.game.subservices.GamePositions;
+import services.game.subservices.GameReady;
+import services.game.subservices.GameStatus;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import services.rooms.subservices.JoinPlayer;
@@ -37,12 +42,23 @@ public class ServicesInitializer {
 		IExtendedService rooms = initRooms();		
 		services.add(rooms);
 		IExtendedService currentoom = initCurrentRoom();
-		services.add(currentoom);
-		services.add(new Game());
+		services.add(currentoom);		
+		IExtendedService game = initGame();	
+		
+		services.add(game);
 		services.add(new Audio());
 		services.add(new Unknown());
 		services.add(new Polling());
 		services.add(new Logout());
+	}
+
+	private IExtendedService initGame() {
+		IExtendedService game = new Game();
+		IExtendedService status = new GameStatus();
+		status.addSubService(new GameReady());
+		status.addSubService(new GameExit());
+		game.addSubService(new GamePositions(), new GameMap(), status);
+		return game;
 	}
 
 	private IExtendedService initCurrentRoom() {

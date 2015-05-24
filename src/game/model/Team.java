@@ -15,13 +15,12 @@ import exceptions.FullTeamException;
  */
 
 public class Team {
-
+	public static final int MAX_PLAYERS = 2;
+	
 	private String teamName;
 	private Color teamColor;
 
 	private ArrayList<Player> players = new ArrayList<Player>();
-
-	public static final int MAX_PLAYERS = 1;
 
 	public Team() {
 		super();

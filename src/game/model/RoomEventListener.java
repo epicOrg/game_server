@@ -1,7 +1,7 @@
 package game.model;
 
-import services.Game;
 import services.current_room.CurrentRoom;
+import services.game.Game;
 import services.rooms.Rooms;
 
 /**

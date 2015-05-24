@@ -1,7 +1,7 @@
 package game.model;
 
 import game.map.MapDimension;
-import services.Game;
+import services.game.Game;
 
 /**
  * <code>PlayerStatus</code> defines the current status of the player in the
