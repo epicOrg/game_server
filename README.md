@@ -32,7 +32,9 @@ If a field is wrong, an error occurs:
 
   - Too short
 	
-    	{"errors":{"username":["short"]},"service":"register","noErrors":false}
+	```
+    {"errors":{"username":["short"]},"service":"register","noErrors":false}
+    ```
 
   - Too long
 
