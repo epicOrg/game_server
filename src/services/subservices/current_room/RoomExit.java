@@ -23,6 +23,7 @@ public class RoomExit implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+		//System.out.println("Exit");
 		try {
 			String playerName = request.getString(FieldsNames.USERNAME);
 			String roomName = request.getString(FieldsNames.ROOM_NAME);

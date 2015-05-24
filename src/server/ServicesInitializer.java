@@ -20,9 +20,7 @@ import services.subservices.current_room.RoomExit;
 
 public class ServicesInitializer {
 	
-	private ArrayList<IService> services;
-	
-	
+	private ArrayList<IService> services;	
 	
 	public ServicesInitializer() {
 		super();
@@ -41,7 +39,7 @@ public class ServicesInitializer {
 		IService playerListReceived = new ListReceived();
 		roomsActions.addSubService(roomExit,playerListReceived);
 		currentoom.addSubService(roomsActions, playerList);
-		services.add(new CurrentRoom());
+		services.add(currentoom);
 		services.add(new Game());
 		services.add(new Audio());
 		services.add(new Unknown());

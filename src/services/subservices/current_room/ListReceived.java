@@ -16,6 +16,7 @@ public class ListReceived implements IService {
 	public JSONObject start(JSONObject request) {
 
 		try {
+			System.out.println("Listreceived");
 			// String playerName = jsonRequest.getString(FieldsNames.USERNAME);
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);

@@ -1,5 +1,6 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -30,19 +31,16 @@ public class ServiceChooser {
 
 	public ServiceChooser() {
 		initializer = new ServicesInitializer();
+		services = new HashMap<>();
 		initMap();
 	}
 
 	private void initMap() {
-		addService(FieldsNames.ENCRYPT, new Encrypt());
-		addService(FieldsNames.REGISTER, new Register());
-		addService(FieldsNames.ROOMS, new RoomService());
-		addService(FieldsNames.CURRENT_ROOM, new CurrentRoom());
-		addService(FieldsNames.GAME, new Game());
-		addService(FieldsNames.AUDIO, new Audio());
-		addService(FieldsNames.UNKNOWN, new Unknown());
-		addService(FieldsNames.POLLING, new Polling());
-		addService(FieldsNames.LOGOUT, new Logout());
+		
+		ArrayList<IService> services = initializer.getServices();
+		for (IService service : services) {
+			addService(service.getName(), service);
+		}
 
 	}
 
