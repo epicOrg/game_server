@@ -2,7 +2,7 @@ Messages Exchange
 =================
 
 The messages exchange between the client and the server it's build on the
-interface [IService](src\services\IService.java). Every service provided by the
+interface [IService](src/services/IService.java). Every service provided by the
 server must implements this interface. In the additional package `messages`
 there are more specific classes who create the server messages.
 
@@ -17,7 +17,7 @@ Register
 
 Through the client you can create an account on the server. A registration
 message from the client who comply with the fields rules specified in
-[FieldsValues](src\check_fields\FieldsValues.java) has always the following
+[FieldsValues](src/check_fields/FieldsValues.java) has always the following
 fields:
 
 	{"service":"register","password":"MY_PASSWORD","email":"MY_EMAIL","username":"MY_USERNAME"}
@@ -99,7 +99,7 @@ If all the fields are ok the response is the following:
 	{"username":"USERNAME","service":"login","hashcode":HASHCODE,"noErrors":true}
 
 In which the hashCode is a login-created code who identify an user. The
-hashCode is generated in [OnlineUser](src\online_management\OnlineUser.java).
+hashCode is generated in [OnlineUser](src/online_management/OnlineUser.java).
 
 If a field is wrong, the server send always this response:
 
@@ -186,11 +186,11 @@ Audio
 When a room it's full, the game automatically starts, and the client send to
 the server the port choosen for the audio streaming:
 
-	{"service":"audio","username":"USERNAME","hashcode":HASHCODE,"audioPortClient":PORT,"name":"NAME_OF_THE_ROOM"}
+  {"service":"audio","username":"USERNAME","hashcode":HASHCODE,"audioPortClient":PORT,"name":"NAME_OF_THE_ROOM"}
 
 The server responds with the server side port:
 
-	{"audioPortServer":PORT,"service":"audio"}
+  {"audioPortServer":PORT,"service":"audio"}
 
 
 Game
@@ -199,11 +199,11 @@ Game
 In addition to the audio port, when a room it's full the client send to the
 server a request for the game map:
 
-	{"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"map","name":"NAME_OF_THE_ROOM"}
+  {"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"map","name":"NAME_OF_THE_ROOM"}
 
 Then the server send to the client the map:
 
-	{"height":"LENGTH_OF_THE_MAP","items":[{"position":"POSITION_ITEM¹","texture":"TEXTURE_ITEM¹","object":"ITEM¹","size":"SIZE_ITEM¹"},{"position":"POSITION_ITEM²","texture":"TEXTURE_ITEM²","object":"ITEM²","size":"SIZE_ITEM²"},{"position":"POSITION_ITEM³","texture":"TEXTURE_ITEM³","object":"ITEM³","size":"SIZE_ITEM³"}],"players":"SPAWN_POINT","width":"WIDTH_OF_THE_MAP","service":"game","serviceType":"map"}
+  SERVER: {"height":"LENGTH_OF_THE_MAP","items":[{"position":"POSITION_ITEM¹","texture":"TEXTURE_ITEM¹","object":"ITEM¹","size":"SIZE_ITEM¹"},{"position":"POSITION_ITEM²","texture":"TEXTURE_ITEM²","object":"ITEM²","size":"SIZE_ITEM²"},{"position":"POSITION_ITEM³","texture":"TEXTURE_ITEM³","object":"ITEM³","size":"SIZE_ITEM³"}],"players":"SPAWN_POINT","width":"WIDTH_OF_THE_MAP","service":"game","serviceType":"map"}
 
 In this example the map consists of three items.
 
@@ -213,13 +213,13 @@ map however, with no errors.
 Before the game really starts, there is a loading phase. When the client it's
 ready it send to the server a message to say this:
 
-	{"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"status","ready":true,"name":"NAME_OF_THE_ROOM"}
+  {"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"status","ready":true,"name":"NAME_OF_THE_ROOM"}
 
 Then the client starts to send the position of the player in the map, to update
 other clients positions list:
 
-	{"position":{"z":Z,"y":Y,"x":X},"service":"game","username":"USERNAME","serviceType":"positions","direction":{"z":Z,"y":Y,"x":X},"name":"NAME_OF_THE_ROOM"}
+  {"position":{"z":Z,"y":Y,"x":X},"service":"game","username":"USERNAME","serviceType":"positions","direction":{"z":Z,"y":Y,"x":X},"name":"NAME_OF_THE_ROOM"}
 
 The server responds with the positions of the other players:
 
-	{"players":[],"service":"game","serviceType":"positions"}
+  {"players":[],"service":"game","serviceType":"positions"}
