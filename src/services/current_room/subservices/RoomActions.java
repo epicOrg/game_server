@@ -1,4 +1,4 @@
-package services.subservices.current_room;
+package services.current_room.subservices;
 
 import java.util.HashMap;
 

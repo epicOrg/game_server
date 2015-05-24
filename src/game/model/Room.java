@@ -1,8 +1,8 @@
 package game.model;
 
-import services.CurrentRoom;
 import services.Game;
-import services.RoomService;
+import services.current_room.CurrentRoom;
+import services.rooms.Rooms;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.RoomMapSelector;
@@ -20,7 +20,7 @@ import game.map.generation.GridMapGenerator;
  * @author Noris
  * @date 2015/04/18
  * @see CurrentRoom
- * @see RoomService
+ * @see Rooms
  * @see Game
  */
 

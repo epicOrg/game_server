@@ -5,7 +5,7 @@ package check_fields;
  * 
  * @author Noris
  * @date 2015/04/19
- * @see RoomService
+ * @see Rooms
  */
 
 public class RoomChecker {

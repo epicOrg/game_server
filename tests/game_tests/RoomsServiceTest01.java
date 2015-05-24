@@ -3,7 +3,7 @@ package game_tests;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.RoomService;
+import services.rooms.Rooms;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
@@ -37,7 +37,7 @@ class RoomsServiceTest01 {
 			e.printStackTrace();
 		}
 
-		RoomService roomService = new RoomService();
+		Rooms roomService = new Rooms();
 		System.out.println(roomService.start(request));
 
 	}

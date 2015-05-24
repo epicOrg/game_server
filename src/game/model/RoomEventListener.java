@@ -1,8 +1,8 @@
 package game.model;
 
-import services.CurrentRoom;
 import services.Game;
-import services.RoomService;
+import services.current_room.CurrentRoom;
+import services.rooms.Rooms;
 
 /**
  * Defines a generic interface for an implementation of a components that react
@@ -20,7 +20,7 @@ public interface RoomEventListener {
 	 * 
 	 * @param player
 	 *            the player just entered
-	 * @see RoomService
+	 * @see Rooms
 	 */
 	public void onNewPlayerAdded(Player player);
 

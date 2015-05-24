@@ -1,6 +1,7 @@
-package services.subservices.current_room;
+package services.current_room.subservices;
 
 import game.model.Room;
+import messages.CurrentRoomMessagesCreator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,18 +11,23 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 
-public class ListReceived implements IService {
-
+public class PlayerListService implements IService{
+	
+	private CurrentRoomMessagesCreator messagesCreator;
+	
+	public PlayerListService() {
+		super();
+		messagesCreator = new CurrentRoomMessagesCreator();
+	}
+	
 	@Override
 	public JSONObject start(JSONObject request) {
-
+		System.out.println("List players request");
 		try {
-			System.out.println("Listreceived");
-			// String playerName = jsonRequest.getString(FieldsNames.USERNAME);
+
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
-
-			room.checkIfFull();
+			return messagesCreator.generatePlayersListMessage(room);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (NoSuchRoomException e) {
@@ -30,9 +36,9 @@ public class ListReceived implements IService {
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_LIST_RECEIVED;
+		return FieldsNames.ROOM_PLAYER_LIST;
 	}
 }

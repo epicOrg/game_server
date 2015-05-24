@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import services.CurrentRoom;
+import services.current_room.CurrentRoom;
 import check_fields.FieldsNames;
 
 /**

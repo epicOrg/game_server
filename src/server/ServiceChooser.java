@@ -7,15 +7,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.Audio;
-import services.CurrentRoom;
 import services.Encrypt;
 import services.Game;
 import services.IService;
 import services.Logout;
 import services.Polling;
 import services.Register;
-import services.RoomService;
 import services.Unknown;
+import services.current_room.CurrentRoom;
+import services.rooms.Rooms;
 import check_fields.FieldsNames;
 
 /**

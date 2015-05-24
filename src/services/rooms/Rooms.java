@@ -1,0 +1,62 @@
+package services.rooms;
+
+import game.model.Room;
+
+import java.util.HashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import services.IExtendedService;
+import services.IService;
+import check_fields.FieldsNames;
+
+/**
+ * 
+ * <code>RoomService</code> manages {@link Room} actions.
+ * Allows Room creation with a specific name request from client.
+ * Provides current available <code>Rooms</code>.
+ * Enable the client to enter in a specific existing <code>Room</code>
+ * 
+ * @author Micieli
+ * @author Noris
+ * @author Torlaschi
+ * @date 2015/04/18
+ */
+
+public class Rooms implements IExtendedService {
+
+	private HashMap<String, IService> subServices;
+
+	public Rooms() {
+		subServices = new HashMap<>();
+	}
+
+	@Override
+	public JSONObject start(JSONObject request) {
+		String serviceType = null;
+		try {
+			serviceType = request.getString(FieldsNames.SERVICE_TYPE);
+			System.out.println(serviceType);
+		} catch (JSONException  e) {
+			e.printStackTrace();
+		}
+		
+		IService subService = subServices.get(serviceType);
+		return subService == null? null : subService.start(request);
+		
+	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.ROOMS;
+	}
+
+	@Override
+	public void addSubService(IService... subservices) {
+		for (IService service : subservices) {
+			this.subServices.put(service.getName(), service);
+		}
+		
+	}
+}

@@ -1,4 +1,4 @@
-package services;
+package services.current_room;
 
 import game.RoomPlayersUpdater;
 import game.model.PlayerEventListener;
@@ -8,6 +8,8 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import services.IExtendedService;
+import services.IService;
 import check_fields.FieldsNames;
 
 /**

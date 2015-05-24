@@ -53,9 +53,9 @@ public class RequestFieldChecher {
 
 				String username = request.getString(FieldsNames.USERNAME);
 				int hashCode = request.getInt(FieldsNames.HASHCODE);
-				System.out.println(serviceName + " " + username + " " + hashCode + " "
-						+ cecker.isUserOnline(username) + " "
-						+ cecker.checkHashCode(username, hashCode));
+//				System.out.println(serviceName + " " + username + " " + hashCode + " "
+//						+ cecker.isUserOnline(username) + " "
+//						+ cecker.checkHashCode(username, hashCode));
 				return cecker.isUserOnline(username) && cecker.checkHashCode(username, hashCode);
 			}
 

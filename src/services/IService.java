@@ -2,6 +2,9 @@ package services;
 
 import org.json.JSONObject;
 
+import services.current_room.CurrentRoom;
+import services.rooms.Rooms;
+
 /**
  * General interface for server services. <code>Service</code> are the center of
  * all server functionalities.
@@ -18,7 +21,7 @@ import org.json.JSONObject;
  * @see Logout
  * @see Polling
  * @see Register
- * @see RoomService
+ * @see Rooms
  * @see Unknown
  */
 
