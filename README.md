@@ -31,7 +31,7 @@ If a field is wrong, an error occurs:
 * Invalid username
 
   - Too short
-
+	
     	{"errors":{"username":["short"]},"service":"register","noErrors":false}
 
   - Too long
@@ -118,32 +118,32 @@ Rooms
 When the login phase is completed, the client automatically send to the server
 a request for the list of the available rooms:
 
-{"serviceType":"list","service":"rooms","username":"USERNAME","hashcode":HASHCODE}
+	{"serviceType":"list","service":"rooms","username":"USERNAME","hashcode":HASHCODE}
 
 The server respond with the list. For every room are specified the number of
 the users actually in the room (`currentPlayers`), and the maximum number of
 users in that room (`maxPlayers`). For example:
 
-  {"service":"rooms","list":{"ROOM1 ":{"currentPlayers":X¹,"maxPlayers":Y¹},"ROOM2 ":{"currentPlayers":X²,"maxPlayers":Y²}},"serviceType":"list","noErrors":true}
+	{"service":"rooms","list":{"ROOM1 ":{"currentPlayers":X¹,"maxPlayers":Y¹},"ROOM2 ":{"currentPlayers":X²,"maxPlayers":Y²}},"serviceType":"list","noErrors":true}
 
 If there are no rooms the server send an empty list:
 
-  {"service":"rooms","list":{},"serviceType":"list","noErrors":true}
+	{"service":"rooms","list":{},"serviceType":"list","noErrors":true}
 
 An user can create a room. In this case the client send the following message:
 
-  {"service":"rooms","username":"USERNAME","hashcode":HASHCODE,"serviceType":"create","name":"NAME_OF_THE_ROOM"}
+	{"service":"rooms","username":"USERNAME","hashcode":HASHCODE,"serviceType":"create","name":"NAME_OF_THE_ROOM"}
 
 The response of the server is the list of available rooms.
 But some errors can occour in the creation of a room:
 
 * The choosen room's name is already used
 
-  {"errors":{"errors":["createErrorAlreadyPresent"]},"service":"rooms","serviceType":"create","noErrors":false}
+	{"errors":{"errors":["createErrorAlreadyPresent"]},"service":"rooms","serviceType":"create","noErrors":false}
 
 * The choosen room's name is invalid (too short, too long, etc.)
 
-  {"errors":{"errors":["createErrorInvalidname"]},"service":"rooms","serviceType":"create","noErrors":false}
+	{"errors":{"errors":["createErrorInvalidname"]},"service":"rooms","serviceType":"create","noErrors":false}
 
 
 CurrentRoom
@@ -151,24 +151,24 @@ CurrentRoom
 
 When a user join a room, the client send this message:
 
-  {"service":"rooms","username":"USERNAME","hashcode":HASHCODE,"serviceType":"join","name":"NAME_OF_THE_ROOM"}
+	{"service":"rooms","username":"USERNAME","hashcode":HASHCODE,"serviceType":"join","name":"NAME_OF_THE_ROOM"}
 
 If the room is available, the server send this response:
 
-  {"result":true,"name":"NAME_OF_THE_ROOM","service":"rooms","serviceType":"join","noErrors":true}
+	{"result":true,"name":"NAME_OF_THE_ROOM","service":"rooms","serviceType":"join","noErrors":true}
 
 Then the client ask for some room's information (like the already presents players):
 
-  {"service":"currentRoom","username":"USERNAME","hashcode":HASHCODE,"serviceType":"playerList","name":"NAME_OF_THE_ROOM"}
+	{"service":"currentRoom","username":"USERNAME","hashcode":HASHCODE,"serviceType":"playerList","name":"NAME_OF_THE_ROOM"}
 
 The response from the server is the following:
 
-  {"maxPlayers":X,"service":"currentRoom","team":[{"teamColor":COLOR¹,"name":"Team 1","list":[{"username":"USERNAME1"},{"username":"USERNAME2"}]},{"teamColor":COLOR²,"name":"Team 2","list":[{"username":"USERNAME3"},{"username":"USERNAME4"}]}],"serviceType":"playerList"}
+	{"maxPlayers":X,"service":"currentRoom","team":[{"teamColor":COLOR¹,"name":"Team 1","list":[{"username":"USERNAME1"},{"username":"USERNAME2"}]},{"teamColor":COLOR²,"name":"Team 2","list":[{"username":"USERNAME3"},{"username":"USERNAME4"}]}],"serviceType":"playerList"}
 
 In this example there are two teams, and every team has two players. In the
 following example there is only one team with three single players:
 
-  {"maxPlayers":X,"service":"currentRoom","team":[{"teamColor":COLOR,"name":"Team 1","list":[{"username":"USERNAME1"},{"username":"USERNAME1"},{"username":"USERNAME3"}]}],"serviceType":"playerList"}
+	{"maxPlayers":X,"service":"currentRoom","team":[{"teamColor":COLOR,"name":"Team 1","list":[{"username":"USERNAME1"},{"username":"USERNAME1"},{"username":"USERNAME3"}]}],"serviceType":"playerList"}
 
 Some errors can occours:
 
@@ -186,11 +186,11 @@ Audio
 When a room it's full, the game automatically starts, and the client send to
 the server the port choosen for the audio streaming:
 
-  {"service":"audio","username":"USERNAME","hashcode":HASHCODE,"audioPortClient":PORT,"name":"NAME_OF_THE_ROOM"}
+	{"service":"audio","username":"USERNAME","hashcode":HASHCODE,"audioPortClient":PORT,"name":"NAME_OF_THE_ROOM"}
 
 The server responds with the server side port:
 
-  {"audioPortServer":PORT,"service":"audio"}
+	{"audioPortServer":PORT,"service":"audio"}
 
 
 Game
@@ -199,11 +199,11 @@ Game
 In addition to the audio port, when a room it's full the client send to the
 server a request for the game map:
 
-  {"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"map","name":"NAME_OF_THE_ROOM"}
+	{"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"map","name":"NAME_OF_THE_ROOM"}
 
 Then the server send to the client the map:
 
-  SERVER: {"height":"LENGTH_OF_THE_MAP","items":[{"position":"POSITION_ITEM¹","texture":"TEXTURE_ITEM¹","object":"ITEM¹","size":"SIZE_ITEM¹"},{"position":"POSITION_ITEM²","texture":"TEXTURE_ITEM²","object":"ITEM²","size":"SIZE_ITEM²"},{"position":"POSITION_ITEM³","texture":"TEXTURE_ITEM³","object":"ITEM³","size":"SIZE_ITEM³"}],"players":"SPAWN_POINT","width":"WIDTH_OF_THE_MAP","service":"game","serviceType":"map"}
+	{"height":"LENGTH_OF_THE_MAP","items":[{"position":"POSITION_ITEM¹","texture":"TEXTURE_ITEM¹","object":"ITEM¹","size":"SIZE_ITEM¹"},{"position":"POSITION_ITEM²","texture":"TEXTURE_ITEM²","object":"ITEM²","size":"SIZE_ITEM²"},{"position":"POSITION_ITEM³","texture":"TEXTURE_ITEM³","object":"ITEM³","size":"SIZE_ITEM³"}],"players":"SPAWN_POINT","width":"WIDTH_OF_THE_MAP","service":"game","serviceType":"map"}
 
 In this example the map consists of three items.
 
@@ -213,13 +213,13 @@ map however, with no errors.
 Before the game really starts, there is a loading phase. When the client it's
 ready it send to the server a message to say this:
 
-  {"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"status","ready":true,"name":"NAME_OF_THE_ROOM"}
+	{"service":"game","username":"USERNAME","hashcode":HASHCODE,"serviceType":"status","ready":true,"name":"NAME_OF_THE_ROOM"}
 
 Then the client starts to send the position of the player in the map, to update
 other clients positions list:
 
-  {"position":{"z":Z,"y":Y,"x":X},"service":"game","username":"USERNAME","serviceType":"positions","direction":{"z":Z,"y":Y,"x":X},"name":"NAME_OF_THE_ROOM"}
+	{"position":{"z":Z,"y":Y,"x":X},"service":"game","username":"USERNAME","serviceType":"positions","direction":{"z":Z,"y":Y,"x":X},"name":"NAME_OF_THE_ROOM"}
 
 The server responds with the positions of the other players:
 
-  {"players":[],"service":"game","serviceType":"positions"}
+	{"players":[],"service":"game","serviceType":"positions"}
