@@ -1,5 +1,11 @@
 package services;
 
+import game.RoomPlayersUpdater;
+import game.model.PlayerEventListener;
+import game.model.Room;
+
+import java.util.HashMap;
+
 import messages.CurrentRoomMessagesCreator;
 
 import org.json.JSONException;
@@ -9,9 +15,6 @@ import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
-import game.RoomPlayersUpdater;
-import game.model.PlayerEventListener;
-import game.model.Room;
 
 /**
  * CurrentRoom Service provides information about the <code>Room</code> in which the client is entered.
@@ -27,17 +30,19 @@ import game.model.Room;
  * @see RoomPlayersUpdater
  */
 
-public class CurrentRoom implements IService {
+public class CurrentRoom implements IExtendedService {
 
 	private JSONObject jsonRequest;
 	private JSONObject jsonResponse;
 
 	private GameDataManager gameDataManager;
 	private CurrentRoomMessagesCreator messagesCreator;
+	private HashMap<String, IService> subServices;
 
 	public CurrentRoom() {
 		gameDataManager = GameDataManager.getInstance();
 		messagesCreator = new CurrentRoomMessagesCreator();
+		subServices = new HashMap<>();
 	}
 
 	@Override
@@ -130,5 +135,17 @@ public class CurrentRoom implements IService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void addSubService(IService... subservices) {
+		for (IService subService : subservices) {
+			this.subServices.put(subService.getName()	, subService);
+		}		
+	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.CURRENT_ROOM;
 	}
 }

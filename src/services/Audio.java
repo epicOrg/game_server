@@ -63,4 +63,9 @@ public class Audio implements IService {
 		}
 		return response;
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.AUDIO;
+	}
 }

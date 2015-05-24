@@ -104,4 +104,9 @@ public class Register implements IService {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.REGISTER;
+	}
 }

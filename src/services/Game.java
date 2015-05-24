@@ -172,4 +172,9 @@ public class Game implements IService {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.GAME;
+	}
 }

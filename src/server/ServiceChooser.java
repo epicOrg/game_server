@@ -25,9 +25,11 @@ import check_fields.FieldsNames;
 
 public class ServiceChooser {
 
-	private HashMap<String, IService> services = new HashMap<>();
+	private HashMap<String, IService> services;
+	private ServicesInitializer initializer;
 
 	public ServiceChooser() {
+		initializer = new ServicesInitializer();
 		initMap();
 	}
 

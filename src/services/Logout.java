@@ -36,4 +36,9 @@ public class Logout implements IService {
 		}
 		return null;
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.LOGOUT;
+	}
 }

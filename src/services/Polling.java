@@ -40,4 +40,9 @@ public class Polling implements IService {
 		}		
 		return null;
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.POLLING;
+	}
 }

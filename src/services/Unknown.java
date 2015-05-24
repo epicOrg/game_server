@@ -26,4 +26,9 @@ public class Unknown implements IService {
 
 		return response;
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.UNKNOWN;
+	}
 }

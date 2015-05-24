@@ -1,5 +1,7 @@
 package services;
 
+import jdk.nashorn.internal.codegen.CompilerConstants.Call;
+
 import org.json.JSONObject;
 
 /**
@@ -31,4 +33,6 @@ public interface IService {
 	 * @return service response message to send
 	 */	
 	public JSONObject start(JSONObject request);
+	
+	public String getName();
 }

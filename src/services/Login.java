@@ -100,4 +100,9 @@ public class Login implements IService {
 		}
 		return response;
 	}
+
+	@Override
+	public String getName() {
+		return FieldsNames.LOGIN;
+	}
 }

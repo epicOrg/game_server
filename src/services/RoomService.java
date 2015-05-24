@@ -138,4 +138,10 @@ public class RoomService implements IService {
 			e.printStackTrace();
 		} 
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return FieldsNames.ROOMS;
+	}
 }

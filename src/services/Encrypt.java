@@ -54,4 +54,9 @@ public class Encrypt implements IService {
 		}
 	}
 
+	@Override
+	public String getName() {
+		return FieldsNames.ENCRYPT;
+	}
+
 }
