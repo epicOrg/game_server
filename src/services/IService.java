@@ -1,13 +1,10 @@
 package services;
 
-import jdk.nashorn.internal.codegen.CompilerConstants.Call;
-
 import org.json.JSONObject;
 
 /**
- * 
- * General interface for server <code>Service</code>.
- * <code>Service</code> are the center of all server functionalities.
+ * General interface for server services. <code>Service</code> are the center of
+ * all server functionalities.
  * 
  * @author Noris
  * @author Micieli
@@ -28,11 +25,12 @@ import org.json.JSONObject;
 public interface IService {
 
 	/**
-	 * Elaborates client requests end responding to them according to the <code>Service</code> type.
+	 * Elaborates client requests end responding to them according to the
+	 * <code>Service</code> type.
 	 * 
-	 * @return service response message to send
-	 */	
+	 * @return service response message
+	 */
 	public JSONObject start(JSONObject request);
-	
+
 	public String getName();
 }
