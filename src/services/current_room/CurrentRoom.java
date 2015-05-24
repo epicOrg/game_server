@@ -17,9 +17,9 @@ import check_fields.FieldsNames;
 /**
  * CurrentRoom service provides information about the {@link Room} joined by the
  * client. It gives the complete {@link Player}s list currently in the
- * {@link Room}, updated in real time according to Player getting in or out from
- * the {@link Room}. It also elaborates the client request to exit from a
- * specific {@link Room}.
+ * <code>Room</code>, updated in real time according to Player getting in or out from
+ * the <code>Room</code>. It also elaborates the client request to exit from a
+ * specific <code>Room</code>.
  * 
  * @author Torlaschi
  * @author Micieli

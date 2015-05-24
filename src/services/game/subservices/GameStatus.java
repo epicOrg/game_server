@@ -7,7 +7,15 @@ import org.json.JSONObject;
 import check_fields.FieldsNames;
 import services.IExtendedService;
 import services.IService;
+import services.game.Game;
 
+/**
+ * 
+ * A {@link Game} subservice.
+ * Allows the player to update his status during the game.
+ * 
+ * @author Micieli
+ */
 public class GameStatus implements IExtendedService {
 	
 	private HashMap<String, IService> subservices;

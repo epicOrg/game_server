@@ -10,11 +10,22 @@ import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 import game.model.Player;
+import game.model.PlayerStatus;
 import game.model.Room;
 import services.IService;
+import services.game.Game;
 
+/**
+ * 
+ * A {@link Game} subservice. The client that at fixed rate have to send to the
+ * server his position in the map. This service update his saved position in the
+ * server and also updae the client about the other player positions.
+ * 
+ * @author Micieli
+ * @see PlayerStatus
+ */
 public class GamePositions implements IService {
-	
+
 	private GameMessagesCreator messagesCreator;
 
 	public GamePositions() {
@@ -43,10 +54,9 @@ public class GamePositions implements IService {
 		return null;
 	}
 
-	private void UpdatePlayerStatus(String username, JSONObject request, Room room) throws JSONException,
-			NoSuchPlayerException {
-		JSONObject posObject = request
-				.getJSONObject(FieldsNames.GAME_POSITION);
+	private void UpdatePlayerStatus(String username, JSONObject request,
+			Room room) throws JSONException, NoSuchPlayerException {
+		JSONObject posObject = request.getJSONObject(FieldsNames.GAME_POSITION);
 		JSONObject dirObject = request
 				.getJSONObject(FieldsNames.GAME_DIRECTION);
 		float xPos = (float) posObject.getDouble(FieldsNames.GAME_X);

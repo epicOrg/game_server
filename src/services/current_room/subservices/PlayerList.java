@@ -7,20 +7,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
+import services.game.Game;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 
 /**
+ * A {@link Game} subservice that responds to the player list request of a client
+ * providing the full list currently in the requested {@link Room}.
+ * 
  * @author Micieli
  * @date 2015/05/24
  */
 
-public class PlayerListService implements IService {
+
+public class PlayerList implements IService {
 
 	private CurrentRoomMessagesCreator messagesCreator;
 
-	public PlayerListService() {
+	public PlayerList() {
 		super();
 		messagesCreator = new CurrentRoomMessagesCreator();
 	}

@@ -7,18 +7,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
+import services.game.Game;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 
 /**
+ * A {@link RoomActions} subservice that execute the exit request of client
+ * removing him from the room player list
+ * 
  * @author Micieli
  * @date 2015/05/24
+ * @see Game
  */
 
 public class RoomExit implements IService {
-	
+
 	private CurrentRoomMessagesCreator messagesCreator;
 
 	public RoomExit() {
@@ -28,7 +33,7 @@ public class RoomExit implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		//System.out.println("Exit");
+		// System.out.println("Exit");
 		try {
 			String playerName = request.getString(FieldsNames.USERNAME);
 			String roomName = request.getString(FieldsNames.ROOM_NAME);

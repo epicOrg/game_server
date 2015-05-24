@@ -12,7 +12,7 @@ import services.Register;
 import services.Unknown;
 import services.current_room.CurrentRoom;
 import services.current_room.subservices.ListReceived;
-import services.current_room.subservices.PlayerListService;
+import services.current_room.subservices.PlayerList;
 import services.current_room.subservices.RoomActions;
 import services.current_room.subservices.RoomExit;
 import services.game.Game;
@@ -63,7 +63,7 @@ public class ServicesInitializer {
 
 	private IExtendedService initCurrentRoom() {
 		IExtendedService currentoom = new CurrentRoom();
-		IService playerList = new PlayerListService();
+		IService playerList = new PlayerList();
 		IExtendedService roomsActions = new RoomActions();
 		IService roomExit = new RoomExit();
 		IService playerListReceived = new ListReceived();

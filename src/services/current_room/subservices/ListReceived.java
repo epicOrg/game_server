@@ -6,13 +6,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
+import services.game.Game;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 
 /**
+ * A {@link RoomActions} subservice that acquire client message communicating that
+ * they received the player list after entering in a {@link Room}
+ * 
  * @author Micieli
  * @date 2015/05/24
+ * @see Game
  */
 
 public class ListReceived implements IService {
@@ -22,10 +27,6 @@ public class ListReceived implements IService {
 
 		try {
 
-			// TODO DEBUG
-			System.out.println("List received.");
-
-			// String playerName = jsonRequest.getString(FieldsNames.USERNAME);
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
 

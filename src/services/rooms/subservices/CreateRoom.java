@@ -6,12 +6,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
+import services.current_room.CurrentRoom;
 import check_fields.FieldsNames;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
 
 /**
+ * A {@link CurrentRoom} subservice that allow the client to create a new
+ * {@link Room}, choosing also the <code>Room</code> name. 
+ * 
  * @author Micieli
  * @date 2015/05/24
  */

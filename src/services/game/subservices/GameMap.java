@@ -10,9 +10,18 @@ import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import game.model.Room;
 import services.IService;
+import services.game.Game;
 
+/**
+ * 
+ * A {@link Game} subservice. This service send to the client the generated map
+ * for the current room in which the player is entered.
+ * 
+ * @author Micieli
+ * @see game.map
+ */
 public class GameMap implements IService {
-	
+
 	private GameMessagesCreator messagesCreator;
 
 	public GameMap() {
@@ -26,14 +35,15 @@ public class GameMap implements IService {
 		try {
 			Room room = null;
 			try {
-				room = GameDataManager.getInstance().getRoomByName(request.getString(FieldsNames.ROOM_NAME));
+				room = GameDataManager.getInstance().getRoomByName(
+						request.getString(FieldsNames.ROOM_NAME));
 			} catch (NoSuchRoomException e) {
-				
+
 				e.printStackTrace();
 				return null;
 			}
-			return  messagesCreator.generateMapMessage(room.getRoomMapSelector().getMap(), 
-					room.getRoomMapSelector().getSpawnPoint());			
+			return messagesCreator.generateMapMessage(room.getRoomMapSelector()
+					.getMap(), room.getRoomMapSelector().getSpawnPoint());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

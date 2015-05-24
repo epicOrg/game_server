@@ -7,14 +7,19 @@ import org.json.JSONObject;
 
 import services.IExtendedService;
 import services.IService;
+import services.game.Game;
 import check_fields.FieldsNames;
 
 /**
+ * A {@link Game} subservice that is in turn an instance of <code>IExtendedService</code>
+ * executing the different Room Actions requested by client
+ * 
  * @author Micieli
  * @date 2015/05/24
  */
 
-public class RoomActions implements IService, IExtendedService {
+
+public class RoomActions implements  IExtendedService {
 
 	private HashMap<String, IService> subServices;
 
