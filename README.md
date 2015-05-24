@@ -163,11 +163,15 @@ But some errors can occour in the creation of a room:
 
 * The choosen room's name is already used
 
-	{"errors":{"errors":["createErrorAlreadyPresent"]},"service":"rooms","serviceType":"create","noErrors":false}
+  ```
+  {"errors":{"errors":["createErrorAlreadyPresent"]},"service":"rooms","serviceType":"create","noErrors":false}
+  ```
 
 * The choosen room's name is invalid (too short, too long, etc.)
 
-	{"errors":{"errors":["createErrorInvalidname"]},"service":"rooms","serviceType":"create","noErrors":false}
+  ```
+  {"errors":{"errors":["createErrorInvalidname"]},"service":"rooms","serviceType":"create","noErrors":false}
+  ```
 
 
 CurrentRoom
@@ -198,7 +202,9 @@ Some errors can occours:
 
 * Full room or non-existent room
 
-    {"result":false,"name":"NAME_OF_THE_ROOM","service":"rooms","serviceType":"join","noErrors":false}
+  ```
+  {"result":false,"name":"NAME_OF_THE_ROOM","service":"rooms","serviceType":"join","noErrors":false}
+  ```
 
 * If the user try to join a room who has alredy joined, the server do nothing,
   and responds with the previous explained messages.
