@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.rooms.Rooms;
+import services.rooms.subservices.CreateRoom;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
@@ -38,8 +39,7 @@ class RoomsServiceTest01 {
 		}
 
 		Rooms roomService = new Rooms();
+		roomService.addSubService(new CreateRoom());
 		System.out.println(roomService.start(request));
-
 	}
-
 }

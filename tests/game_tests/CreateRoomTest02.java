@@ -10,6 +10,7 @@ import services.IService;
 import services.Login;
 import services.Register;
 import services.rooms.Rooms;
+import services.rooms.subservices.CreateRoom;
 import check_fields.FieldsNames;
 
 /**
@@ -75,6 +76,7 @@ class CreateRoomTest02 {
 
 		// SERVER: Send a response with the list of the online rooms
 		Rooms roomService = new Rooms();
+		roomService.addSubService(new CreateRoom());
 		System.out.println("SERVER RoomCreate Message: "
 				+ roomService.start(jsonRoomCreateFromClient) + "\n");
 
@@ -95,5 +97,4 @@ class CreateRoomTest02 {
 		System.out.println("SERVER RoomCreate Message: "
 				+ roomService.start(jsonRoomCreateFromClientCopy));
 	}
-
 }

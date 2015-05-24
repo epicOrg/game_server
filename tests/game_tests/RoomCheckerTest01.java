@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.rooms.Rooms;
+import services.rooms.subservices.CreateRoom;
 import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
 
@@ -39,6 +40,7 @@ class RoomCheckerTest01 {
 
 			System.out.println("Request: " + jsonRequest);
 			Rooms roomService = new Rooms();
+			roomService.addSubService(new CreateRoom());
 			System.out.println("Response: "
 					+ roomService.start(jsonRequest));
 		} catch (UserNotOnlineException e) {
