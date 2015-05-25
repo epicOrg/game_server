@@ -14,9 +14,16 @@ public class TeamManager {
 	public static final int NUMBER_OF_TEAMS = 1;
 
 	private ArrayList<Team> teams = new ArrayList<Team>();
+	public int numberOfTeams;
 
 	public TeamManager() {
 		generateTeams();
+		numberOfTeams = NUMBER_OF_TEAMS;
+	}
+	
+	public TeamManager(int numbersOfTeam) {
+		generateTeams();
+		numberOfTeams = NUMBER_OF_TEAMS;
 	}
 
 	/**
@@ -24,7 +31,7 @@ public class TeamManager {
 	 */
 	private void generateTeams() {
 
-		for (int i = 0; i < NUMBER_OF_TEAMS; i++) {
+		for (int i = 0; i < numberOfTeams; i++) {
 			Team team = new Team();
 			team.setTeamName("Team " + (teams.size() + 1));
 			team.setRandomTeamColor();

@@ -32,6 +32,7 @@ public class Room {
 	private TeamManager teamManager;
 	private RoomEventListener playersUpdater;
 	private boolean inPlay = false;
+	private int maxPlayers;
 
 	private RoomMapSelector roomMapSelector;
 
@@ -45,6 +46,15 @@ public class Room {
 		this.roomName = roomName;
 		teamManager = new TeamManager();
 		generateMap();
+		maxPlayers = MAX_PLAYERS;
+	}
+
+	public Room(String roomName, int numberOfTeam) {
+		super();
+		this.roomName = roomName;
+		teamManager = new TeamManager(numberOfTeam);
+		maxPlayers = Team.MAX_PLAYERS * numberOfTeam;
+		generateMap();
 	}
 
 	/**
@@ -53,7 +63,7 @@ public class Room {
 	public void generateMap() {
 
 		roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),
-				MAX_PLAYERS));
+				maxPlayers));
 
 		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
 		// MapDimension(20, 20, 20)));
@@ -122,7 +132,7 @@ public class Room {
 	 *         false otherwise (there are more users slot).
 	 */
 	private boolean isFull() {
-		return getSize() >= MAX_PLAYERS;
+		return getSize() >= maxPlayers;
 	}
 
 	public int getSize() {
