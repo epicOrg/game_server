@@ -41,6 +41,7 @@ public class TestMapGenerator implements MapGenerator {
 				new MapDimension(1, 5, 1));
 
 		mapConstructor.addMapObjects(o1, o2, o3, o4, o5, o6);
+		mapConstructor.addMapObject(o1);
 
 		return mapConstructor;
 	}

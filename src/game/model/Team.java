@@ -15,7 +15,7 @@ import exceptions.FullTeamException;
  */
 
 public class Team {
-	public static final int MAX_PLAYERS = 2;
+	public static final int MAX_PLAYERS = 1;
 	
 	private String teamName;
 	private Color teamColor;
