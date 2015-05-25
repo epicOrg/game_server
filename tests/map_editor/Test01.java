@@ -8,6 +8,7 @@ import java.awt.Point;
  *
  * @author Noris
  * @date 2015/05/25
+ * @see MapEditor
  */
 
 class Test01 {

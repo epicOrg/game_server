@@ -8,6 +8,7 @@ import email_confirmation.EmailSender;
  * 
  * @author Noris
  * @date 2015/05/05
+ * @see EmailSender
  */
 
 class Test01 {

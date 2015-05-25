@@ -13,7 +13,7 @@ import com.biasedbit.efflux.participant.RtpParticipant;
 import com.biasedbit.efflux.session.SingleParticipantSession;
 
 /**
- * @author Luca
+ * @author Micieli
  * @date 2015/04/28
  */
 
@@ -41,40 +41,34 @@ public class ThreePeopleConversationTest {
 			String ip3 = "10.42.0.22";
 
 			// creo gli "utenti server"
-			RtpParticipant server1 = RtpParticipant.createReceiver(MY_IP,
-					serverPort1, 4001);
-			RtpParticipant server2 = RtpParticipant.createReceiver(MY_IP,
-					serverPort2, 4002);
-			RtpParticipant server3 = RtpParticipant.createReceiver(MY_IP,
-					serverPort3, 4002);
+			RtpParticipant server1 = RtpParticipant.createReceiver(MY_IP, serverPort1, 4001);
+			RtpParticipant server2 = RtpParticipant.createReceiver(MY_IP, serverPort2, 4002);
+			RtpParticipant server3 = RtpParticipant.createReceiver(MY_IP, serverPort3, 4002);
 
 			// creo gli "utenti"
-			RtpParticipant user1 = RtpParticipant.createReceiver(ip1, port1,
-					4001);
+			RtpParticipant user1 = RtpParticipant.createReceiver(ip1, port1, 4001);
 			user1.getInfo().setName("user1");
-			RtpParticipant user2 = RtpParticipant.createReceiver(ip2, port2,
-					4001);
+			RtpParticipant user2 = RtpParticipant.createReceiver(ip2, port2, 4001);
 			user2.getInfo().setName("user2");
-			RtpParticipant user3 = RtpParticipant.createReceiver(ip3, port3,
-					4001);
+			RtpParticipant user3 = RtpParticipant.createReceiver(ip3, port3, 4001);
 			user3.getInfo().setName("user2");
 
 			// creo le sessioni
-			SingleParticipantSession user1Server1 = new SingleParticipantSession(
-					"ForwardSession1", 0, server1, user1);
-			SingleParticipantSession user2Server2 = new SingleParticipantSession(
-					"ForwardSession2", 0, server2, user2);
-			SingleParticipantSession user3Server3 = new SingleParticipantSession(
-					"ForwardSession3", 0, server3, user3);
+			SingleParticipantSession user1Server1 = new SingleParticipantSession("ForwardSession1",
+					0, server1, user1);
+			SingleParticipantSession user2Server2 = new SingleParticipantSession("ForwardSession2",
+					0, server2, user2);
+			SingleParticipantSession user3Server3 = new SingleParticipantSession("ForwardSession3",
+					0, server3, user3);
 
 			// Creo gli stream dall'1
 			PipedOutputStream bytesStream1to2 = new PipedOutputStream();
-			PipedInputStream audioInputStream1to2 = new PipedInputStream(
-					bytesStream1to2, BUFFER_SIZE);
+			PipedInputStream audioInputStream1to2 = new PipedInputStream(bytesStream1to2,
+					BUFFER_SIZE);
 
 			PipedOutputStream bytesStream1to3 = new PipedOutputStream();
-			PipedInputStream audioInputStream1to3 = new PipedInputStream(
-					bytesStream1to3, BUFFER_SIZE);
+			PipedInputStream audioInputStream1to3 = new PipedInputStream(bytesStream1to3,
+					BUFFER_SIZE);
 			ArrayList<PipedOutputStream> streamsFrom1 = new ArrayList<>();
 			streamsFrom1.add(bytesStream1to2);
 			streamsFrom1.add(bytesStream1to3);
@@ -83,12 +77,12 @@ public class ThreePeopleConversationTest {
 
 			// Creo gli stream dall'2
 			PipedOutputStream bytesStream2to1 = new PipedOutputStream();
-			PipedInputStream audioInputStream2to1 = new PipedInputStream(
-					bytesStream2to1, BUFFER_SIZE);
+			PipedInputStream audioInputStream2to1 = new PipedInputStream(bytesStream2to1,
+					BUFFER_SIZE);
 
 			PipedOutputStream bytesStream2to3 = new PipedOutputStream();
-			PipedInputStream audioInputStream2to3 = new PipedInputStream(
-					bytesStream2to3, BUFFER_SIZE);
+			PipedInputStream audioInputStream2to3 = new PipedInputStream(bytesStream2to3,
+					BUFFER_SIZE);
 			ArrayList<PipedOutputStream> streamsFrom2 = new ArrayList<>();
 			streamsFrom2.add(bytesStream2to1);
 			streamsFrom2.add(bytesStream2to3);
@@ -97,12 +91,12 @@ public class ThreePeopleConversationTest {
 
 			// Creo gli stream dall'3
 			PipedOutputStream bytesStream3to1 = new PipedOutputStream();
-			PipedInputStream audioInputStream3to1 = new PipedInputStream(
-					bytesStream3to1, BUFFER_SIZE);
+			PipedInputStream audioInputStream3to1 = new PipedInputStream(bytesStream3to1,
+					BUFFER_SIZE);
 
 			PipedOutputStream bytesStream3to2 = new PipedOutputStream();
-			PipedInputStream audioInputStream3to2 = new PipedInputStream(
-					bytesStream3to2, BUFFER_SIZE);
+			PipedInputStream audioInputStream3to2 = new PipedInputStream(bytesStream3to2,
+					BUFFER_SIZE);
 			ArrayList<PipedOutputStream> streamsFrom3 = new ArrayList<>();
 			streamsFrom3.add(bytesStream3to2);
 			streamsFrom3.add(bytesStream3to1);
@@ -121,20 +115,14 @@ public class ThreePeopleConversationTest {
 			streamToUser3.add(audioInputStream2to3);
 
 			// creo gli stream mizati
-			MixingPipedInputStream mixingInputStream1 = new MixingPipedInputStream(
-					streamToUser1);
-			MixingPipedInputStream mixingInputStream2 = new MixingPipedInputStream(
-					streamToUser2);
-			MixingPipedInputStream mixingInputStream3 = new MixingPipedInputStream(
-					streamToUser3);
+			MixingPipedInputStream mixingInputStream1 = new MixingPipedInputStream(streamToUser1);
+			MixingPipedInputStream mixingInputStream2 = new MixingPipedInputStream(streamToUser2);
+			MixingPipedInputStream mixingInputStream3 = new MixingPipedInputStream(streamToUser3);
 
 			// creo le classi che inviano i pacchetti mixati
-			Forwarder forwarder1 = new Forwarder(mixingInputStream1,
-					user1Server1);
-			Forwarder forwarder2 = new Forwarder(mixingInputStream2,
-					user2Server2);
-			Forwarder forwarder3 = new Forwarder(mixingInputStream3,
-					user3Server3);
+			Forwarder forwarder1 = new Forwarder(mixingInputStream1, user1Server1);
+			Forwarder forwarder2 = new Forwarder(mixingInputStream2, user2Server2);
+			Forwarder forwarder3 = new Forwarder(mixingInputStream3, user3Server3);
 			ArrayList<Forwarder> forwarders = new ArrayList<>();
 			forwarders.add(forwarder1);
 			forwarders.add(forwarder2);

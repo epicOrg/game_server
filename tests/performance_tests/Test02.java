@@ -12,7 +12,7 @@ import database.Paths;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after
- * registration or every user).. Before run this test start the server on the
+ * registration or every user). Before run this test start the server on the
  * same machine. Remember to restore the e-mails database after this test (it
  * already remove users registration file).
  * 

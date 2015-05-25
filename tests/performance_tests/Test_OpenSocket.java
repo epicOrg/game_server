@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * Class used by @see {@link Test02}. It send a message to the server.
+ * Class used by {@link Test02}. It send a message to the server.
  * 
  * @author Noris
  * @date 2015/04/21
@@ -23,11 +23,10 @@ class Test_OpenSocket {
 	private PrintWriter writer;
 
 	public void connectSocket() throws UnknownHostException, IOException {
-		socket.connect(
-				new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS),
-						SERVER_PORT), 5000);
+		socket.connect(new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS), SERVER_PORT),
+				5000);
 	}
-	
+
 	public void writeSocket(String message) throws IOException {
 
 		writer = new PrintWriter(socket.getOutputStream(), true);

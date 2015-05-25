@@ -6,8 +6,9 @@ import java.net.UnknownHostException;
 import voip.NetUtils;
 
 /**
- * @author Luca
+ * @author Micieli
  * @date 2015/05/03
+ * @see NetUtils
  */
 
 public class NetUtilsTest {
@@ -15,7 +16,7 @@ public class NetUtilsTest {
 	public static void main(String[] args) throws UnknownHostException {
 
 		for (int i = 0; i < 10; i++) {
-			System.out.println("Porta libera: " + NetUtils.findFreePort());
+			System.out.println("Free port: " + NetUtils.findFreePort());
 		}
 		
 		InetAddress address = InetAddress.getByName("192.168.1.1");

@@ -6,11 +6,13 @@ import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
 /**
- * File saving test with DataManager.
+ * File saving test with {@link DataManager}.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17
+ * @see DataManager
+ * @see RegisteredUser
  */
 class Test01 {
 

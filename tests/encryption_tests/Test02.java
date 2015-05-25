@@ -19,12 +19,12 @@ class Test02 {
 
 		SymmetricKeyGenerator symmetricKeyGenerator = new SymmetricKeyGenerator();
 		symmetricKeyGenerator.generateKey();
-		Key asymmetricKey = symmetricKeyGenerator.getKey();
+		Key symmetricKey = symmetricKeyGenerator.getKey();
 
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
-		Encrypter encrypter = new Encrypter(asymmetricKey);
+		Encrypter encrypter = new Encrypter(symmetricKey);
 		encrypter.encrypt(string);
 
 		byte[] cryptedData = encrypter.getEncryptedData();
@@ -38,7 +38,7 @@ class Test02 {
 		String string1 = new String(incomingData, "UTF-8");
 		System.out.println("Encrypted: " + string1);
 
-		Decrypter decrypter = new Decrypter(asymmetricKey);
+		Decrypter decrypter = new Decrypter(symmetricKey);
 		decrypter.decrypt(new String(incomingData, "UTF-8"));
 
 		byte[] decryptedData = decrypter.getDecryptedData();

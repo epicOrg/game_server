@@ -12,10 +12,13 @@ import com.biasedbit.efflux.session.RtpSession;
 import com.biasedbit.efflux.session.RtpSessionDataListener;
 
 /**
- * Listen to a RTPSession and stores audio bytes in streams.
+ * Listen to a {@link RtpSession} and stores audio bytes in streams.
  * 
  * @author Micieli
  * @date 2015/04/28
+ * @see PipedOutputStream
+ * @see ExecutorService
+ * @see RtpSession
  */
 
 public class Receiver implements RtpSessionDataListener {

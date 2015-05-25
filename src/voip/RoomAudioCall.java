@@ -3,17 +3,16 @@ package voip;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import game.model.Player;
 import game.model.Room;
 import game.model.Team;
 
 /**
+ * Defines the audio conversation between each {@link Player} of the same
+ * {@link Team} in the related {@link Room}.
  * 
- * Define the audio conversation between each players of the same team in the
- * related room.
- * 
- * @author Luca
+ * @author Micieli
  * @date 2015/04/28
- *
  */
 
 public class RoomAudioCall {
@@ -27,8 +26,7 @@ public class RoomAudioCall {
 	}
 
 	/**
-	 * 
-	 * Prepare audio conversation for each teams in the room
+	 * Prepares the audio conversation for each team in the room.
 	 * 
 	 * @throws IOException
 	 */
@@ -52,10 +50,6 @@ public class RoomAudioCall {
 		}
 	}
 
-	/**
-	 * 
-	 * 
-	 */
 	public void endCall() {
 		System.out.println("Call ended");
 		for (TeamAudioCall teamAudioCall : teamAudioCalls) {

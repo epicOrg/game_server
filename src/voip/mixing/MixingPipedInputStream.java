@@ -6,11 +6,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Mixing stream for ulaw audio byte.
+ * Mixing stream for u-law audio byte.
  * 
  * @author Micieli
  * @date 2015/04/28
  * @see PipedInputStream
+ * @see <a href="http://en.wikipedia.org/wiki/%CE%9C-law_algorithm">μ-law</a>
  */
 
 public class MixingPipedInputStream {

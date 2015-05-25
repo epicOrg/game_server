@@ -18,18 +18,21 @@ import exceptions.UserNotOnlineException;
  * 
  * @author Noris
  * @date 2015/04/19
+ * @see Rooms
+ * @see CreateRoom
  */
 class RoomCheckerTest01 {
 
-	public static void main(String[] args) throws UnknownHostException,
-			JSONException {
+	public static void main(String[] args) throws UnknownHostException, JSONException {
 
 		// SERVER: Set online Friedrich Nietzsche
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		InetAddress ipAddress = InetAddress.getByName("15.10.18.44");
-		onlineManager.setOnline("Nietzsche", ipAddress,null);
+		onlineManager.setOnline("Nietzsche", ipAddress, null);
 		int hashCode;
+
 		try {
+
 			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
 			JSONObject jsonRequest = new JSONObject();
 			jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
@@ -41,8 +44,8 @@ class RoomCheckerTest01 {
 			System.out.println("Request: " + jsonRequest);
 			Rooms roomService = new Rooms();
 			roomService.addSubService(new CreateRoom());
-			System.out.println("Response: "
-					+ roomService.start(jsonRequest));
+			System.out.println("Response: " + roomService.start(jsonRequest));
+
 		} catch (UserNotOnlineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -17,7 +17,9 @@ import connection_encryption.SymmetricKeyGenerator;
  * 
  * @author Noris
  * @date 2015/04/14
- *
+ * @see SymmetricKeyGenerator
+ * @see Encrypter
+ * @see Decrypter
  */
 
 public class Test04 {
@@ -27,12 +29,12 @@ public class Test04 {
 
 		SymmetricKeyGenerator symmetricKeyGenerator = new SymmetricKeyGenerator();
 		symmetricKeyGenerator.generateKey();
-		Key asymmetricKey = symmetricKeyGenerator.getKey();
+		Key symmetricKey = symmetricKeyGenerator.getKey();
 
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
-		Encrypter encrypter = new Encrypter(asymmetricKey);
+		Encrypter encrypter = new Encrypter(symmetricKey);
 		encrypter.encrypt(string);
 
 		String cryptedString = encrypter.getEncryptedString();
@@ -40,7 +42,7 @@ public class Test04 {
 		String string1 = cryptedString;
 		System.out.println("Encrypted: " + string1);
 
-		Decrypter decrypter = new Decrypter(asymmetricKey);
+		Decrypter decrypter = new Decrypter(symmetricKey);
 		decrypter.decrypt(cryptedString);
 
 		byte[] decryptedData = decrypter.getDecryptedData();

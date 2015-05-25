@@ -14,7 +14,7 @@ import database.Paths;
 
 /**
  * Register NUMBER_OF_USERS users and login them. Note: remember to delete the
- * emails from the database.
+ * e-mails from the database.
  * 
  * @author Noris
  * @date 2015/04/21
@@ -41,8 +41,7 @@ class Test01 {
 			jsonRegFromClient.put(FieldsNames.USERNAME, username);
 			jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@logos.org");
-			System.out.println("[" + i + "] CLIENT Registration Message: "
-					+ jsonRegFromClient);
+			System.out.println("[" + i + "] CLIENT Registration Message: " + jsonRegFromClient);
 
 			// SERVER: Register the user
 			Register register = new Register();
@@ -56,18 +55,15 @@ class Test01 {
 			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
 			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
 			jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
-			System.out.println("[" + i + "] CLIENT Login Message: "
-					+ jsonLoginFromClient);
+			System.out.println("[" + i + "] CLIENT Login Message: " + jsonLoginFromClient);
 
 			// SERVER: Set the user online
 			IService login = new Login(null);
 			String stringLoginFromServer = login.start(jsonLoginFromClient).toString();
-			System.out.println("[" + i + "] SERVER Login Message: "
-					+ stringLoginFromServer + "\n");
+			System.out.println("[" + i + "] SERVER Login Message: " + stringLoginFromServer + "\n");
 
 			// CLIENT: Read response from server
-			JSONObject jsonLoginFromServer = new JSONObject(
-					stringLoginFromServer);
+			JSONObject jsonLoginFromServer = new JSONObject(stringLoginFromServer);
 			@SuppressWarnings("unused")
 			int hashCode = (int) jsonLoginFromServer.get(FieldsNames.HASHCODE);
 		}

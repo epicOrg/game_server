@@ -2,12 +2,18 @@ package voip_tests;
 
 import java.io.IOException;
 
-import data_management.GameDataManager;
 import voip.RoomAudioCall;
+import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
 import game.model.Player;
 import game.model.Room;
+
+/**
+ * @author Micieli
+ * @date 2015/05/05
+ * @see RoomAudioCall
+ */
 
 public class TeamCallTest {
 
@@ -31,6 +37,7 @@ public class TeamCallTest {
 		luca.getAudioData().setRemotePort(52016);
 
 		try {
+
 			room.addPlayer(fabio);
 			room.addPlayer(andrea);
 			room.addPlayer(luca);

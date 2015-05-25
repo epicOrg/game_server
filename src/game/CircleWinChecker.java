@@ -50,7 +50,7 @@ public class CircleWinChecker implements IWinChecher {
 				return false;
 		}
 
-		// TODO DEBUG
+		// TODO DEBUG PRINT
 		System.out.println("Winner: " + team.getTeamName());
 
 		return true;

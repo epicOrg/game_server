@@ -18,7 +18,7 @@ import check_fields.FieldsNames;
  * 
  * @author Noris
  * @date 2015/04/21
- *
+ * @see CreateRoom
  */
 
 class CreateRoomTest01 {

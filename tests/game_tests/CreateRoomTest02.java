@@ -14,11 +14,12 @@ import services.rooms.subservices.CreateRoom;
 import check_fields.FieldsNames;
 
 /**
- * Test for an invalid Room Create request: room already exists.
+ * Test for an invalid Room Create request: room name already exists.
  * 
  * @author Noris
  * @date 2015/04/21
- *
+ * @see Rooms
+ * @see CreateRoom
  */
 
 class CreateRoomTest02 {

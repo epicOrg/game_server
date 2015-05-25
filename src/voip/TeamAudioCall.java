@@ -21,15 +21,15 @@ import com.biasedbit.efflux.participant.RtpParticipant;
 import com.biasedbit.efflux.session.SingleParticipantSession;
 
 /**
- * Team Audio Call defines RTP audio conversation between server end clients.
- * Client must send his audio data to the granted port and the server mixes all 
- * other player audio end sends back it to the client.
+ * Team Audio Call defines RTP audio conversation between server and clients.
+ * Client must send its audio data to the granted port and the server mixes all
+ * other players audio and sends back it to the client.
  * 
- * The supported audio format is the Payload type 0 of the RFC 2198.
- * A PCMU (u-law) format at 8kHz and sending period of 20 ms according to android audioStream. 
+ * The supported audio format is the Payload type 0 of the RFC 2198. A PCMU
+ * (u-law) format at 8kHz and sending period of 20 ms according to Android
+ * audioStream.
  * 
- * 
- * @author Luca
+ * @author Micieli
  * @date 2015/05/03
  */
 
@@ -76,8 +76,7 @@ public class TeamAudioCall {
 
 			MixingPipedInputStream mixingPipedInputStream = new MixingPipedInputStream(
 					streams.get(player));
-			Forwarder forwarder = new Forwarder(mixingPipedInputStream,
-					sessions.get(player));
+			Forwarder forwarder = new Forwarder(mixingPipedInputStream, sessions.get(player));
 			forwarders.add(forwarder);
 		}
 
@@ -86,15 +85,13 @@ public class TeamAudioCall {
 
 	// creates streams in which data are recorded and from which are read
 	// for each player there is a stream for each other players
-	private ArrayList<PipedOutputStream> createStreams(Player player)
-			throws IOException {
+	private ArrayList<PipedOutputStream> createStreams(Player player) throws IOException {
 		ArrayList<PipedOutputStream> outputStreams = new ArrayList<>();
 		ArrayList<Player> players2 = team.getPlayers();
 		for (Player player2 : players2) {
 			if (!player2.equals(player)) {
 				PipedOutputStream outputStream = new PipedOutputStream();
-				PipedInputStream inputStream = new PipedInputStream(
-						outputStream, BUFFER_SIZE);
+				PipedInputStream inputStream = new PipedInputStream(outputStream, BUFFER_SIZE);
 				outputStreams.add(outputStream);
 				streams.get(player2).add(inputStream);
 			}
@@ -104,16 +101,13 @@ public class TeamAudioCall {
 
 	// creates RTP session from server to client
 	private SingleParticipantSession createSession(Player player) {
-		RtpParticipant server = RtpParticipant.createReceiver(NetUtils
-				.getLocalIpAddress(), player.getAudioData().getLocalPort(),
-				player.getAudioData().getLocalControlPort());
-		RtpParticipant client = RtpParticipant.createReceiver(player
-				.getAudioData().getIp(), player.getAudioData().getRemotePort(),
-				player.getAudioData().getRemotePort() + 1);
-		SingleParticipantSession session = new SingleParticipantSession(
-				player.getUsername(), 0, server, client);
-		System.out.println(player.getUsername() + " "
-				+ player.getAudioData().getIp() + " "
+		RtpParticipant server = RtpParticipant.createReceiver(NetUtils.getLocalIpAddress(), player
+				.getAudioData().getLocalPort(), player.getAudioData().getLocalControlPort());
+		RtpParticipant client = RtpParticipant.createReceiver(player.getAudioData().getIp(), player
+				.getAudioData().getRemotePort(), player.getAudioData().getRemotePort() + 1);
+		SingleParticipantSession session = new SingleParticipantSession(player.getUsername(), 0,
+				server, client);
+		System.out.println(player.getUsername() + " " + player.getAudioData().getIp() + " "
 				+ player.getAudioData().getLocalPort() + " "
 				+ player.getAudioData().getRemotePort());
 		return session;
@@ -127,11 +121,11 @@ public class TeamAudioCall {
 		thread.start();
 
 		ExecutorService executor = Executors.newFixedThreadPool(sessions.size());
-		
+
 		Collection<SingleParticipantSession> tmp = sessions.values();
 		for (final SingleParticipantSession singleParticipantSession : tmp) {
 			executor.execute(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					singleParticipantSession.init();
@@ -148,8 +142,8 @@ public class TeamAudioCall {
 
 	/**
 	 * 
-	 * Ends call stopping receiving packets and the forwarding thread.
-	 * Frees resources: buffers and srver port
+	 * Ends call stopping receiving packets and the forwarding thread. Frees
+	 * resources: buffers and srver port
 	 * 
 	 */
 	public void endCall() {
@@ -160,7 +154,7 @@ public class TeamAudioCall {
 		for (SingleParticipantSession singleParticipantSession : sessios) {
 			singleParticipantSession.terminate();
 		}
-		
+
 		for (Player player : team.getPlayers()) {
 			NetUtils.releasePort(player.getAudioData().getLocalPort());
 			NetUtils.releasePort(player.getAudioData().getLocalControlPort());

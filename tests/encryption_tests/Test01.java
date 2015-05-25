@@ -10,6 +10,9 @@ import connection_encryption.SymmetricKeyGenerator;
 /**
  * @author Noris
  * @date 2015/03/30
+ * @see SymmetricKeyGenerator
+ * @see Encrypter
+ * @see Decrypter
  */
 
 class Test01 {
@@ -18,18 +21,18 @@ class Test01 {
 
 		SymmetricKeyGenerator symmetricKeyGenerator = new SymmetricKeyGenerator();
 		symmetricKeyGenerator.generateKey();
-		Key asymmetricKey = symmetricKeyGenerator.getKey();
+		Key symmetricKey = symmetricKeyGenerator.getKey();
 
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
 
-		Encrypter encrypter = new Encrypter(asymmetricKey);
+		Encrypter encrypter = new Encrypter(symmetricKey);
 		encrypter.encrypt(string);
 
 		String string1 = encrypter.getEncryptedString();
 		System.out.println("Encrypted: " + string1);
 
-		Decrypter decrypter = new Decrypter(asymmetricKey);
+		Decrypter decrypter = new Decrypter(symmetricKey);
 		decrypter.decrypt(string1);
 
 		byte[] decryptedData = decrypter.getDecryptedData();
