@@ -1,8 +1,8 @@
-package check_fields;
+package fields_name;
 
 /**
  * @author Noris
- * @version 25
+ * @version 26
  * @date 2015/03/30
  */
 
@@ -20,7 +20,6 @@ public class FieldsNames {
     public static final String ENCRYPT = "encrypt";
     public static final String REGISTER = "register";
     public static final String LOGIN = "login";
-    public static final String CALL = "call";
     public static final String ROOMS = "rooms";
     public static final String CURRENT_ROOM = "currentRoom";
     public static final String GAME = "game";
@@ -48,10 +47,6 @@ public class FieldsNames {
 
     // Register, Login
     public static final String PASSWORD = "password";
-
-    // Call
-    public static final String CALLER = "caller";
-    public static final String CALLEE = "callee";
 
     // Audio
     public static final String AUDIO_PORT_CLIENT = "audioPortClient";

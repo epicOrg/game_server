@@ -5,9 +5,9 @@ import messages.GameMessagesCreator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
+import fields_name.FieldsNames;
 import game.model.Room;
 import services.IService;
 import services.game.Game;

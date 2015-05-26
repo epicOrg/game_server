@@ -1,5 +1,6 @@
 package services.current_room;
 
+import fields_name.FieldsNames;
 import game.RoomPlayersUpdater;
 import game.model.Player;
 import game.model.PlayerEventListener;
@@ -12,7 +13,6 @@ import org.json.JSONObject;
 
 import services.IExtendedService;
 import services.IService;
-import check_fields.FieldsNames;
 
 /**
  * CurrentRoom service provides information about the {@link Room} joined by the

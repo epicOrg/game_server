@@ -12,9 +12,9 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.Login;
-import check_fields.FieldsNames;
 import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
+import fields_name.FieldsNames;
 
 /**
  * @author Noris

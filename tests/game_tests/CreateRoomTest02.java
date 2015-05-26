@@ -11,7 +11,7 @@ import services.Login;
 import services.Register;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
-import check_fields.FieldsNames;
+import fields_name.FieldsNames;
 
 /**
  * Test for an invalid Room Create request: room name already exists.

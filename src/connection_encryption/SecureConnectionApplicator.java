@@ -3,7 +3,7 @@ package connection_encryption;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
+import fields_name.FieldsNames;
 
 /**
  * @author Noris

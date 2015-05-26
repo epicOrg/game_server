@@ -1,5 +1,6 @@
 package messages;
 
+import fields_name.FieldsNames;
 import game.model.Room;
 
 import java.util.ArrayList;
@@ -7,8 +8,6 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * @author Micieli

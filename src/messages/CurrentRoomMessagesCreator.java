@@ -1,5 +1,6 @@
 package messages;
 
+import fields_name.FieldsNames;
 import game.model.Player;
 import game.model.Room;
 import game.model.Team;
@@ -9,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.current_room.CurrentRoom;
-import check_fields.FieldsNames;
 
 /**
  * Generates messages related to the {@link CurrentRoom} service.

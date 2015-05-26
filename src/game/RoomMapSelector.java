@@ -1,5 +1,6 @@
 package game;
 
+import fields_name.FieldsNames;
 import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
@@ -10,8 +11,6 @@ import java.util.LinkedList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * @author Noris

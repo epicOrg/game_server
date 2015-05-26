@@ -1,5 +1,6 @@
 package services.current_room.subservices;
 
+import fields_name.FieldsNames;
 import game.model.Room;
 
 import org.json.JSONException;
@@ -7,7 +8,6 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.game.Game;
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 

@@ -1,5 +1,6 @@
 package services.rooms;
 
+import fields_name.FieldsNames;
 import game.model.Room;
 
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import org.json.JSONObject;
 
 import services.IExtendedService;
 import services.IService;
-import check_fields.FieldsNames;
 
 /**
  * <code>RoomService</code> manages {@link Room} actions. Allows {@link Room}

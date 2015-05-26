@@ -9,8 +9,8 @@ import server.ServerInitializer;
 import services.IService;
 import services.Login;
 import services.Register;
-import check_fields.FieldsNames;
 import database.Paths;
+import fields_name.FieldsNames;
 
 /**
  * Register NUMBER_OF_USERS users and login them. Note: remember to delete the

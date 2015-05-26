@@ -1,5 +1,6 @@
 package services;
 
+import fields_name.FieldsNames;
 import game.model.Player;
 
 import org.json.JSONException;
@@ -7,7 +8,6 @@ import org.json.JSONObject;
 
 import voip.AudioData;
 import voip.NetUtils;
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;

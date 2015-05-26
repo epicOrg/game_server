@@ -1,6 +1,7 @@
 package online_management;
 
 import exceptions.UserNotOnlineException;
+import fields_name.FieldsNames;
 
 import java.io.PrintWriter;
 import java.util.Timer;
@@ -10,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import server.ClientRequestThread;
-import check_fields.FieldsNames;
 
 /**
  * Thread who polls the user each polling-time to check if the user is yet

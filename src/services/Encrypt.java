@@ -3,8 +3,8 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import connection_encryption.ConnectionEncrypter;
+import fields_name.FieldsNames;
 
 /**
  * @author Noris

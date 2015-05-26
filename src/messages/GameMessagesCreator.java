@@ -1,5 +1,6 @@
 package messages;
 
+import fields_name.FieldsNames;
 import game.map.MapJSONizer;
 import game.model.Player;
 import game.model.PlayerStatus;
@@ -13,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.game.Game;
-import check_fields.FieldsNames;
 
 /**
  * Client message generator for the {@link Game} service.

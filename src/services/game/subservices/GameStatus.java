@@ -1,5 +1,6 @@
 package services.game.subservices;
 
+import fields_name.FieldsNames;
 import game.model.Player;
 import game.model.PlayerStatus;
 
@@ -7,7 +8,6 @@ import java.util.HashMap;
 
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.IExtendedService;
 import services.IService;
 import services.game.Game;

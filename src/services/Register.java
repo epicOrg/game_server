@@ -4,11 +4,11 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
+import fields_name.FieldsNames;
 
 /**
  * @author Noris

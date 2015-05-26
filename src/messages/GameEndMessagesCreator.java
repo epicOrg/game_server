@@ -1,11 +1,10 @@
 package messages;
 
+import fields_name.FieldsNames;
 import game.model.RoomThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * Provides a builder for messages that the server has to send while the game is

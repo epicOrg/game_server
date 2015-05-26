@@ -36,12 +36,12 @@ public class RoomChecker {
 	}
 	
 	public boolean chekNumberOfTeams(int numbersOfTeams){
-		if(numbersOfTeams < MAX_TEAMS)
+		if(numbersOfTeams > MAX_TEAMS)
 			return false;
 		return true;
 	}
 	public boolean chekNumberOfPlayer(int numberOfPlayersPerTeam){
-		if(numberOfPlayersPerTeam < MAX_PLAYERS_PER_TEAM)
+		if(numberOfPlayersPerTeam > MAX_PLAYERS_PER_TEAM)
 			return false;
 		return true;
 	}

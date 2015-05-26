@@ -3,6 +3,7 @@ package services.rooms.subservices;
 import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
+import fields_name.FieldsNames;
 import game.model.Player;
 import game.model.Room;
 
@@ -14,7 +15,6 @@ import online_management.OnlineManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import services.IService;
 import voip.NetUtils;
 

@@ -1,11 +1,10 @@
 package messages;
 
+import fields_name.FieldsNames;
 import game.model.Room;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * Generate messages to update the player on room/game events.

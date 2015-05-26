@@ -3,7 +3,6 @@ package server;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import check_fields.FieldsNames;
 import check_fields.RequestFieldChecher;
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.ConnectionEncrypter;
@@ -19,6 +18,7 @@ import database.writer.EmailFormatter;
 import database.writer.EmailSaver;
 import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
+import fields_name.FieldsNames;
 
 /**
  * Initializes some classes used by the server.

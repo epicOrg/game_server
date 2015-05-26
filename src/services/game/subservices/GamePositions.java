@@ -5,10 +5,10 @@ import messages.GameMessagesCreator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
+import fields_name.FieldsNames;
 import game.model.Player;
 import game.model.PlayerStatus;
 import game.model.Room;
@@ -36,8 +36,6 @@ public class GamePositions implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG PRINT
-		System.out.println(getName());
 
 		try {
 

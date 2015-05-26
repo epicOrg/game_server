@@ -10,9 +10,9 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import data_management.DataManager;
 import data_management.RegisteredUser;
+import fields_name.FieldsNames;
 
 /**
  * <code>Login</code> service allows the client to access to others services.

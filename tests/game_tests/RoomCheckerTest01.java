@@ -10,8 +10,8 @@ import org.json.JSONObject;
 
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
-import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
+import fields_name.FieldsNames;
 
 /**
  * RoomService request message test with no errors.

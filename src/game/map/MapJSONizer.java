@@ -1,5 +1,6 @@
 package game.map;
 
+import fields_name.FieldsNames;
 import game.model.PlayerStatus;
 
 import java.util.ArrayList;
@@ -8,8 +9,6 @@ import java.util.LinkedList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import check_fields.FieldsNames;
 
 /**
  * Adapt a server map to a client map.

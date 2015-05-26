@@ -7,10 +7,10 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.current_room.CurrentRoom;
-import check_fields.FieldsNames;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
+import fields_name.FieldsNames;
 
 /**
  * A {@link CurrentRoom} subservice that allow the client to create a new
@@ -49,9 +49,9 @@ public class CreateRoom implements IService {
 				e.printStackTrace();
 			}
 
-			if (!(!roomChecker.checkRoomName(roomName)
-					 && !roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
-					!roomChecker.chekNumberOfTeams(numberOfTeams))) {
+			if (!(roomChecker.checkRoomName(roomName)
+					 && roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
+					roomChecker.chekNumberOfTeams(numberOfTeams))) {
 				return messagesCreator.generateNameInvalidRespose();
 			}
 

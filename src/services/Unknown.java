@@ -3,7 +3,7 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
+import fields_name.FieldsNames;
 
 /**
  * Default Service started when the Requested service from the client isn't supported.

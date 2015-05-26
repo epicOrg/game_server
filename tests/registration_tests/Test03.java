@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import server.ServerInitializer;
 import services.Register;
-import check_fields.FieldsNames;
+import fields_name.FieldsNames;
 
 /**
  * Test for client registration with an error: email already used.

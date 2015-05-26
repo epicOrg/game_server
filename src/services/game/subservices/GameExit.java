@@ -1,5 +1,6 @@
 package services.game.subservices;
 
+import fields_name.FieldsNames;
 import game.model.Player;
 import game.model.Room;
 
@@ -7,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;

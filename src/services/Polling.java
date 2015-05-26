@@ -7,8 +7,8 @@ import online_management.PollingThread;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import exceptions.UserNotOnlineException;
+import fields_name.FieldsNames;
 
 /**
  * 

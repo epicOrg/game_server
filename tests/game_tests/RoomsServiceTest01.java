@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
-import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
+import fields_name.FieldsNames;
 import game.model.Team;
 import game.model.TeamManager;
 

@@ -7,8 +7,8 @@ import java.net.UnknownHostException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import check_fields.FieldsNames;
 import database.Paths;
+import fields_name.FieldsNames;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after
