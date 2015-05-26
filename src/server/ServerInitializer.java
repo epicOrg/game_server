@@ -35,7 +35,7 @@ public class ServerInitializer {
 		initEncryption();
 		initdataManager();
 		String[] services = { FieldsNames.ENCRYPT, FieldsNames.LOGIN, FieldsNames.REGISTER,
-				FieldsNames.UNKNOWN, FieldsNames.GAME };
+				FieldsNames.UNKNOWN, FieldsNames.GAME, FieldsNames.POLLING};
 		ArrayList<String> arrayList = new ArrayList<>();
 		Collections.addAll(arrayList, services);
 		RequestFieldChecher.setServiceNotToBeChecked(arrayList);

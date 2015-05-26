@@ -23,7 +23,8 @@ import server.ClientRequestThread;
 
 public class PollingThread extends Thread {
 
-	private static final int POLLING_TIME = 5;
+	private static final int POLLING_TIME = 500;
+	private static final int POLLING_DELAY = 4000;
 
 	private OnlineUser onlineUser;
 	private Timer timer;
@@ -36,7 +37,11 @@ public class PollingThread extends Thread {
 
 	@Override
 	public void run() {
-		timer.scheduleAtFixedRate(new PollingTask(), 0, POLLING_TIME);
+		timer.scheduleAtFixedRate(new PollingTask(), POLLING_DELAY, POLLING_TIME);
+	}
+	
+	public void shutdown(){
+		timer.cancel();
 	}
 
 	private String generatePollingMessage() {
@@ -61,9 +66,8 @@ public class PollingThread extends Thread {
 			if (onlineUser.isPolled()) {
 				printWriter.println(generatePollingMessage());
 				onlineUser.setPolled(false);
-			}
-
-			else {
+			}else {
+				System.out.println("Polling failed");
 				OnlineManager onlineManager = OnlineManager.getInstance();
 
 				try {

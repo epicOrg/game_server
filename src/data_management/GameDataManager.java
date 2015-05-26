@@ -1,8 +1,10 @@
 package data_management;
 
+import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
 import game.RoomPlayersUpdater;
+import game.model.Player;
 import game.model.Room;
 import game.model.RoomEventListener;
 
@@ -72,6 +74,18 @@ public class GameDataManager {
 		}
 
 		throw new NoSuchRoomException();
+	}
+	
+	public Room getRoomForPlayer(Player player){
+		for (Room room : rooms) {
+			try {
+				room.getPlayerByName(player.getUsername());
+				return room;
+			} catch (NoSuchPlayerException e) {
+				
+			}
+		}
+		return null;
 	}
 	
 	

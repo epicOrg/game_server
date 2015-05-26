@@ -24,6 +24,7 @@ public class OnlineManager {
 
 	private static OnlineManager onlineManager = new OnlineManager();
 	private HashMap<String, OnlineUser> onlineUsers = new HashMap<String, OnlineUser>();
+	private HashMap<String, PollingThread> pollingTreads = new HashMap<>();
 
 	private OnlineManager() {
 	}
@@ -44,9 +45,9 @@ public class OnlineManager {
 	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
 
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
-		// TODO
-		// PollingThread pollingThread = new PollingThread(onlineUser);
-		// pollingThread.start();
+		PollingThread pollingThread = new PollingThread(onlineUser);
+		pollingThread.start();
+		pollingTreads.put(username, pollingThread);
 		onlineUser.setOutStream(printWriter);
 		onlineUsers.put(username, onlineUser);
 
@@ -61,8 +62,12 @@ public class OnlineManager {
 	 * @throws UserNotOnlineException
 	 */
 	public void setOffline(String username, int hashCode) throws UserNotOnlineException {
-		if (getHashCodeByUsername(username) == hashCode)
+		if (getHashCodeByUsername(username) == hashCode){
+			pollingTreads.get(username).shutdown();
+			pollingTreads.remove(username);
 			onlineUsers.remove(username);
+		}
+			
 	}
 
 	/**
@@ -89,6 +94,12 @@ public class OnlineManager {
 		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
 		return onlineUsers.get(username);
+	}
+	
+	public PollingThread getPollingThreadForUser(String username) throws UserNotOnlineException{
+		if(!checkIfOnline(username))
+			throw new UserNotOnlineException();
+		return  pollingTreads.get(username);
 	}
 
 	/**

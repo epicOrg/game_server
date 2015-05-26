@@ -25,6 +25,8 @@ public class Polling implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {	
 		
+		System.out.println(request.toString());
+		
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		
 		try {

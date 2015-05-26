@@ -47,8 +47,11 @@ public class ClientRequestThread implements Runnable {
 			String request = in.readLine();
 
 			while (!socket.isClosed()) {
-				if (request == null)
+				if (request == null){
+					System.out.println("null request");
 					return;
+				}
+					
 
 				// TODO DEBUG: client request
 				//System.out.println("CLIENT: " + request);
@@ -69,7 +72,7 @@ public class ClientRequestThread implements Runnable {
 					// TODO DEBUG: server response
 					//System.out.println("SERVER: " + response);
 				} else {
-					System.out.println("SERVER: " + "No response.");
+					//System.out.println("SERVER: " + "No response.");
 				}
 
 				request = in.readLine();
@@ -77,6 +80,7 @@ public class ClientRequestThread implements Runnable {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("chiuso");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
