@@ -24,7 +24,7 @@ public class Team {
 
 	public Team() {
 		super();
-		setRandomTeamColor();
+		setRandomTeamColorFromList();
 	}
 
 	public Team(String teamName) {
@@ -109,11 +109,14 @@ public class Team {
 	public void setRandomTeamColorFromList() {
 
 		ArrayList<Color> admittedColors = new ArrayList<Color>();
+		admittedColors.add(Color.BLACK);
 		admittedColors.add(Color.BLUE);
-		admittedColors.add(Color.RED);
-		admittedColors.add(Color.YELLOW);
-		admittedColors.add(Color.PINK);
+		admittedColors.add(Color.GRAY);
 		admittedColors.add(Color.ORANGE);
+		admittedColors.add(Color.PINK);
+		admittedColors.add(Color.RED);
+		admittedColors.add(Color.WHITE);
+		admittedColors.add(Color.YELLOW);
 
 		int randomNumber = new Random().nextInt(admittedColors.size());
 

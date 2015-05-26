@@ -32,7 +32,7 @@ public class TeamManager {
 		for (int i = 0; i < NUMBER_OF_TEAMS; i++) {
 			Team team = new Team();
 			team.setTeamName("Team " + (teams.size() + 1));
-			team.setRandomTeamColor();
+			team.setRandomTeamColorFromList();
 			teams.add(team);
 		}
 	}
