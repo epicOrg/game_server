@@ -241,8 +241,8 @@ public class GridMapGenerator implements MapGenerator {
 				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
 						wallsSizes.get(j));
 
-				if (MapGeometric.isCircleOnSegment(tmp, MapConst.PLAYER_SIZE / 2, points.get(0),
-						points.get(1))) {
+				if (MapGeometric.isCircleOnSegment(tmp, MapConst.PLAYER_SIZE / 2 + WALL_SIZE,
+						points.get(0), points.get(1))) {
 					isOK = false;
 					break;
 				}
@@ -252,7 +252,7 @@ public class GridMapGenerator implements MapGenerator {
 				mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
 				spawnPoints.add(tmp);
 			}
-			
+
 			else {
 				numberOfPlayers--;
 			}
