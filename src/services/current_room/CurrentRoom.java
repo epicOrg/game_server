@@ -53,7 +53,6 @@ public class CurrentRoom implements IExtendedService {
 	@Override
 	public void addSubService(IService... subservices) {
 		for (IService subService : subservices) {
-			System.out.println(subService.getName() + " " + "added");
 			this.subServices.put(subService.getName(), subService);
 		}
 	}

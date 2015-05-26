@@ -189,4 +189,8 @@ public class Room {
 	public RoomMapSelector getRoomMapSelector() {
 		return roomMapSelector;
 	}
+	
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
 }

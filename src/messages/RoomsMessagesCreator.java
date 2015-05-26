@@ -43,7 +43,7 @@ public class RoomsMessagesCreator {
 			for (Room room : rooms) {
 				JSONObject roomDescription = new JSONObject();
 				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
-						Room.MAX_PLAYERS);
+						room.getMaxPlayers());
 				roomDescription.put(FieldsNames.ROOM_CURRENT_PLAYERS,
 						room.getSize());
 				roomsList.put(room.getName(), roomDescription);

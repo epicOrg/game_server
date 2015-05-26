@@ -10,6 +10,9 @@ package check_fields;
 
 public class RoomChecker {
 
+	private static final int MAX_TEAMS = 5;
+	private static final int MAX_PLAYERS_PER_TEAM = 5;
+	
 	/**
 	 * Check if the room name is valid.
 	 * 
@@ -30,5 +33,16 @@ public class RoomChecker {
 		}
 
 		return fieldIsOk;
+	}
+	
+	public boolean chekNumberOfTeams(int numbersOfTeams){
+		if(numbersOfTeams < MAX_TEAMS)
+			return false;
+		return true;
+	}
+	public boolean chekNumberOfPlayer(int numberOfPlayersPerTeam){
+		if(numberOfPlayersPerTeam < MAX_PLAYERS_PER_TEAM)
+			return false;
+		return true;
 	}
 }

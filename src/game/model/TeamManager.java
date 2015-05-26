@@ -18,12 +18,12 @@ public class TeamManager {
 
 	public TeamManager() {
 		generateTeams(Team.MAX_PLAYERS);
-		numberOfTeams = NUMBER_OF_TEAMS;
+		this.numberOfTeams = NUMBER_OF_TEAMS;
 	}
-	
-	public TeamManager(int numbersOfTeam, int numberOfPlayrXTeam) {
+
+	public TeamManager(int numberOfTeam, int numberOfPlayrXTeam) {
+		this.numberOfTeams = numberOfTeam;
 		generateTeams(numberOfPlayrXTeam);
-		numberOfTeams = numbersOfTeam;
 	}
 
 	/**

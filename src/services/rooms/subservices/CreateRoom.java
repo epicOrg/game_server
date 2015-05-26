@@ -14,13 +14,15 @@ import exceptions.RoomAlreadyExistsException;
 
 /**
  * A {@link CurrentRoom} subservice that allow the client to create a new
- * {@link Room}, choosing also the <code>Room</code> name. 
+ * {@link Room}, choosing also the <code>Room</code> name.
  * 
  * @author Micieli
  * @date 2015/05/24
  */
 
 public class CreateRoom implements IService {
+
+	// private int
 
 	private RoomsMessagesCreator messagesCreator;
 	private RoomChecker roomChecker;
@@ -33,7 +35,7 @@ public class CreateRoom implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		System.out.println(getName());
+		System.out.println(request);
 		try {
 			String roomName = null;
 			int numberOfTeams = 0;
@@ -41,16 +43,20 @@ public class CreateRoom implements IService {
 			try {
 				roomName = request.getString(FieldsNames.ROOM_NAME);
 				numberOfTeams = request.getInt(FieldsNames.ROOM_TEAMS_NUMBER);
-				numberOfPlayrXTeam = request.getInt(FieldsNames.ROOM_TEAMS_DIMENSION);
+				numberOfPlayrXTeam = request
+						.getInt(FieldsNames.ROOM_TEAMS_DIMENSION);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
-			if (!roomChecker.checkRoomName(roomName)) {
+			if (!(roomChecker.checkRoomName(roomName)
+					&& roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
+					roomChecker.chekNumberOfTeams(numberOfTeams))) {
 				return messagesCreator.generateNameInvalidRespose();
 			}
 
-			GameDataManager.getInstance().newRoom(roomName, numberOfTeams, numberOfPlayrXTeam);
+			GameDataManager.getInstance().newRoom(roomName, numberOfTeams,
+					numberOfPlayrXTeam);
 
 		} catch (RoomAlreadyExistsException e) {
 			return messagesCreator.generateRoomExistMessage();
