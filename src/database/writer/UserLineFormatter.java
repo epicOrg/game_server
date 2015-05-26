@@ -3,7 +3,7 @@ package database.writer;
 import data_management.RegisteredUser;
 
 /**
- * It formats file's lines for saving all user data.
+ * Formats file's lines for saving all the user data.
  * 
  * @author Micieli
  * @author Noris

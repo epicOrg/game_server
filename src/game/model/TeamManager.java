@@ -17,9 +17,9 @@ public class TeamManager {
 
 	public TeamManager() {
 		generateTeams();
-		
+
 	}
-	
+
 	public TeamManager(int numbersOfTeam) {
 		generateTeams();
 	}
@@ -38,7 +38,7 @@ public class TeamManager {
 	}
 
 	/**
-	 * Empties all teams removing all players
+	 * Empties all teams removing all players.
 	 */
 	public void emptyTeams() {
 		for (Team team : teams) {

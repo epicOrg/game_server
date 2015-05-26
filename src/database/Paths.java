@@ -1,8 +1,7 @@
 package database;
 
 /**
- * 
- * Define path where data are located
+ * Defines path where data is located.
  * 
  * @author Noris
  * @date 2015/04/25
@@ -22,10 +21,9 @@ public final class Paths {
 	private static String separator;
 
 	/**
-	 * 
 	 * Finds the right database path according to the Operating System.
 	 * 
-	 * @return		the database path
+	 * @return the database path
 	 */
 	public static String getDatabasePath() {
 		if (System.getProperty("os.name").startsWith("Windows"))

@@ -6,12 +6,13 @@ import data_management.RegisteredUser;
 import exceptions.LoginFailedException;
 
 /**
- * Interface for user checking in the login. It allows to switch painless to
- * different data managing systems.
+ * Interface for user checking in the login. It allows to switch different data
+ * managing systems painless.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17
+ * @see RegisteredUser
  */
 
 public interface ILoginChecker {

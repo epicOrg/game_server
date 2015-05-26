@@ -1,10 +1,9 @@
 package exceptions;
 
 /**
- * 
- * 
  * @author Noris
  * @date 2015/04/17
+ * @see Login
  */
 
 @SuppressWarnings("serial")

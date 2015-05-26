@@ -16,7 +16,7 @@ import exceptions.UserNotOnlineException;
 
 /**
  * Thread that periodically checks if a team win the game; if there are any
- * update all the player in the room end ends the game
+ * update all the player in the room end ends the game.
  * 
  * @author Micieli
  * @date 2015/05/12

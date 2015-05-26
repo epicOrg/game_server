@@ -21,10 +21,9 @@ import game.model.RoomThread;
 import game.model.Team;
 
 /**
- * An implementation of {@link RoomEventListener} and
- * {@link PlayerEventListener}. Updates {@link Player}s about {@link Room} events,
- * sending them messages in real time, breaking the request/reply pattern
- * provided by <code>Service</code>.
+ * Updates {@link Player}s about {@link Room} events, sending them messages in
+ * real time, breaking the request/reply pattern provided by
+ * <code>Service</code>.
  * 
  * @author Micieli
  * @date 2015/04/25

@@ -5,10 +5,9 @@ import java.util.GregorianCalendar;
 import data_management.password_encrypter.PasswordEncrypter;
 
 /**
+ * An incomplete description of an user who has an account in the server.
  * 
- * A not complete description of an user data that has an account in the server.
- * 
- * The user Password is encrypted whit a {@link PasswordEncrypter} 
+ * The user password is encrypted whit a {@link PasswordEncrypter}.
  * 
  * @author Noris
  * @date 2015/04/14

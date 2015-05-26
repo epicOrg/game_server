@@ -12,7 +12,7 @@ import services.current_room.CurrentRoom;
 import check_fields.FieldsNames;
 
 /**
- * Generate messages related to the {@link CurrentRoom} service.
+ * Generates messages related to the {@link CurrentRoom} service.
  * 
  * @author Micieli
  * @date 2015/05/20
@@ -22,8 +22,8 @@ import check_fields.FieldsNames;
 public class CurrentRoomMessagesCreator {
 
 	/**
-	 * Generate a players list, informing client about the players that are in
-	 * the <code>Room</code>.
+	 * Generates a players list, informing the client about the players who are
+	 * in the {@link Room}.
 	 * 
 	 * @param room
 	 *            the room from which take the players list
@@ -50,7 +50,7 @@ public class CurrentRoomMessagesCreator {
 	}
 
 	/**
-	 * Generate the response after an exit request from a player.
+	 * Generates the response after an exit request from a {@link Player}.
 	 * 
 	 * @param result
 	 *            true if the exit succeeded, false otherwise

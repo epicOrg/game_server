@@ -10,13 +10,13 @@ import exceptions.EmailAlreadyUsedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
- * An implementation of {@link IRegistrationChecker} that use files to manages
- * data.
+ * Use files to manages data.
  * 
  * @author Modica
  * @author Gavina
  * @date 2015/04/17
  */
+
 public class RegistrationFileChecker implements IRegistrationChecker {
 
 	private String userPath;

@@ -7,9 +7,8 @@ import database.writer.IDataSaver;
 import database.writer.UserSaver;
 
 /**
- * 
- * An implementation of {@link IDataSaver} that use two other <code>IDataSaver</code> to save fields.
- * In order to speed up the checking phase emails are also saved in a separated file 
+ * It uses two {@link IDataSaver} to save fields. In order to speed up the
+ * checking phase, e-mails are also saved in a separate file.
  * 
  * @author Micieli
  * @date 2015/04/17
@@ -21,12 +20,14 @@ public class RegisterDataSaver implements IDataSaver {
 
 	private IDataSaver userSaver;
 	private IDataSaver emailSaver;
-	
+
 	/**
 	 * Constructor
 	 * 
-	 * @param userSaver		 a <code>IDataSaver</code> that saves emails
-	 * @param emailSaver	 a <code>IDataSaver</code> that saves user data
+	 * @param userSaver
+	 *            a <code>IDataSaver</code> that saves emails
+	 * @param emailSaver
+	 *            a <code>IDataSaver</code> that saves user data
 	 */
 	public RegisterDataSaver(IDataSaver userSaver, IDataSaver emailSaver) {
 		super();

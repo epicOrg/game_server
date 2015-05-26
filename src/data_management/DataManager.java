@@ -15,7 +15,7 @@ import exceptions.UsernameAlreadyUsedException;
 /**
  * 
  * <code>DataManager</code> provides methods to manages users data.
- * Allows {@link Register} <code>Service</code> to save users data and to check them.
+ * Allows the {@link Register} service to save users data and to check them.
  * 
  * @author Noris
  * @author Micieli

@@ -7,7 +7,7 @@ import java.util.Random;
 import exceptions.FullTeamException;
 
 /**
- * Every room has two teams, which play one against the other. This class tracks
+ * Every room has N teams, which play one against the other. This class tracks
  * the players of a single team.
  * 
  * @author Noris
@@ -16,7 +16,7 @@ import exceptions.FullTeamException;
 
 public class Team {
 	public static final int MAX_PLAYERS = 2;
-	
+
 	private String teamName;
 	private Color teamColor;
 
@@ -47,7 +47,7 @@ public class Team {
 	 * @param player
 	 * @throws FullTeamException
 	 */
-	public void addPlayer(Player player) { 
+	public void addPlayer(Player player) {
 		// throws FullTeamException {
 		// if (isFull()) {
 		// throw new FullTeamException();
@@ -126,11 +126,11 @@ public class Team {
 	public Color getTeamColor() {
 		return teamColor;
 	}
-	
+
 	/**
 	 * Empties the team removing all players
 	 */
-	public void empty(){
+	public void empty() {
 		players.removeAll(players);
 	}
 }

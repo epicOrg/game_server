@@ -3,10 +3,11 @@ package data_management.password_encrypter;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
- * Implementation of @see {@link StringCrypter}. It encrypts a string using MD5.
+ * It encrypts a string using MD5.
  * 
  * @author Noris
  * @date 2015/04/16
+ * @see StringEncrypter
  */
 
 public class Md5StringEncrypter implements StringEncrypter {

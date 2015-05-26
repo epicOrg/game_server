@@ -8,7 +8,7 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
- * Save e-mails of the registration in a specific file.
+ * Saves e-mails of the registration in a specific file.
  * 
  * @author Micieli
  * @date 2015/04/17

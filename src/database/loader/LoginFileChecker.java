@@ -9,12 +9,12 @@ import data_management.RegisteredUser;
 import exceptions.LoginFailedException;
 
 /**
- * An implementation of {@link ILoginChecker} that finds and checks used data in
- * files.
+ * Finds and checks used data in files.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17
+ * @see RegisteredUser
  */
 
 public class LoginFileChecker implements ILoginChecker {

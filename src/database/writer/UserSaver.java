@@ -8,7 +8,7 @@ import java.io.IOException;
 import data_management.RegisteredUser;
 
 /**
- * Save all user data of the registration in a file. In order to speed up the
+ * Saves all user data of the registration in a file. In order to speed up the
  * checking phase, each user has its own file.
  * 
  * @author Micieli

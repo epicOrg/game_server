@@ -42,7 +42,6 @@ public interface RoomEventListener {
 	public void onPlayerRemoved(Player player);
 
 	/**
-	 * 
 	 * Reacts to a forced game stops.
 	 * 
 	 * @see Game
@@ -51,7 +50,6 @@ public interface RoomEventListener {
 
 	/**
 	 * Reacts to the end of the game preparing the room for another round.
-	 * 
 	 */
 	public void onGameEnded();
 }

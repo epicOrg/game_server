@@ -11,10 +11,10 @@ import game.map.generation.GridMapGenerator;
 
 /**
  * <code>Room</code> is the fundamental piece of the multiplayer game. Players
- * can come in and go out from the it, finding other players and waiting from
- * the player number is sufficient to start the game. While entering a
- * <code>Room</code> a player is assigned to a random team A
- * {@link RoomEventListener} is advised of everything that happens
+ * can come in and go out from it, finding other players and waiting then the
+ * player number is sufficient to start the game. While entering a
+ * <code>Room</code> a player is assigned to a random team. A
+ * {@link RoomEventListener} is advised of everything that happens.
  * 
  * @author Micieli
  * @author Noris
