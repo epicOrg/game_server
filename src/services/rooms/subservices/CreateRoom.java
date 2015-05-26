@@ -49,9 +49,9 @@ public class CreateRoom implements IService {
 				e.printStackTrace();
 			}
 
-			if (!(roomChecker.checkRoomName(roomName)
-					&& roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
-					roomChecker.chekNumberOfTeams(numberOfTeams))) {
+			if (!(!roomChecker.checkRoomName(roomName)
+					 && !roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
+					!roomChecker.chekNumberOfTeams(numberOfTeams))) {
 				return messagesCreator.generateNameInvalidRespose();
 			}
 
