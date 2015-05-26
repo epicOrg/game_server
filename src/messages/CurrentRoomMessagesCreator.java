@@ -37,7 +37,7 @@ public class CurrentRoomMessagesCreator {
 
 			response.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
 			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
-			response.put(FieldsNames.ROOM_MAX_PLAYERS, Room.MAX_PLAYERS);
+			response.put(FieldsNames.ROOM_MAX_PLAYERS, room.getMaxPlayers());
 
 			JSONArray teams = formatTeams(room);
 			response.put(FieldsNames.ROOM_TEAM, teams);

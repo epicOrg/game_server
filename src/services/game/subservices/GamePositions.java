@@ -36,7 +36,6 @@ public class GamePositions implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-
 		try {
 
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
