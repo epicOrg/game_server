@@ -112,6 +112,7 @@ public class Team {
 		admittedColors.add(Color.BLACK);
 		admittedColors.add(Color.BLUE);
 		admittedColors.add(Color.GRAY);
+		admittedColors.add(Color.MAGENTA);
 		admittedColors.add(Color.ORANGE);
 		admittedColors.add(Color.PINK);
 		admittedColors.add(Color.RED);
