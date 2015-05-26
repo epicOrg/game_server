@@ -97,11 +97,10 @@ public class GridMapGenerator implements MapGenerator {
 	// }
 	//
 	// }
-	
+
 	private MapDimension getMapSizeWithTolerance() {
-		return new MapDimension(mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
-				- MapConst.PLAYER_SIZE / 2);
+		return new MapDimension(mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2,
+				mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2);
 	}
 
 	private void generateSpawnPoints() {
@@ -225,8 +224,9 @@ public class GridMapGenerator implements MapGenerator {
 			for (int j = 0; j < segments.size() - 1; j++) {
 
 				if (!(i == 0 || i == loop - 1)) {
-					mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, segments
-							.get(j), segments.get(segments.size() - 1)));
+					mapConstructor
+							.addMapObject(new MapObject(Item.WALL, MapRandom.getRandomTexture(),
+									segments.get(j), segments.get(segments.size() - 1)));
 
 					if (j != 0 && j != segments.size() - 2)
 						wallSegments.add(segments.get(j));
@@ -323,8 +323,8 @@ public class GridMapGenerator implements MapGenerator {
 			if (!MapGeometric.checkIfUsed(points.get(0), doors, 0.5)
 					&& !MapGeometric.checkIfUsed(points.get(1), doors, 0.5)) {
 
-				mapConstructor
-						.addMapObject(new MapObject(Item.WALL, Texture.HEDGE4, position, size));
+				mapConstructor.addMapObject(new MapObject(Item.WALL, MapRandom.getRandomTexture(),
+						position, size));
 
 				wallsPositions.add(position);
 				wallsSizes.add(size);

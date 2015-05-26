@@ -1,5 +1,8 @@
 package game.map.utils;
 
+import game.map.Texture;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -79,6 +82,29 @@ public class MapRandom {
 			return -1;
 
 		return 1;
+	}
+
+	/**
+	 * Get a random texture selected from a list.
+	 * 
+	 * @return a random texture
+	 */
+	public static String getRandomTexture() {
+
+		ArrayList<String> textures = new ArrayList<String>();
+		textures.add(Texture.CERAMIC1);
+		textures.add(Texture.HEDGE1);
+		textures.add(Texture.HEDGE2);
+		textures.add(Texture.HEDGE3);
+		textures.add(Texture.HEDGE4);
+		textures.add(Texture.WALL1);
+		textures.add(Texture.WALL2);
+		textures.add(Texture.WALL3);
+		textures.add(Texture.WOOD1);
+
+		int randomNumber = new Random().nextInt(textures.size());
+
+		return textures.get(randomNumber);
 	}
 
 }
