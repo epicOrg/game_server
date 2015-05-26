@@ -139,7 +139,7 @@ public class Team {
 	}
 
 	/**
-	 * Empties the team removing all players
+	 * Empties the team removing all players.
 	 */
 	public void empty() {
 		players.removeAll(players);

@@ -48,6 +48,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onNewPlayerAdded(Player player) {
+
 		try {
 
 			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
@@ -58,6 +59,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		} catch (UserNotOnlineException e) {
 			e.printStackTrace();
 		}
+
 		updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
 	}
 
@@ -81,6 +83,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onPlayerStatusChanged() {
+
 		for (Team t : room.getTeamGenerator().getTeams()) {
 			for (Player p : t.getPlayers()) {
 				if (p.getStatus() != true)
@@ -100,7 +103,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	}
 
 	private void startAudioConversation() {
+
 		RoomAudioCall roomAudioCall = null;
+
 		try {
 			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
 			roomAudioCall.prepare();
@@ -114,17 +119,21 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onExtingFromGame() {
+
 		roomThread.shutdown();
+
 		try {
 			GameDataManager.getInstance().stopCallForRoom(room.getName());
 		} catch (NoSuchRoomException e) {
 			e.printStackTrace();
 		}
+
 		updatePlayers(null, messagesCreator.generateExitMessage());
 
 	}
 
 	private void updatePlayers(Player excludedPlayer, JSONObject message) {
+
 		String strMessage = message.toString();
 
 		for (Player p : writers.keySet()) {
@@ -133,4 +142,5 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			}
 		}
 	}
+
 }

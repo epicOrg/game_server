@@ -72,7 +72,7 @@ public class CircleWinChecker implements IWinChecher {
 
 			if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= radius * radius) {
 
-				// TODO DEBUG
+				// TODO DEBUG PRINT
 				System.out.println(player.getUsername() + " in win position.");
 
 				return true;
