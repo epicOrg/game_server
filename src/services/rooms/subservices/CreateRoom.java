@@ -36,8 +36,12 @@ public class CreateRoom implements IService {
 		System.out.println(getName());
 		try {
 			String roomName = null;
+			int numberOfTeams = 0;
+			int numberOfPlayrXTeam = 0;
 			try {
 				roomName = request.getString(FieldsNames.ROOM_NAME);
+				numberOfTeams = request.getInt(FieldsNames.ROOM_TEAMS_NUMBER);
+				numberOfPlayrXTeam = request.getInt(FieldsNames.ROOM_TEAMS_DIMENSION);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -46,7 +50,7 @@ public class CreateRoom implements IService {
 				return messagesCreator.generateNameInvalidRespose();
 			}
 
-			GameDataManager.getInstance().newRoom(roomName);
+			GameDataManager.getInstance().newRoom(roomName, numberOfTeams, numberOfPlayrXTeam);
 
 		} catch (RoomAlreadyExistsException e) {
 			return messagesCreator.generateRoomExistMessage();

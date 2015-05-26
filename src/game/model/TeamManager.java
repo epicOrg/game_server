@@ -14,31 +14,33 @@ public class TeamManager {
 	public static final int NUMBER_OF_TEAMS = 1;
 
 	private ArrayList<Team> teams = new ArrayList<Team>();
+	private int numberOfTeams;
 
 	public TeamManager() {
-		generateTeams();
-
+		generateTeams(Team.MAX_PLAYERS);
+		numberOfTeams = NUMBER_OF_TEAMS;
 	}
-
-	public TeamManager(int numbersOfTeam) {
-		generateTeams();
+	
+	public TeamManager(int numbersOfTeam, int numberOfPlayrXTeam) {
+		generateTeams(numberOfPlayrXTeam);
+		numberOfTeams = numbersOfTeam;
 	}
 
 	/**
 	 * Generates teams with different colors.
 	 */
-	private void generateTeams() {
+	private void generateTeams(int numberOfPlayrXTeam) {
 
-		for (int i = 0; i < NUMBER_OF_TEAMS; i++) {
-			Team team = new Team();
+		for (int i = 0; i < numberOfTeams; i++) {
+			Team team = new Team(numberOfPlayrXTeam);
 			team.setTeamName("Team " + (teams.size() + 1));
-			team.setRandomTeamColorFromList();
+			team.setRandomTeamColor();
 			teams.add(team);
 		}
 	}
 
 	/**
-	 * Empties all teams removing all players.
+	 * Empties all teams removing all players
 	 */
 	public void emptyTeams() {
 		for (Team team : teams) {

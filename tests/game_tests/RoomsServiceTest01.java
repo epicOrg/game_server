@@ -8,6 +8,8 @@ import services.rooms.subservices.CreateRoom;
 import check_fields.FieldsNames;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
+import game.model.Team;
+import game.model.TeamManager;
 
 /**
  * @author Micieli
@@ -20,9 +22,9 @@ class RoomsServiceTest01 {
 
 		GameDataManager gameDataManager = GameDataManager.getInstance();
 
-		gameDataManager.newRoom("ciao");
+		gameDataManager.newRoom("ciao", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS);
 
-		gameDataManager.newRoom("ok");
+		gameDataManager.newRoom("ok", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS);
 
 		JSONObject request = new JSONObject();
 		

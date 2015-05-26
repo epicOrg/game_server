@@ -7,7 +7,7 @@ import java.util.Random;
 import exceptions.FullTeamException;
 
 /**
- * Every room has N teams, which play one against the other. This class tracks
+ * Every room has two teams, which play one against the other. This class tracks
  * the players of a single team.
  * 
  * @author Noris
@@ -15,22 +15,31 @@ import exceptions.FullTeamException;
  */
 
 public class Team {
-	public static final int MAX_PLAYERS = 2;
-
+	public static final int MAX_PLAYERS = 1;
+	
 	private String teamName;
 	private Color teamColor;
+	private int numberOfPlayrXTeam;
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 
+	public Team(int numberOfPlayrXTeam) {
+		super();
+		setRandomTeamColor();
+		this.numberOfPlayrXTeam = numberOfPlayrXTeam;
+	}
+	
 	public Team() {
 		super();
-		setRandomTeamColorFromList();
+		setRandomTeamColor();
+		this.numberOfPlayrXTeam = MAX_PLAYERS;
 	}
 
 	public Team(String teamName) {
 		super();
 		this.teamName = teamName;
 		setRandomTeamColorFromList();
+		this.numberOfPlayrXTeam = MAX_PLAYERS;
 	}
 
 	public String getTeamName() {
@@ -47,7 +56,7 @@ public class Team {
 	 * @param player
 	 * @throws FullTeamException
 	 */
-	public void addPlayer(Player player) {
+	public void addPlayer(Player player) { 
 		// throws FullTeamException {
 		// if (isFull()) {
 		// throw new FullTeamException();
@@ -84,7 +93,7 @@ public class Team {
 	 *         false otherwise (there are more users slot).
 	 */
 	public boolean isFull() {
-		return getSize() >= MAX_PLAYERS;
+		return getSize() >= numberOfPlayrXTeam;
 	}
 
 	public void setTeamColor(Color teamColor) {
@@ -109,15 +118,9 @@ public class Team {
 	public void setRandomTeamColorFromList() {
 
 		ArrayList<Color> admittedColors = new ArrayList<Color>();
-		admittedColors.add(Color.BLACK);
 		admittedColors.add(Color.BLUE);
-		admittedColors.add(Color.GRAY);
-		admittedColors.add(Color.MAGENTA);
-		admittedColors.add(Color.ORANGE);
-		admittedColors.add(Color.PINK);
 		admittedColors.add(Color.RED);
-		admittedColors.add(Color.WHITE);
-		admittedColors.add(Color.YELLOW);
+		admittedColors.add(Color.GREEN);
 
 		int randomNumber = new Random().nextInt(admittedColors.size());
 
@@ -127,11 +130,11 @@ public class Team {
 	public Color getTeamColor() {
 		return teamColor;
 	}
-
+	
 	/**
 	 * Empties the team removing all players
 	 */
-	public void empty() {
+	public void empty(){
 		players.removeAll(players);
 	}
 }

@@ -88,6 +88,8 @@ public class FieldsNames {
     public static final String ROOM_CREATE_ERROR_ALREADY_PRESENT = "createErrorAlreadyPresent";
     public static final String ROOM_JOIN_ERROR_FULL = "joinErrorFull";
     public static final String ROOM_JOIN_OTHERS = "joinErrorOthers";
+    public static final String ROOM_TEAMS_NUMBER = "teamnumber";
+    public static final String ROOM_TEAMS_DIMENSION = "teamdimension";
 
     // Room
     // Service Type
