@@ -13,11 +13,11 @@ import services.IService;
 import services.game.Game;
 
 /**
- * 
- * A {@link Game} subservice. This service send to the client the generated map
- * for the current room in which the player is entered.
+ * A {@link Game} sub-service. This service sends to the client the generated
+ * map for the current {@link Room} in which the player is entered.
  * 
  * @author Micieli
+ * @date 2015/05/24
  * @see game.map
  */
 public class GameMap implements IService {
@@ -31,7 +31,10 @@ public class GameMap implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
+		// TODO DEBUG PRINT
 		System.out.println(getName());
+
 		try {
 			Room room = null;
 			try {
@@ -42,8 +45,8 @@ public class GameMap implements IService {
 				e.printStackTrace();
 				return null;
 			}
-			return messagesCreator.generateMapMessage(room.getRoomMapSelector()
-					.getMap(), room.getRoomMapSelector().getSpawnPoint());
+			return messagesCreator.generateMapMessage(room.getRoomMapSelector().getMap(), room
+					.getRoomMapSelector().getSpawnPoint());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

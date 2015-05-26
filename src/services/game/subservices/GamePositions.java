@@ -16,12 +16,12 @@ import services.IService;
 import services.game.Game;
 
 /**
- * 
- * A {@link Game} subservice. The client that at fixed rate have to send to the
- * server his position in the map. This service update his saved position in the
- * server and also updae the client about the other player positions.
+ * A {@link Game} sub-service. The client has to send to the server, at a fixed
+ * rate, his position in the map. This service updates his saved position in the
+ * server and also updates the client about the other {@link Player}s positions.
  * 
  * @author Micieli
+ * @date 2015/05/24
  * @see PlayerStatus
  */
 public class GamePositions implements IService {
@@ -35,7 +35,10 @@ public class GamePositions implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
+		// TODO DEBUG PRINT
 		System.out.println(getName());
+
 		try {
 
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
@@ -54,11 +57,11 @@ public class GamePositions implements IService {
 		return null;
 	}
 
-	private void UpdatePlayerStatus(String username, JSONObject request,
-			Room room) throws JSONException, NoSuchPlayerException {
+	private void UpdatePlayerStatus(String username, JSONObject request, Room room)
+			throws JSONException, NoSuchPlayerException {
+
 		JSONObject posObject = request.getJSONObject(FieldsNames.GAME_POSITION);
-		JSONObject dirObject = request
-				.getJSONObject(FieldsNames.GAME_DIRECTION);
+		JSONObject dirObject = request.getJSONObject(FieldsNames.GAME_DIRECTION);
 		float xPos = (float) posObject.getDouble(FieldsNames.GAME_X);
 		float yPos = (float) posObject.getDouble(FieldsNames.GAME_Y);
 		float zPos = (float) posObject.getDouble(FieldsNames.GAME_Z);
