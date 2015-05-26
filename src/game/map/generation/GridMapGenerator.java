@@ -254,7 +254,7 @@ public class GridMapGenerator implements MapGenerator {
 			}
 
 			else {
-				numberOfPlayers--;
+				i--;
 			}
 
 			// TODO DEBUG
