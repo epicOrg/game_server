@@ -15,8 +15,8 @@ import game.model.PlayerStatus;
 import java.util.ArrayList;
 
 /**
- * Generate a maze by construct a default (random) grid and by open random
- * doors.
+ * Generates a maze by construct a default (random) grid and by open random
+ * doors. Then it adds random spawn points, win point and random items.
  * 
  * @author Noris
  * @date 2015/04/23
@@ -77,123 +77,13 @@ public class GridMapGenerator implements MapGenerator {
 		generateSpawnPoints();
 		generateWin();
 
+		// generateItems();
+
 		return mapConstructor;
 	}
 
-	// private void generateSpawnPoints() {
-	//
-	// MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() -
-	// WALL_SIZE
-	// - PLAYER_SIZE / 2, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
-	// - PLAYER_SIZE / 2);
-	//
-	// for (int i = 0; i < numberOfPlayers; i++) {
-	// MapDimension tmp = MapPosition.getRandomSpawnPoint(mapSizeWithTolerance);
-	// spawnPoints.add(tmp);
-	// mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
-	//
-	// // TODO DEBUG
-	// System.out.println("Player Position: " + tmp);
-	// }
-	//
-	// }
-
-	private MapDimension getMapSizeWithTolerance() {
-		return new MapDimension(mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2,
-				mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2);
-	}
-
-	private void generateSpawnPoints() {
-
-		for (int i = 0; i < numberOfPlayers; i++) {
-
-			MapDimension tmp = MapPosition.getRandomSpawnPoint(getMapSizeWithTolerance());
-
-			boolean isOK = true;
-
-			for (int j = 0; j < wallsPositions.size(); j++) {
-
-				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
-						wallsSizes.get(j));
-
-				if (MapGeometric.isCircleOnSegment(tmp, MapConst.PLAYER_SIZE / 2, points.get(0),
-						points.get(1))) {
-					isOK = false;
-					break;
-				}
-			}
-
-			if (isOK) {
-				mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
-				spawnPoints.add(tmp);
-			}
-
-			// TODO DEBUG
-			System.out.println("Player Position: " + tmp);
-		}
-
-	}
-
-	// private void generateWin() {
-	//
-	// do {
-	//
-	// MapDimension mapSizeWithTolerance = new MapDimension(mapSize.getWidth() -
-	// WALL_SIZE
-	// - PLAYER_SIZE, mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE
-	// - PLAYER_SIZE);
-	//
-	// winPoint = MapPosition.getRandomPosition(mapSizeWithTolerance);
-	//
-	// // TODO DEBUG
-	// System.out.println("Win Position: " + winPoint);
-	//
-	// } while (MapGeometric.checkIfUsed(winPoint, spawnPoints, PLAYER_SIZE *
-	// 3));
-	//
-	// mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1,
-	// winPoint,
-	// new MapDimension(0.5, 1, 0)));
-	//
-	// }
-
-	private void generateWin() {
-
-		boolean isOK;
-
-		do {
-
-			isOK = true;
-
-			winPoint = MapPosition.getRandomPosition(getMapSizeWithTolerance());
-
-			for (int j = 0; j < wallsPositions.size(); j++) {
-
-				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
-						wallsSizes.get(j));
-
-				if (MapGeometric.isCircleOnSegment(winPoint, MapConst.PLAYER_SIZE / 2,
-						points.get(0), points.get(1))) {
-					isOK = false;
-					break;
-				}
-			}
-
-			if (MapGeometric.checkIfUsed(winPoint, spawnPoints, MapConst.PLAYER_SIZE * 3))
-				isOK = false;
-
-		} while (!isOK);
-
-		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
-				new MapDimension(0.5, 1, 0)));
-
-		// TODO DEBUG
-		System.out.println("Win Position: " + winPoint);
-
-	}
-
 	/*
-	 * It generates a grid of walls in the total size of the map. Every wall go
+	 * Generates a grid of walls in the total size of the map. Every wall go
 	 * from one end of the map to the other, and it's distance from the closest
 	 * walls is always equal to GRID_TOLERANCE. Than the number of these walls
 	 * is equal to the length of the map divided by GRID_TOLERANCE. After the
@@ -239,8 +129,8 @@ public class GridMapGenerator implements MapGenerator {
 	}
 
 	/*
-	 * It split a wall into num+1 segments, where num is the number of the
-	 * doors. Every segment is on the same line of the original wall. The doors
+	 * Splits a wall into N+1 segments, where N is the number of the doors.
+	 * Every segment is on the same line of the original wall. The doors
 	 * aperture is equal to PLAYER_SIZE.
 	 */
 	private ArrayList<MapDimension> generateDoors(MapDimension position, MapDimension size, int num) {
@@ -306,8 +196,8 @@ public class GridMapGenerator implements MapGenerator {
 	}
 
 	/*
-	 * It generate the walls in the opposite direction of the generateGrid
-	 * method. Every wall starts from the center of a wall of the grid.
+	 * Generates the walls in the opposite direction of the generateGrid method.
+	 * Every wall starts from the center of a wall of the grid.
 	 */
 	private void generateVerticalWall() {
 
@@ -331,6 +221,95 @@ public class GridMapGenerator implements MapGenerator {
 			}
 		}
 
+	}
+
+	private MapDimension getMapSizeWithTolerance() {
+		return new MapDimension(mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2,
+				mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2);
+	}
+
+	private void generateSpawnPoints() {
+
+		for (int i = 0; i < numberOfPlayers; i++) {
+
+			MapDimension tmp = MapPosition.getRandomSpawnPoint(getMapSizeWithTolerance());
+
+			boolean isOK = true;
+
+			for (int j = 0; j < wallsPositions.size(); j++) {
+
+				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
+						wallsSizes.get(j));
+
+				if (MapGeometric.isCircleOnSegment(tmp, MapConst.PLAYER_SIZE / 2, points.get(0),
+						points.get(1))) {
+					isOK = false;
+					break;
+				}
+			}
+
+			if (isOK) {
+				mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
+				spawnPoints.add(tmp);
+			}
+			
+			else {
+				numberOfPlayers--;
+			}
+
+			// TODO DEBUG
+			System.out.println("Player Position: " + tmp);
+		}
+
+	}
+
+	private void generateWin() {
+
+		boolean isOK;
+
+		do {
+
+			isOK = true;
+
+			winPoint = MapPosition.getRandomPosition(getMapSizeWithTolerance());
+
+			for (int j = 0; j < wallsPositions.size(); j++) {
+
+				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
+						wallsSizes.get(j));
+
+				if (MapGeometric.isCircleOnSegment(winPoint, MapConst.PLAYER_SIZE / 2,
+						points.get(0), points.get(1))) {
+					isOK = false;
+					break;
+				}
+			}
+
+			if (MapGeometric.checkIfUsed(winPoint, spawnPoints, MapConst.PLAYER_SIZE * 3))
+				isOK = false;
+
+		} while (!isOK);
+
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint,
+				new MapDimension(0.5, 1, 0)));
+
+		// TODO DEBUG
+		System.out.println("Win Position: " + winPoint);
+
+	}
+
+	/*
+	 * Generates random item and adds it in a random position of the map.
+	 */
+	private void generateItems() {
+
+		for (int i = 0; i < mapSize.getLength() / 2; i++) {
+
+			MapDimension position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
+
+			mapConstructor.addMapObject(new MapObject(Item.MEAT, Texture.MEAT1, position,
+					new MapDimension(0.5, 1, 0)));
+		}
 	}
 
 }

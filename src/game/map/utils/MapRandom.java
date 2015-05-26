@@ -92,7 +92,7 @@ public class MapRandom {
 	public static String getRandomTexture() {
 
 		ArrayList<String> textures = new ArrayList<String>();
-		textures.add(Texture.CERAMIC1);
+		//textures.add(Texture.CERAMIC1);
 		textures.add(Texture.HEDGE1);
 		textures.add(Texture.HEDGE2);
 		textures.add(Texture.HEDGE3);
