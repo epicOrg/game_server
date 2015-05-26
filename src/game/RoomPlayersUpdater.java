@@ -3,6 +3,8 @@ package game;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import messages.UpdatingMessagesCreator;
 import online_management.OnlineManager;
@@ -32,7 +34,10 @@ import game.model.Team;
 
 public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
 
+	private static final int DELAY = 4000;
+
 	private OnlineManager onlineManager;
+	private Timer timer;
 
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
@@ -65,13 +70,36 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onRoomFull() {
-		updatePlayers(null, messagesCreator.generateStartMessage());
-		room.setInPlay(true);
-		GameDataManager.getInstance().newAudioCallForRoom(room);
+		try {
+			if (timer != null)
+				timer.cancel();
+			timer = new Timer();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		timer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				updatePlayers(null, messagesCreator.generateStartMessage());
+				room.setInPlay(true);
+				GameDataManager.getInstance().newAudioCallForRoom(room);
+			}
+		}, DELAY);
+
 	}
 
 	@Override
 	public void onPlayerRemoved(Player player) {
+		try {
+			if (timer != null)
+				timer.cancel();
+			timer = new Timer();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		writers.remove(player);
 		updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
 	}
@@ -79,6 +107,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onGameEnded() {
 		writers = new HashMap<>();
+		room.generateMap();
 	}
 
 	@Override

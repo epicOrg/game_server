@@ -117,7 +117,6 @@ public class RoomThread extends Thread {
 		}
 
 		room.setInPlay(false);
-		room.generateMap();
 	}
 
 	private void updatePlayers(ArrayList<Player> players, JSONObject message)

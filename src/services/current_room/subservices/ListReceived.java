@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.game.Game;
+import sun.net.www.protocol.file.Handler;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 
@@ -32,12 +33,6 @@ public class ListReceived implements IService {
 			String roomName = request.getString(FieldsNames.ROOM_NAME);
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
 
-			try {
-				Thread.sleep(DELAY_TIME);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			room.checkIfFull();
 		} catch (JSONException e) {
 			e.printStackTrace();

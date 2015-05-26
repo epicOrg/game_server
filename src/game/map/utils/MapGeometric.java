@@ -96,7 +96,8 @@ public class MapGeometric {
 	 * 
 	 * @return the extremes point of the wall segment, without the wall size
 	 */
-	public static ArrayList<MapDimension> getWallPointsOnLength(MapDimension position, MapDimension size) {
+	public static ArrayList<MapDimension> getWallPointsOnLength(MapDimension position,
+			MapDimension size) {
 
 		ArrayList<MapDimension> points = new ArrayList<MapDimension>(2);
 
@@ -121,7 +122,8 @@ public class MapGeometric {
 	 * 
 	 * @return the extremes point of the wall segment
 	 */
-	public static ArrayList<MapDimension> getWallPointsOnWidth(MapDimension position, MapDimension size) {
+	public static ArrayList<MapDimension> getWallPointsOnWidth(MapDimension position,
+			MapDimension size) {
 
 		ArrayList<MapDimension> points = new ArrayList<MapDimension>(2);
 
@@ -169,7 +171,8 @@ public class MapGeometric {
 	 * @return true if at least one point of the array is on the line, false
 	 *         otherwise
 	 */
-	public static boolean isPointOnLine(ArrayList<MapDimension> points, MapDimension l1, MapDimension l2) {
+	public static boolean isPointOnLine(ArrayList<MapDimension> points, MapDimension l1,
+			MapDimension l2) {
 
 		for (MapDimension p : points) {
 			if (isPointOnLine(p, l1, l2))
@@ -209,7 +212,8 @@ public class MapGeometric {
 	 * @return true if at least one point of the array is on the segment, false
 	 *         otherwise
 	 */
-	public static boolean isPointOnSegment(ArrayList<MapDimension> points, MapDimension l1, MapDimension l2) {
+	public static boolean isPointOnSegment(ArrayList<MapDimension> points, MapDimension l1,
+			MapDimension l2) {
 
 		for (MapDimension p : points) {
 			if (isPointOnSegment(p, l1, l2))
@@ -235,6 +239,7 @@ public class MapGeometric {
 			MapDimension l2) {
 
 		Line2D line = new Line2D.Double();
+
 		line.setLine(l1.getWidth(), l1.getLength(), l2.getWidth(), l2.getLength());
 
 		Point2D point = new Point2D.Double();

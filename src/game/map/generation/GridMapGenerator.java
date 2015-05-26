@@ -77,7 +77,7 @@ public class GridMapGenerator implements MapGenerator {
 		generateSpawnPoints();
 		generateWin();
 
-		// generateItems();
+		generateItems();
 
 		return mapConstructor;
 	}
@@ -275,8 +275,17 @@ public class GridMapGenerator implements MapGenerator {
 
 			for (int j = 0; j < wallsPositions.size(); j++) {
 
-				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
-						wallsSizes.get(j));
+				ArrayList<MapDimension> points;
+
+				if (wallsSizes.get(j).getLength() == WALL_SIZE) {
+					points = MapGeometric.getWallPointsOnLength(wallsPositions.get(j),
+							wallsSizes.get(j));
+				}
+
+				else {
+					points = MapGeometric.getWallPointsOnWidth(wallsPositions.get(j),
+							wallsSizes.get(j));
+				}
 
 				if (MapGeometric.isCircleOnSegment(winPoint, MapConst.PLAYER_SIZE / 2,
 						points.get(0), points.get(1))) {
