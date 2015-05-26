@@ -15,7 +15,7 @@ import exceptions.FullTeamException;
  */
 
 public class Team {
-	public static final int MAX_PLAYERS = 1;
+	public static final int MAX_PLAYERS = 2;
 	
 	private String teamName;
 	private Color teamColor;
@@ -111,7 +111,9 @@ public class Team {
 		ArrayList<Color> admittedColors = new ArrayList<Color>();
 		admittedColors.add(Color.BLUE);
 		admittedColors.add(Color.RED);
-		admittedColors.add(Color.GREEN);
+		admittedColors.add(Color.YELLOW);
+		admittedColors.add(Color.PINK);
+		admittedColors.add(Color.ORANGE);
 
 		int randomNumber = new Random().nextInt(admittedColors.size());
 
