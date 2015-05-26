@@ -54,7 +54,7 @@ public class ClientRequestThread implements Runnable {
 					
 
 				// TODO DEBUG: client request
-				//System.out.println("CLIENT: " + request);
+				System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
 				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);

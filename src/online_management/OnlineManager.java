@@ -46,7 +46,7 @@ public class OnlineManager {
 
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
 		PollingThread pollingThread = new PollingThread(onlineUser);
-		pollingThread.start();
+		//pollingThread.start();
 		pollingTreads.put(username, pollingThread);
 		onlineUser.setOutStream(printWriter);
 		onlineUsers.put(username, onlineUser);

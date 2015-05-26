@@ -23,7 +23,7 @@ import server.ClientRequestThread;
 
 public class PollingThread extends Thread {
 
-	private static final int POLLING_TIME = 500;
+	private static final int POLLING_TIME = 4000;
 	private static final int POLLING_DELAY = 4000;
 
 	private OnlineUser onlineUser;
