@@ -7,16 +7,17 @@ import java.util.Random;
 import exceptions.FullTeamException;
 
 /**
- * Every room has two teams, which play one against the other. This class tracks
- * the players of a single team.
+ * Every room has N teams, which play one against the others. This class tracks
+ * the {@link Player}s of a single team.
  * 
  * @author Noris
  * @date 2015/04/18
+ * @see Player
  */
 
 public class Team {
 	public static final int MAX_PLAYERS = 1;
-	
+
 	private String teamName;
 	private Color teamColor;
 	private int numberOfPlayrXTeam;
@@ -28,10 +29,10 @@ public class Team {
 		setRandomTeamColor();
 		this.numberOfPlayrXTeam = numberOfPlayrXTeam;
 	}
-	
+
 	public Team() {
 		super();
-		setRandomTeamColor();
+		setRandomTeamColorFromList();
 		this.numberOfPlayrXTeam = MAX_PLAYERS;
 	}
 
@@ -56,7 +57,7 @@ public class Team {
 	 * @param player
 	 * @throws FullTeamException
 	 */
-	public void addPlayer(Player player) { 
+	public void addPlayer(Player player) {
 		// throws FullTeamException {
 		// if (isFull()) {
 		// throw new FullTeamException();
@@ -118,9 +119,15 @@ public class Team {
 	public void setRandomTeamColorFromList() {
 
 		ArrayList<Color> admittedColors = new ArrayList<Color>();
+		admittedColors.add(Color.BLACK);
 		admittedColors.add(Color.BLUE);
+		admittedColors.add(Color.GRAY);
+		admittedColors.add(Color.MAGENTA);
+		admittedColors.add(Color.ORANGE);
+		admittedColors.add(Color.PINK);
 		admittedColors.add(Color.RED);
-		admittedColors.add(Color.GREEN);
+		admittedColors.add(Color.WHITE);
+		admittedColors.add(Color.YELLOW);
 
 		int randomNumber = new Random().nextInt(admittedColors.size());
 
@@ -130,11 +137,11 @@ public class Team {
 	public Color getTeamColor() {
 		return teamColor;
 	}
-	
+
 	/**
 	 * Empties the team removing all players
 	 */
-	public void empty(){
+	public void empty() {
 		players.removeAll(players);
 	}
 }
