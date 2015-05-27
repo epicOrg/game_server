@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import exceptions.UserNotOnlineException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Elaborates explicit Logout requests setting the applicant offline

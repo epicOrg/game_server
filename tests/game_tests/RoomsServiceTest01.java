@@ -7,7 +7,7 @@ import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Team;
 import game.model.TeamManager;
 

@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import services.Register;
 import data_management.DataManager;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Contains methods for check registration fields sending in client request to

@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import exceptions.UserNotOnlineException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * RoomService request message test with no errors.

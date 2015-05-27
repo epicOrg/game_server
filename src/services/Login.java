@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import data_management.DataManager;
 import data_management.RegisteredUser;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * <code>Login</code> service allows the client to access to others services.

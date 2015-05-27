@@ -5,7 +5,7 @@ import messages.RoomsMessagesCreator;
 import org.json.JSONObject;
 
 import data_management.GameDataManager;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import services.IService;
 
 /**

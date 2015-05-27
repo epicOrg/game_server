@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.PlayerStatus;
 
 /**

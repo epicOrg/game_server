@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import connection_encryption.ConnectionEncrypter;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * @author Noris

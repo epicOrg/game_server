@@ -1,6 +1,6 @@
 package services.current_room;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.RoomPlayersUpdater;
 import game.model.Player;
 import game.model.PlayerEventListener;

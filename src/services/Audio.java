@@ -1,6 +1,6 @@
 package services;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Player;
 
 import org.json.JSONException;

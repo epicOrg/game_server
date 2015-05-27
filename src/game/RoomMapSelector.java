@@ -1,6 +1,6 @@
 package game;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;

@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import database.Paths;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after

@@ -12,7 +12,7 @@ import services.game.subservices.GameMap;
 import services.game.subservices.GamePositions;
 import services.game.subservices.GameReady;
 import services.game.subservices.GameStatus;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Game <code>Service</code> is the central one of all server. It provides

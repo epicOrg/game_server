@@ -18,7 +18,7 @@ import database.writer.EmailFormatter;
 import database.writer.EmailSaver;
 import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Initializes some classes used by the server.

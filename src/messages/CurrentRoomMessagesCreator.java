@@ -1,6 +1,6 @@
 package messages;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Player;
 import game.model.Room;
 import game.model.Team;

@@ -1,7 +1,7 @@
 package online_management;
 
 import exceptions.UserNotOnlineException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 import java.io.PrintWriter;
 import java.util.Timer;

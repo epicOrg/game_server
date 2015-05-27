@@ -1,6 +1,6 @@
 package services.current_room.subservices;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
 

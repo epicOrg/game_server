@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import server.ServerInitializer;
 import services.Register;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Test for client registration with an error: username already exists.

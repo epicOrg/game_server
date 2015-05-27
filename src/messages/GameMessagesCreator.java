@@ -1,6 +1,6 @@
 package messages;
 
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.map.MapJSONizer;
 import game.model.Player;
 import game.model.PlayerStatus;

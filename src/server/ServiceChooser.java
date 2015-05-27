@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * @author Noris

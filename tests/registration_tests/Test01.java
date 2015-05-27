@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import server.ServerInitializer;
 import services.Register;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * Test for client register message without errors. Note: I can check only if

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Player;
 import game.model.PlayerStatus;
 import game.model.Room;

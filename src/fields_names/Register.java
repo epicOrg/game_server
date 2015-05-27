@@ -1,4 +1,4 @@
-package fields_name;
+package fields_names;
 
 public enum Register {
 

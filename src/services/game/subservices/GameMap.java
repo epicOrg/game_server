@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 import game.model.Room;
 import services.IService;
 import services.game.Game;

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import services.IExtendedService;
 import services.IService;
 import services.game.Game;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * A {@link Game} subservice that is in turn an instance of <code>IExtendedService</code>

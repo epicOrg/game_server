@@ -10,7 +10,7 @@ import services.current_room.CurrentRoom;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
-import fields_name.FieldsNames;
+import fields_names.FieldsNames;
 
 /**
  * A {@link CurrentRoom} subservice that allow the client to create a new
