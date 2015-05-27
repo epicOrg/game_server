@@ -125,7 +125,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	private void allPlayerReady() {
 		roomThread = new RoomThread(room, new CircleWinChecker(room.getRoomMapSelector()
-				.getWinPoint(), 3));
+				.getWinPoint(), 2));
 		roomThread.start();
 		updatePlayers(null, messagesCreator.generateGoMessage());
 		startAudioConversation();

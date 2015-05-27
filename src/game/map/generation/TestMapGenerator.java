@@ -5,6 +5,7 @@ import game.map.Item;
 import game.map.MapConstructor;
 import game.map.MapObject;
 import game.map.Texture;
+import game.model.PlayerStatus;
 
 /**
  * It generate a test map.
@@ -40,8 +41,15 @@ public class TestMapGenerator implements MapGenerator {
 		MapObject o6 = new MapObject(Item.WALL, Texture.WALL2, new MapDimension(0, -1, 0),
 				new MapDimension(1, 5, 1));
 
+		MapObject o7 = new MapObject(Item.WALL, Texture.WALL2, new MapDimension(5, -1, 0),
+				new MapDimension(0.2, 2, 20));
+
+		PlayerStatus spawn = new PlayerStatus(new MapDimension(5, -1, 0), new MapDimension(0, 0, 0));
+
+		mapConstructor.addSpawnPoint(spawn);
+
 		mapConstructor.addMapObjects(o1, o2, o3, o4, o5, o6);
-		mapConstructor.addMapObject(o1);
+		mapConstructor.addMapObject(o7);
 
 		return mapConstructor;
 	}

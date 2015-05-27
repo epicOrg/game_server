@@ -1,19 +1,19 @@
 package game.model;
 
-import services.current_room.CurrentRoom;
-import services.game.Game;
-import services.rooms.Rooms;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.RoomMapSelector;
 import game.map.MapDimension;
 import game.map.generation.GridMapGenerator;
+import services.current_room.CurrentRoom;
+import services.game.Game;
+import services.rooms.Rooms;
 
 /**
  * <code>Room</code> is the fundamental piece of the multiplayer game. Players
- * can come in and go out from the it, finding other players and waiting from
- * the player number is sufficient to start the game. While entering a
- * <code>Room</code> a player is assigned to a random team A
+ * can come in and go out from it, finding other players and waiting from the
+ * player number is sufficient to start the game. While entering into a
+ * <code>Room</code> a player is assigned to a random team. A
  * {@link RoomEventListener} is advised of everything that happens
  * 
  * @author Micieli
@@ -45,12 +45,11 @@ public class Room {
 	public Room(String roomName) {
 		this.roomName = roomName;
 		teamManager = new TeamManager();
-		generateMap();
 		maxPlayers = MAX_PLAYERS;
+		generateMap();
 	}
 
 	public Room(String roomName, int numberOfTeam, int numberOfPlayrXTeam) {
-		super();
 		this.roomName = roomName;
 		teamManager = new TeamManager(numberOfTeam, numberOfPlayrXTeam);
 		maxPlayers = numberOfPlayrXTeam * numberOfTeam;
@@ -189,7 +188,7 @@ public class Room {
 	public RoomMapSelector getRoomMapSelector() {
 		return roomMapSelector;
 	}
-	
+
 	public int getMaxPlayers() {
 		return maxPlayers;
 	}

@@ -1,14 +1,14 @@
 package game.map;
 
-import fields_name.FieldsNames;
-import game.model.PlayerStatus;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fields_name.FieldsNames;
+import game.model.PlayerStatus;
 
 /**
  * Adapt a server map to a client map.
@@ -68,7 +68,24 @@ public class MapJSONizer {
 	 * @return all the spawn points
 	 */
 	public LinkedList<PlayerStatus> getAdaptedSpawnPoints() {
-		return mapConstructor.getSpawnPoints();
+
+		LinkedList<PlayerStatus> spawnPoints = mapConstructor.getSpawnPoints();
+
+		if (PHASE != 0)
+			for (int i = 0; i < spawnPoints.size(); i++) {
+
+				MapDimension phasePosition = new MapDimension(spawnPoints.get(i).getxPosition()
+						+ PHASE, spawnPoints.get(i).getyPosition(), spawnPoints.get(i)
+						.getzPosition() + PHASE);
+
+				MapDimension phaseDirection = new MapDimension(spawnPoints.get(i).getxDirection()
+						+ PHASE, spawnPoints.get(i).getyDirection(), spawnPoints.get(i)
+						.getzDirection() + PHASE);
+
+				spawnPoints.set(i, new PlayerStatus(phasePosition, phaseDirection));
+			}
+
+		return spawnPoints;
 	}
 
 	/**

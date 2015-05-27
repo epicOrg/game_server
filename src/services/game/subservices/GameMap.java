@@ -36,15 +36,17 @@ public class GameMap implements IService {
 		System.out.println(getName());
 
 		try {
+			
 			Room room = null;
+			
 			try {
 				room = GameDataManager.getInstance().getRoomByName(
 						request.getString(FieldsNames.ROOM_NAME));
 			} catch (NoSuchRoomException e) {
-
 				e.printStackTrace();
 				return null;
 			}
+			
 			return messagesCreator.generateMapMessage(room.getRoomMapSelector().getMap(), room
 					.getRoomMapSelector().getSpawnPoint());
 

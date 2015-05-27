@@ -47,11 +47,10 @@ public class ClientRequestThread implements Runnable {
 			String request = in.readLine();
 
 			while (!socket.isClosed()) {
-				if (request == null){
+				if (request == null) {
 					System.out.println("null request");
 					return;
 				}
-					
 
 				// TODO DEBUG: client request
 				System.out.println("CLIENT: " + request);
@@ -59,20 +58,20 @@ public class ClientRequestThread implements Runnable {
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
 				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);
 				JSONObject jResponse = null;
-				
-				if(cecker.checkRequest(jsonRequest)){
+
+				if (cecker.checkRequest(jsonRequest)) {
 					jResponse = elaborateRequest(jsonRequest);
 				}
-				
+
 				if (jResponse != null) {
 					String response = secureConnection.encrypt(jResponse).toString();
 
 					out.println(response);
 
 					// TODO DEBUG: server response
-					//System.out.println("SERVER: " + response);
+					System.out.println("SERVER: " + response);
 				} else {
-					//System.out.println("SERVER: " + "No response.");
+					// System.out.println("SERVER: " + "No response.");
 				}
 
 				request = in.readLine();
@@ -86,12 +85,10 @@ public class ClientRequestThread implements Runnable {
 		}
 	}
 
-	private JSONObject elaborateRequest(JSONObject jsonRequest)
-			throws JSONException {
-		
-		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
-				.getRemoteSocketAddress();
-		
+	private JSONObject elaborateRequest(JSONObject jsonRequest) throws JSONException {
+
+		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+
 		jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
 		jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
 

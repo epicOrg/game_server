@@ -64,9 +64,9 @@ public class PlayerStatus {
 		this.yPosition = (float) position.getHeight();
 		this.zPosition = (float) position.getLength();
 
-		this.xPosition = (float) direction.getWidth();
-		this.yPosition = (float) direction.getHeight();
-		this.zPosition = (float) direction.getLength();
+		this.xDirection = (float) direction.getWidth();
+		this.yDirection = (float) direction.getHeight();
+		this.zDirection = (float) direction.getLength();
 	}
 
 	public void setPosition(float xPosition, float yPosition, float zPosition) {

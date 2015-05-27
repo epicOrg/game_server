@@ -68,13 +68,14 @@ public class GameMessagesCreator {
 		PlayerStatus status = p.getPlayerStatus();
 
 		try {
-			JSONObject jObjectPos = formatPosition(status);
-			JSONObject jObjectDir = formatDirection(status);
-			jPlayer.put(FieldsNames.GAME_POSITION, jObjectPos);
-			jPlayer.put(FieldsNames.GAME_DIRECTION, jObjectDir);
+			
+			JSONObject jsonPosition = formatPosition(status);
+			JSONObject jsonDirection = formatDirection(status);
+			jPlayer.put(FieldsNames.GAME_POSITION, jsonPosition);
+			jPlayer.put(FieldsNames.GAME_DIRECTION, jsonDirection);
 			jPlayer.put(FieldsNames.USERNAME, p.getUsername());
+			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -82,19 +83,19 @@ public class GameMessagesCreator {
 	}
 
 	private JSONObject formatDirection(PlayerStatus status) throws JSONException {
-		JSONObject jObjectDir = new JSONObject();
-		jObjectDir.put(FieldsNames.GAME_X, status.getxDirection());
-		jObjectDir.put(FieldsNames.GAME_Y, status.getyDirection());
-		jObjectDir.put(FieldsNames.GAME_Z, status.getzDirection());
-		return jObjectDir;
+		JSONObject jsonDirection = new JSONObject();
+		jsonDirection.put(FieldsNames.GAME_X, status.getxDirection());
+		jsonDirection.put(FieldsNames.GAME_Y, status.getyDirection());
+		jsonDirection.put(FieldsNames.GAME_Z, status.getzDirection());
+		return jsonDirection;
 	}
 
 	private JSONObject formatPosition(PlayerStatus status) throws JSONException {
-		JSONObject jObjectPos = new JSONObject();
-		jObjectPos.put(FieldsNames.GAME_X, status.getxPosition());
-		jObjectPos.put(FieldsNames.GAME_Y, status.getyPosition());
-		jObjectPos.put(FieldsNames.GAME_Z, status.getzPosition());
-		return jObjectPos;
+		JSONObject jsonPosition = new JSONObject();
+		jsonPosition.put(FieldsNames.GAME_X, status.getxPosition());
+		jsonPosition.put(FieldsNames.GAME_Y, status.getyPosition());
+		jsonPosition.put(FieldsNames.GAME_Z, status.getzPosition());
+		return jsonPosition;
 	}
 
 	/**
@@ -103,12 +104,12 @@ public class GameMessagesCreator {
 	 * 
 	 * @param map
 	 *            a <code>JSONObject</code> containing the map
-	 * @param playerInitialPosition
+	 * @param spawnPoint
 	 *            a <code>PlayerStatus</code> containing the initial position
 	 * @see PlayerStatus
 	 * @see MapJSONizer
 	 */
-	public JSONObject generateMapMessage(JSONObject map, PlayerStatus playerInitialPosition) {
+	public JSONObject generateMapMessage(JSONObject map, PlayerStatus spawnPoint) {
 		JSONObject message = new JSONObject();
 
 		try {
@@ -119,10 +120,9 @@ public class GameMessagesCreator {
 				message.put(key, map.get(key));
 			}
 
-			message.put(FieldsNames.GAME_PLAYER_POSITION, playerInitialPosition.toStringPosition());
+			message.put(FieldsNames.GAME_PLAYER_POSITION, spawnPoint.toStringPosition());
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

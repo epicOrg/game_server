@@ -249,16 +249,18 @@ public class GridMapGenerator implements MapGenerator {
 			}
 
 			if (isOK) {
+
 				mapConstructor.addSpawnPoint(new PlayerStatus(tmp, tmp));
 				spawnPoints.add(tmp);
+
+				// TODO DEBUG PRINT
+				System.out.println("Player Position: " + tmp);
 			}
 
 			else {
 				i--;
 			}
 
-			// TODO DEBUG
-			System.out.println("Player Position: " + tmp);
 		}
 
 	}
@@ -275,17 +277,8 @@ public class GridMapGenerator implements MapGenerator {
 
 			for (int j = 0; j < wallsPositions.size(); j++) {
 
-				ArrayList<MapDimension> points;
-
-				if (wallsSizes.get(j).getLength() == WALL_SIZE) {
-					points = MapGeometric.getWallPointsOnLength(wallsPositions.get(j),
-							wallsSizes.get(j));
-				}
-
-				else {
-					points = MapGeometric.getWallPointsOnWidth(wallsPositions.get(j),
-							wallsSizes.get(j));
-				}
+				ArrayList<MapDimension> points = MapGeometric.getWallPoints(wallsPositions.get(j),
+						wallsSizes.get(j));
 
 				if (MapGeometric.isCircleOnSegment(winPoint, MapConst.PLAYER_SIZE / 2,
 						points.get(0), points.get(1))) {
@@ -317,7 +310,7 @@ public class GridMapGenerator implements MapGenerator {
 			MapDimension position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
 
 			mapConstructor.addMapObject(new MapObject(Item.MEAT, Texture.MEAT1, position,
-					new MapDimension(0.5, 1, 0)));
+					new MapDimension(0.2, 0.5, 0)));
 		}
 	}
 
