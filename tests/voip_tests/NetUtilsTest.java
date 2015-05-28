@@ -25,7 +25,6 @@ public class NetUtilsTest {
 		System.out.println(NetUtils.getIpByInetAddress(address));
 		System.out.println(NetUtils.getLocalIpAddress());
 		
-		System.out.println(CommonFields.PASSWORD.toString());
 	}
 	
 

@@ -8,8 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Provides a builder for messages that the server has to send while the game is
- * over.
+ * Provides a builder for messages that the server has to send while the game is over.
  * 
  * @author Micieli
  * @date 2015/05/21
@@ -24,19 +23,7 @@ public class GameEndMessagesCreator {
 	 */
 	public JSONObject generateLoseMessage() {
 
-		JSONObject loseMessage = new JSONObject();
-
-		try {
-
-			loseMessage.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
-			loseMessage.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
-			loseMessage.put(GameFields.GAME_END.toString(), GameFields.GAME_LOSE.toString());
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return loseMessage;
+		return generateEndMessage(GameFields.GAME_LOSE.toString());
 	}
 
 	/**
@@ -46,19 +33,7 @@ public class GameEndMessagesCreator {
 	 */
 	public JSONObject generateWinMessage() {
 
-		JSONObject winMessage = new JSONObject();
-
-		try {
-
-			winMessage.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
-			winMessage.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
-			winMessage.put(GameFields.GAME_END.toString(), GameFields.GAME_WIN.toString());
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		return winMessage;
+		return generateEndMessage(GameFields.GAME_WIN.toString());
 	}
 
 	/**
@@ -68,18 +43,20 @@ public class GameEndMessagesCreator {
 	 */
 	public JSONObject generateDrawMessage() {
 
+		return generateEndMessage(GameFields.GAME_DRAW.toString());
+	}
+	
+	private JSONObject generateEndMessage(String status) {
 		JSONObject message = new JSONObject();
-
 		try {
 
 			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
 			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
-			message.put(GameFields.GAME_END.toString(), GameFields.GAME_DRAW.toString());
+			message.put(GameFields.GAME_END.toString(), status);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		return message;
 	}
 }
