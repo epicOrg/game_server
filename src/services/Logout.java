@@ -6,7 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import exceptions.UserNotOnlineException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * Elaborates explicit Logout requests setting the applicant offline
@@ -24,8 +26,8 @@ public class Logout implements IService {
 
 		try {
 
-			String username = request.getString(FieldsNames.USERNAME);
-			int hashCode = request.getInt(FieldsNames.HASHCODE);
+			String username = request.getString(CommonFields.USERNAME.toString());
+			int hashCode = request.getInt(CommonFields.HASHCODE.toString());
 			onlineManager.setOffline(username, hashCode);
 
 		} catch (JSONException e) {
@@ -39,6 +41,6 @@ public class Logout implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.LOGOUT;
+		return ServicesFields.LOGOUT.toString();
 	}
 }

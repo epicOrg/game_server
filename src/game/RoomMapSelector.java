@@ -1,6 +1,7 @@
 package game;
 
 import fields_names.FieldsNames;
+import fields_names.GameFields;
 import game.map.MapDimension;
 import game.map.MapJSONizer;
 import game.map.generation.MapGenerator;
@@ -37,9 +38,9 @@ public class RoomMapSelector {
 		try {
 
 			JSONObject jsonMap = new JSONObject();
-			jsonMap.put(FieldsNames.GAME_WIDTH, mapJSONizer.getAdaptedWidth());
-			jsonMap.put(FieldsNames.GAME_HEIGHT, mapJSONizer.getAdaptedHeight());
-			jsonMap.put(FieldsNames.GAME_ITEMS, mapJSONizer.getAdaptedItems());
+			jsonMap.put(GameFields.GAME_WIDTH.toString(), mapJSONizer.getAdaptedWidth());
+			jsonMap.put(GameFields.GAME_HEIGHT.toString(), mapJSONizer.getAdaptedHeight());
+			jsonMap.put(GameFields.GAME_ITEMS.toString(), mapJSONizer.getAdaptedItems());
 
 			map = jsonMap;
 

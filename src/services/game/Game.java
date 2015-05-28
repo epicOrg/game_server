@@ -13,6 +13,7 @@ import services.game.subservices.GamePositions;
 import services.game.subservices.GameReady;
 import services.game.subservices.GameStatus;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * Game <code>Service</code> is the central one of all server. It provides
@@ -40,7 +41,7 @@ public class Game implements IExtendedService {
 	public JSONObject start(JSONObject request) {
 		IService subservice = null;
 		try {
-			String serviceType = request.getString(FieldsNames.SERVICE_TYPE);
+			String serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
 			subservice = subServices.get(serviceType);
 
 		} catch (JSONException e) {
@@ -52,7 +53,7 @@ public class Game implements IExtendedService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME;
+		return ServicesFields.GAME.toString();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import services.IExtendedService;
 import services.IService;
 import services.game.Game;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
 
 /**
  * A {@link Game} subservice that is in turn an instance of <code>IExtendedService</code>
@@ -34,7 +35,7 @@ public class RoomActions implements  IExtendedService {
 		String roomAction = null;
 
 		try {
-			roomAction = request.getString(FieldsNames.ROOM_ACTION);
+			roomAction = request.getString(RoomFields.ROOM_ACTION.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -56,6 +57,6 @@ public class RoomActions implements  IExtendedService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_ACTIONS;
+		return RoomFields.ROOM_ACTIONS.toString();
 	}
 }

@@ -8,7 +8,10 @@ import org.junit.Test;
 
 import server.ServerInitializer;
 import services.Register;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.ServicesFields;
 
 /**
  * Test for client register message without errors. Note: I can check only if
@@ -30,10 +33,10 @@ public class Test01 {
 		new ServerInitializer().init();
 
 		JSONObject jsonFromClient = new JSONObject();
-		jsonFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-		jsonFromClient.put(FieldsNames.USERNAME, "Schopenhauer");
-		jsonFromClient.put(FieldsNames.PASSWORD, "DieWeltAlsWilleUndL0L");
-		jsonFromClient.put(FieldsNames.EMAIL, "arthur@paralipomena.org");
+		jsonFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+		jsonFromClient.put(CommonFields.USERNAME.toString(), "Schopenhauer");
+		jsonFromClient.put(CommonFields.PASSWORD.toString(), "DieWeltAlsWilleUndL0L");
+		jsonFromClient.put(RegisterFields.EMAIL.toString(), "arthur@paralipomena.org");
 
 		Register register = new Register();
 		String response = register.start(jsonFromClient).toString();
@@ -42,8 +45,8 @@ public class Test01 {
 		 * Console print "fake" control: it can not work because "An object is
 		 * an unordered set of name/value pairs".
 		 */
-		String expectedResponse = "{\"" + FieldsNames.SERVICE + "\":\""
-				+ FieldsNames.REGISTER + "\",\"" + FieldsNames.NO_ERRORS
+		String expectedResponse = "{\"" + ServicesFields.SERVICE.toString() + "\":\""
+				+ ServicesFields.REGISTER.toString() + "\",\"" + CommonFields.NO_ERRORS.toString()
 				+ "\":" + "true}";
 
 		// assertEquals(expectedResponse, response);
@@ -56,16 +59,16 @@ public class Test01 {
 		JSONObject jsonResponse = new JSONObject(response);
 
 		String serviceField;
-		if (jsonResponse.has(FieldsNames.SERVICE))
-			serviceField = jsonResponse.getString(FieldsNames.SERVICE);
+		if (jsonResponse.has(ServicesFields.SERVICE.toString()))
+			serviceField = jsonResponse.getString(ServicesFields.SERVICE.toString());
 		else
 			serviceField = null;
 
-		assertEquals(FieldsNames.REGISTER, serviceField);
+		assertEquals(ServicesFields.REGISTER.toString(), serviceField);
 
 		Boolean noErrorsField;
-		if (jsonResponse.has(FieldsNames.NO_ERRORS))
-			noErrorsField = (Boolean) jsonResponse.get(FieldsNames.NO_ERRORS);
+		if (jsonResponse.has(CommonFields.NO_ERRORS.toString()))
+			noErrorsField = (Boolean) jsonResponse.get(CommonFields.NO_ERRORS.toString());
 		else
 			noErrorsField = false;
 

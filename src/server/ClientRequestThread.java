@@ -14,7 +14,9 @@ import services.IService;
 import services.Login;
 import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -89,11 +91,11 @@ public class ClientRequestThread implements Runnable {
 
 		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
 
-		jsonRequest.put(FieldsNames.IP_ADDRESS, inetSocketAddress.getHostName());
-		jsonRequest.put(FieldsNames.LOCAL_PORT, socket.getLocalPort());
+		jsonRequest.put(CommonFields.IP_ADDRESS.toString(), inetSocketAddress.getHostName());
+		jsonRequest.put(CommonFields.LOCAL_PORT.toString(), socket.getLocalPort());
 
 		IService service;
-		if (jsonRequest.getString(FieldsNames.SERVICE).equals(FieldsNames.LOGIN)) {
+		if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(ServicesFields.LOGIN.toString())) {
 			service = new Login(out);
 		} else {
 			service = serviceChooser.chooseService(jsonRequest);

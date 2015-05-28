@@ -11,6 +11,8 @@ import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
 
 /**
  * A {@link CurrentRoom} subservice that allow the client to create a new
@@ -37,21 +39,16 @@ public class CreateRoom implements IService {
 	public JSONObject start(JSONObject request) {
 		System.out.println(request);
 		try {
-			String roomName = null;
-			int numberOfTeams = 0;
-			int numberOfPlayrXTeam = 0;
-			try {
-				roomName = request.getString(FieldsNames.ROOM_NAME);
-				numberOfTeams = request.getInt(FieldsNames.ROOM_TEAMS_NUMBER);
-				numberOfPlayrXTeam = request
-						.getInt(FieldsNames.ROOM_TEAMS_DIMENSION);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
+			int numberOfTeams = request.getInt(RoomsFields.ROOM_TEAMS_NUMBER
+					.toString());
+			int numberOfPlayrXTeam = request
+					.getInt(RoomsFields.ROOM_TEAMS_DIMENSION.toString());
 
 			if (!(roomChecker.checkRoomName(roomName)
-					 && roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && 
-					roomChecker.chekNumberOfTeams(numberOfTeams))) {
+					&& roomChecker.chekNumberOfPlayer(numberOfPlayrXTeam) && roomChecker
+						.chekNumberOfTeams(numberOfTeams))) {
 				return messagesCreator.generateNameInvalidRespose();
 			}
 
@@ -60,6 +57,10 @@ public class CreateRoom implements IService {
 
 		} catch (RoomAlreadyExistsException e) {
 			return messagesCreator.generateRoomExistMessage();
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return messagesCreator.generateNameInvalidRespose();
 		}
 
 		return messagesCreator.generateRommListMessage(GameDataManager
@@ -68,6 +69,6 @@ public class CreateRoom implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_CREATE;
+		return RoomsFields.ROOM_CREATE.toString();
 	}
 }

@@ -7,7 +7,9 @@ import org.json.JSONObject;
 
 import services.Register;
 import data_management.DataManager;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
 
 /**
  * Contains methods for check registration fields sending in client request to
@@ -39,22 +41,22 @@ public class RegisterChecker {
 			JSONArray usernameErrors = new JSONArray();
 
 			if (username.length() < FieldsValues.USERNAME_MIN_LENGTH) {
-				usernameErrors.put(FieldsNames.REGISTER_SHORT);
+				usernameErrors.put(RegisterFields.REGISTER_SHORT.toString());
 				fieldIsOk = false;
 			}
 
 			else if (username.length() > FieldsValues.USERNAME_MAX_LENGTH) {
-				usernameErrors.put(FieldsNames.REGISTER_LONG);
+				usernameErrors.put(RegisterFields.REGISTER_LONG.toString());
 				fieldIsOk = false;
 			}
 
 			if (username.matches(FieldsValues.USERNAME_FORBIDDEN_CHARS)) {
-				usernameErrors.put(FieldsNames.REGISTER_INVALID_CHAR);
+				usernameErrors.put(RegisterFields.REGISTER_INVALID_CHAR.toString());
 				fieldIsOk = false;
 			}
 
 			if (!fieldIsOk) {
-				errors.put(FieldsNames.USERNAME, usernameErrors);
+				errors.put(CommonFields.USERNAME.toString(), usernameErrors);
 				noErrors = false;
 			}
 
@@ -82,22 +84,22 @@ public class RegisterChecker {
 			JSONArray passwordErrors = new JSONArray();
 
 			if (password.length() < FieldsValues.PASSWORD_MIN_LENGTH) {
-				passwordErrors.put(FieldsNames.REGISTER_SHORT);
+				passwordErrors.put(RegisterFields.REGISTER_SHORT.toString());
 				fieldIsOk = false;
 			}
 
 			else if (password.length() > FieldsValues.PASSWORD_MAX_LENGTH) {
-				passwordErrors.put(FieldsNames.REGISTER_LONG);
+				passwordErrors.put(RegisterFields.REGISTER_LONG.toString());
 				fieldIsOk = false;
 			}
 
 			if (!password.matches(FieldsValues.PASSWORD_NEEDED_CHARS)) {
-				passwordErrors.put(FieldsNames.REGISTER_INVALID_CHAR);
+				passwordErrors.put(RegisterFields.REGISTER_INVALID_CHAR.toString());
 				fieldIsOk = false;
 			}
 
 			if (!fieldIsOk) {
-				errors.put(FieldsNames.PASSWORD, passwordErrors);
+				errors.put(CommonFields.PASSWORD.toString(), passwordErrors);
 				noErrors = false;
 			}
 
@@ -128,18 +130,18 @@ public class RegisterChecker {
 			JSONArray emailErrors = new JSONArray();
 
 			if (!emailValidator.isValid(email)) {
-				emailErrors.put(FieldsNames.INVALID);
+				emailErrors.put(CommonFields.INVALID.toString());
 				fieldIsOk = false;
 			}
 
 			if (email.endsWith("@example.com")) {
 				// TODO Add invalid domains
-				emailErrors.put(FieldsNames.REGISTER_INVALID_DOMAIN);
+				emailErrors.put(RegisterFields.REGISTER_INVALID_DOMAIN.toString());
 				fieldIsOk = false;
 			}
 
 			if (!fieldIsOk) {
-				errors.put(FieldsNames.EMAIL, emailErrors);
+				errors.put(RegisterFields.EMAIL.toString(), emailErrors);
 				noErrors = false;
 			}
 
@@ -163,10 +165,10 @@ public class RegisterChecker {
 		DataManager dataManager = DataManager.getInstance();
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
-			usernameErrors.put(FieldsNames.REGISTER_ALREADY_USED);
+			usernameErrors.put(RegisterFields.REGISTER_ALREADY_USED.toString());
 
 			try {
-				errors.put(FieldsNames.USERNAME, usernameErrors);
+				errors.put(CommonFields.USERNAME.toString(), usernameErrors);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -189,10 +191,10 @@ public class RegisterChecker {
 		DataManager dataManager = DataManager.getInstance();
 		if (!dataManager.checkEmail(email)) {
 			JSONArray emailErrors = new JSONArray();
-			emailErrors.put(FieldsNames.REGISTER_ALREADY_USED);
+			emailErrors.put(RegisterFields.REGISTER_ALREADY_USED.toString());
 
 			try {
-				errors.put(FieldsNames.EMAIL, emailErrors);
+				errors.put(RegisterFields.EMAIL.toString(), emailErrors);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

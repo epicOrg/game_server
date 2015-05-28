@@ -12,7 +12,9 @@ import org.json.JSONObject;
 
 import data_management.DataManager;
 import data_management.RegisteredUser;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * <code>Login</code> service allows the client to access to others services.
@@ -60,10 +62,10 @@ public class Login implements IService {
 
 		try {
 
-			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			String password = jsonRequest.getString(FieldsNames.PASSWORD);
+			String username = jsonRequest.getString(CommonFields.USERNAME.toString());
+			String password = jsonRequest.getString(CommonFields.PASSWORD.toString());
 			user = new RegisteredUser(username, password, null);
-			ipAddress = InetAddress.getByName(jsonRequest.getString(FieldsNames.IP_ADDRESS));
+			ipAddress = InetAddress.getByName(jsonRequest.getString(CommonFields.IP_ADDRESS.toString()));
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -89,10 +91,10 @@ public class Login implements IService {
 	private JSONObject generateResponse(boolean noErrors) {
 		JSONObject response = new JSONObject();
 		try {
-			response.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-			response.put(FieldsNames.USERNAME, user.getUsername());
-			response.put(FieldsNames.HASHCODE, hashCode);
-			response.put(FieldsNames.NO_ERRORS, noErrors);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
+			response.put(CommonFields.USERNAME.toString(), user.getUsername());
+			response.put(CommonFields.HASHCODE.toString(), hashCode);
+			response.put(CommonFields.NO_ERRORS.toString(), noErrors);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -102,6 +104,6 @@ public class Login implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.LOGIN;
+		return ServicesFields.LOGIN.toString();
 	}
 }

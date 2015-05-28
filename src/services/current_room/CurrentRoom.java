@@ -1,6 +1,7 @@
 package services.current_room;
 
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 import game.RoomPlayersUpdater;
 import game.model.Player;
 import game.model.PlayerEventListener;
@@ -40,7 +41,7 @@ public class CurrentRoom implements IExtendedService {
 	public JSONObject start(JSONObject request) {
 		String serviceType = null;
 		try {
-			serviceType = request.getString(FieldsNames.SERVICE_TYPE);
+			serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
 			// System.out.println(serviceType);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -59,6 +60,6 @@ public class CurrentRoom implements IExtendedService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.CURRENT_ROOM;
+		return ServicesFields.CURRENT_ROOM.toString();
 	}
 }

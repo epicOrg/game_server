@@ -11,7 +11,12 @@ import services.Login;
 import services.Register;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 
 /**
  * Test for an invalid Room Create request: room name already exists.
@@ -34,10 +39,10 @@ class CreateRoomTest02 {
 
 		// CLIENT: Registration
 		JSONObject jsonRegFromClient = new JSONObject();
-		jsonRegFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-		jsonRegFromClient.put(FieldsNames.USERNAME, randomUsername);
-		jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
-		jsonRegFromClient.put(FieldsNames.EMAIL, randomUsername + "@logos.org");
+		jsonRegFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+		jsonRegFromClient.put(CommonFields.USERNAME.toString(), randomUsername);
+		jsonRegFromClient.put(CommonFields.PASSWORD.toString(), "Doxa0rTrolling");
+		jsonRegFromClient.put(RegisterFields.EMAIL.toString(), randomUsername + "@logos.org");
 		System.out.println("CLIENT Registration Message: " + jsonRegFromClient);
 
 		// SERVER: Register the user
@@ -47,11 +52,11 @@ class CreateRoomTest02 {
 
 		// CLIENT: Send message to go online
 		JSONObject jsonLoginFromClient = new JSONObject();
-		jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-		jsonLoginFromClient.put(FieldsNames.USERNAME, randomUsername);
-		jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
-		jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
-		jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
+		jsonLoginFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
+		jsonLoginFromClient.put(CommonFields.USERNAME.toString(), randomUsername);
+		jsonLoginFromClient.put(CommonFields.PASSWORD.toString(), "Doxa0rTrolling");
+		jsonLoginFromClient.put(CommonFields.IP_ADDRESS.toString(), "192.168.1.3");
+		jsonLoginFromClient.put(CommonFields.LOCAL_PORT.toString(), "1234");
 		System.out.println("CLIENT Login Message: " + jsonLoginFromClient);
 
 		// SERVER: Set the user online
@@ -62,16 +67,18 @@ class CreateRoomTest02 {
 
 		// CLIENT: Read response from server
 		JSONObject jsonLoginFromServer = new JSONObject(stringLoginFromServer);
-		int hashCode = (int) jsonLoginFromServer.get(FieldsNames.HASHCODE);
+		int hashCode = (int) jsonLoginFromServer.get(CommonFields.HASHCODE.toString());
 
 		// CLIENT: Send a RoomCreate request
 		JSONObject jsonRoomCreateFromClient = new JSONObject();
-		jsonRoomCreateFromClient.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-		jsonRoomCreateFromClient.put(FieldsNames.SERVICE_TYPE,
-				FieldsNames.ROOM_CREATE);
-		jsonRoomCreateFromClient.put(FieldsNames.ROOM_NAME, "OntologicRoom");
-		jsonRoomCreateFromClient.put(FieldsNames.USERNAME, randomUsername);
-		jsonRoomCreateFromClient.put(FieldsNames.HASHCODE, hashCode);
+		jsonRoomCreateFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+		jsonRoomCreateFromClient.put(ServicesFields.SERVICE_TYPE.toString(),
+				RoomsFields.ROOM_CREATE.toString());
+		jsonRoomCreateFromClient.put(RoomFields.ROOM_NAME.toString(), "OntologicRoom");
+		jsonRoomCreateFromClient.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
+		jsonRoomCreateFromClient.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
+		jsonRoomCreateFromClient.put(CommonFields.USERNAME.toString(), randomUsername);
+		jsonRoomCreateFromClient.put(CommonFields.HASHCODE.toString(), hashCode);
 		System.out.println("CLIENT RoomCreate Message: "
 				+ jsonRoomCreateFromClient);
 
@@ -84,13 +91,15 @@ class CreateRoomTest02 {
 		// CLIENT: Send a duplicate Room Create request
 		JSONObject jsonRoomCreateFromClientCopy = new JSONObject();
 		jsonRoomCreateFromClientCopy
-				.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-		jsonRoomCreateFromClientCopy.put(FieldsNames.SERVICE_TYPE,
-				FieldsNames.ROOM_CREATE);
+				.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+		jsonRoomCreateFromClientCopy.put(ServicesFields.SERVICE_TYPE.toString(),
+				RoomsFields.ROOM_CREATE.toString());
 		jsonRoomCreateFromClientCopy
-				.put(FieldsNames.ROOM_NAME, "OntologicRoom");
-		jsonRoomCreateFromClientCopy.put(FieldsNames.USERNAME, randomUsername);
-		jsonRoomCreateFromClientCopy.put(FieldsNames.HASHCODE, hashCode);
+				.put(RoomFields.ROOM_NAME.toString(), "OntologicRoom");
+		jsonRoomCreateFromClientCopy.put(CommonFields.USERNAME.toString(), randomUsername);
+		jsonRoomCreateFromClientCopy.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
+		jsonRoomCreateFromClientCopy.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
+		jsonRoomCreateFromClientCopy.put(CommonFields.HASHCODE.toString(), hashCode);
 		System.out.println("CLIENT RoomCreate Message: "
 				+ jsonRoomCreateFromClientCopy);
 

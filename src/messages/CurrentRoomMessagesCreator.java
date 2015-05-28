@@ -1,6 +1,10 @@
 package messages;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 import game.model.Player;
 import game.model.Room;
 import game.model.Team;
@@ -35,12 +39,12 @@ public class CurrentRoomMessagesCreator {
 
 		try {
 
-			response.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_PLAYER_LIST);
-			response.put(FieldsNames.ROOM_MAX_PLAYERS, room.getMaxPlayers());
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.CURRENT_ROOM.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomFields.ROOM_PLAYER_LIST.toString());
+			response.put(RoomsFields.ROOM_MAX_PLAYERS.toString(), room.getMaxPlayers());
 
 			JSONArray teams = formatTeams(room);
-			response.put(FieldsNames.ROOM_TEAM, teams);
+			response.put(RoomFields.ROOM_TEAM.toString(), teams);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -62,10 +66,10 @@ public class CurrentRoomMessagesCreator {
 
 		try {
 
-			response.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-			response.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_EXIT);
-			response.put(FieldsNames.NO_ERRORS, result);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.CURRENT_ROOM.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomFields.ROOM_ACTIONS.toString());
+			response.put(RoomFields.ROOM_ACTION.toString(), RoomFields.ROOM_EXIT.toString());
+			response.put(CommonFields.NO_ERRORS.toString(), result);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -79,9 +83,9 @@ public class CurrentRoomMessagesCreator {
 		for (Team t : room.getTeamGenerator().getTeams()) {
 			JSONObject team = new JSONObject();
 			JSONArray players = formatPlayers(t);
-			team.put(FieldsNames.ROOM_TEAM_COLOR, t.getTeamColor().getRGB());
-			team.put(FieldsNames.ROOM_NAME, t.getTeamName());
-			team.put(FieldsNames.LIST, players);
+			team.put(RoomFields.ROOM_TEAM_COLOR.toString(), t.getTeamColor().getRGB());
+			team.put(RoomFields.ROOM_NAME.toString(), t.getTeamName());
+			team.put(CommonFields.LIST.toString(), players);
 			teams.put(team);
 		}
 		return teams;
@@ -91,7 +95,7 @@ public class CurrentRoomMessagesCreator {
 		JSONArray players = new JSONArray();
 		for (Player p : t.getPlayers()) {
 			JSONObject jObject = new JSONObject();
-			jObject.put(FieldsNames.USERNAME, p.getUsername());
+			jObject.put(CommonFields.USERNAME.toString(), p.getUsername());
 			players.put(jObject);
 		}
 		return players;

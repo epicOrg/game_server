@@ -10,7 +10,10 @@ import services.IService;
 import services.Login;
 import services.Register;
 import database.Paths;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.ServicesFields;
 
 /**
  * Register NUMBER_OF_USERS users and login them. Note: remember to delete the
@@ -37,10 +40,10 @@ class Test01 {
 
 			// CLIENT: Registration
 			JSONObject jsonRegFromClient = new JSONObject();
-			jsonRegFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-			jsonRegFromClient.put(FieldsNames.USERNAME, username);
-			jsonRegFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
-			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@logos.org");
+			jsonRegFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+			jsonRegFromClient.put(CommonFields.USERNAME.toString(), username);
+			jsonRegFromClient.put(CommonFields.PASSWORD.toString(), "Doxa0rTrolling");
+			jsonRegFromClient.put(RegisterFields.EMAIL.toString(), username + "@logos.org");
 			System.out.println("[" + i + "] CLIENT Registration Message: " + jsonRegFromClient);
 
 			// SERVER: Register the user
@@ -50,11 +53,11 @@ class Test01 {
 
 			// CLIENT: Send message to go online
 			JSONObject jsonLoginFromClient = new JSONObject();
-			jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
-			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Doxa0rTrolling");
-			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.3");
-			jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
+			jsonLoginFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
+			jsonLoginFromClient.put(CommonFields.USERNAME.toString(), username);
+			jsonLoginFromClient.put(CommonFields.PASSWORD.toString(), "Doxa0rTrolling");
+			jsonLoginFromClient.put(CommonFields.IP_ADDRESS.toString(), "192.168.1.3");
+			jsonLoginFromClient.put(CommonFields.LOCAL_PORT.toString(), "1234");
 			System.out.println("[" + i + "] CLIENT Login Message: " + jsonLoginFromClient);
 
 			// SERVER: Set the user online
@@ -65,7 +68,7 @@ class Test01 {
 			// CLIENT: Read response from server
 			JSONObject jsonLoginFromServer = new JSONObject(stringLoginFromServer);
 			@SuppressWarnings("unused")
-			int hashCode = (int) jsonLoginFromServer.get(FieldsNames.HASHCODE);
+			int hashCode = (int) jsonLoginFromServer.get(CommonFields.HASHCODE.toString());
 		}
 
 		// Deleted registration file for a clean test

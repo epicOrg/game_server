@@ -1,6 +1,9 @@
 package services.game.subservices;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.RoomFields;
 import game.model.Player;
 
 import org.json.JSONException;
@@ -26,11 +29,11 @@ public class GameReady implements IService {
 	public JSONObject start(JSONObject request) {
 		System.out.println(getName());
 		try {
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
-			String username = request.getString(FieldsNames.USERNAME);
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
+			String username = request.getString(CommonFields.USERNAME.toString());
 			Player player = GameDataManager.getInstance().getRoomByName(roomName)
 					.getPlayerByName(username);
-			player.setStatus(request.getBoolean(FieldsNames.GAME_READY));
+			player.setStatus(request.getBoolean(GameFields.GAME_READY.toString()));
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -46,6 +49,6 @@ public class GameReady implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME_READY;
+		return GameFields.GAME_READY.toString();
 	}
 }

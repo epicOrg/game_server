@@ -1,6 +1,9 @@
 package services.game.subservices;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.RoomFields;
 import game.model.Player;
 import game.model.Room;
 
@@ -30,8 +33,8 @@ public class GameExit implements IService {
 		System.out.println(getName());
 
 		try {
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
-			String username = request.getString(FieldsNames.USERNAME);
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
+			String username = request.getString(CommonFields.USERNAME.toString());
 			GameDataManager gameDataManager = GameDataManager.getInstance();
 			Player player = gameDataManager.getRoomByName(roomName).getPlayerByName(username);
 
@@ -53,6 +56,6 @@ public class GameExit implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME_EXIT;
+		return GameFields.GAME_EXIT.toString();
 	}
 }

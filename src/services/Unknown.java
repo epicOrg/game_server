@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * Default Service started when the Requested service from the client isn't supported.
@@ -20,7 +21,7 @@ public class Unknown implements IService {
 		JSONObject response = new JSONObject();
 
 		try {
-			response.put(FieldsNames.SERVICE, FieldsNames.UNKNOWN);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.UNKNOWN.toString());
 		} catch (JSONException e) {
 		}
 
@@ -29,6 +30,6 @@ public class Unknown implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.UNKNOWN;
+		return ServicesFields.UNKNOWN.toString();
 	}
 }

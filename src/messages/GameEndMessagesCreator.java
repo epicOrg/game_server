@@ -1,6 +1,8 @@
 package messages;
 
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.ServicesFields;
 import game.model.RoomThread;
 
 import org.json.JSONException;
@@ -27,9 +29,9 @@ public class GameEndMessagesCreator {
 
 		try {
 
-			loseMessage.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			loseMessage.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			loseMessage.put(FieldsNames.GAME_END, FieldsNames.GAME_LOSE);
+			loseMessage.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			loseMessage.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
+			loseMessage.put(GameFields.GAME_END.toString(), GameFields.GAME_LOSE.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -49,9 +51,9 @@ public class GameEndMessagesCreator {
 
 		try {
 
-			winMessage.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			winMessage.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			winMessage.put(FieldsNames.GAME_END, FieldsNames.GAME_WIN);
+			winMessage.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			winMessage.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
+			winMessage.put(GameFields.GAME_END.toString(), GameFields.GAME_WIN.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -71,9 +73,9 @@ public class GameEndMessagesCreator {
 
 		try {
 
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_END, FieldsNames.GAME_DRAW);
+			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
+			message.put(GameFields.GAME_END.toString(), GameFields.GAME_DRAW.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

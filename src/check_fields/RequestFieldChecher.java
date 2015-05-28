@@ -8,7 +8,9 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 import services.IService;
 import services.Login;
 
@@ -46,14 +48,14 @@ public class RequestFieldChecher {
 	public boolean checkRequest(JSONObject request) {
 
 		try {
-			String serviceName = request.getString(FieldsNames.SERVICE);
+			String serviceName = request.getString(ServicesFields.SERVICE.toString());
 
 			if (serviceNotToBeChecked.contains(serviceName)) {
 				return true;
 			} else {
 
-				String username = request.getString(FieldsNames.USERNAME);
-				int hashCode = request.getInt(FieldsNames.HASHCODE);
+				String username = request.getString(CommonFields.USERNAME.toString());
+				int hashCode = request.getInt(CommonFields.HASHCODE.toString());
 				return cecker.isUserOnline(username) && cecker.checkHashCode(username, hashCode);
 			}
 

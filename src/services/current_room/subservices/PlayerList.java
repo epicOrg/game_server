@@ -1,6 +1,7 @@
 package services.current_room.subservices;
 
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
 import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
 
@@ -38,7 +39,7 @@ public class PlayerList implements IService {
 
 		try {
 
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
 			return messagesCreator.generatePlayersListMessage(room);
 
@@ -54,6 +55,6 @@ public class PlayerList implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_PLAYER_LIST;
+		return RoomFields.ROOM_PLAYER_LIST.toString();
 	}
 }

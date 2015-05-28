@@ -8,7 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import database.Paths;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.ServicesFields;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after the
@@ -39,10 +42,10 @@ class Test03 {
 
 			// CLIENT: Registration
 			JSONObject jsonRegFromClient = new JSONObject();
-			jsonRegFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-			jsonRegFromClient.put(FieldsNames.USERNAME, username);
-			jsonRegFromClient.put(FieldsNames.PASSWORD, "Friedrich59");
-			jsonRegFromClient.put(FieldsNames.EMAIL, username + "@neckar.com");
+			jsonRegFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+			jsonRegFromClient.put(CommonFields.USERNAME.toString(), username);
+			jsonRegFromClient.put(CommonFields.PASSWORD.toString(), "Friedrich59");
+			jsonRegFromClient.put(RegisterFields.EMAIL.toString(), username + "@neckar.com");
 			System.out.println("[" + i + "] CLIENT Registration Message: "
 					+ jsonRegFromClient);
 
@@ -50,11 +53,11 @@ class Test03 {
 
 			// CLIENT: Send message to go online
 			JSONObject jsonLoginFromClient = new JSONObject();
-			jsonLoginFromClient.put(FieldsNames.SERVICE, FieldsNames.LOGIN);
-			jsonLoginFromClient.put(FieldsNames.USERNAME, username);
-			jsonLoginFromClient.put(FieldsNames.PASSWORD, "Friedrich59");
-			jsonLoginFromClient.put(FieldsNames.IP_ADDRESS, "192.168.1.4");
-			jsonLoginFromClient.put(FieldsNames.LOCAL_PORT, "1234");
+			jsonLoginFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
+			jsonLoginFromClient.put(CommonFields.USERNAME.toString(), username);
+			jsonLoginFromClient.put(CommonFields.PASSWORD.toString(), "Friedrich59");
+			jsonLoginFromClient.put(CommonFields.IP_ADDRESS.toString(), "192.168.1.4");
+			jsonLoginFromClient.put(CommonFields.LOCAL_PORT.toString(), "1234");
 			System.out.println("[" + i + "] CLIENT Login Message: "
 					+ jsonLoginFromClient + "\n");
 

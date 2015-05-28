@@ -7,7 +7,10 @@ import org.json.JSONObject;
 
 import server.ServerInitializer;
 import services.Register;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.ServicesFields;
 
 /**
  * Test for client registration with an error: email already used.
@@ -29,10 +32,10 @@ class Test03 {
 
 		// CLIENT: Registration
 		JSONObject jsonRegFromClient = new JSONObject();
-		jsonRegFromClient.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-		jsonRegFromClient.put(FieldsNames.USERNAME, randomUsername);
-		jsonRegFromClient.put(FieldsNames.PASSWORD, "abdera460");
-		jsonRegFromClient.put(FieldsNames.EMAIL, randomUsername + "@atom.com");
+		jsonRegFromClient.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+		jsonRegFromClient.put(CommonFields.USERNAME.toString(), randomUsername);
+		jsonRegFromClient.put(CommonFields.PASSWORD.toString(), "abdera460");
+		jsonRegFromClient.put(RegisterFields.EMAIL.toString(), randomUsername + "@atom.com");
 		System.out.println("CLIENT Registration Message: " + jsonRegFromClient);
 
 		// SERVER: Register the user
@@ -42,10 +45,10 @@ class Test03 {
 
 		// CLIENT: Try to register with the same email
 		JSONObject jsonRegFromClientCopy = new JSONObject();
-		jsonRegFromClientCopy.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-		jsonRegFromClientCopy.put(FieldsNames.USERNAME, randomUsername + "LOL");
-		jsonRegFromClientCopy.put(FieldsNames.PASSWORD, "abdera460");
-		jsonRegFromClientCopy.put(FieldsNames.EMAIL, randomUsername
+		jsonRegFromClientCopy.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+		jsonRegFromClientCopy.put(CommonFields.USERNAME.toString(), randomUsername + "LOL");
+		jsonRegFromClientCopy.put(CommonFields.PASSWORD.toString(), "abdera460");
+		jsonRegFromClientCopy.put(RegisterFields.EMAIL.toString(), randomUsername
 				+ "@atom.com");
 		System.out.println("CLIENT Registration Message: " + jsonRegFromClient);
 

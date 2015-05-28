@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import data_management.GameDataManager;
 import fields_names.FieldsNames;
+import fields_names.RoomsFields;
 import services.IService;
 
 /**
@@ -29,6 +30,6 @@ public class RoomsList implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOMS_LIST;
+		return RoomsFields.ROOMS_LIST.toString();
 	}
 }

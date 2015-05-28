@@ -11,7 +11,11 @@ import org.json.JSONObject;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import exceptions.UserNotOnlineException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 
 /**
  * RoomService request message test with hashCode error.
@@ -32,11 +36,13 @@ class RoomCheckerTest02 {
 		try {
 			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
 			JSONObject jsonRequest = new JSONObject();
-			jsonRequest.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			jsonRequest.put(FieldsNames.USERNAME, "Nietzsche");
-			jsonRequest.put(FieldsNames.HASHCODE, hashCode + 1);
-			jsonRequest.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-			jsonRequest.put(FieldsNames.ROOM_NAME, "GottIstTot");
+			jsonRequest.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			jsonRequest.put(CommonFields.USERNAME.toString(), "Nietzsche");
+			jsonRequest.put(CommonFields.HASHCODE.toString(), hashCode + 1);
+			jsonRequest.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			jsonRequest.put(RoomFields.ROOM_NAME.toString(), "GottIstTot");
+			jsonRequest.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
+			jsonRequest.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
 
 			System.out.println("Request: " + jsonRequest);
 			

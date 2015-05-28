@@ -1,6 +1,7 @@
 package services.rooms;
 
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 import game.model.Room;
 
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class Rooms implements IExtendedService {
 	public JSONObject start(JSONObject request) {
 		String serviceType = null;
 		try {
-			serviceType = request.getString(FieldsNames.SERVICE_TYPE);
+			serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
 			System.out.println(serviceType);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -48,7 +49,7 @@ public class Rooms implements IExtendedService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOMS;
+		return ServicesFields.ROOMS.toString();
 	}
 
 	@Override

@@ -8,7 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import exceptions.UserNotOnlineException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * 
@@ -30,7 +32,7 @@ public class Polling implements IService {
 		OnlineManager onlineManager = OnlineManager.getInstance();
 		
 		try {
-			String username = request.getString(FieldsNames.USERNAME);
+			String username = request.getString(CommonFields.USERNAME.toString());
 			OnlineUser user = onlineManager.getOnlineUserByUsername(username);
 			user.setPolled(true);
 		} catch (JSONException e) {
@@ -45,6 +47,6 @@ public class Polling implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.POLLING;
+		return ServicesFields.POLLING.toString();
 	}
 }

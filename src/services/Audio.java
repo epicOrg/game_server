@@ -1,6 +1,10 @@
 package services;
 
+import fields_names.AudioFields;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.ServicesFields;
 import game.model.Player;
 
 import org.json.JSONException;
@@ -29,11 +33,11 @@ public class Audio implements IService {
 		int localPort = NetUtils.findFreePort();
 		try {
 
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
-			String username = request.getString(FieldsNames.USERNAME);
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
+			String username = request.getString(CommonFields.USERNAME.toString());
 			Player player = dataManager.getRoomByName(roomName)
 					.getPlayerByName(username);
-			int playerAudioPort = request.getInt(FieldsNames.AUDIO_PORT_CLIENT);
+			int playerAudioPort = request.getInt(AudioFields.AUDIO_PORT_CLIENT.toString());
 			AudioData audioData = player.getAudioData();			
 			audioData.setLocalPort(localPort);
 			int localControlPort = NetUtils.findFreePort();
@@ -55,8 +59,8 @@ public class Audio implements IService {
 	protected JSONObject generateResponse(int localPort){
 		JSONObject response = new JSONObject();
 		try {
-			response.put(FieldsNames.SERVICE, FieldsNames.AUDIO);
-			response.put(FieldsNames.AUDIO_PORT_SERVER, localPort);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.AUDIO.toString());
+			response.put(AudioFields.AUDIO_PORT_SERVER.toString(), localPort);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +70,6 @@ public class Audio implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.AUDIO;
+		return ServicesFields.AUDIO.toString();
 	}
 }

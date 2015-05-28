@@ -8,6 +8,9 @@ import services.rooms.subservices.CreateRoom;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 import game.model.Team;
 import game.model.TeamManager;
 
@@ -30,9 +33,11 @@ class RoomsServiceTest01 {
 		
 		try {
 
-			request.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			request.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-			request.put(FieldsNames.ROOM_NAME, "ciao2");
+			request.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			request.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			request.put(RoomFields.ROOM_NAME.toString(), "ciao2");
+			request.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
+			request.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
 			System.out.println(request.toString());
 
 		} catch (JSONException e) {

@@ -8,7 +8,10 @@ import org.json.JSONObject;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.RoomFields;
 import game.model.Player;
 import game.model.PlayerStatus;
 import game.model.Room;
@@ -38,9 +41,9 @@ public class GamePositions implements IService {
 
 		try {
 
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
-			String username = request.getString(FieldsNames.USERNAME);
+			String username = request.getString(CommonFields.USERNAME.toString());
 
 			UpdatePlayerStatus(username, request, room);
 			return messagesCreator.generatePositionMessage(username, room);
@@ -57,14 +60,14 @@ public class GamePositions implements IService {
 	private void UpdatePlayerStatus(String username, JSONObject request, Room room)
 			throws JSONException, NoSuchPlayerException {
 
-		JSONObject posObject = request.getJSONObject(FieldsNames.GAME_POSITION);
-		JSONObject dirObject = request.getJSONObject(FieldsNames.GAME_DIRECTION);
-		float xPos = (float) posObject.getDouble(FieldsNames.GAME_X);
-		float yPos = (float) posObject.getDouble(FieldsNames.GAME_Y);
-		float zPos = (float) posObject.getDouble(FieldsNames.GAME_Z);
-		float xDir = (float) dirObject.getDouble(FieldsNames.GAME_X);
-		float yDir = (float) dirObject.getDouble(FieldsNames.GAME_Y);
-		float zDir = (float) dirObject.getDouble(FieldsNames.GAME_Z);
+		JSONObject posObject = request.getJSONObject(GameFields.GAME_POSITION.toString());
+		JSONObject dirObject = request.getJSONObject(GameFields.GAME_DIRECTION.toString());
+		float xPos = (float) posObject.getDouble(GameFields.GAME_X.toString());
+		float yPos = (float) posObject.getDouble(GameFields.GAME_Y.toString());
+		float zPos = (float) posObject.getDouble(GameFields.GAME_Z.toString());
+		float xDir = (float) dirObject.getDouble(GameFields.GAME_X.toString());
+		float yDir = (float) dirObject.getDouble(GameFields.GAME_Y.toString());
+		float zDir = (float) dirObject.getDouble(GameFields.GAME_Z.toString());
 
 		Player player = room.getPlayerByName(username);
 		player.getPlayerStatus().setPosition(xPos, yPos, zPos);
@@ -73,6 +76,6 @@ public class GamePositions implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME_POSITIONS;
+		return GameFields.GAME_POSITIONS.toString();
 	}
 }

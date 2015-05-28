@@ -4,7 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import connection_encryption.ConnectionEncrypter;
+import fields_names.CommonFields;
+import fields_names.EncryptFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -15,7 +18,8 @@ public class Encrypt implements IService {
 
 	private JSONObject jsonRequest;
 	private JSONObject jsonResponse;
-
+	
+	private static final String PUBLIC_KEY_REQUEST = "PUBLIC_KEY_REQUEST";
 	@Override
 	public JSONObject start(JSONObject jsonRequest) {
 		this.jsonRequest = jsonRequest;
@@ -27,13 +31,15 @@ public class Encrypt implements IService {
 	}
 
 	private void runService() {
+		
+		
 
 		try {
 
-			switch (jsonRequest.getString(FieldsNames.SERVICE_TYPE)) {
+			switch (jsonRequest.getString(ServicesFields.SERVICE_TYPE.toString())) {
 
-			case FieldsNames.PUBLIC_KEY_REQUEST:
-				jsonResponse.put(FieldsNames.PUBLIC_KEY,
+			case PUBLIC_KEY_REQUEST:
+				jsonResponse.put(EncryptFields.PUBLIC_KEY.toString(),
 						ConnectionEncrypter.getPublicKey()); // TODO
 				break;
 			}
@@ -47,8 +53,8 @@ public class Encrypt implements IService {
 
 		try {
 
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.ENCRYPT);
-			jsonResponse.put(FieldsNames.NO_ERRORS, true);
+			jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.ENCRYPT.toString());
+			jsonResponse.put(CommonFields.NO_ERRORS.toString(), true);
 
 		} catch (JSONException e) {
 		}
@@ -56,7 +62,7 @@ public class Encrypt implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ENCRYPT;
+		return ServicesFields.ENCRYPT.toString();
 	}
 
 }

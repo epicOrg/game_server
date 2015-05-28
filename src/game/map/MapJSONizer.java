@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import fields_names.FieldsNames;
+import fields_names.GameFields;
 import game.model.PlayerStatus;
 
 /**
@@ -42,16 +43,16 @@ public class MapJSONizer {
 
 				JSONObject adapted = new JSONObject();
 
-				adapted.put(FieldsNames.GAME_OBJECT, i.getObjectName());
-				adapted.put(FieldsNames.GAME_TEXTURE, i.getTextureName());
+				adapted.put(GameFields.GAME_OBJECT.toString(), i.getObjectName());
+				adapted.put(GameFields.GAME_TEXTURE.toString(), i.getTextureName());
 
 				String position = new MapDimension(i.getPosition().getWidth() + PHASE, i
 						.getPosition().getHeight(), i.getPosition().getLength() + PHASE).toString();
-				adapted.put(FieldsNames.GAME_POSITION, position);
+				adapted.put(GameFields.GAME_POSITION.toString(), position);
 
 				String size = new MapDimension(i.getSize().getWidth(), i.getSize().getHeight(), i
 						.getSize().getLength()).toString();
-				adapted.put(FieldsNames.GAME_SIZE, size);
+				adapted.put(GameFields.GAME_SIZE.toString(), size);
 
 				adaptedItems.put(adapted);
 			}

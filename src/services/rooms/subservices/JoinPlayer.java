@@ -3,7 +3,10 @@ package services.rooms.subservices;
 import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
 import game.model.Player;
 import game.model.Room;
 
@@ -41,11 +44,11 @@ public class JoinPlayer implements IService {
 
 		try {
 
-			player = new Player(request.getString(FieldsNames.USERNAME));
+			player = new Player(request.getString(CommonFields.USERNAME.toString()));
 			InetAddress address = OnlineManager.getInstance().getIpAddressByUsername(
 					player.getUsername());
 			player.getAudioData().setIp(NetUtils.getIpByInetAddress(address));
-			roomName = request.getString(FieldsNames.ROOM_NAME);
+			roomName = request.getString(RoomFields.ROOM_NAME.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -65,6 +68,6 @@ public class JoinPlayer implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_JOIN;
+		return RoomsFields.ROOM_JOIN.toString();
 	}
 }

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import services.IService;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -39,7 +40,7 @@ public class ServiceChooser {
 
 		String serviceName;
 		try {
-			serviceName = json.getString(FieldsNames.SERVICE);
+			serviceName = json.getString(ServicesFields.SERVICE.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 			serviceName = null;
@@ -47,7 +48,7 @@ public class ServiceChooser {
 
 		IService service = services.get(serviceName);
 		if (service == null)
-			service = services.get(FieldsNames.UNKNOWN);
+			service = services.get(ServicesFields.UNKNOWN.toString());
 
 		return service;
 	}

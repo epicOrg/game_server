@@ -1,6 +1,10 @@
 package messages;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.RoomFields;
+import fields_names.ServicesFields;
 import game.model.Room;
 
 import org.json.JSONException;
@@ -32,10 +36,10 @@ public class UpdatingMessagesCreator {
 
 		try {
 
-			message.put(FieldsNames.SERVICE, FieldsNames.CURRENT_ROOM);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_ACTIONS);
-			message.put(FieldsNames.ROOM_ACTION, FieldsNames.ROOM_START);
-			message.put(FieldsNames.NO_ERRORS, true);
+			message.put(ServicesFields.SERVICE.toString(), ServicesFields.CURRENT_ROOM.toString());
+			message.put(ServicesFields.SERVICE_TYPE.toString(), RoomFields.ROOM_ACTIONS.toString());
+			message.put(RoomFields.ROOM_ACTION.toString(), RoomFields.ROOM_START.toString());
+			message.put(CommonFields.NO_ERRORS.toString(), true);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -63,9 +67,9 @@ public class UpdatingMessagesCreator {
 	public JSONObject generateGoMessage() {
 		JSONObject message = new JSONObject();
 		try {
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_GO, true);
+			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
+			message.put(GameFields.GAME_GO.toString(), true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -80,9 +84,9 @@ public class UpdatingMessagesCreator {
 	public JSONObject generateExitMessage() {
 		JSONObject message = new JSONObject();
 		try {
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_STATUS);
-			message.put(FieldsNames.GAME_END, FieldsNames.GAME_INTERRUPTED);
+			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
+			message.put(GameFields.GAME_END.toString(), GameFields.GAME_INTERRUPTED.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

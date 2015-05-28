@@ -1,6 +1,10 @@
 package messages;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 import game.model.Room;
 
 import java.util.ArrayList;
@@ -18,14 +22,14 @@ public class RoomsMessagesCreator {
 
 	public JSONObject generateNameInvalidRespose() {
 
-		String error = FieldsNames.ROOM_CREATE_ERROR_INVALID_NAME;
+		String error = RoomsFields.ROOM_CREATE_ERROR_INVALID_NAME.toString();
 		JSONObject response = getCreateFailedMessage(error);
 		return response;
 	}
 
 	public JSONObject generateRoomExistMessage() {
 
-		String error = FieldsNames.ROOM_CREATE_ERROR_ALREADY_PRESENT;
+		String error = RoomsFields.ROOM_CREATE_ERROR_ALREADY_PRESENT.toString();
 		JSONObject response = getCreateFailedMessage(error);
 		return response;
 
@@ -36,19 +40,19 @@ public class RoomsMessagesCreator {
 		JSONObject roomsList = new JSONObject();
 
 		try {
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOMS_LIST);
-			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			response.put(FieldsNames.NO_ERRORS, true);
+			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOMS_LIST.toString());
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			response.put(CommonFields.NO_ERRORS.toString(), true);
 			for (Room room : rooms) {
 				JSONObject roomDescription = new JSONObject();
-				roomDescription.put(FieldsNames.ROOM_MAX_PLAYERS,
+				roomDescription.put(RoomsFields.ROOM_MAX_PLAYERS.toString(),
 						room.getMaxPlayers());
-				roomDescription.put(FieldsNames.ROOM_CURRENT_PLAYERS,
+				roomDescription.put(RoomFields.ROOM_CURRENT_PLAYERS.toString(),
 						room.getSize());
 				roomsList.put(room.getName(), roomDescription);
 			}
 
-			response.put(FieldsNames.ROOMS_LIST, roomsList);
+			response.put(RoomsFields.ROOMS_LIST.toString(), roomsList);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -62,11 +66,11 @@ public class RoomsMessagesCreator {
 		JSONObject response = new JSONObject();
 		
 		try {
-			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_JOIN);
-			response.put(FieldsNames.ROOM_NAME, roomName);
-			response.put(FieldsNames.RESULT, result);
-			response.put(FieldsNames.NO_ERRORS, result);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_JOIN.toString());
+			response.put(RoomFields.ROOM_NAME.toString(), roomName);
+			response.put(CommonFields.RESULT.toString(), result);
+			response.put(CommonFields.NO_ERRORS.toString(), result);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -78,14 +82,14 @@ public class RoomsMessagesCreator {
 	private JSONObject getCreateFailedMessage(String error) {
 		JSONObject response = new JSONObject();
 		try {
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.ROOM_CREATE);
-			response.put(FieldsNames.SERVICE, FieldsNames.ROOMS);
-			response.put(FieldsNames.NO_ERRORS, false);
+			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			response.put(CommonFields.NO_ERRORS.toString(), false);
 			JSONObject errorObj = new JSONObject();
 			JSONArray errors = new JSONArray();
 			errors.put(error);
-			errorObj.put(FieldsNames.ERRORS, errors);
-			response.put(FieldsNames.ERRORS, errorObj);
+			errorObj.put(CommonFields.ERRORS.toString(), errors);
+			response.put(CommonFields.ERRORS.toString(), errorObj);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

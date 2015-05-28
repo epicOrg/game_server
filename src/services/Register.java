@@ -8,7 +8,10 @@ import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RegisterFields;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -52,9 +55,9 @@ public class Register implements IService {
 
 		try {
 
-			String username = jsonRequest.getString(FieldsNames.USERNAME);
-			String password = jsonRequest.getString(FieldsNames.PASSWORD);
-			String email = jsonRequest.getString(FieldsNames.EMAIL);
+			String username = jsonRequest.getString(CommonFields.USERNAME.toString());
+			String password = jsonRequest.getString(CommonFields.PASSWORD.toString());
+			String email = jsonRequest.getString(RegisterFields.EMAIL.toString());
 			registeredUser = new RegisteredUser(username, password, email);
 
 		} catch (JSONException e) {
@@ -83,7 +86,7 @@ public class Register implements IService {
 		} catch (RegistrationFailedException e) {
 			try {
 
-				jsonResponse.put(FieldsNames.SERVER_ERROR, true);
+				jsonResponse.put(CommonFields.SERVER_ERROR.toString(), true);
 				registerChecker.addError();
 
 			} catch (JSONException e1) {
@@ -96,9 +99,9 @@ public class Register implements IService {
 
 		try {
 
-			jsonResponse.put(FieldsNames.SERVICE, FieldsNames.REGISTER);
-			jsonResponse.put(FieldsNames.NO_ERRORS, registerChecker.noErrors());
-			jsonResponse.put(FieldsNames.ERRORS, registerChecker.getErrors());
+			jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.REGISTER.toString());
+			jsonResponse.put(CommonFields.NO_ERRORS.toString(), registerChecker.noErrors());
+			jsonResponse.put(CommonFields.ERRORS.toString(), registerChecker.getErrors());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -107,6 +110,6 @@ public class Register implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.REGISTER;
+		return ServicesFields.REGISTER.toString();
 	}
 }

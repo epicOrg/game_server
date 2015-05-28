@@ -1,6 +1,9 @@
 package messages;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.ServicesFields;
 import game.map.MapJSONizer;
 import game.model.Player;
 import game.model.PlayerStatus;
@@ -37,8 +40,8 @@ public class GameMessagesCreator {
 		JSONObject response = new JSONObject();
 		try {
 
-			response.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			response.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_POSITIONS);
+			response.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_POSITIONS.toString());
 
 			JSONArray jPlayers = new JSONArray();
 
@@ -54,7 +57,7 @@ public class GameMessagesCreator {
 				jPlayers.put(formatPlayer(p));
 			}
 
-			response.put(FieldsNames.GAME_PLAYERS, jPlayers);
+			response.put(GameFields.GAME_PLAYERS.toString(), jPlayers);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -71,9 +74,9 @@ public class GameMessagesCreator {
 			
 			JSONObject jsonPosition = formatPosition(status);
 			JSONObject jsonDirection = formatDirection(status);
-			jPlayer.put(FieldsNames.GAME_POSITION, jsonPosition);
-			jPlayer.put(FieldsNames.GAME_DIRECTION, jsonDirection);
-			jPlayer.put(FieldsNames.USERNAME, p.getUsername());
+			jPlayer.put(GameFields.GAME_POSITION.toString(), jsonPosition);
+			jPlayer.put(GameFields.GAME_DIRECTION.toString(), jsonDirection);
+			jPlayer.put(CommonFields.USERNAME.toString(), p.getUsername());
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -84,17 +87,17 @@ public class GameMessagesCreator {
 
 	private JSONObject formatDirection(PlayerStatus status) throws JSONException {
 		JSONObject jsonDirection = new JSONObject();
-		jsonDirection.put(FieldsNames.GAME_X, status.getxDirection());
-		jsonDirection.put(FieldsNames.GAME_Y, status.getyDirection());
-		jsonDirection.put(FieldsNames.GAME_Z, status.getzDirection());
+		jsonDirection.put(GameFields.GAME_X.toString(), status.getxDirection());
+		jsonDirection.put(GameFields.GAME_Y.toString(), status.getyDirection());
+		jsonDirection.put(GameFields.GAME_Z.toString(), status.getzDirection());
 		return jsonDirection;
 	}
 
 	private JSONObject formatPosition(PlayerStatus status) throws JSONException {
 		JSONObject jsonPosition = new JSONObject();
-		jsonPosition.put(FieldsNames.GAME_X, status.getxPosition());
-		jsonPosition.put(FieldsNames.GAME_Y, status.getyPosition());
-		jsonPosition.put(FieldsNames.GAME_Z, status.getzPosition());
+		jsonPosition.put(GameFields.GAME_X.toString(), status.getxPosition());
+		jsonPosition.put(GameFields.GAME_Y.toString(), status.getyPosition());
+		jsonPosition.put(GameFields.GAME_Z.toString(), status.getzPosition());
 		return jsonPosition;
 	}
 
@@ -113,14 +116,14 @@ public class GameMessagesCreator {
 		JSONObject message = new JSONObject();
 
 		try {
-			message.put(FieldsNames.SERVICE, FieldsNames.GAME);
-			message.put(FieldsNames.SERVICE_TYPE, FieldsNames.GAME_MAP);
+			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
+			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_MAP.toString());
 
 			for (String key : JSONObject.getNames(map)) {
 				message.put(key, map.get(key));
 			}
 
-			message.put(FieldsNames.GAME_PLAYER_POSITION, spawnPoint.toStringPosition());
+			message.put(GameFields.GAME_PLAYER_POSITION.toString(), spawnPoint.toStringPosition());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

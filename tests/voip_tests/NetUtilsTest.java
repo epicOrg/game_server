@@ -3,6 +3,7 @@ package voip_tests;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import fields_names.CommonFields;
 import voip.NetUtils;
 
 /**
@@ -23,6 +24,8 @@ public class NetUtilsTest {
 		System.out.println(address.toString());
 		System.out.println(NetUtils.getIpByInetAddress(address));
 		System.out.println(NetUtils.getLocalIpAddress());
+		
+		System.out.println(CommonFields.PASSWORD.toString());
 	}
 	
 

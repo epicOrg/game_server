@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="connection_encryption.SecureConnectionApplicator" project="game_server" 
     file="/game_server/src/connection_encryption/SecureConnectionApplicator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="150" y="281"/>    
+    <position height="-1" width="-1" x="155" y="308"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -82,80 +82,80 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <realization id="10">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <association id="11">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="12" name="secureConnection">        
+  <association id="10">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="11" name="connectionEncrypter">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1">        
+      <multiplicity id="12" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="14" name="secureConnection">        
+        <position height="0" width="0" x="5" y="27"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="5" y="27"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <association id="15">    
+  <association id="16">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="decrypter">        
+      <attribute id="17" name="decrypter">        
         <position height="0" width="0" x="18" y="-25"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
+      <multiplicity id="18" minimum="0" maximum="1">        
         <position height="0" width="0" x="18" y="-25"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
+  <association id="19">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="19" name="keysGenerator">        
+      <attribute id="20" name="keysGenerator">        
         <position height="0" width="0" x="45" y="-36"/>      
       </attribute>      
-      <multiplicity id="20" minimum="0" maximum="1">        
+      <multiplicity id="21" minimum="0" maximum="1">        
         <position height="0" width="0" x="45" y="-36"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="21">    
+  <dependency id="22">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="24">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <dependency id="25">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <association id="22">    
+  <association id="26">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="23" name="encrypter">        
+      <attribute id="27" name="encrypter">        
         <position height="0" width="0" x="-23" y="-6"/>      
       </attribute>      
-      <multiplicity id="24" minimum="0" maximum="1">        
+      <multiplicity id="28" minimum="0" maximum="1">        
         <position height="0" width="0" x="-23" y="-6"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="25">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <association id="26">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="27" name="connectionEncrypter">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

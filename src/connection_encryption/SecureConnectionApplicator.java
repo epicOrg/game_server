@@ -3,7 +3,9 @@ package connection_encryption;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fields_names.EncryptFields;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -22,12 +24,12 @@ public class SecureConnectionApplicator {
 		if (!isRequestEncrypted(jsonRequest)) {
 
 			// ...it can be an encryption establishment message...
-			if (jsonRequest.getString(FieldsNames.SERVICE).equals(
-					FieldsNames.ENCRYPT)) {
+			if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(
+					ServicesFields.ENCRYPT.toString())) {
 
-				if (jsonRequest.has(FieldsNames.WRAPPED_KEY))
+				if (jsonRequest.has(EncryptFields.WRAPPED_KEY.toString()))
 					connectionEncrypter.setAsymmetricKey(jsonRequest
-							.getString(FieldsNames.WRAPPED_KEY));
+							.getString(EncryptFields.WRAPPED_KEY.toString()));
 
 				return jsonRequest;
 			}
@@ -44,7 +46,7 @@ public class SecureConnectionApplicator {
 			return new JSONObject();
 
 		String encryptedRequest = jsonRequest
-				.getString(FieldsNames.ENCRYPTED_MESSAGE);
+				.getString(EncryptFields.ENCRYPTED_MESSAGE.toString());
 		String uncryptedRequest = connectionEncrypter
 				.decryptRequest(encryptedRequest);
 
@@ -62,28 +64,28 @@ public class SecureConnectionApplicator {
 		// If (a) the encryption is not enabled, or if (b) the response is an
 		// encryption establishment message, or if (c) the asymmetric key is not
 		// set, it send an unencrypted response.
-		if ((jsonResponse.has(FieldsNames.SERVICE) && (jsonResponse // TODO
-				.getString(FieldsNames.SERVICE).equals(FieldsNames.ENCRYPT)))
+		if ((jsonResponse.has(ServicesFields.SERVICE.toString()) && (jsonResponse // TODO
+				.getString(ServicesFields.SERVICE.toString()).equals(ServicesFields.ENCRYPT.toString())))
 				|| !ConnectionEncrypter.isEncryptionEnabled()
-				|| jsonResponse.getString(FieldsNames.SERVICE).equals(
-						FieldsNames.ENCRYPT)
+				|| jsonResponse.getString(ServicesFields.SERVICE.toString()).equals(
+						ServicesFields.ENCRYPT.toString())
 				|| !connectionEncrypter.isSymmetricKeySet())
 			return jsonResponse;
 
 		String uncryptedResponse = jsonResponse
-				.getString(FieldsNames.ENCRYPTED_MESSAGE);
+				.getString(EncryptFields.ENCRYPTED_MESSAGE.toString());
 		String encryptedResponse = connectionEncrypter
 				.encryptResponse(uncryptedResponse);
 
 		JSONObject jsonEncryptedResponse = new JSONObject();
-		jsonEncryptedResponse.put(FieldsNames.ENCRYPTED_MESSAGE,
+		jsonEncryptedResponse.put(EncryptFields.ENCRYPTED_MESSAGE.toString(),
 				encryptedResponse);
 
 		return jsonEncryptedResponse;
 	}
 
 	private boolean isRequestEncrypted(JSONObject jsonRequest) {
-		return jsonRequest.has(FieldsNames.ENCRYPTED_MESSAGE);
+		return jsonRequest.has(EncryptFields.ENCRYPTED_MESSAGE.toString());
 	}
 
 }

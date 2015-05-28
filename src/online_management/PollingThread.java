@@ -2,6 +2,7 @@ package online_management;
 
 import exceptions.UserNotOnlineException;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 import java.io.PrintWriter;
 import java.util.Timer;
@@ -48,7 +49,7 @@ public class PollingThread extends Thread {
 
 		JSONObject pollingRequest = new JSONObject();
 		try {
-			pollingRequest.put(FieldsNames.SERVICE, FieldsNames.POLLING);
+			pollingRequest.put(ServicesFields.SERVICE.toString(), ServicesFields.POLLING.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

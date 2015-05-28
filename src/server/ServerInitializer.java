@@ -19,6 +19,7 @@ import database.writer.EmailSaver;
 import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
 import fields_names.FieldsNames;
+import fields_names.ServicesFields;
 
 /**
  * Initializes some classes used by the server.
@@ -34,8 +35,8 @@ public class ServerInitializer {
 
 		initEncryption();
 		initdataManager();
-		String[] services = { FieldsNames.ENCRYPT, FieldsNames.LOGIN, FieldsNames.REGISTER,
-				FieldsNames.UNKNOWN, FieldsNames.GAME, FieldsNames.POLLING};
+		String[] services = { ServicesFields.ENCRYPT.toString(), ServicesFields.LOGIN.toString(), ServicesFields.REGISTER.toString(),
+				ServicesFields.UNKNOWN.toString(), ServicesFields.GAME.toString(), ServicesFields.POLLING.toString()};
 		ArrayList<String> arrayList = new ArrayList<>();
 		Collections.addAll(arrayList, services);
 		RequestFieldChecher.setServiceNotToBeChecked(arrayList);

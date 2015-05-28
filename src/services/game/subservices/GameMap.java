@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import fields_names.FieldsNames;
+import fields_names.GameFields;
+import fields_names.RoomFields;
 import game.model.Room;
 import services.IService;
 import services.game.Game;
@@ -41,7 +43,7 @@ public class GameMap implements IService {
 			
 			try {
 				room = GameDataManager.getInstance().getRoomByName(
-						request.getString(FieldsNames.ROOM_NAME));
+						request.getString(RoomFields.ROOM_NAME.toString()));
 			} catch (NoSuchRoomException e) {
 				e.printStackTrace();
 				return null;
@@ -58,7 +60,7 @@ public class GameMap implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME_MAP;
+		return GameFields.GAME_MAP.toString();
 	}
 
 }

@@ -1,6 +1,8 @@
 package services.current_room.subservices;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
+import fields_names.RoomFields;
 import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
 
@@ -35,8 +37,8 @@ public class RoomExit implements IService {
 	public JSONObject start(JSONObject request) {
 		// System.out.println("Exit");
 		try {
-			String playerName = request.getString(FieldsNames.USERNAME);
-			String roomName = request.getString(FieldsNames.ROOM_NAME);
+			String playerName = request.getString(CommonFields.USERNAME.toString());
+			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
 			room.removePlayer(room.getPlayerByName(playerName));
 			return messagesCreator.generateExitResponse(true);
@@ -50,6 +52,6 @@ public class RoomExit implements IService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.ROOM_EXIT;
+		return RoomFields.ROOM_EXIT.toString();
 	}
 }

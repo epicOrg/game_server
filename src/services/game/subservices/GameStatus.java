@@ -1,6 +1,7 @@
 package services.game.subservices;
 
 import fields_names.FieldsNames;
+import fields_names.GameFields;
 import game.model.Player;
 import game.model.PlayerStatus;
 
@@ -34,10 +35,10 @@ public class GameStatus implements IExtendedService {
 		// TODO DEBUG PRINT
 		System.out.println(getName());
 
-		if (request.has(FieldsNames.GAME_READY)) {
-			return subservices.get(FieldsNames.GAME_READY).start(request);
-		} else if (request.has(FieldsNames.GAME_EXIT)) {
-			return subservices.get(FieldsNames.GAME_EXIT).start(request);
+		if (request.has(GameFields.GAME_READY.toString())) {
+			return subservices.get(GameFields.GAME_READY.toString()).start(request);
+		} else if (request.has(GameFields.GAME_EXIT.toString())) {
+			return subservices.get(GameFields.GAME_EXIT.toString()).start(request);
 		}
 
 		return null;
@@ -45,7 +46,7 @@ public class GameStatus implements IExtendedService {
 
 	@Override
 	public String getName() {
-		return FieldsNames.GAME_STATUS;
+		return GameFields.GAME_STATUS.toString();
 	}
 
 	@Override

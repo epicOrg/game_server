@@ -3,6 +3,7 @@ package exceptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fields_names.CommonFields;
 import fields_names.FieldsNames;
 
 /**
@@ -18,7 +19,7 @@ public class MissingFieldException extends Exception {
 		JSONObject error = new JSONObject();
 
 		try {
-			error.put(FieldsNames.MISSING_FIELD, FieldsNames.INVALID);
+			error.put(CommonFields.MISSING_FIELD.toString(), CommonFields.INVALID.toString());
 		} catch (JSONException e) {
 		}
 
@@ -30,7 +31,7 @@ public class MissingFieldException extends Exception {
 		JSONObject error = new JSONObject();
 
 		try {
-			error.put(FieldsNames.MISSING_FIELD, fieldName);
+			error.put(CommonFields.MISSING_FIELD.toString(), fieldName);
 		} catch (JSONException e) {
 		}
 
