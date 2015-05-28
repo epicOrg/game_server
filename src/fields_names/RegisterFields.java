@@ -1,8 +1,8 @@
 package fields_names;
 
-public enum Register {
+public enum RegisterFields {
 
-	PASSWORD,
+	
 	EMAIL,
 	REGISTER_SHORT,
     REGISTER_LONG,

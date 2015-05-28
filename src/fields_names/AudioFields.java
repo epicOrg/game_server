@@ -1,6 +1,6 @@
 package fields_names;
 
-public enum Audio {
+public enum AudioFields {
 	
 	 // Audio
     AUDIO_PORT_CLIENT,

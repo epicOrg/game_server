@@ -14,19 +14,19 @@ public class FieldsNames {
      * ************************************************************************
      */
 
-    public static final String SERVICE = "service";
-    public static final String SERVICE_TYPE = "serviceType";
+    //public static final String SERVICE = "service";
+    //public static final String SERVICE_TYPE = "serviceType";
 
-    public static final String ENCRYPT = "encrypt";
-    public static final String REGISTER = "register";
-    public static final String LOGIN = "login";
-    public static final String ROOMS = "rooms";
-    public static final String CURRENT_ROOM = "currentRoom";
-    public static final String GAME = "game";
-    public static final String UNKNOWN = "unknown";
-    public static final String AUDIO = "audio";
-    public static final String POLLING = "polling";
-    public static final String LOGOUT = "logout";
+    //public static final String ENCRYPT = "encrypt";
+    //public static final String REGISTER = "register";
+    //public static final String LOGIN = "login";
+    //public static final String ROOMS = "rooms";
+    //public static final String CURRENT_ROOM = "currentRoom";
+    //public static final String GAME = "game";
+    //public static final String UNKNOWN = "unknown";
+    //public static final String AUDIO = "audio";
+    //public static final String POLLING = "polling";
+    //public static final String LOGOUT = "logout";
 
     /**
      * ************************************************************************
@@ -35,41 +35,41 @@ public class FieldsNames {
      */
 
     // Common
-    public static final String IP_ADDRESS = "ipAddress";
-    public static final String RESULT = "result";
-    public static final String HASHCODE = "hashcode";
-    public static final String LIST = "list";
-    public static final String USERNAME = "username";
-    public static final String LOCAL_PORT = "localPort";
+    //public static final String IP_ADDRESS = "ipAddress";
+    //public static final String RESULT = "result";
+    //public static final String HASHCODE = "hashcode";
+    //public static final String LIST = "list";
+    //public static final String USERNAME = "username";
+    //public static final String LOCAL_PORT = "localPort";
 
     // Register
-    public static final String EMAIL = "email";
+    //public static final String EMAIL = "email";
 
     // Register, Login
-    public static final String PASSWORD = "password";
+    //public static final String PASSWORD = "password";
 
     // Audio
-    public static final String AUDIO_PORT_CLIENT = "audioPortClient";
-    public static final String AUDIO_PORT_SERVER = "audioPortServer";
+    //public static final String AUDIO_PORT_CLIENT = "audioPortClient";
+    //public static final String AUDIO_PORT_SERVER = "audioPortServer";
 
-    // Register
-    public static final String REGISTER_SHORT = "short";
-    public static final String REGISTER_LONG = "long";
-    public static final String REGISTER_INVALID_CHAR = "invalidChar";
-    public static final String REGISTER_INVALID_DOMAIN = "invalidDomain";
-    public static final String REGISTER_SERVER_ERROR = "serverError";
-    public static final String REGISTER_ALREADY_USED = "alreadyUsed";
+//     Register
+//    public static final String REGISTER_SHORT = "short";
+//    public static final String REGISTER_LONG = "long";
+//    public static final String REGISTER_INVALID_CHAR = "invalidChar";
+//    public static final String REGISTER_INVALID_DOMAIN = "invalidDomain";
+//    public static final String REGISTER_SERVER_ERROR = "serverError";
+//    public static final String REGISTER_ALREADY_USED = "alreadyUsed";
 
     // Encrypt
-    public static final String ENCRYPTED_MESSAGE = "encrypedMessage";
-    public static final String ENCRYPT_REQUEST = "encryptRequest";
-    public static final String PUBLIC_KEY_REQUEST = "getKey";
-    public static final String PUBLIC_KEY = "pKey";
-    public static final String WRAPPED_KEY = "aKey";
+//    public static final String ENCRYPTED_MESSAGE = "encrypedMessage";
+    //public static final String ENCRYPT_REQUEST = "encryptRequest";
+    //public static final String PUBLIC_KEY_REQUEST = "getKey";
+//    public static final String PUBLIC_KEY = "pKey";
+//    public static final String WRAPPED_KEY = "aKey";
 
     // Rooms/Room
     // Others
-    public static final String ROOM_MAX_PLAYERS = "maxPlayers";
+    //public static final String ROOM_MAX_PLAYERS = "maxPlayers";
     public static final String ROOM_NAME = "name";
 
     // Rooms

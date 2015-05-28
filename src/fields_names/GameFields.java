@@ -1,6 +1,6 @@
 package fields_names;
 
-public enum Game {
+public enum GameFields {
 
 	
 	// Game

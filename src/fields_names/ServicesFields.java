@@ -1,6 +1,6 @@
 package fields_names;
 
-public enum Services {
+public enum ServicesFields {
 	 SERVICE,
      SERVICE_TYPE,
      ENCRYPT,

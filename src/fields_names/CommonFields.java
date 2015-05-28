@@ -1,6 +1,6 @@
 package fields_names;
 
-public enum Commons {
+public enum CommonFields {
 	
 	 // Common
      IP_ADDRESS,
@@ -8,6 +8,7 @@ public enum Commons {
      HASHCODE,
      LIST,
      USERNAME,
+     PASSWORD,
      LOCAL_PORT,
      NO_ERRORS,
      ERRORS,

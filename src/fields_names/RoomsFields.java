@@ -1,11 +1,11 @@
 package fields_names;
 
-public enum Rooms {
+public enum RoomsFields {
 
 	// Rooms/Room
 	// Others
 	ROOM_MAX_PLAYERS, 
-	ROOM_NAME,
+	
 
 	// Rooms
 	// Service Type

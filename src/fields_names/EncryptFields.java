@@ -1,6 +1,6 @@
 package fields_names;
 
-public enum Encrypt {
+public enum EncryptFields {
 
 	// Encrypt
     ENCRYPTED_MESSAGE,
