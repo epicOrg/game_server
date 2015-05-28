@@ -9,7 +9,6 @@ import org.junit.Test;
 import server.ServerInitializer;
 import services.Register;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.RegisterFields;
 import fields_names.ServicesFields;
 

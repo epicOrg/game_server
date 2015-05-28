@@ -1,18 +1,17 @@
 package services.game.subservices;
 
+import exceptions.NoSuchRoomException;
+import fields_names.GameFields;
+import fields_names.RoomFields;
+import game.model.Room;
 import messages.GameMessagesCreator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import data_management.GameDataManager;
-import exceptions.NoSuchRoomException;
-import fields_names.FieldsNames;
-import fields_names.GameFields;
-import fields_names.RoomFields;
-import game.model.Room;
 import services.IService;
 import services.game.Game;
+import data_management.GameDataManager;
 
 /**
  * A {@link Game} sub-service. This service sends to the client the generated

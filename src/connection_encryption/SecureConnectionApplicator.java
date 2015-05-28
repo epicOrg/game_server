@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import fields_names.EncryptFields;
-import fields_names.FieldsNames;
 import fields_names.ServicesFields;
 
 /**

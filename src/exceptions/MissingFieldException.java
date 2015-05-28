@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 
 /**
  * @author Noris

@@ -1,7 +1,8 @@
 package services.game.subservices;
 
+import exceptions.NoSuchPlayerException;
+import exceptions.NoSuchRoomException;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.GameFields;
 import fields_names.RoomFields;
 import game.model.Player;
@@ -12,8 +13,6 @@ import org.json.JSONObject;
 
 import services.IService;
 import data_management.GameDataManager;
-import exceptions.NoSuchPlayerException;
-import exceptions.NoSuchRoomException;
 
 /**
  * A {@link GameStatus} sub-service. The client who requests this service will

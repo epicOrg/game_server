@@ -1,6 +1,5 @@
 package services.rooms;
 
-import fields_names.FieldsNames;
 import fields_names.ServicesFields;
 import game.model.Room;
 

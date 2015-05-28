@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.ServicesFields;
 
 /**

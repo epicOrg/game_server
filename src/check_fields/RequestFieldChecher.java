@@ -8,11 +8,10 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_names.CommonFields;
-import fields_names.FieldsNames;
-import fields_names.ServicesFields;
 import services.IService;
 import services.Login;
+import fields_names.CommonFields;
+import fields_names.ServicesFields;
 
 /**
  * A common request checker for all {@link IService}. Before elaborating a

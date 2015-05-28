@@ -12,7 +12,6 @@ import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import exceptions.UserNotOnlineException;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.RoomFields;
 import fields_names.RoomsFields;
 import fields_names.ServicesFields;

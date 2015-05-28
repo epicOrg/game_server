@@ -1,7 +1,6 @@
 package messages;
 
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.GameFields;
 import fields_names.ServicesFields;
 import game.map.MapJSONizer;

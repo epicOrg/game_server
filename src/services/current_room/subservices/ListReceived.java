@@ -1,6 +1,6 @@
 package services.current_room.subservices;
 
-import fields_names.FieldsNames;
+import exceptions.NoSuchRoomException;
 import fields_names.RoomFields;
 import game.model.Room;
 
@@ -9,9 +9,7 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.game.Game;
-import sun.net.www.protocol.file.Handler;
 import data_management.GameDataManager;
-import exceptions.NoSuchRoomException;
 
 /**
  * A {@link RoomActions} subservice that acquire client message communicating that

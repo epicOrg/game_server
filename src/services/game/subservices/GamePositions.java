@@ -1,22 +1,21 @@
 package services.game.subservices;
 
-import messages.GameMessagesCreator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.GameFields;
 import fields_names.RoomFields;
 import game.model.Player;
 import game.model.PlayerStatus;
 import game.model.Room;
+import messages.GameMessagesCreator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import services.IService;
 import services.game.Game;
+import data_management.GameDataManager;
 
 /**
  * A {@link Game} sub-service. The client has to send to the server, at a fixed

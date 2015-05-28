@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import services.Register;
 import data_management.DataManager;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.RegisterFields;
 
 /**

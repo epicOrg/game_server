@@ -1,6 +1,5 @@
 package services.game.subservices;
 
-import fields_names.FieldsNames;
 import fields_names.GameFields;
 import game.model.Player;
 import game.model.PlayerStatus;

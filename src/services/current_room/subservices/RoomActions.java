@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import services.IExtendedService;
 import services.IService;
 import services.game.Game;
-import fields_names.FieldsNames;
 import fields_names.RoomFields;
 
 /**

@@ -9,7 +9,6 @@ import data_management.DataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.RegisterFields;
 import fields_names.ServicesFields;
 

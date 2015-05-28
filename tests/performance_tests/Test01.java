@@ -11,7 +11,6 @@ import services.Login;
 import services.Register;
 import database.Paths;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.RegisterFields;
 import fields_names.ServicesFields;
 

@@ -1,6 +1,6 @@
 package services.current_room.subservices;
 
-import fields_names.FieldsNames;
+import exceptions.NoSuchRoomException;
 import fields_names.RoomFields;
 import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import services.IService;
 import services.game.Game;
 import data_management.GameDataManager;
-import exceptions.NoSuchRoomException;
 
 /**
  * A {@link Game} subservice that responds to the player list request of a client

@@ -1,9 +1,5 @@
 package services.current_room.subservices;
 
-import fields_names.CommonFields;
-import fields_names.FieldsNames;
-import fields_names.RoomFields;
-import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
 
 import org.json.JSONException;
@@ -14,6 +10,9 @@ import services.game.Game;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
+import fields_names.CommonFields;
+import fields_names.RoomFields;
+import game.model.Room;
 
 /**
  * A {@link RoomActions} subservice that execute the exit request of client

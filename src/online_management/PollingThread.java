@@ -1,9 +1,5 @@
 package online_management;
 
-import exceptions.UserNotOnlineException;
-import fields_names.FieldsNames;
-import fields_names.ServicesFields;
-
 import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import server.ClientRequestThread;
+import exceptions.UserNotOnlineException;
+import fields_names.ServicesFields;
 
 /**
  * Thread who polls the user each polling-time to check if the user is yet

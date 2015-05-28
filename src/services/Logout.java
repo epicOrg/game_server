@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import exceptions.UserNotOnlineException;
 import fields_names.CommonFields;
-import fields_names.FieldsNames;
 import fields_names.ServicesFields;
 
 /**

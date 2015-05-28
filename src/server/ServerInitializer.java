@@ -12,13 +12,12 @@ import data_management.RegisteredUser;
 import data_management.password_encrypter.PasswordEncrypter;
 import data_management.password_encrypter.SHA512StringEncrypter;
 import database.Paths;
-import database.loader.RegistrationFileChecker;
 import database.loader.LoginFileChecker;
+import database.loader.RegistrationFileChecker;
 import database.writer.EmailFormatter;
 import database.writer.EmailSaver;
-import database.writer.UserSaver;
 import database.writer.UserLineFormatter;
-import fields_names.FieldsNames;
+import database.writer.UserSaver;
 import fields_names.ServicesFields;
 
 /**
