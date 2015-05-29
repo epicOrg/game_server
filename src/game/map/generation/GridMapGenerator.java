@@ -306,12 +306,17 @@ public class GridMapGenerator implements MapGenerator {
 	private void generateItems() {
 
 		for (int i = 0; i < mapSize.getLength() / 2; i++) {
-
-			MapDimension position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
-
+			MapDimension position;
+			
+			position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
 			mapConstructor.addMapObject(new MapObject(Item.MEAT, Texture.MEAT1, position,
 					new MapDimension(0.2, 0.5, 0)));
+			
+			position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
+			mapConstructor.addMapObject(new MapObject(Item.CARROT, Texture.CARROT1, position,
+					new MapDimension(3, 3, 0)));
 		}
+		
 	}
 
 }
