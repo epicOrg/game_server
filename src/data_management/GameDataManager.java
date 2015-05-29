@@ -59,6 +59,20 @@ public class GameDataManager {
 
 		throw new RoomAlreadyExistsException();
 	}
+	
+	public Room getRoomForPlayer(String username) throws NoSuchPlayerException{
+		
+		for (Room room : rooms) {
+			try {
+				room.getPlayerByName(username);
+				return room;
+			} catch (NoSuchPlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		throw new NoSuchPlayerException();		
+	}
 
 	/**
 	 * 
@@ -74,6 +88,20 @@ public class GameDataManager {
 		}
 
 		throw new NoSuchRoomException();
+	}
+	
+	public void removePlayerFromAnyRooms(String username) throws NoSuchPlayerException{
+		for (Room room : rooms) {
+			try {
+				Player player = room.getPlayerByName(username);
+				room.removePlayer(player);
+				return;
+			} catch (NoSuchPlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		throw new NoSuchPlayerException();
 	}
 	
 	public Room getRoomForPlayer(Player player){
