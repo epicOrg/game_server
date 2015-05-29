@@ -1,7 +1,8 @@
 package game.map.generation;
 
+import game.map.IMap;
 import game.map.Item;
-import game.map.MapConstructor;
+import game.map.Map;
 import game.map.MapDimension;
 import game.map.MapObject;
 import game.map.Texture;
@@ -40,7 +41,7 @@ public class GridMapGenerator implements MapGenerator {
 	private static final int MIN_DOORS = 1;
 	private static final int MAX_DOORS = 5;
 
-	private MapConstructor mapConstructor;
+	private IMap mapConstructor;
 	private MapDimension mapSize;
 	private int numberOfPlayers;
 
@@ -55,7 +56,7 @@ public class GridMapGenerator implements MapGenerator {
 	public GridMapGenerator(MapDimension mapSize, int numberOfPlayers) {
 
 		this.mapSize = mapSize;
-		mapConstructor = new MapConstructor();
+		mapConstructor = new Map();
 		spawnPoints = new ArrayList<MapDimension>();
 		doors = new ArrayList<MapDimension>();
 		this.numberOfPlayers = numberOfPlayers;
@@ -66,7 +67,7 @@ public class GridMapGenerator implements MapGenerator {
 	}
 
 	@Override
-	public MapConstructor generateMap() {
+	public IMap generateMap() {
 
 		mapConstructor.setMapSize(mapSize);
 		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE4);

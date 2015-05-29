@@ -1,8 +1,9 @@
 package game.map.generation;
 
+import game.map.IMap;
 import game.map.MapDimension;
 import game.map.Item;
-import game.map.MapConstructor;
+import game.map.Map;
 import game.map.MapObject;
 import game.map.Texture;
 import game.map.utils.MapConst;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class DivisionMapGenerator implements MapGenerator {
 
 	private MapDimension mapSize;
-	private MapConstructor mapConstructor;
+	private IMap mapConstructor;
 
 	private static final double CENTER_TOLERANCE = 3;
 	private static final double WALL_TOLERANCE = MapConst.PLAYER_SIZE;
@@ -45,12 +46,12 @@ public class DivisionMapGenerator implements MapGenerator {
 	public DivisionMapGenerator(MapDimension mapSize) {
 		super();
 		this.mapSize = mapSize;
-		mapConstructor = new MapConstructor();
+		mapConstructor = new Map();
 		spawnPoints = new ArrayList<MapDimension>();
 	}
 
 	@Override
-	public MapConstructor generateMap() {
+	public IMap generateMap() {
 
 		mapConstructor.setMapSize(mapSize);
 		// MapDefault.constructBorders(mapJSONizer, mapSize, Texture.WALL3);

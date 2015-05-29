@@ -1,6 +1,6 @@
 package game.map.generation;
 
-import game.map.MapConstructor;
+import game.map.IMap;
 
 /**
  * Interface for the map generators.
@@ -16,6 +16,6 @@ public interface MapGenerator {
 	 * 
 	 * @return a description of the map
 	 */
-	public MapConstructor generateMap();
+	public IMap generateMap();
 
 }

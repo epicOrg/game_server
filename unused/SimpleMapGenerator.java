@@ -1,54 +1,54 @@
-package game.map;
+package game.map.generation;
 
-import java.util.ArrayList;
+import game.map.IMap;
+import game.map.MapDimension;
+import game.map.Item;
+import game.map.Map;
+import game.map.MapObject;
+import game.map.Texture;
+import game.map.utils.MapDefault;
+import game.model.PlayerStatus;
 
 /**
+ * It generate an example map.
+ *
+ * @author Noris
  * @author Torlaschi
- * @date 2015/04/22
+ * @date 2015/04/23
  */
 
-public class SimpleMapGenerator implements IMapGenerator {
+public class SimpleMapGenerator implements MapGenerator {
 
-	private int groundDim = 20;
+	private IMap mapConstructor;
 
-	@Override
-	public ArrayList<MapObject> generate() {
-
-		ArrayList<MapObject> mapObjects = new ArrayList<MapObject>();
-
-		// double h = 2.5;
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "-9.25 -1 -2.75", "1.5 2.5 14.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "-6.75 -1 -4.25", "3.5 2.5 1.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "-1 -1 -9.25", "15 2.5 1.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "7.25 -1 -2.75", "1.5 2.5 14.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "4 -1 -4.25", "5 2.5 1.5"));
-		mapObjects.add(new MapObject("Obstacle", "obstacle_texture_01", "-0.7 -1 -4.25", "0.3 2.5"));
-		mapObjects.add(new MapObject("Obstacle", "obstacle_texture_01", "-2.9 -1 -4.25", "0.3 2.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "3.75 -1 3.75", "5.5 2.5 1.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "-4.75 -1 3.75", "7.5 2.5 1.5"));
-		mapObjects.add(new MapObject("Wall", "wall_texture_03", "-1 -1 -0.25", "10 2.5 1.5"));
-
-		// double h2 = 2;
-		mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "0 -1 20", "40 2 2"));
-		mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "0 -1 -20", "40 2 2"));
-		mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "20 -1 0", "2 2 38"));
-		mapObjects.add(new MapObject("Wall", "hedge_texture_02_1", "-20 -1 0", "2 2 38"));
-
-		// win
-		mapObjects.add(new MapObject("Obstacle", "wall_texture_02", "0 -1 17", "0.3 2.5"));
-
-		return mapObjects;
+	public SimpleMapGenerator() {
+		mapConstructor = new Map();
 	}
 
 	@Override
-	public float getWidth() {
-		return groundDim;
-	}
+	public IMap generateMap() {
+		
+		MapDimension mapSize = new MapDimension(20, 20, 20);
 
-	@Override
-	public float getHeight() {
-		// TODO Auto-generated method stub
-		return groundDim;
+		mapConstructor.setMapSize(mapSize);
+		
+		MapDefault.constructBorders(mapConstructor, mapSize, 2.0, Texture.HEDGE4);
+
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(-8.25, -1, -1.75), new MapDimension(1.5, 2.5, 14.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(-5.75, -1, -3.25), new MapDimension(3.5, 2.5, 1.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(0, -1, -8.25), new MapDimension(15, 2.5, 1.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(8.25, -1, -1.75), new MapDimension(1.5, 2.5, 14.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(5, -1, -3.25), new MapDimension(5, 2.5, 1.5)));
+		mapConstructor.addMapObject(new MapObject(Item.OBSTACLE, Texture.WOOD1, new MapDimension(1.7, -1, -3.25), new MapDimension(0.3, 2.5, 0)));
+		mapConstructor.addMapObject(new MapObject(Item.OBSTACLE, Texture.WOOD1, new MapDimension(-1.9, -1, -3.25), new MapDimension(0.3, 2.5, 0)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(4.75, -1, 4.75), new MapDimension(5.5, 2.5, 1.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(-3.75, -1, 4.75), new MapDimension(7.5, 2.5, 1.5)));
+		mapConstructor.addMapObject(new MapObject(Item.WALL, Texture.WALL3, new MapDimension(0, -1, 1.25), new MapDimension(10, 2.5, 1.5)));
+
+		mapConstructor.addSpawnPoint(new PlayerStatus(5, 0.5f, -7, -1, -0.25f, 0));
+		mapConstructor.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, new MapDimension(0, -1, 18), new MapDimension(0.5, 1, 0)));
+
+		return mapConstructor;
 	}
 
 }

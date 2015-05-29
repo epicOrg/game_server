@@ -1,8 +1,9 @@
 package game.map.generation;
 
+import game.map.IMap;
 import game.map.MapDimension;
 import game.map.Item;
-import game.map.MapConstructor;
+import game.map.Map;
 import game.map.MapObject;
 import game.map.Texture;
 import game.map.utils.MapConst;
@@ -52,7 +53,7 @@ public class ForestMapGenerator implements MapGenerator {
 	 */
 	private static final double FOLIAGE_HEIGHT_FACTOR = 4;
 
-	private MapConstructor mapConstructor;
+	private IMap mapConstructor;
 
 	private MapDimension mapSize;
 	private int numberOfPlayers;
@@ -70,12 +71,12 @@ public class ForestMapGenerator implements MapGenerator {
 		this.numberOfTrees = numberOfTrees;
 		this.numberOfPlayers = numberOfPlayers;
 
-		mapConstructor = new MapConstructor();
+		mapConstructor = new Map();
 		positions = new ArrayList<MapDimension>(numberOfTrees + numberOfPlayers);
 	}
 
 	@Override
-	public MapConstructor generateMap() {
+	public IMap generateMap() {
 
 		mapConstructor.setMapSize(mapSize);
 		MapDefault.constructBorders(mapConstructor, mapSize, Texture.HEDGE3);

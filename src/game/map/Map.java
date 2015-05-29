@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * @date 2015/04/23
  */
 
-public class MapConstructor {
+public class Map implements IMap {
 
 	private MapDimension mapSize;
 
@@ -25,53 +25,73 @@ public class MapConstructor {
 
 	private ArrayList<MapDimension> winPoints;
 
-	public MapConstructor() {
+	public Map() {
 		items = new ArrayList<MapObject>();
 		spawnPoints = new LinkedList<PlayerStatus>();
 		winPoints = new ArrayList<MapDimension>();
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#setMapSize(game.map.MapDimension)
+	 */
+	@Override
 	public void setMapSize(MapDimension mapSize) {
 		this.mapSize = mapSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#getMapSize()
+	 */
+	@Override
 	public MapDimension getMapSize() {
 		return mapSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#addMapObject(game.map.MapObject)
+	 */
+	@Override
 	public void addMapObject(MapObject item) {
 		items.add(item);
 		numItems++;
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#getItems()
+	 */
+	@Override
 	public ArrayList<MapObject> getItems() {
 		return items;
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#getNumItems()
+	 */
+	@Override
 	public int getNumItems() {
 		return numItems;
 	}
 
-	/**
-	 * Add multiple {@link MapObject} to the list of the objects.
-	 * 
-	 * @param items
-	 *            an array of {@link MapObject}
+	/* (non-Javadoc)
+	 * @see game.map.IMap#addMapObjects(game.map.MapObject)
 	 */
+	@Override
 	public void addMapObjects(MapObject... items) {
 		Collections.addAll(this.items, items);
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#addSpawnPoint(game.model.PlayerStatus)
+	 */
+	@Override
 	public void addSpawnPoint(PlayerStatus playerStatus) {
 		spawnPoints.add(playerStatus);
 	}
 
-	/**
-	 * It gets all the spawn points. If there aren't spawn points it return a
-	 * single default spawn point (set in {@link PlayerStatus}).
-	 * 
-	 * @return the spawn points
+	/* (non-Javadoc)
+	 * @see game.map.IMap#getSpawnPoints()
 	 */
+	@Override
 	public LinkedList<PlayerStatus> getSpawnPoints() {
 
 		if (spawnPoints.isEmpty())
@@ -80,18 +100,19 @@ public class MapConstructor {
 		return spawnPoints;
 	}
 
-	/**
-	 * It add a spawn point to the spawn points list. It also add the win point
-	 * object to the objects list.
-	 * 
-	 * @param mapObject
-	 *            the {@link MapObject} who represents a win point.
+	/* (non-Javadoc)
+	 * @see game.map.IMap#addWinPoint(game.map.MapObject)
 	 */
+	@Override
 	public void addWinPoint(MapObject mapObject) {
 		winPoints.add(mapObject.getPosition());
 		addMapObject(mapObject);
 	}
 
+	/* (non-Javadoc)
+	 * @see game.map.IMap#getWinPoints()
+	 */
+	@Override
 	public ArrayList<MapDimension> getWinPoints() {
 		return winPoints;
 	}

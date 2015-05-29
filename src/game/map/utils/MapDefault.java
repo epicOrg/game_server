@@ -1,8 +1,8 @@
 package game.map.utils;
 
+import game.map.IMap;
 import game.map.MapDimension;
 import game.map.Item;
-import game.map.MapConstructor;
 import game.map.MapObject;
 
 /**
@@ -19,7 +19,7 @@ public class MapDefault {
 	/**
 	 * It constructs the borders of the map.
 	 */
-	public static void constructBorders(MapConstructor mapJSONizer, MapDimension mapSize,
+	public static void constructBorders(IMap mapJSONizer, MapDimension mapSize,
 			Double wallSize, String texture) {
 
 		double mapWidth = mapSize.getWidth();
@@ -44,7 +44,7 @@ public class MapDefault {
 	/**
 	 * It constructs the borders of the map with the default wall size.
 	 */
-	public static void constructBorders(MapConstructor mapJSONizer, MapDimension mapSize,
+	public static void constructBorders(IMap mapJSONizer, MapDimension mapSize,
 			String texture) {
 		constructBorders(mapJSONizer, mapSize, WALL_SIZE, texture);
 

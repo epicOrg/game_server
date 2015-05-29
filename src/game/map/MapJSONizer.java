@@ -21,9 +21,9 @@ public class MapJSONizer {
 
 	private static final int PHASE = -1;
 
-	private MapConstructor mapConstructor;
+	private IMap mapConstructor;
 
-	public MapJSONizer(MapConstructor mapConstructor) {
+	public MapJSONizer(IMap mapConstructor) {
 		this.mapConstructor = mapConstructor;
 	}
 

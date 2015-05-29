@@ -64,16 +64,6 @@ public class Room {
 
 		roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),
 				maxPlayers));
-
-		// roomMapSelector = new RoomMapSelector(new DivisionMapGenerator(new
-		// MapDimension(20, 20, 20)));
-
-		// roomMapSelector = new RoomMapSelector(new ForestMapGenerator(new
-		// MapDimension(20, 20, 20), 30, MAX_PLAYERS));
-
-		// roomMapSelector = new RoomMapSelector(new SimpleMapGenerator());
-
-		// roomMapSelector = new RoomMapSelector(new TestMapGenerator());
 	}
 
 	/**

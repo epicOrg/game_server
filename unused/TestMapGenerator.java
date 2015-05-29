@@ -1,8 +1,9 @@
 package game.map.generation;
 
+import game.map.IMap;
 import game.map.MapDimension;
 import game.map.Item;
-import game.map.MapConstructor;
+import game.map.Map;
 import game.map.MapObject;
 import game.map.Texture;
 import game.model.PlayerStatus;
@@ -16,10 +17,10 @@ import game.model.PlayerStatus;
 
 public class TestMapGenerator implements MapGenerator {
 
-	private MapConstructor mapConstructor = new MapConstructor();
+	private IMap mapConstructor = new Map();
 
 	@Override
-	public MapConstructor generateMap() {
+	public IMap generateMap() {
 
 		mapConstructor.setMapSize(new MapDimension(10, 10, 10));
 
