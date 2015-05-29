@@ -32,7 +32,8 @@ import game.model.Team;
  * @see Room
  */
 
-public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
+public class RoomPlayersUpdater implements RoomEventListener,
+		PlayerEventListener {
 
 	private static final int DELAY = 4000;
 
@@ -43,6 +44,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
 	private RoomThread roomThread;
 	private UpdatingMessagesCreator messagesCreator;
+	private boolean interrupted = false;
 
 	public RoomPlayersUpdater(Room room) {
 		super();
@@ -56,8 +58,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 		try {
 
-			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
-					.getOutStream();
+			PrintWriter writer = onlineManager.getOnlineUserByUsername(
+					player.getUsername()).getOutStream();
 			writers.put(player, writer);
 			player.setPlayerEventListener(this);
 
@@ -87,21 +89,32 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 				GameDataManager.getInstance().newAudioCallForRoom(room);
 			}
 		}, DELAY);
+		
+		roomThread = new RoomThread(room, new CircleWinChecker(room
+				.getRoomMapSelector().getWinPoint(), 2));
 
 	}
 
 	@Override
 	public void onPlayerRemoved(Player player) {
-		try {
-			if (timer != null)
-				timer.cancel();
-			timer = new Timer();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		writers.remove(player);
-		updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
+		if (room.isInPlayng() && !room.areAllPlayersReady()){
+			this.interrupted = true;
+			onPlayerStatusChanged();
+		}
+		else {
+
+			try {
+				if (timer != null)
+					timer.cancel();
+				timer = new Timer();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
+		}
 	}
 
 	@Override
@@ -119,6 +132,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 					return;
 			}
 		}
+
 		
 		try {
 			Thread.sleep(2000);
@@ -126,13 +140,16 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		if(interrupted){
+			onExtingFromGame();
+			return;
+		}
+		room.setAllPlayerReady(true);
 		allPlayerReady();
 	}
 
 	private void allPlayerReady() {
-		roomThread = new RoomThread(room, new CircleWinChecker(room.getRoomMapSelector()
-				.getWinPoint(), 2));
+		
 		roomThread.start();
 		updatePlayers(null, messagesCreator.generateGoMessage());
 		startAudioConversation();
@@ -143,7 +160,8 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		RoomAudioCall roomAudioCall = null;
 
 		try {
-			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
+			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(
+					room.getName());
 			roomAudioCall.prepare();
 			roomAudioCall.startCall();
 		} catch (NoSuchRoomException e) {
@@ -165,6 +183,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		}
 
 		updatePlayers(null, messagesCreator.generateExitMessage());
+		room.setInPlay(false);
 
 	}
 

@@ -33,6 +33,7 @@ public class Room {
 	private RoomEventListener playersUpdater;
 	private boolean inPlay = false;
 	private int maxPlayers;
+	private boolean allPlayerReady = false;
 
 	private RoomMapSelector roomMapSelector;
 
@@ -103,9 +104,8 @@ public class Room {
 	 */
 	public void removePlayer(Player player) {
 
-		if (inPlay) {
+		if (inPlay && allPlayerReady) {
 			playersUpdater.onExtingFromGame();
-			setInPlay(false);
 			System.out.println("Game interrupted.");
 
 		} else {
@@ -176,6 +176,7 @@ public class Room {
 		if (this.inPlay && !inPlay) {
 			playersUpdater.onGameEnded();
 			teamManager.emptyTeams();
+			this.allPlayerReady = false;
 		}
 
 		this.inPlay = inPlay;
@@ -183,6 +184,14 @@ public class Room {
 
 	public boolean isInPlayng() {
 		return inPlay;
+	}
+	
+	public boolean areAllPlayersReady(){
+		return allPlayerReady;
+	}
+	
+	public void setAllPlayerReady(boolean status){
+		this.allPlayerReady = status;
 	}
 
 	public RoomMapSelector getRoomMapSelector() {
