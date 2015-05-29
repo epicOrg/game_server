@@ -18,6 +18,7 @@ public class ConnectionEncrypter {
 
 	public static void setKeysGenerator(KeysGenerator keysGenerator) {
 		ConnectionEncrypter.keysGenerator = keysGenerator;
+		System.out.println("Key: " + keysGenerator.getPublicKey());
 		enabled = true;
 	}
 

@@ -3,7 +3,6 @@ package server;
 import java.util.ArrayList;
 
 import services.Audio;
-import services.Encrypt;
 import services.IExtendedService;
 import services.IService;
 import services.Logout;
@@ -15,6 +14,9 @@ import services.current_room.subservices.ListReceived;
 import services.current_room.subservices.PlayerList;
 import services.current_room.subservices.RoomActions;
 import services.current_room.subservices.RoomExit;
+import services.encrypt.Encrypt;
+import services.encrypt.subservices.PublicKeyRequest;
+import services.encrypt.subservices.WrappedKey;
 import services.game.Game;
 import services.game.subservices.GameExit;
 import services.game.subservices.GameMap;
@@ -37,7 +39,12 @@ public class ServicesInitializer {
 	}
 
 	private void init(){
-		services.add(new Encrypt());
+		
+		IExtendedService encrypt = new Encrypt();
+		encrypt.addSubService(new PublicKeyRequest());
+		encrypt.addSubService(new WrappedKey());
+		
+		services.add(encrypt);
 		services.add(new Register());
 		IExtendedService rooms = initRooms();		
 		services.add(rooms);

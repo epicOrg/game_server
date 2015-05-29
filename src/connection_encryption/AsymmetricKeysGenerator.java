@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 
 public class AsymmetricKeysGenerator implements KeysGenerator {
 
-	private static final int KEYSIZE = 256;
+	private static final int KEYSIZE = 512;
 
 	private Key publicKey;
 	private Key privateKey;

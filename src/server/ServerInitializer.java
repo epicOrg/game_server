@@ -42,7 +42,9 @@ public class ServerInitializer {
 	}
 
 	private void initEncryption() {
-		ConnectionEncrypter.setKeysGenerator(new AsymmetricKeysGenerator());
+		AsymmetricKeysGenerator asymmetricKeysGenerator = new AsymmetricKeysGenerator();
+		asymmetricKeysGenerator.generateKeys();
+		ConnectionEncrypter.setKeysGenerator(asymmetricKeysGenerator);
 		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(new SHA512StringEncrypter()));
 
 	}

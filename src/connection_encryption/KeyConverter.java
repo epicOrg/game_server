@@ -5,6 +5,7 @@ import java.security.Key;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 
 /**
@@ -14,7 +15,8 @@ import org.apache.commons.codec.binary.Hex;
 public class KeyConverter {
 
 	public static String keyToString(Key key) {
-		return Hex.encodeHexString(key.getEncoded());
+		//return Hex.encodeHexString(key.getEncoded());
+		return Base64.encodeBase64String(key.getEncoded());
 	}
 
 	public static Key stringToKey(String key) {
