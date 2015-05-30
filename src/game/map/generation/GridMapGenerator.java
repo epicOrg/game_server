@@ -62,7 +62,7 @@ public class GridMapGenerator implements IMapGenerator {
 		clearMap();
 
 		map.setMapSize(mapSize);
-		MapDefault.constructBorders(map, mapSize, Texture.HEDGE4);
+		MapDefault.constructBorders(map, mapSize, Texture.HEDGE1);
 
 		generateGrid();
 		generateVerticalWall();

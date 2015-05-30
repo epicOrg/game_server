@@ -94,14 +94,8 @@ public class MapRandom {
 		ArrayList<String> textures = new ArrayList<String>();
 		//textures.add(Texture.CERAMIC1);
 		textures.add(Texture.HEDGE1);
-		textures.add(Texture.HEDGE2);
-		textures.add(Texture.HEDGE3);
-		textures.add(Texture.HEDGE4);
 		textures.add(Texture.WALL1);
 		textures.add(Texture.WALL2);
-		textures.add(Texture.WALL3);
-		textures.add(Texture.WALL4);
-		textures.add(Texture.WALL5);
 		textures.add(Texture.WOOD1);
 
 		int randomNumber = new Random().nextInt(textures.size());

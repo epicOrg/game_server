@@ -37,7 +37,7 @@ public class MapEditor {
 
 		wallSize = 0.3;
 		wallHeight = 2;
-		wallTexture = Texture.WALL3;
+		wallTexture = Texture.WALL2;
 
 	}
 
