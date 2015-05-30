@@ -64,7 +64,7 @@ public class RoomThread extends Thread {
 
 			ArrayList<Team> winner = new ArrayList<>();
 
-			for (Team team : room.getTeamGenerator().getTeams()) {
+			for (Team team : room.getTeamManager().getTeams()) {
 				if (winChecker.checkWin(team))
 					winner.add(team);
 			}
@@ -96,7 +96,7 @@ public class RoomThread extends Thread {
 		timer.cancel();
 
 		ArrayList<Team> losers = new ArrayList<>();
-		losers.addAll(room.getTeamGenerator().getTeams());
+		losers.addAll(room.getTeamManager().getTeams());
 		losers.removeAll(winner);
 
 		try {

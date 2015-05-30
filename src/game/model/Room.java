@@ -46,15 +46,15 @@ public class Room {
 	 */
 	public Room(String roomName) {
 		this.roomName = roomName;
-		teamManager = new TeamManager();
-		maxPlayers = MAX_PLAYERS;
+		this.teamManager = new TeamManager();
+		this.maxPlayers = MAX_PLAYERS;
 		generateMap();
 	}
 
 	public Room(String roomName, int numberOfTeam, int numberOfPlayrXTeam, IMapGenerator generator) {
 		this.roomName = roomName;
-		teamManager = new TeamManager(numberOfTeam, numberOfPlayrXTeam);
-		maxPlayers = numberOfPlayrXTeam * numberOfTeam;
+		this.teamManager = new TeamManager(numberOfTeam, numberOfPlayrXTeam);
+		this.maxPlayers = numberOfPlayrXTeam * numberOfTeam;
 		this.mapGenerator = generator;
 		generateMap();
 	}
@@ -141,7 +141,7 @@ public class Room {
 		return roomName;
 	}
 
-	public TeamManager getTeamGenerator() {
+	public TeamManager getTeamManager() {
 		return teamManager;
 	}
 

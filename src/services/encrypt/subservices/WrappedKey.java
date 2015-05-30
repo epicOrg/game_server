@@ -1,9 +1,10 @@
 package services.encrypt.subservices;
 
+import messages.fields_names.EncryptFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_names.EncryptFields;
 import services.IService;
 
 public class WrappedKey implements IService {

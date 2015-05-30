@@ -2,6 +2,8 @@ package check_fields;
 
 import java.util.ArrayList;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.ServicesFields;
 import online_management.OnlineManager;
 import online_management.OnlineUser;
 
@@ -10,8 +12,6 @@ import org.json.JSONObject;
 
 import services.IService;
 import services.Login;
-import fields_names.CommonFields;
-import fields_names.ServicesFields;
 
 /**
  * A common request checker for all {@link IService}. Before elaborating a
@@ -30,7 +30,7 @@ import fields_names.ServicesFields;
 public class RequestFieldChecher {
 
 	private ClientIdentityCecker cecker;
-	private static ArrayList<String> serviceNotToBeChecked;
+	private static ArrayList<String> serviceNotToBeChecked = new ArrayList<>();
 
 	public RequestFieldChecher() {
 		super();
@@ -47,15 +47,18 @@ public class RequestFieldChecher {
 	public boolean checkRequest(JSONObject request) {
 
 		try {
-			String serviceName = request.getString(ServicesFields.SERVICE.toString());
+			String serviceName = request.getString(ServicesFields.SERVICE
+					.toString());
 
 			if (serviceNotToBeChecked.contains(serviceName)) {
 				return true;
 			} else {
 
-				String username = request.getString(CommonFields.USERNAME.toString());
+				String username = request.getString(CommonFields.USERNAME
+						.toString());
 				int hashCode = request.getInt(CommonFields.HASHCODE.toString());
-				return cecker.isUserOnline(username) && cecker.checkHashCode(username, hashCode);
+				return cecker.isUserOnline(username)
+						&& cecker.checkHashCode(username, hashCode);
 			}
 
 		} catch (JSONException e) {
@@ -64,7 +67,14 @@ public class RequestFieldChecher {
 		}
 	}
 
-	public static void setServiceNotToBeChecked(ArrayList<String> serviceNotToBeChecked) {
+	/**
+	 * Exclude same services from the check
+	 * 
+	 * @param serviceNotToBeChecked
+	 *            a list of service name that doesn't have to be checked
+	 */
+	public static void setServiceNotToBeChecked(
+			ArrayList<String> serviceNotToBeChecked) {
 		RequestFieldChecher.serviceNotToBeChecked = serviceNotToBeChecked;
 	}
 }

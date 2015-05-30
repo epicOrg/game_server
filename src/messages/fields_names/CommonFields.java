@@ -1,4 +1,4 @@
-package fields_names;
+package messages.fields_names;
 
 public enum CommonFields {
 	

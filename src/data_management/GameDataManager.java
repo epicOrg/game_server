@@ -56,7 +56,8 @@ public class GameDataManager {
 			getRoomByName(roomName);
 
 		} catch (NoSuchRoomException e) {
-			Room room = new Room(roomName, numberOfTeam, teamDimension, mapGenerator);
+			Room room = new Room(roomName, numberOfTeam, teamDimension,
+					mapGenerator);
 			RoomEventListener listener = new RoomPlayersUpdater(room);
 			room.setEventListener(listener);
 			rooms.add(room);
@@ -64,21 +65,6 @@ public class GameDataManager {
 		}
 
 		throw new RoomAlreadyExistsException();
-	}
-
-	public Room getRoomForPlayer(String username) throws NoSuchPlayerException {
-
-		for (Room room : rooms) {
-			try {
-				room.getPlayerByName(username);
-				return room;
-			} catch (NoSuchPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		throw new NoSuchPlayerException();
 	}
 
 	/**
@@ -97,7 +83,16 @@ public class GameDataManager {
 		throw new NoSuchRoomException();
 	}
 
-	public void removePlayerFromAnyRooms(String username) throws NoSuchPlayerException {
+	/**
+	 * Remove the player from the room in which he is in (if there is one).
+	 * 
+	 * @param username
+	 *            the username of the player to remove
+	 * @throws NoSuchPlayerException
+	 *             if the player isn't in any room.
+	 */
+	public void removePlayerFromAnyRooms(String username)
+			throws NoSuchPlayerException {
 
 		for (Room room : rooms) {
 			try {
@@ -110,20 +105,6 @@ public class GameDataManager {
 		}
 
 		throw new NoSuchPlayerException();
-	}
-
-	public Room getRoomForPlayer(Player player) {
-
-		for (Room room : rooms) {
-			try {
-				room.getPlayerByName(player.getUsername());
-				return room;
-			} catch (NoSuchPlayerException e) {
-
-			}
-		}
-
-		return null;
 	}
 
 	/**
@@ -162,7 +143,8 @@ public class GameDataManager {
 	 * @throws NoSuchRoomException
 	 *             if there isn't any room with the given name
 	 */
-	public RoomAudioCall getCallbyRoomName(String roomName) throws NoSuchRoomException {
+	public RoomAudioCall getCallbyRoomName(String roomName)
+			throws NoSuchRoomException {
 
 		for (RoomAudioCall roomAudioCall : audioCalls) {
 			if (roomAudioCall.getRoom().getName().equals(roomName))
@@ -170,9 +152,5 @@ public class GameDataManager {
 		}
 
 		throw new NoSuchRoomException();
-	}
-
-	public ArrayList<RoomAudioCall> getAudioCalls() {
-		return audioCalls;
 	}
 }

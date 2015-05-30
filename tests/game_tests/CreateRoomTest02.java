@@ -2,6 +2,12 @@ package game_tests;
 
 import java.util.Random;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.RegisterFields;
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,11 +17,6 @@ import services.Login;
 import services.Register;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
-import fields_names.CommonFields;
-import fields_names.RegisterFields;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
-import fields_names.ServicesFields;
 
 /**
  * Test for an invalid Room Create request: room name already exists.

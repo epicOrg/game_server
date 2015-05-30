@@ -122,7 +122,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 	@Override
 	public void onPlayerStatusChanged() {
 
-		for (Team t : room.getTeamGenerator().getTeams()) {
+		for (Team t : room.getTeamManager().getTeams()) {
 			for (Player p : t.getPlayers()) {
 				if (p.getStatus() != true)
 					return;

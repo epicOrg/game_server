@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.ServicesFields;
 import online_management.OnlineManager;
 import online_management.OnlineUser;
 
@@ -12,8 +14,6 @@ import org.json.JSONObject;
 
 import data_management.DataManager;
 import data_management.RegisteredUser;
-import fields_names.CommonFields;
-import fields_names.ServicesFields;
 
 /**
  * <code>Login</code> service allows the client to access to others services.

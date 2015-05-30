@@ -2,12 +2,13 @@ package services.encrypt;
 
 import java.util.HashMap;
 
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IExtendedService;
 import services.IService;
-import fields_names.ServicesFields;
 
 /**
  * @author Noris

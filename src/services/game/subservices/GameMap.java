@@ -1,12 +1,12 @@
 package services.game.subservices;
 
 import exceptions.NoSuchRoomException;
-import fields_names.GameFields;
-import fields_names.RoomFields;
 import game.map.MapJSONizer;
 import game.model.PlayerStatus;
 import game.model.Room;
 import messages.GameMessagesCreator;
+import messages.fields_names.GameFields;
+import messages.fields_names.RoomFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

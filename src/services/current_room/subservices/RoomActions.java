@@ -2,13 +2,14 @@ package services.current_room.subservices;
 
 import java.util.HashMap;
 
+import messages.fields_names.RoomFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IExtendedService;
 import services.IService;
 import services.game.Game;
-import fields_names.RoomFields;
 
 /**
  * A {@link Game} sub-service that is in turn an instance of

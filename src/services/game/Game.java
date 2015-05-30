@@ -2,6 +2,8 @@ package services.game;
 
 import java.util.HashMap;
 
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +14,6 @@ import services.game.subservices.GameMap;
 import services.game.subservices.GamePositions;
 import services.game.subservices.GameReady;
 import services.game.subservices.GameStatus;
-import fields_names.ServicesFields;
 
 /**
  * Game <code>Service</code> is the central one of all server. It provides

@@ -1,12 +1,12 @@
 package messages;
 
-import fields_names.CommonFields;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
-import fields_names.ServicesFields;
 import game.model.Player;
 import game.model.Room;
 import game.model.Team;
+import messages.fields_names.CommonFields;
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
+import messages.fields_names.ServicesFields;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +80,7 @@ public class CurrentRoomMessagesCreator {
 	private JSONArray formatTeams(Room room) throws JSONException {
 		JSONArray teams = new JSONArray();
 
-		for (Team t : room.getTeamGenerator().getTeams()) {
+		for (Team t : room.getTeamManager().getTeams()) {
 			JSONObject team = new JSONObject();
 			JSONArray players = formatPlayers(t);
 			team.put(RoomFields.ROOM_TEAM_COLOR.toString(), t.getTeamColor().getRGB());

@@ -1,5 +1,9 @@
 package services;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.RegisterFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,9 +11,6 @@ import check_fields.RegisterChecker;
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
-import fields_names.CommonFields;
-import fields_names.RegisterFields;
-import fields_names.ServicesFields;
 
 /**
  * @author Noris

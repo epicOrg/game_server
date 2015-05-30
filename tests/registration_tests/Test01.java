@@ -1,6 +1,9 @@
 package registration_tests;
 
 import static org.junit.Assert.*;
+import messages.fields_names.CommonFields;
+import messages.fields_names.RegisterFields;
+import messages.fields_names.ServicesFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,9 +11,6 @@ import org.junit.Test;
 
 import server.ServerInitializer;
 import services.Register;
-import fields_names.CommonFields;
-import fields_names.RegisterFields;
-import fields_names.ServicesFields;
 
 /**
  * Test for client register message without errors. Note: I can check only if

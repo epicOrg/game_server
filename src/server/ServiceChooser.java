@@ -3,11 +3,12 @@ package server;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.IService;
-import fields_names.ServicesFields;
 
 /**
  * @author Noris

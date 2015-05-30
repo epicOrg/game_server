@@ -1,6 +1,9 @@
 package exceptions;
 
 /**
+ * Thrown if Login fails.
+ * Both if the password is wrong and the user is not registered.
+ *  
  * @author Noris
  * @date 2015/04/17
  * @see Login

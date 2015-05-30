@@ -59,15 +59,7 @@ public class ClientIdentityCecker {
 	 * @return true if the user is online, false otherwise
 	 */
 	public boolean isUserOnline(String username) {
-
-		if (!onlineManager.checkIfOnline(username)) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public OnlineUser getOnlineUser(String username) throws UserNotOnlineException {
-		return onlineManager.getOnlineUserByUsername(username);
+		
+		return onlineManager.checkIfOnline(username);
 	}
 }
