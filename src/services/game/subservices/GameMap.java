@@ -23,6 +23,7 @@ import data_management.GameDataManager;
  * @date 2015/05/24
  * @see game.map
  */
+
 public class GameMap implements IService {
 
 	private GameMessagesCreator messagesCreator;
@@ -53,17 +54,15 @@ public class GameMap implements IService {
 			MapJSONizer mapJSONizer = new MapJSONizer(room.getMap());
 			mapJSONizer.generateMap();
 
-			PlayerStatus playerStatus = room.getMap().getSpawnPoint();
-
-			// TODO DEBUG PRINT
-			System.out.println(playerStatus);
+			PlayerStatus spawnPoint = room.getMap().getSpawnPoint();
 
 			return messagesCreator.generateMapMessage(mapJSONizer.getMap(),
-					MapJSONizer.getAdaptedSpawnPoints(playerStatus));
+					MapJSONizer.getAdaptedSpawnPoints(spawnPoint));
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 

@@ -53,15 +53,14 @@ public class GridMapGenerator implements IMapGenerator {
 	private ArrayList<MapDimension> wallsPositions;
 	private ArrayList<MapDimension> wallsSizes;
 
-	public GridMapGenerator() {
-
-	}
-
 	@Override
 	public IMap generateMap(MapDimension mapSize, int numberOfPlayers) {
+
 		this.mapSize = mapSize;
 		this.numberOfPlayers = numberOfPlayers;
+
 		clearMap();
+
 		map.setMapSize(mapSize);
 		MapDefault.constructBorders(map, mapSize, Texture.HEDGE4);
 
@@ -227,8 +226,8 @@ public class GridMapGenerator implements IMapGenerator {
 	}
 
 	private MapDimension getMapSizeWithTolerance() {
-		return new MapDimension(mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2,
-				mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE - MapConst.PLAYER_SIZE / 2);
+		return new MapDimension(mapSize.getWidth() - WALL_SIZE / 2 - MapConst.PLAYER_SIZE / 2,
+				mapSize.getHeight(), mapSize.getWidth() - WALL_SIZE / 2 - MapConst.PLAYER_SIZE / 2);
 	}
 
 	private void generateSpawnPoints() {
@@ -256,8 +255,6 @@ public class GridMapGenerator implements IMapGenerator {
 				map.addSpawnPoint(new PlayerStatus(tmp, tmp));
 				spawnPoints.add(tmp);
 
-				// TODO DEBUG PRINT
-				System.out.println("Player Position: " + tmp);
 			}
 
 			else {
@@ -298,9 +295,6 @@ public class GridMapGenerator implements IMapGenerator {
 		map.addWinPoint(new MapObject(Item.VASE, Texture.CERAMIC1, winPoint, new MapDimension(0.5,
 				1, 0)));
 
-		// TODO DEBUG PRINT
-		System.out.println("Win Position: " + winPoint);
-
 	}
 
 	/*
@@ -309,9 +303,8 @@ public class GridMapGenerator implements IMapGenerator {
 	private void generateItems() {
 
 		for (int i = 0; i < mapSize.getLength() / 2; i++) {
-			MapDimension position;
 
-			position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
+			MapDimension position = MapPosition.getRandomPosition(getMapSizeWithTolerance());
 			map.addMapObject(new MapObject(Item.MEAT, Texture.MEAT1, position, new MapDimension(
 					0.2, 0.5, 0)));
 

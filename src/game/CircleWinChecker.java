@@ -1,6 +1,7 @@
 package game;
 
 import game.map.MapDimension;
+import game.map.utils.MapConst;
 import game.model.IWinChecher;
 import game.model.Player;
 import game.model.PlayerStatus;
@@ -22,18 +23,8 @@ public class CircleWinChecker implements IWinChecher {
 
 	private float radius;
 
-	public CircleWinChecker(float xWin, float yWin, float zWin, float ray) {
-
-		winPoints = new ArrayList<MapDimension>();
-		winPoints.add(new MapDimension((float) xWin, (float) yWin, (float) zWin));
-		this.radius = ray;
-	}
-
-	public CircleWinChecker(MapDimension winPoint, float ray) {
-
-		winPoints = new ArrayList<MapDimension>();
-		winPoints.add(winPoint);
-		this.radius = ray;
+	public CircleWinChecker(ArrayList<MapDimension> winPoints) {
+		this(winPoints, (float) MapConst.PLAYER_SIZE);
 	}
 
 	public CircleWinChecker(ArrayList<MapDimension> winPoints, float ray) {
@@ -66,7 +57,7 @@ public class CircleWinChecker implements IWinChecher {
 		float z = status.getzPosition();
 
 		for (MapDimension w : winPoints) {
-			
+
 			float xWin = (float) w.getWidth();
 			// float yWin = (float) w.getHeight();
 			float zWin = (float) w.getLength();

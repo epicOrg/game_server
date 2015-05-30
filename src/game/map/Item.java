@@ -5,7 +5,7 @@ package game.map;
  * 
  * @author Noris
  * @date 2015/05/17
- * @version 3
+ * @version 4
  */
 
 public class Item {

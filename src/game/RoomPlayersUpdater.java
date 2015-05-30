@@ -33,8 +33,7 @@ import game.model.Team;
  * @see Room
  */
 
-public class RoomPlayersUpdater implements RoomEventListener,
-		PlayerEventListener {
+public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
 
 	private static final int DELAY = 4000;
 
@@ -59,8 +58,8 @@ public class RoomPlayersUpdater implements RoomEventListener,
 
 		try {
 
-			PrintWriter writer = onlineManager.getOnlineUserByUsername(
-					player.getUsername()).getOutStream();
+			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
+					.getOutStream();
 			writers.put(player, writer);
 			player.setPlayerEventListener(this);
 
@@ -73,6 +72,7 @@ public class RoomPlayersUpdater implements RoomEventListener,
 
 	@Override
 	public void onRoomFull() {
+
 		try {
 			if (timer != null)
 				timer.cancel();
@@ -81,6 +81,7 @@ public class RoomPlayersUpdater implements RoomEventListener,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		timer.schedule(new TimerTask() {
 
 			@Override
@@ -90,19 +91,21 @@ public class RoomPlayersUpdater implements RoomEventListener,
 				GameDataManager.getInstance().newAudioCallForRoom(room);
 			}
 		}, DELAY);
-		
-		roomThread = new RoomThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room.getMap().getWinPoints()), 2));
+
+		roomThread = new RoomThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room
+				.getMap().getWinPoints()), 2));
 
 	}
 
 	@Override
 	public void onPlayerRemoved(Player player) {
+
 		writers.remove(player);
-		if (room.isInPlayng() && !room.areAllPlayersReady()){
+
+		if (room.isInPlayng() && !room.areAllPlayersReady()) {
 			this.interrupted = true;
 			onPlayerStatusChanged();
-		}
-		else {
+		} else {
 
 			try {
 				if (timer != null)
@@ -133,23 +136,23 @@ public class RoomPlayersUpdater implements RoomEventListener,
 			}
 		}
 
-		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(interrupted){
+
+		if (interrupted) {
 			onExtingFromGame();
 			return;
 		}
+
 		room.setAllPlayerReady(true);
 		allPlayerReady();
 	}
 
 	private void allPlayerReady() {
-		
 		roomThread.start();
 		updatePlayers(null, messagesCreator.generateGoMessage());
 		startAudioConversation();
@@ -160,8 +163,7 @@ public class RoomPlayersUpdater implements RoomEventListener,
 		RoomAudioCall roomAudioCall = null;
 
 		try {
-			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(
-					room.getName());
+			roomAudioCall = GameDataManager.getInstance().getCallbyRoomName(room.getName());
 			roomAudioCall.prepare();
 			roomAudioCall.startCall();
 		} catch (NoSuchRoomException e) {

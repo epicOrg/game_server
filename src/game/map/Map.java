@@ -134,13 +134,23 @@ public class Map implements IMap {
 	 */
 	@Override
 	public ArrayList<MapDimension> getWinPoints() {
+		
+		// TODO DEBUG: win points
+		System.out.println("Win Points: " + winPoints);
+		
 		return winPoints;
 	}
 
 	public PlayerStatus getSpawnPoint() {
-		System.out.println(spawnPoints);
+
+		// TODO DEBUG: spawn points
+		System.out.println("Spawn Points: " + spawnPoints);
+
 		if (spawnPoints.size() == 1)
 			return spawnPoints.getFirst();
+
+		else if (spawnPoints.isEmpty())
+			return new PlayerStatus();
 
 		return spawnPoints.remove();
 
