@@ -100,7 +100,8 @@ public class GameDataManager {
 				room.removePlayer(player);
 				return;
 			} catch (NoSuchPlayerException e) {
-				e.printStackTrace();
+				//if the user isn't in the room
+				//e.printStackTrace();
 			}
 		}
 

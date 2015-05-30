@@ -84,8 +84,8 @@ public class PollingThread extends Thread {
 					GameDataManager.getInstance()
 							.removePlayerFromAnyRooms(onlineUser.getUsername());
 				} catch (NoSuchPlayerException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					//if the user isn't in any room
+					//e1.printStackTrace();
 				}
 
 				try {

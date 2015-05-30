@@ -22,8 +22,6 @@ import data_management.GameDataManager;
 
 public class ListReceived implements IService {
 
-	// private static final int DELAY_TIME = 4000;
-
 	@Override
 	public JSONObject start(JSONObject request) {
 

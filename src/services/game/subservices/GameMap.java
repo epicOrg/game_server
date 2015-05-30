@@ -36,9 +36,6 @@ public class GameMap implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG PRINT
-		System.out.println(getName());
-
 		try {
 
 			Room room = null;

@@ -35,9 +35,6 @@ public class RoomExit implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG PRINT
-		// System.out.println("Exit");
-
 		try {
 
 			String playerName = request.getString(CommonFields.USERNAME.toString());

@@ -46,9 +46,6 @@ public class CurrentRoom implements IExtendedService {
 
 			serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
 
-			// TODO DEBUG PRINT
-			// System.out.println(serviceType);
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -32,9 +32,6 @@ public class PlayerList implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG
-		System.out.println("Players list request.");
-
 		try {
 
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());

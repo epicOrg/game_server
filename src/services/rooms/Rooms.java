@@ -37,7 +37,6 @@ public class Rooms implements IExtendedService {
 		String serviceType = null;
 		try {
 			serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
-			System.out.println(serviceType);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -19,6 +19,9 @@ import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
 
 /**
+ * A client dedicated thread that listen for client request and run server
+ * Services for him.
+ * 
  * @author Noris
  * @date 2015/03/26
  */
@@ -43,7 +46,8 @@ public class ClientRequestThread implements Runnable {
 	public void run() {
 		try {
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 
 			String request = in.readLine();
@@ -58,7 +62,8 @@ public class ClientRequestThread implements Runnable {
 				// System.out.println("CLIENT: " + request);
 
 				JSONObject jsonEncryptedRequest = new JSONObject(request);
-				JSONObject jsonRequest = secureConnection.decrypt(jsonEncryptedRequest);
+				JSONObject jsonRequest = secureConnection
+						.decrypt(jsonEncryptedRequest);
 				JSONObject jResponse = null;
 
 				if (cecker.checkRequest(jsonRequest)) {
@@ -66,7 +71,8 @@ public class ClientRequestThread implements Runnable {
 				}
 
 				if (jResponse != null) {
-					String response = secureConnection.encrypt(jResponse).toString();
+					String response = secureConnection.encrypt(jResponse)
+							.toString();
 
 					out.println(response);
 
@@ -87,12 +93,16 @@ public class ClientRequestThread implements Runnable {
 		}
 	}
 
-	private JSONObject elaborateRequest(JSONObject jsonRequest) throws JSONException {
+	private JSONObject elaborateRequest(JSONObject jsonRequest)
+			throws JSONException {
 
-		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
+				.getRemoteSocketAddress();
 
-		jsonRequest.put(CommonFields.IP_ADDRESS.toString(), inetSocketAddress.getHostName());
-		jsonRequest.put(CommonFields.LOCAL_PORT.toString(), socket.getLocalPort());
+		jsonRequest.put(CommonFields.IP_ADDRESS.toString(),
+				inetSocketAddress.getHostName());
+		jsonRequest.put(CommonFields.LOCAL_PORT.toString(),
+				socket.getLocalPort());
 
 		IService service;
 		if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(

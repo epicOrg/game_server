@@ -46,19 +46,7 @@ public class GameMessagesCreator {
 			response.put(ServicesFields.SERVICE_TYPE.toString(),
 					GameFields.GAME_POSITIONS.toString());
 
-			JSONArray jPlayers = new JSONArray();
-
-			ArrayList<Player> players = new ArrayList<Player>();
-			for (Team t : room.getTeamManager().getTeams()) {
-				players.addAll(t.getPlayers());
-			}
-
-			for (Player p : players) {
-				if (p.getUsername().equals(username))
-					continue;
-
-				jPlayers.put(formatPlayer(p));
-			}
+			JSONArray jPlayers = createPositionsList(username, room);
 
 			response.put(GameFields.GAME_PLAYERS.toString(), jPlayers);
 
@@ -67,6 +55,24 @@ public class GameMessagesCreator {
 		}
 
 		return response;
+	}
+
+	private JSONArray createPositionsList(String username, Room room) {
+		JSONArray jPlayers = new JSONArray();
+
+		ArrayList<Player> players = new ArrayList<Player>();
+		for (Team t : room.getTeamManager().getTeams()) {
+			players.addAll(t.getPlayers());
+		}
+
+		for (Player p : players) {
+			if (p.getUsername().equals(username))
+				continue;
+
+			jPlayers.put(formatPlayer(p));
+		}
+		
+		return jPlayers;
 	}
 
 	private JSONObject formatPlayer(Player p) {
@@ -120,7 +126,6 @@ public class GameMessagesCreator {
 
 		JSONObject message = new JSONObject();
 
-		System.out.println(spawnPoint.getzPosition() + " " + spawnPoint.getxPosition());
 		try {
 			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
 			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_MAP.toString());

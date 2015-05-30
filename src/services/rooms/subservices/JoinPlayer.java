@@ -37,7 +37,6 @@ public class JoinPlayer implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		System.out.println(getName());
 		Player player = null;
 		String roomName = null;
 

@@ -29,7 +29,6 @@ public class CircleWinChecker implements IWinChecher {
 
 	public CircleWinChecker(ArrayList<MapDimension> winPoints, float ray) {
 		this.winPoints = winPoints;
-		System.out.println(winPoints);
 		this.radius = ray;
 	}
 
@@ -42,9 +41,6 @@ public class CircleWinChecker implements IWinChecher {
 				return false;
 		}
 
-		// TODO DEBUG PRINT
-		System.out.println("Winner: " + team.getTeamName());
-
 		return true;
 
 	}
@@ -53,25 +49,17 @@ public class CircleWinChecker implements IWinChecher {
 
 		PlayerStatus status = player.getPlayerStatus();
 		float x = status.getxPosition();
-		// float y = status.getyPosition();
 		float z = status.getzPosition();
 
 		for (MapDimension w : winPoints) {
-
 			float xWin = (float) w.getWidth();
-			// float yWin = (float) w.getHeight();
 			float zWin = (float) w.getLength();
-			System.out.println(w + player.getUsername() + " " + xWin + " " + zWin);
+			
 			if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= radius * radius) {
-
-				// TODO DEBUG PRINT
-				System.out.println(player.getUsername() + " in win position.");
-
 				return true;
 			}
 		}
 
 		return false;
 	}
-
 }

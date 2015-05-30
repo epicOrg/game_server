@@ -62,12 +62,12 @@ public class OnlineManager {
 	 * @throws UserNotOnlineException
 	 */
 	public void setOffline(String username, int hashCode) throws UserNotOnlineException {
+		
 		if (getHashCodeByUsername(username) == hashCode){
 			pollingTreads.get(username).shutdown();
 			pollingTreads.remove(username);
 			onlineUsers.remove(username);
-		}
-			
+		}			
 	}
 
 	/**
@@ -94,12 +94,6 @@ public class OnlineManager {
 		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
 		return onlineUsers.get(username);
-	}
-	
-	public PollingThread getPollingThreadForUser(String username) throws UserNotOnlineException{
-		if(!checkIfOnline(username))
-			throw new UserNotOnlineException();
-		return  pollingTreads.get(username);
 	}
 
 	/**

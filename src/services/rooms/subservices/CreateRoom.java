@@ -38,7 +38,7 @@ public class CreateRoom implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		System.out.println(request);
+
 		try {
 
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
@@ -64,7 +64,7 @@ public class CreateRoom implements IService {
 			return messagesCreator.generateNameInvalidRespose();
 		}
 
-		return messagesCreator.generateRommListMessage(GameDataManager
+		return messagesCreator.generateRoomsListMessage(GameDataManager
 				.getInstance().getRooms());
 	}
 

@@ -24,7 +24,7 @@ public class RoomsList implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		return messagesCreator.generateRommListMessage(GameDataManager.getInstance().getRooms());
+		return messagesCreator.generateRoomsListMessage(GameDataManager.getInstance().getRooms());
 	}
 
 	@Override

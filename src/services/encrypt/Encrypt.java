@@ -30,7 +30,6 @@ public class Encrypt implements IExtendedService {
 
 		try {
 			serviceType = jsonRequest.getString(ServicesFields.SERVICE_TYPE.toString());
-			System.out.println(serviceType);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

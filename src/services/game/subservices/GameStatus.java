@@ -33,9 +33,6 @@ public class GameStatus implements IExtendedService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG PRINT
-		System.out.println(getName());
-
 		if (request.has(GameFields.GAME_READY.toString())) {
 			return subservices.get(GameFields.GAME_READY.toString()).start(request);
 		} else if (request.has(GameFields.GAME_EXIT.toString())) {

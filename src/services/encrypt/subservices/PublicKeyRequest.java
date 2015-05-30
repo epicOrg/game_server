@@ -25,8 +25,6 @@ public class PublicKeyRequest implements IService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(getName());
 
 		return jsonResponse;
 	}
