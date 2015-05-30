@@ -35,7 +35,7 @@ import game.model.Team;
 
 public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
 
-	private static final int DELAY = 4000;
+	private static final int DELAY = 1500;
 
 	private OnlineManager onlineManager;
 	private Timer timer;
@@ -55,14 +55,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onNewPlayerAdded(Player player) {
-
 		try {
-
 			PrintWriter writer = onlineManager.getOnlineUserByUsername(player.getUsername())
 					.getOutStream();
 			writers.put(player, writer);
 			player.setPlayerEventListener(this);
-
 		} catch (UserNotOnlineException e) {
 			e.printStackTrace();
 		}
@@ -72,13 +69,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onRoomFull() {
-
 		try {
 			if (timer != null)
 				timer.cancel();
 			timer = new Timer();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -106,13 +101,11 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			this.interrupted = true;
 			onPlayerStatusChanged();
 		} else {
-
 			try {
 				if (timer != null)
 					timer.cancel();
 				timer = new Timer();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -139,7 +132,6 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
