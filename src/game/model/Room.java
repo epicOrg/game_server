@@ -2,7 +2,6 @@ package game.model;
 
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
-import game.RoomMapSelector;
 import game.map.IMap;
 import game.map.MapDimension;
 import game.map.generation.IMapGenerator;
