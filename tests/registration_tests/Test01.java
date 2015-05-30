@@ -1,6 +1,6 @@
 package registration_tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,6 +71,6 @@ public class Test01 {
 		else
 			noErrorsField = false;
 
-		assertEquals(true, noErrorsField);
+		assertTrue(noErrorsField);
 	}
 }

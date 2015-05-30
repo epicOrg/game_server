@@ -1,13 +1,18 @@
 package data_management_tests;
 
-import server.ServerInitializer;
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import data_management.DataManager;
 import data_management.RegisteredUser;
 import database.loader.RegistrationFileChecker;
 import exceptions.RegistrationFailedException;
+import server.ServerInitializer;
 
 /**
- * Test @see {@link RegistrationFileChecker}.
+ * Test {@link RegistrationFileChecker}.
  * 
  * @author Modica
  * @author Gavina
@@ -17,29 +22,36 @@ import exceptions.RegistrationFailedException;
  * @see RegistrationFileChecker
  * @see RegistrationFailedException
  */
-class Test02 {
+public class Test02 {
 
-	public static void main(String[] args) throws RegistrationFailedException {
+	private DataManager dataManager;
+	private RegisteredUser user1;
+	private RegisteredUser user2;
+	private ServerInitializer serverInitializer = new ServerInitializer();
 
-		new ServerInitializer().init();
+	@Before
+	public void setUp() {
 
-		DataManager dataManager = DataManager.getInstance();
+		serverInitializer.init();
 
-		RegisteredUser user = new RegisteredUser("Hegel", "I_AM_A_LOL", "hegel@epic.org");
+		dataManager = DataManager.getInstance();
+		user1 = new RegisteredUser("Hegel", "I_AM_A_LOL", "hegel@epic.org");
+		user2 = new RegisteredUser("Kant", "I_AM_TROLL", "kant@epic.org");
+	}
 
-		System.out.println(dataManager.checkEmail(user.getEmail()));
-		System.out.println(dataManager.checkUsername(user.getUsername()));
+	@Test
+	public void usernameTest() throws RegistrationFailedException {
 
-		dataManager.saveRegistrationFields(user);
+		dataManager.saveRegistrationFields(user1);
+		assertFalse("Username non esistente",
+				dataManager.checkUsername(user1.getUsername()));
+		assertTrue("Username già esistente", dataManager.checkUsername(user2.getUsername()));
+	}
 
-		System.out.println(dataManager.checkEmail(user.getEmail()));
-		System.out.println(dataManager.checkUsername(user.getUsername()));
-
-		RegisteredUser user2 = new RegisteredUser("Kant", "I_AM_TROLL", "kant@epic.org");
-
-		System.out.println(dataManager.checkEmail(user2.getEmail()));
-		System.out.println(dataManager.checkUsername(user2.getUsername()));
-		dataManager.saveRegistrationFields(user2);
-
+	@Test
+	public void emailTest() {
+		assertFalse("Email non esistente",
+				dataManager.checkEmail(user1.getEmail()));
+		assertTrue("Email già esistente", dataManager.checkEmail(user2.getEmail()));
 	}
 }
