@@ -116,5 +116,14 @@ public class Map implements IMap {
 	public ArrayList<MapDimension> getWinPoints() {
 		return winPoints;
 	}
+	
+	public PlayerStatus getSpawnPoint() {
+		System.out.println(spawnPoints);
+		if (spawnPoints.size() == 1)
+			return spawnPoints.getFirst();
+
+		return spawnPoints.remove();
+
+	}
 
 }

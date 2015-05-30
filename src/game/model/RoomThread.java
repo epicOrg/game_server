@@ -24,7 +24,7 @@ import exceptions.UserNotOnlineException;
 
 public class RoomThread extends Thread {
 
-	private static final int CHECKING_PERIOD = 1;
+	private static final int CHECKING_PERIOD = 200;
 	private IWinChecher winChecker;
 	private Timer timer;
 	private Room room;

@@ -3,7 +3,9 @@ package game.model;
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
 import game.RoomMapSelector;
+import game.map.IMap;
 import game.map.MapDimension;
+import game.map.generation.IMapGenerator;
 import game.map.generation.GridMapGenerator;
 import services.current_room.CurrentRoom;
 import services.game.Game;
@@ -35,7 +37,8 @@ public class Room {
 	private int maxPlayers;
 	private boolean allPlayerReady = false;
 
-	private RoomMapSelector roomMapSelector;
+	private IMap map;
+	private IMapGenerator mapGenerator;
 
 	/**
 	 * Create a room with the given name
@@ -50,10 +53,11 @@ public class Room {
 		generateMap();
 	}
 
-	public Room(String roomName, int numberOfTeam, int numberOfPlayrXTeam) {
+	public Room(String roomName, int numberOfTeam, int numberOfPlayrXTeam, IMapGenerator generator) {
 		this.roomName = roomName;
 		teamManager = new TeamManager(numberOfTeam, numberOfPlayrXTeam);
 		maxPlayers = numberOfPlayrXTeam * numberOfTeam;
+		this.mapGenerator = generator;
 		generateMap();
 	}
 
@@ -61,9 +65,10 @@ public class Room {
 	 * Generates a random map in which the player will move.
 	 */
 	public void generateMap() {
+		
+		map = mapGenerator.generateMap(new MapDimension(20, 20, 20), maxPlayers);
 
-		roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),
-				maxPlayers));
+		//roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),maxPlayers));
 	}
 
 	/**
@@ -183,9 +188,13 @@ public class Room {
 	public void setAllPlayerReady(boolean status){
 		this.allPlayerReady = status;
 	}
+	
+	public void setMapGenerator(IMapGenerator mapGenerator) {
+		this.mapGenerator = mapGenerator;
+	}
 
-	public RoomMapSelector getRoomMapSelector() {
-		return roomMapSelector;
+	public IMap getMap() {
+		return map;
 	}
 
 	public int getMaxPlayers() {

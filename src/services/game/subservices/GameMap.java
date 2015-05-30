@@ -1,8 +1,13 @@
 package services.game.subservices;
 
+import java.util.HashMap;
+
 import exceptions.NoSuchRoomException;
 import fields_names.GameFields;
 import fields_names.RoomFields;
+import game.map.MapDimension;
+import game.map.MapJSONizer;
+import game.model.PlayerStatus;
 import game.model.Room;
 import messages.GameMessagesCreator;
 
@@ -48,8 +53,12 @@ public class GameMap implements IService {
 				return null;
 			}
 			
-			return messagesCreator.generateMapMessage(room.getRoomMapSelector().getMap(), room
-					.getRoomMapSelector().getSpawnPoint());
+			MapJSONizer jsoNizer = new MapJSONizer(room.getMap());
+			jsoNizer.generateMap();
+
+			PlayerStatus s = room.getMap().getSpawnPoint();
+			System.out.println(s);
+			return messagesCreator.generateMapMessage(jsoNizer.getMap(),MapJSONizer.getAdaptedSpawnPoints(s) );
 
 		} catch (JSONException e) {
 			e.printStackTrace();

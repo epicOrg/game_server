@@ -46,4 +46,5 @@ public interface IMap {
 
 	public ArrayList<MapDimension> getWinPoints();
 
+	public PlayerStatus getSpawnPoint();
 }

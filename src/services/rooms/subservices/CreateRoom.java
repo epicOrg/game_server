@@ -12,6 +12,7 @@ import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
 import fields_names.RoomFields;
 import fields_names.RoomsFields;
+import game.map.generation.GridMapGenerator;
 import game.model.Room;
 
 /**
@@ -53,7 +54,7 @@ public class CreateRoom implements IService {
 			}
 
 			GameDataManager.getInstance().newRoom(roomName, numberOfTeams,
-					numberOfPlayrXTeam);
+					numberOfPlayrXTeam, new GridMapGenerator());
 
 		} catch (RoomAlreadyExistsException e) {
 			return messagesCreator.generateRoomExistMessage();

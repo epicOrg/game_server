@@ -15,6 +15,7 @@ import voip.RoomAudioCall;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
+import game.map.MapJSONizer;
 import game.model.Player;
 import game.model.PlayerEventListener;
 import game.model.Room;
@@ -90,8 +91,7 @@ public class RoomPlayersUpdater implements RoomEventListener,
 			}
 		}, DELAY);
 		
-		roomThread = new RoomThread(room, new CircleWinChecker(room
-				.getRoomMapSelector().getWinPoint(), 2));
+		roomThread = new RoomThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room.getMap().getWinPoints()), 2));
 
 	}
 

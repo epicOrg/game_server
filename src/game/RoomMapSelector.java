@@ -3,7 +3,7 @@ package game;
 import fields_names.GameFields;
 import game.map.MapDimension;
 import game.map.MapJSONizer;
-import game.map.generation.MapGenerator;
+import game.map.generation.IMapGenerator;
 import game.model.PlayerStatus;
 
 import java.util.ArrayList;
@@ -19,36 +19,36 @@ import org.json.JSONObject;
 
 public class RoomMapSelector {
 
-	private MapGenerator mapGenerator;
+	private IMapGenerator mapGenerator;
 	private JSONObject map;
 
 	private LinkedList<PlayerStatus> spawnPoints;
 	private ArrayList<MapDimension> winPoints;
 
-	public RoomMapSelector(MapGenerator mapGenerator) {
+	public RoomMapSelector(IMapGenerator mapGenerator) {
 		this.mapGenerator = mapGenerator;
 		generateMap();
 	}
 
 	private void generateMap() {
 
-		MapJSONizer mapJSONizer = new MapJSONizer(mapGenerator.generateMap());
-
-		try {
-
-			JSONObject jsonMap = new JSONObject();
-			jsonMap.put(GameFields.GAME_WIDTH.toString(), mapJSONizer.getAdaptedWidth());
-			jsonMap.put(GameFields.GAME_HEIGHT.toString(), mapJSONizer.getAdaptedHeight());
-			jsonMap.put(GameFields.GAME_ITEMS.toString(), mapJSONizer.getAdaptedItems());
-
-			map = jsonMap;
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		spawnPoints = mapJSONizer.getAdaptedSpawnPoints();
-		winPoints = mapJSONizer.getAdaptedWinPoint();
+//		MapJSONizer mapJSONizer = new MapJSONizer(mapGenerator.generateMap());
+//
+//		try {
+//
+//			JSONObject jsonMap = new JSONObject();
+//			jsonMap.put(GameFields.GAME_WIDTH.toString(), mapJSONizer.getAdaptedWidth());
+//			jsonMap.put(GameFields.GAME_HEIGHT.toString(), mapJSONizer.getAdaptedHeight());
+//			jsonMap.put(GameFields.GAME_ITEMS.toString(), mapJSONizer.getAdaptedItems());
+//
+//			map = jsonMap;
+//
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//
+//		spawnPoints = mapJSONizer.getAdaptedSpawnPoints();
+//		winPoints = mapJSONizer.getAdaptedWinPoint();
 
 	}
 

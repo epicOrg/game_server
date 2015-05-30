@@ -114,6 +114,7 @@ public class GameMessagesCreator {
 	public JSONObject generateMapMessage(JSONObject map, PlayerStatus spawnPoint) {
 		JSONObject message = new JSONObject();
 
+		System.out.println(spawnPoint.getzPosition() + " " + spawnPoint.getxPosition());
 		try {
 			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
 			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_MAP.toString());

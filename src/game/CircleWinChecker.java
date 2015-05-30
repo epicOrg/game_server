@@ -38,6 +38,7 @@ public class CircleWinChecker implements IWinChecher {
 
 	public CircleWinChecker(ArrayList<MapDimension> winPoints, float ray) {
 		this.winPoints = winPoints;
+		System.out.println(winPoints);
 		this.radius = ray;
 	}
 
@@ -65,11 +66,11 @@ public class CircleWinChecker implements IWinChecher {
 		float z = status.getzPosition();
 
 		for (MapDimension w : winPoints) {
-
+			
 			float xWin = (float) w.getWidth();
 			// float yWin = (float) w.getHeight();
 			float zWin = (float) w.getLength();
-
+			System.out.println(w + player.getUsername() + " " + xWin + " " + zWin);
 			if ((x - xWin) * (x - xWin) + (z - zWin) * (z - zWin) <= radius * radius) {
 
 				// TODO DEBUG PRINT

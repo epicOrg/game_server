@@ -4,6 +4,7 @@ import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
 import game.RoomPlayersUpdater;
+import game.map.generation.IMapGenerator;
 import game.model.Player;
 import game.model.Room;
 import game.model.RoomEventListener;
@@ -44,13 +45,13 @@ public class GameDataManager {
 	 * @param name							the name of the room
 	 * @throws RoomAlreadyExistsException	if another <code>Room</code> with the same name exists
 	 */
-	public void newRoom(String roomName, int numberOfTeam, int teamDimension) throws RoomAlreadyExistsException {
+	public void newRoom(String roomName, int numberOfTeam, int teamDimension, IMapGenerator mapGenerator) throws RoomAlreadyExistsException {
 		try {
 
 			getRoomByName(roomName);
 
 		} catch (NoSuchRoomException e) {
-			Room room = new Room(roomName, numberOfTeam, teamDimension);
+			Room room = new Room(roomName, numberOfTeam, teamDimension,mapGenerator);
 			RoomEventListener listener = new RoomPlayersUpdater(room);
 			room.setEventListener(listener);
 			rooms.add(room);

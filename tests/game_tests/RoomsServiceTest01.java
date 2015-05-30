@@ -10,6 +10,7 @@ import exceptions.RoomAlreadyExistsException;
 import fields_names.RoomFields;
 import fields_names.RoomsFields;
 import fields_names.ServicesFields;
+import game.map.generation.GridMapGenerator;
 import game.model.Team;
 import game.model.TeamManager;
 
@@ -24,9 +25,9 @@ class RoomsServiceTest01 {
 
 		GameDataManager gameDataManager = GameDataManager.getInstance();
 
-		gameDataManager.newRoom("ciao", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS);
+		gameDataManager.newRoom("ciao", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS, new GridMapGenerator());
 
-		gameDataManager.newRoom("ok", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS);
+		gameDataManager.newRoom("ok", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS, new GridMapGenerator());
 
 		JSONObject request = new JSONObject();
 		
