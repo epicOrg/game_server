@@ -36,11 +36,14 @@ public class GameMessagesCreator {
 	 * @return a response message ready to be sent
 	 */
 	public JSONObject generatePositionMessage(String username, Room room) {
+
 		JSONObject response = new JSONObject();
+
 		try {
 
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
-			response.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_POSITIONS.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(),
+					GameFields.GAME_POSITIONS.toString());
 
 			JSONArray jPlayers = new JSONArray();
 
@@ -57,6 +60,7 @@ public class GameMessagesCreator {
 			}
 
 			response.put(GameFields.GAME_PLAYERS.toString(), jPlayers);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -70,13 +74,13 @@ public class GameMessagesCreator {
 		PlayerStatus status = p.getPlayerStatus();
 
 		try {
-			
+
 			JSONObject jsonPosition = formatPosition(status);
 			JSONObject jsonDirection = formatDirection(status);
 			jPlayer.put(GameFields.GAME_POSITION.toString(), jsonPosition);
 			jPlayer.put(GameFields.GAME_DIRECTION.toString(), jsonDirection);
 			jPlayer.put(CommonFields.USERNAME.toString(), p.getUsername());
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -112,6 +116,7 @@ public class GameMessagesCreator {
 	 * @see MapJSONizer
 	 */
 	public JSONObject generateMapMessage(JSONObject map, PlayerStatus spawnPoint) {
+
 		JSONObject message = new JSONObject();
 
 		System.out.println(spawnPoint.getzPosition() + " " + spawnPoint.getxPosition());

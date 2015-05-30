@@ -16,7 +16,7 @@ import fields_names.ServicesFields;
 
 /**
  * Game <code>Service</code> is the central one of all server. It provides
- * actions while player are playing the game. 
+ * actions while player are playing the game.
  * 
  * @author Torlaschi
  * @author Micieli
@@ -38,8 +38,11 @@ public class Game implements IExtendedService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
 		IService subservice = null;
+
 		try {
+
 			String serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
 			subservice = subServices.get(serviceType);
 

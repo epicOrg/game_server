@@ -6,14 +6,14 @@ import org.json.JSONObject;
 import fields_names.ServicesFields;
 
 /**
- * Default Service started when the Requested service from the client isn't supported.
+ * Default Service started when the Requested service from the client isn't
+ * supported.
  * 
  * @author Noris
  * @date 2015/03/26
  */
 
 public class Unknown implements IService {
-
 
 	@Override
 	public JSONObject start(JSONObject request) {
@@ -22,6 +22,7 @@ public class Unknown implements IService {
 		try {
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.UNKNOWN.toString());
 		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		return response;

@@ -10,9 +10,10 @@ import javax.swing.JPanel;
  * @date 2015/05/05
  */
 
+@SuppressWarnings("serial")
 public class DrawMaze extends JPanel {
 
-	private Maze maze = new Maze(4,4);
+	private Maze maze = new Maze(4, 4);
 
 	public void paintComponent(Graphics g) {
 
@@ -21,8 +22,8 @@ public class DrawMaze extends JPanel {
 
 		int cellWidth = alpha / maze.getxSize(); // 20
 		int cellHeight = beta / maze.getySize(); // 20
-		int boardWidth = alpha + 1; // cellWidth * (maze.xSize + 1);
-		int boardHeight = beta + 1; // cellHeight * (maze.ySize + 1);
+		// int boardWidth = alpha + 1; // cellWidth * (maze.xSize + 1);
+		// int boardHeight = beta + 1; // cellHeight * (maze.ySize + 1);
 
 		for (int i = 0; i < maze.getxSize(); i++) {
 			for (int j = 0; j < maze.getySize(); j++) {

@@ -44,7 +44,7 @@ public class Login implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
-		
+
 		this.jsonRequest = request;
 
 		readFields();
@@ -64,7 +64,8 @@ public class Login implements IService {
 			String username = jsonRequest.getString(CommonFields.USERNAME.toString());
 			String password = jsonRequest.getString(CommonFields.PASSWORD.toString());
 			user = new RegisteredUser(username, password, null);
-			ipAddress = InetAddress.getByName(jsonRequest.getString(CommonFields.IP_ADDRESS.toString()));
+			ipAddress = InetAddress.getByName(jsonRequest.getString(CommonFields.IP_ADDRESS
+					.toString()));
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -75,10 +76,13 @@ public class Login implements IService {
 	}
 
 	private boolean checkFields() {
+
 		OnlineManager onlineManager = OnlineManager.getInstance();
+
 		if (onlineManager.checkIfOnline(user.getUsername())) {
 			return false;
 		}
+
 		return DataManager.getInstance().checkPassword(user);
 	}
 
@@ -88,7 +92,9 @@ public class Login implements IService {
 	}
 
 	private JSONObject generateResponse(boolean noErrors) {
+
 		JSONObject response = new JSONObject();
+
 		try {
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
 			response.put(CommonFields.USERNAME.toString(), user.getUsername());
@@ -98,6 +104,7 @@ public class Login implements IService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		return response;
 	}
 

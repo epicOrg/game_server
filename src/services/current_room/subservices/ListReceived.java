@@ -12,8 +12,8 @@ import services.game.Game;
 import data_management.GameDataManager;
 
 /**
- * A {@link RoomActions} subservice that acquire client message communicating that
- * they received the player list after entering in a {@link Room}
+ * A {@link RoomActions} sub-service that acquire client message communicating
+ * that they received the player list after entering in a {@link Room}.
  * 
  * @author Micieli
  * @date 2015/05/24
@@ -21,8 +21,8 @@ import data_management.GameDataManager;
  */
 
 public class ListReceived implements IService {
-	
-	private static final int DELAY_TIME = 4000;
+
+	// private static final int DELAY_TIME = 4000;
 
 	@Override
 	public JSONObject start(JSONObject request) {
@@ -31,14 +31,15 @@ public class ListReceived implements IService {
 
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			Room room = GameDataManager.getInstance().getRoomByName(roomName);
-
 			room.checkIfFull();
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (NoSuchRoomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 

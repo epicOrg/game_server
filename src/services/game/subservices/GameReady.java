@@ -26,7 +26,10 @@ public class GameReady implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
+		// TODO DEBUG PRINT
 		System.out.println(getName());
+
 		try {
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			String username = request.getString(CommonFields.USERNAME.toString());
@@ -43,6 +46,7 @@ public class GameReady implements IService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 

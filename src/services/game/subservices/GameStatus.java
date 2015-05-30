@@ -19,6 +19,7 @@ import services.game.Game;
  * @author Micieli
  * @date 2015/05/24
  */
+
 public class GameStatus implements IExtendedService {
 
 	private HashMap<String, IService> subservices;

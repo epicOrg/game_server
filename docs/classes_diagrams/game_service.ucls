@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="services.IService" project="game_server" 
     file="/game_server/src/services/IService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="625" y="82"/>    
+    <position height="-1" width="-1" x="379" y="63"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -12,7 +12,7 @@
   </interface>  
   <interface id="2" language="java" name="services.IExtendedService" project="game_server" 
     file="/game_server/src/services/IExtendedService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="307" y="82"/>    
+    <position height="-1" width="-1" x="90" y="301"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -21,7 +21,7 @@
   </interface>  
   <class id="3" language="java" name="services.game.Game" project="game_server" 
     file="/game_server/src/services/game/Game.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="148" y="197"/>    
+    <position height="-1" width="-1" x="92" y="64"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="services.game.subservices.GameStatus" project="game_server" 
     file="/game_server/src/services/game/subservices/GameStatus.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="389" y="296"/>    
+    <position height="-1" width="-1" x="389" y="304"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="services.game.subservices.GameReady" project="game_server" 
     file="/game_server/src/services/game/subservices/GameReady.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="583" y="393"/>    
+    <position height="-1" width="-1" x="740" y="310"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="services.game.subservices.GameExit" project="game_server" 
     file="/game_server/src/services/game/subservices/GameExit.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="784" y="393"/>    
+    <position height="-1" width="-1" x="736" y="224"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="services.game.subservices.GameMap" project="game_server" 
     file="/game_server/src/services/game/subservices/GameMap.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="985" y="393"/>    
+    <position height="-1" width="-1" x="734" y="148"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -66,55 +66,63 @@
   </class>  
   <class id="8" language="java" name="services.game.subservices.GamePositions" project="game_server" 
     file="/game_server/src/services/game/subservices/GamePositions.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1186" y="393"/>    
+    <position height="-1" width="-1" x="730" y="67"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="9">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="10" name="subServices"/>      
-      <multiplicity id="11" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="12">    
-    <end type="SOURCE" refId="5"/>    
+  <realization id="9">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <association id="13">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="14" name="subservices"/>      
-      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="16">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="17">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="18">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="19">    
+  <realization id="10">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <generalization id="20">    
+  <realization id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="12">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="13" name="subServices">        
+        <position height="0" width="0" x="-246" y="-19"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-246" y="-19"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="15">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
+  <association id="16">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="17" name="subservices">        
+        <position height="0" width="0" x="-246" y="-19"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-246" y="-19"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="19">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="20">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
   <realization id="21">    
-    <end type="SOURCE" refId="7"/>    
+    <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

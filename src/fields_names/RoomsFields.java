@@ -4,16 +4,15 @@ public enum RoomsFields {
 
 	// Rooms/Room
 	// Others
-	ROOM_MAX_PLAYERS, 
-	
+	ROOM_MAX_PLAYERS,
 
 	// Rooms
 	// Service Type
 	ROOMS_LIST, 
 	ROOM_CREATE, 
 	ROOM_JOIN,
-	// Others
 	
+	// Others
 	ROOM_CREATE_ERROR_INVALID_NAME, 
 	ROOM_CREATE_ERROR_ALREADY_PRESENT, 
 	ROOM_JOIN_ERROR_FULL, 

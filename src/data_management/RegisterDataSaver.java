@@ -22,10 +22,8 @@ public class RegisterDataSaver implements IDataSaver {
 	private IDataSaver emailSaver;
 
 	/**
-	 * Constructor
-	 * 
 	 * @param userSaver
-	 *            a <code>IDataSaver</code> that saves emails
+	 *            a <code>IDataSaver</code> that saves e-mails
 	 * @param emailSaver
 	 *            a <code>IDataSaver</code> that saves user data
 	 */

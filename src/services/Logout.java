@@ -10,7 +10,7 @@ import fields_names.CommonFields;
 import fields_names.ServicesFields;
 
 /**
- * Elaborates explicit Logout requests setting the applicant offline
+ * Elaborates an explicit logout requests setting the applicant offline.
  * 
  * @author Micieli
  * @date 2015/05/17
@@ -35,6 +35,7 @@ public class Logout implements IService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 

@@ -13,13 +13,12 @@ import services.game.Game;
 import data_management.GameDataManager;
 
 /**
- * A {@link Game} subservice that responds to the player list request of a client
- * providing the full list currently in the requested {@link Room}.
+ * A {@link Game} sub-service that responds to the player list request of a
+ * client providing the full list currently in the requested {@link Room}.
  * 
  * @author Micieli
  * @date 2015/05/24
  */
-
 
 public class PlayerList implements IService {
 

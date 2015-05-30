@@ -1,6 +1,10 @@
 package encryption_tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.security.Key;
+
+import org.junit.Test;
 
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.KeyConverter;
@@ -10,25 +14,27 @@ import connection_encryption.KeyConverter;
  * @date 2015/05/29
  */
 
-class Test05 {
+public class Test05 {
 
-	public static void main(String[] args) {
+	@Test
+	public void test() {
 
 		AsymmetricKeysGenerator keyGenerator = new AsymmetricKeysGenerator();
 		keyGenerator.generateKeys();
 
 		Key originalKey = keyGenerator.getPublicKey();
 
-		System.out.println("ORIGINAL KEY : " + originalKey + "\n");
+		System.out.println("> ORIGINAL KEY....: " + originalKey + "\n");
 
 		String stringKey = KeyConverter.keyToString(originalKey);
+		
+		System.out.println("> STRING KEY......: " + stringKey + "\n");
 
 		Key newKey = KeyConverter.stringToPublicKey(stringKey);
 
-		System.out.println("CONVERTED KEY: " + newKey + "\n");
+		System.out.println("> CONVERTED KEY...: " + newKey + "\n");
 
-		if (originalKey.equals(newKey))
-			System.out.println("> THE KEYS ARE EQUAL!");
+		assertEquals(originalKey, newKey);
 
 	}
 

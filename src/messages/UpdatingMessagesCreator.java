@@ -20,7 +20,6 @@ public class UpdatingMessagesCreator {
 	private CurrentRoomMessagesCreator currentRoomMessagesCreator;
 
 	public UpdatingMessagesCreator() {
-		super();
 		this.currentRoomMessagesCreator = new CurrentRoomMessagesCreator();
 	}
 
@@ -64,14 +63,19 @@ public class UpdatingMessagesCreator {
 	 * @return the message
 	 */
 	public JSONObject generateGoMessage() {
+
 		JSONObject message = new JSONObject();
+
 		try {
+
 			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
 			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
 			message.put(GameFields.GAME_GO.toString(), true);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		return message;
 	}
 
@@ -81,14 +85,19 @@ public class UpdatingMessagesCreator {
 	 * @return the complete message
 	 */
 	public JSONObject generateExitMessage() {
+
 		JSONObject message = new JSONObject();
+
 		try {
+
 			message.put(ServicesFields.SERVICE.toString(), ServicesFields.GAME.toString());
 			message.put(ServicesFields.SERVICE_TYPE.toString(), GameFields.GAME_STATUS.toString());
 			message.put(GameFields.GAME_END.toString(), GameFields.GAME_INTERRUPTED.toString());
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		return message;
 	}
 }

@@ -17,9 +17,9 @@ import services.IService;
 /**
  * CurrentRoom service provides information about the {@link Room} joined by the
  * client. It gives the complete {@link Player}s list currently in the
- * <code>Room</code>, updated in real time according to Player getting in or out from
- * the <code>Room</code>. It also elaborates the client request to exit from a
- * specific <code>Room</code>.
+ * <code>Room</code>, updated in real time according to Player getting in or out
+ * from the <code>Room</code>. It also elaborates the client request to exit
+ * from a specific <code>Room</code>.
  * 
  * @author Torlaschi
  * @author Micieli
@@ -38,13 +38,20 @@ public class CurrentRoom implements IExtendedService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
+
 		String serviceType = null;
+
 		try {
+
 			serviceType = request.getString(ServicesFields.SERVICE_TYPE.toString());
+
+			// TODO DEBUG PRINT
 			// System.out.println(serviceType);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		IService subService = subServices.get(serviceType);
 
 		return subService == null ? null : subService.start(request);

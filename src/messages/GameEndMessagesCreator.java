@@ -8,7 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Provides a builder for messages that the server has to send while the game is over.
+ * Provides a builder for messages that the server has to send while the game is
+ * over.
  * 
  * @author Micieli
  * @date 2015/05/21
@@ -45,7 +46,7 @@ public class GameEndMessagesCreator {
 
 		return generateEndMessage(GameFields.GAME_DRAW.toString());
 	}
-	
+
 	private JSONObject generateEndMessage(String status) {
 		JSONObject message = new JSONObject();
 		try {

@@ -2,7 +2,6 @@ package fields_names;
 
 public enum RegisterFields {
 
-	
 	EMAIL,
 	REGISTER_SHORT,
     REGISTER_LONG,

@@ -34,8 +34,11 @@ public class ServerInitializer {
 
 		initEncryption();
 		initdataManager();
-		String[] services = { ServicesFields.ENCRYPT.toString(), ServicesFields.LOGIN.toString(), ServicesFields.REGISTER.toString(),
-				ServicesFields.UNKNOWN.toString(), ServicesFields.GAME.toString(), ServicesFields.POLLING.toString()};
+
+		String[] services = { ServicesFields.ENCRYPT.toString(), ServicesFields.LOGIN.toString(),
+				ServicesFields.REGISTER.toString(), ServicesFields.UNKNOWN.toString(),
+				ServicesFields.GAME.toString(), ServicesFields.POLLING.toString() };
+
 		ArrayList<String> arrayList = new ArrayList<>();
 		Collections.addAll(arrayList, services);
 		RequestFieldChecher.setServiceNotToBeChecked(arrayList);
@@ -46,10 +49,10 @@ public class ServerInitializer {
 		asymmetricKeysGenerator.generateKeys();
 		ConnectionEncrypter.setKeysGenerator(asymmetricKeysGenerator);
 		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(new SHA512StringEncrypter()));
-
 	}
 
 	private void initdataManager() {
+
 		DataManager dataManager = DataManager.getInstance();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserSaver(

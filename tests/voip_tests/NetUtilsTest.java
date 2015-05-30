@@ -3,7 +3,6 @@ package voip_tests;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import fields_names.CommonFields;
 import voip.NetUtils;
 
 /**
@@ -12,7 +11,7 @@ import voip.NetUtils;
  * @see NetUtils
  */
 
-public class NetUtilsTest {
+class NetUtilsTest {
 
 	public static void main(String[] args) throws UnknownHostException {
 

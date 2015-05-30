@@ -39,7 +39,8 @@ public class CurrentRoomMessagesCreator {
 		try {
 
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.CURRENT_ROOM.toString());
-			response.put(ServicesFields.SERVICE_TYPE.toString(), RoomFields.ROOM_PLAYER_LIST.toString());
+			response.put(ServicesFields.SERVICE_TYPE.toString(),
+					RoomFields.ROOM_PLAYER_LIST.toString());
 			response.put(RoomsFields.ROOM_MAX_PLAYERS.toString(), room.getMaxPlayers());
 
 			JSONArray teams = formatTeams(room);
@@ -91,12 +92,14 @@ public class CurrentRoomMessagesCreator {
 	}
 
 	private JSONArray formatPlayers(Team t) throws JSONException {
+
 		JSONArray players = new JSONArray();
 		for (Player p : t.getPlayers()) {
 			JSONObject jObject = new JSONObject();
 			jObject.put(CommonFields.USERNAME.toString(), p.getUsername());
 			players.put(jObject);
 		}
+
 		return players;
 	}
 }

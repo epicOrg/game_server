@@ -1,4 +1,3 @@
-
 package services;
 
 import org.json.JSONException;
@@ -37,7 +36,7 @@ public class Register implements IService {
 	public JSONObject start(JSONObject request) {
 		this.jsonRequest = request;
 		jsonResponse = new JSONObject();
-		registerChecker = new RegisterChecker();	
+		registerChecker = new RegisterChecker();
 
 		readFields();
 

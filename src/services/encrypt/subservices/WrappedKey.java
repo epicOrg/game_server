@@ -11,11 +11,11 @@ public class WrappedKey implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		String symmetricKey;
+		String wrappedKey;
 
 		try {
-			symmetricKey = request.getString(EncryptFields.WRAPPED_KEY.toString());
-			System.out.println("Chiave: " + symmetricKey);
+			wrappedKey = request.getString(EncryptFields.WRAPPED_KEY.toString());
+			System.out.println("WrappedKey STR: " + wrappedKey);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

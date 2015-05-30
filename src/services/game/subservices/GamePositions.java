@@ -46,6 +46,7 @@ public class GamePositions implements IService {
 
 			UpdatePlayerStatus(username, request, room);
 			return messagesCreator.generatePositionMessage(username, room);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (NoSuchPlayerException e) {

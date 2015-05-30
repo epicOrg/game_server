@@ -19,7 +19,7 @@ public class FieldsValues {
 	public static final String USERNAME_NEEDED_CHARS = ".*[a-zA-Z]+.*";
 
 	public static final int PASSWORD_MIN_LENGTH = 8;
-	public static final int PASSWORD_MAX_LENGTH = 30;
+	public static final int PASSWORD_MAX_LENGTH = 35;
 	// public static final String PASSWORD_FORBIDDEN_CHARS = "";
 	// public static final String PASSWORD_ONLY_CHARS = "";
 	public static final String PASSWORD_NEEDED_CHARS = "^" + "([a-zA-Z]+[0-9][a-zA-Z0-9]*)" + "|"

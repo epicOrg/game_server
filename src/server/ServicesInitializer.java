@@ -28,30 +28,35 @@ import services.rooms.subservices.CreateRoom;
 import services.rooms.subservices.JoinPlayer;
 import services.rooms.subservices.RoomsList;
 
+/**
+ * @author Micieli
+ * @date 2015/05/24
+ */
+
 public class ServicesInitializer {
-	
-	private ArrayList<IService> services;	
-	
+
+	private ArrayList<IService> services;
+
 	public ServicesInitializer() {
 		super();
 		services = new ArrayList<>();
 		init();
 	}
 
-	private void init(){
-		
+	private void init() {
+
 		IExtendedService encrypt = new Encrypt();
 		encrypt.addSubService(new PublicKeyRequest());
 		encrypt.addSubService(new WrappedKey());
-		
+
 		services.add(encrypt);
 		services.add(new Register());
-		IExtendedService rooms = initRooms();		
+		IExtendedService rooms = initRooms();
 		services.add(rooms);
 		IExtendedService currentoom = initCurrentRoom();
-		services.add(currentoom);		
-		IExtendedService game = initGame();	
-		
+		services.add(currentoom);
+		IExtendedService game = initGame();
+
 		services.add(game);
 		services.add(new Audio());
 		services.add(new Unknown());
@@ -74,7 +79,7 @@ public class ServicesInitializer {
 		IExtendedService roomsActions = new RoomActions();
 		IService roomExit = new RoomExit();
 		IService playerListReceived = new ListReceived();
-		roomsActions.addSubService(roomExit,playerListReceived);
+		roomsActions.addSubService(roomExit, playerListReceived);
 		currentoom.addSubService(roomsActions, playerList);
 		return currentoom;
 	}
@@ -86,7 +91,7 @@ public class ServicesInitializer {
 		rooms.addSubService(new RoomsList());
 		return rooms;
 	}
-	
+
 	public ArrayList<IService> getServices() {
 		return services;
 	}

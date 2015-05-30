@@ -7,12 +7,11 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import data_management.GameDataManager;
 import server.ClientRequestThread;
+import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.UserNotOnlineException;
 import fields_names.ServicesFields;
-import game.model.Room;
 
 /**
  * Thread who polls the user each polling-time to check if the user is yet
@@ -40,8 +39,7 @@ public class PollingThread extends Thread {
 
 	@Override
 	public void run() {
-		timer.scheduleAtFixedRate(new PollingTask(), POLLING_DELAY,
-				POLLING_TIME);
+		timer.scheduleAtFixedRate(new PollingTask(), POLLING_DELAY, POLLING_TIME);
 	}
 
 	public void shutdown() {
@@ -51,9 +49,11 @@ public class PollingThread extends Thread {
 	private String generatePollingMessage() {
 
 		JSONObject pollingRequest = new JSONObject();
+
 		try {
-			pollingRequest.put(ServicesFields.SERVICE.toString(),
-					ServicesFields.POLLING.toString());
+
+			pollingRequest
+					.put(ServicesFields.SERVICE.toString(), ServicesFields.POLLING.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -71,8 +71,12 @@ public class PollingThread extends Thread {
 			if (onlineUser.isPolled()) {
 				printWriter.println(generatePollingMessage());
 				onlineUser.setPolled(false);
+
 			} else {
+
+				// TODO DEBUG PRINT
 				System.out.println("Polling failed");
+
 				OnlineManager onlineManager = OnlineManager.getInstance();
 
 				try {
@@ -84,8 +88,7 @@ public class PollingThread extends Thread {
 				}
 
 				try {
-					onlineManager.setOffline(onlineUser.getUsername(),
-							onlineUser.hashCode());
+					onlineManager.setOffline(onlineUser.getUsername(), onlineUser.hashCode());
 				} catch (UserNotOnlineException e) {
 					e.printStackTrace();
 				}

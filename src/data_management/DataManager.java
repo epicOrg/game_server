@@ -14,8 +14,8 @@ import exceptions.UsernameAlreadyUsedException;
 
 /**
  * 
- * <code>DataManager</code> provides methods to manages users data.
- * Allows the {@link Register} service to save users data and to check them.
+ * <code>DataManager</code> provides methods to manages users data. Allows the
+ * {@link Register} service to save users data and to check them.
  * 
  * @author Noris
  * @author Micieli
@@ -32,12 +32,13 @@ public class DataManager {
 
 	private DataManager() {
 	}
-	
+
 	/**
 	 * 
-	 * Checks if exist another user registered with the same username
+	 * Checks if exist another user registered with the same username.
 	 * 
-	 * @param username  the username to check
+	 * @param username
+	 *            the username to check
 	 * @return true if the username is available, false otherwise
 	 * @see IRegistrationChecker#checkUsername(String)
 	 */
@@ -53,11 +54,11 @@ public class DataManager {
 	}
 
 	/**
+	 * Checks if exist another user registered with the same e-mail.
 	 * 
-	 * Checks if exist another user registered with the same email
-	 * 
-	 * @param 		 email the email to check
-	 * @return		 true if the aren't user registered with the given email
+	 * @param email
+	 *            the email to check
+	 * @return true if the aren't user registered with the given email
 	 * @see IRegistrationChecker#checkEmail(String)
 	 */
 	public boolean checkEmail(String email) {
@@ -76,7 +77,8 @@ public class DataManager {
 
 	/**
 	 * 
-	 * Checks if the password given by the user mathes with the one provided during registration
+	 * Checks if the password given by the user matches with the one provided
+	 * during the registration.
 	 * 
 	 * @param registeredUser
 	 * @return
@@ -96,18 +98,20 @@ public class DataManager {
 
 		return true;
 	}
-	
+
 	/**
 	 * 
-	 * Permanently saves user data (username, email and password) in the server database.
+	 * Permanently saves user data (username, email and password) in the server
+	 * database.
 	 * 
-	 * @param user								the registered user to be saved
-	 * @throws RegistrationFailedException		if an error occurred during writing into database
+	 * @param user
+	 *            the registered user to be saved
+	 * @throws RegistrationFailedException
+	 *             if an error occurred during writing into database
 	 * @see RegisteredUser
 	 * @see IDataSaver
 	 */
-	public void saveRegistrationFields(RegisteredUser user)
-			throws RegistrationFailedException {
+	public void saveRegistrationFields(RegisteredUser user) throws RegistrationFailedException {
 
 		try {
 			registerDataSaver.saveData(user);

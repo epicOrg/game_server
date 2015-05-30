@@ -1,8 +1,6 @@
 package game.map;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +29,7 @@ public class MapJSONizer {
 	}
 
 	public void generateMap() {
+
 		try {
 
 			JSONObject jsonMap = new JSONObject();
@@ -71,19 +70,15 @@ public class MapJSONizer {
 
 				JSONObject adapted = new JSONObject();
 
-				adapted.put(GameFields.GAME_OBJECT.toString(),
-						i.getObjectName());
-				adapted.put(GameFields.GAME_TEXTURE.toString(),
-						i.getTextureName());
+				adapted.put(GameFields.GAME_OBJECT.toString(), i.getObjectName());
+				adapted.put(GameFields.GAME_TEXTURE.toString(), i.getTextureName());
 
-				String position = new MapDimension(i.getPosition().getWidth()
-						+ PHASE, i.getPosition().getHeight(), i.getPosition()
-						.getLength() + PHASE).toString();
+				String position = new MapDimension(i.getPosition().getWidth() + PHASE, i
+						.getPosition().getHeight(), i.getPosition().getLength() + PHASE).toString();
 				adapted.put(GameFields.GAME_POSITION.toString(), position);
 
-				String size = new MapDimension(i.getSize().getWidth(), i
-						.getSize().getHeight(), i.getSize().getLength())
-						.toString();
+				String size = new MapDimension(i.getSize().getWidth(), i.getSize().getHeight(), i
+						.getSize().getLength()).toString();
 				adapted.put(GameFields.GAME_SIZE.toString(), size);
 
 				adaptedItems.put(adapted);
@@ -102,22 +97,17 @@ public class MapJSONizer {
 	 */
 	public static PlayerStatus getAdaptedSpawnPoints(PlayerStatus spawnPoint) {
 
-		PlayerStatus adaptedSpawnPoints = new PlayerStatus(
-				spawnPoint.getxPosition(), spawnPoint.getyPosition(),
-				spawnPoint.getzPosition(), spawnPoint.getxDirection(),
+		PlayerStatus adaptedSpawnPoints = new PlayerStatus(spawnPoint.getxPosition(),
+				spawnPoint.getyPosition(), spawnPoint.getzPosition(), spawnPoint.getxDirection(),
 				spawnPoint.getyDirection(), spawnPoint.getzDirection());
 
 		if (PHASE != 0) {
 
-			MapDimension phasePosition = new MapDimension(
-					spawnPoint.getxPosition() + PHASE,
-					spawnPoint.getyPosition(), spawnPoint.getzPosition()
-							+ PHASE);
+			MapDimension phasePosition = new MapDimension(spawnPoint.getxPosition() + PHASE,
+					spawnPoint.getyPosition(), spawnPoint.getzPosition() + PHASE);
 
-			MapDimension phaseDirection = new MapDimension(
-					spawnPoint.getxDirection() + PHASE,
-					spawnPoint.getyDirection(), spawnPoint.getzDirection()
-							+ PHASE);
+			MapDimension phaseDirection = new MapDimension(spawnPoint.getxDirection() + PHASE,
+					spawnPoint.getyDirection(), spawnPoint.getzDirection() + PHASE);
 
 			adaptedSpawnPoints = new PlayerStatus(phasePosition, phaseDirection);
 		}
@@ -135,9 +125,8 @@ public class MapJSONizer {
 
 		if (PHASE != 0)
 			for (int i = 0; i < winPoints.size(); i++) {
-				winPoints.set(i, new MapDimension(winPoints.get(i).getWidth()
-						+ PHASE, winPoints.get(i).getHeight(), winPoints.get(i)
-						.getLength() + PHASE));
+				winPoints.set(i, new MapDimension(winPoints.get(i).getWidth() + PHASE, winPoints
+						.get(i).getHeight(), winPoints.get(i).getLength() + PHASE));
 			}
 
 		if (winPoints.isEmpty())

@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 /**
- * It can be used to create a map, starting from single {@link MapObject} (one, more,
- * or none), the size of the map, spawn point(s) and win point(s).
+ * It can be used to create a map, starting from single {@link MapObject} (one,
+ * more, or none), the size of the map, spawn point(s) and win point(s).
  * 
  * @author Noris
  * @date 2015/04/23
@@ -31,7 +31,9 @@ public class Map implements IMap {
 		winPoints = new ArrayList<MapDimension>();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#setMapSize(game.map.MapDimension)
 	 */
 	@Override
@@ -39,7 +41,9 @@ public class Map implements IMap {
 		this.mapSize = mapSize;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#getMapSize()
 	 */
 	@Override
@@ -47,7 +51,9 @@ public class Map implements IMap {
 		return mapSize;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#addMapObject(game.map.MapObject)
 	 */
 	@Override
@@ -56,7 +62,9 @@ public class Map implements IMap {
 		numItems++;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#getItems()
 	 */
 	@Override
@@ -64,7 +72,9 @@ public class Map implements IMap {
 		return items;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#getNumItems()
 	 */
 	@Override
@@ -72,7 +82,9 @@ public class Map implements IMap {
 		return numItems;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#addMapObjects(game.map.MapObject)
 	 */
 	@Override
@@ -80,7 +92,9 @@ public class Map implements IMap {
 		Collections.addAll(this.items, items);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#addSpawnPoint(game.model.PlayerStatus)
 	 */
 	@Override
@@ -88,7 +102,9 @@ public class Map implements IMap {
 		spawnPoints.add(playerStatus);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#getSpawnPoints()
 	 */
 	@Override
@@ -100,7 +116,9 @@ public class Map implements IMap {
 		return spawnPoints;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#addWinPoint(game.map.MapObject)
 	 */
 	@Override
@@ -109,14 +127,16 @@ public class Map implements IMap {
 		addMapObject(mapObject);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.map.IMap#getWinPoints()
 	 */
 	@Override
 	public ArrayList<MapDimension> getWinPoints() {
 		return winPoints;
 	}
-	
+
 	public PlayerStatus getSpawnPoint() {
 		System.out.println(spawnPoints);
 		if (spawnPoints.size() == 1)

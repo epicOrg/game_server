@@ -32,6 +32,7 @@ public class GameExit implements IService {
 		System.out.println(getName());
 
 		try {
+
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			String username = request.getString(CommonFields.USERNAME.toString());
 			GameDataManager gameDataManager = GameDataManager.getInstance();

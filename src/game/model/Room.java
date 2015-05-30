@@ -5,7 +5,6 @@ import exceptions.NoSuchPlayerException;
 import game.map.IMap;
 import game.map.MapDimension;
 import game.map.generation.IMapGenerator;
-import game.map.generation.GridMapGenerator;
 import services.current_room.CurrentRoom;
 import services.game.Game;
 import services.rooms.Rooms;
@@ -64,10 +63,7 @@ public class Room {
 	 * Generates a random map in which the player will move.
 	 */
 	public void generateMap() {
-		
 		map = mapGenerator.generateMap(new MapDimension(20, 20, 20), maxPlayers);
-
-		//roomMapSelector = new RoomMapSelector(new GridMapGenerator(new MapDimension(20, 20, 20),maxPlayers));
 	}
 
 	/**
@@ -100,6 +96,8 @@ public class Room {
 
 		if (inPlay && allPlayerReady) {
 			playersUpdater.onExtingFromGame();
+
+			// TODO DUBUG PRINT
 			System.out.println("Game interrupted.");
 
 		} else {
@@ -179,15 +177,15 @@ public class Room {
 	public boolean isInPlayng() {
 		return inPlay;
 	}
-	
-	public boolean areAllPlayersReady(){
+
+	public boolean areAllPlayersReady() {
 		return allPlayerReady;
 	}
-	
-	public void setAllPlayerReady(boolean status){
+
+	public void setAllPlayerReady(boolean status) {
 		this.allPlayerReady = status;
 	}
-	
+
 	public void setMapGenerator(IMapGenerator mapGenerator) {
 		this.mapGenerator = mapGenerator;
 	}

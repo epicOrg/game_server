@@ -15,7 +15,7 @@ import game.model.Room;
  * @see RoomAudioCall
  */
 
-public class TeamCallTest {
+class TeamCallTest {
 
 	public static void main(String[] args) throws IOException, NoSuchRoomException {
 

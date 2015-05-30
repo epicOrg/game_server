@@ -17,7 +17,7 @@ import com.biasedbit.efflux.session.SingleParticipantSession;
  * @date 2015/04/28
  */
 
-public class ThreePeopleConversationTest {
+class ThreePeopleConversationTest {
 
 	private static final String MY_IP = "10.42.0.80";
 	private static final int DATA_LENTH = 160;
