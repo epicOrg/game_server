@@ -19,7 +19,7 @@ import exceptions.UserNotOnlineException;
  * 
  * @author Noris
  * @date 2015/04/05
- *
+ * 
  */
 
 public class Test01 {
@@ -57,7 +57,7 @@ public class Test01 {
 
 			assertEquals(realUsername, foundUsername);
 		} catch (UserNotOnlineException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

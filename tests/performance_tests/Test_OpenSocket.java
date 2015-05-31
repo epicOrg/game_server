@@ -19,7 +19,7 @@ class Test_OpenSocket {
 	private static final String SERVER_ADDRESS = "127.0.0.1";
 	private static final int SERVER_PORT = 7007;
 
-	private Socket socket = new Socket();;
+	private Socket socket = new Socket();
 	private PrintWriter writer;
 
 	public void connectSocket() throws UnknownHostException, IOException {

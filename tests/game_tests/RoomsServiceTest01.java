@@ -25,28 +25,31 @@ class RoomsServiceTest01 {
 
 		GameDataManager gameDataManager = GameDataManager.getInstance();
 
-		gameDataManager.newRoom("ciao", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS, new GridMapGenerator());
+		gameDataManager.newRoom("ciao", TeamManager.NUMBER_OF_TEAMS,
+				Team.MAX_PLAYERS, new GridMapGenerator());
 
-		gameDataManager.newRoom("ok", TeamManager.NUMBER_OF_TEAMS, Team.MAX_PLAYERS, new GridMapGenerator());
+		gameDataManager.newRoom("ok", TeamManager.NUMBER_OF_TEAMS,
+				Team.MAX_PLAYERS, new GridMapGenerator());
 
 		JSONObject request = new JSONObject();
-		
+
 		try {
 
-			request.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
-			request.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			request.put(ServicesFields.SERVICE.toString(),
+					ServicesFields.ROOMS.toString());
+			request.put(ServicesFields.SERVICE_TYPE.toString(),
+					RoomsFields.ROOM_CREATE.toString());
 			request.put(RoomFields.ROOM_NAME.toString(), "ciao2");
 			request.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
 			request.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
-			System.out.println(request.toString());
+			System.out.println("CLIENT RoomCreate Message: " + request.toString());
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		Rooms roomService = new Rooms();
 		roomService.addSubService(new CreateRoom());
-		System.out.println(roomService.start(request));
+		System.out.println("SERVER RoomCreate Message: " + roomService.start(request));
 	}
 }

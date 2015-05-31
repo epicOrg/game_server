@@ -26,7 +26,8 @@ import fields_names.ServicesFields;
  */
 class RoomCheckerTest01 {
 
-	public static void main(String[] args) throws UnknownHostException, JSONException {
+	public static void main(String[] args) throws UnknownHostException,
+			JSONException {
 
 		// SERVER: Set online Friedrich Nietzsche
 		OnlineManager onlineManager = OnlineManager.getInstance();
@@ -38,14 +39,15 @@ class RoomCheckerTest01 {
 
 			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
 			JSONObject jsonRequest = new JSONObject();
-			jsonRequest.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			jsonRequest.put(ServicesFields.SERVICE.toString(),
+					ServicesFields.ROOMS.toString());
 			jsonRequest.put(CommonFields.USERNAME.toString(), "Nietzsche");
 			jsonRequest.put(CommonFields.HASHCODE.toString(), hashCode);
-			jsonRequest.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			jsonRequest.put(ServicesFields.SERVICE_TYPE.toString(),
+					RoomsFields.ROOM_CREATE.toString());
 			jsonRequest.put(RoomFields.ROOM_NAME.toString(), "GottIstTot");
 			jsonRequest.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
 			jsonRequest.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
-			
 
 			System.out.println("Request: " + jsonRequest);
 			Rooms roomService = new Rooms();
@@ -53,7 +55,6 @@ class RoomCheckerTest01 {
 			System.out.println("Response: " + roomService.start(jsonRequest));
 
 		} catch (UserNotOnlineException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

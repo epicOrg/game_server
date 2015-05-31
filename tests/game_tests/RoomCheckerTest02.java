@@ -35,23 +35,23 @@ class RoomCheckerTest02 {
 		try {
 			hashCode = onlineManager.getHashCodeByUsername("Nietzsche");
 			JSONObject jsonRequest = new JSONObject();
-			jsonRequest.put(ServicesFields.SERVICE.toString(), ServicesFields.ROOMS.toString());
+			jsonRequest.put(ServicesFields.SERVICE.toString(),
+					ServicesFields.ROOMS.toString());
 			jsonRequest.put(CommonFields.USERNAME.toString(), "Nietzsche");
 			jsonRequest.put(CommonFields.HASHCODE.toString(), hashCode + 1);
-			jsonRequest.put(ServicesFields.SERVICE_TYPE.toString(), RoomsFields.ROOM_CREATE.toString());
+			jsonRequest.put(ServicesFields.SERVICE_TYPE.toString(),
+					RoomsFields.ROOM_CREATE.toString());
 			jsonRequest.put(RoomFields.ROOM_NAME.toString(), "GottIstTot");
 			jsonRequest.put(RoomsFields.ROOM_TEAMS_NUMBER.toString(), 2);
 			jsonRequest.put(RoomsFields.ROOM_TEAMS_DIMENSION.toString(), 2);
 
-			System.out.println("Request: " + jsonRequest);
-			
+			System.out.println("CLIENT RoomCreate Message: " + jsonRequest);
+
 			Rooms roomService = new Rooms();
 			roomService.addSubService(new CreateRoom());
-			System.out.println("Response: "
-					+ roomService.start(jsonRequest));
+			System.out.println("SERVER RoomCreate Message: " + roomService.start(jsonRequest));
 
 		} catch (UserNotOnlineException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

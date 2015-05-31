@@ -1,5 +1,9 @@
 package data_management_tests;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
 import server.ServerInitializer;
 import data_management.DataManager;
 import data_management.RegisteredUser;
@@ -15,21 +19,38 @@ import exceptions.RegistrationFailedException;
  * @see RegisteredUser
  */
 
-class Test03 {
+public class Test03 {
 
-	public static void main(String[] args) throws RegistrationFailedException {
+	private DataManager dataManager;
+	private RegisteredUser user;
+	private ServerInitializer serverInitializer = new ServerInitializer();
 
-		new ServerInitializer().init();
+	@Before
+	public void setUp() {
 
-		DataManager dataManager = DataManager.getInstance();
+		serverInitializer.init();
 
-		RegisteredUser user = new RegisteredUser("marx", "proletarian707", "marx@proletarian.org");
-
-		System.out.println(dataManager.checkPassword(user));
-
-		dataManager.saveRegistrationFields(user);
-
-		System.out.println(dataManager.checkPassword(user));
+		dataManager = DataManager.getInstance();
+		user = new RegisteredUser("marx", "proletarian707",
+				"marx@proletarian.org");
 
 	}
+
+	/**
+	 * Test method for
+	 * {@link data_management.DataManager#checkPassword(data_management.RegisteredUser)}
+	 * .
+	 * 
+	 * @throws RegistrationFailedException
+	 */
+	@Test
+	public void testCheckPassword() throws RegistrationFailedException {
+
+		assertTrue(dataManager.checkPassword(user));
+
+		dataManager.saveRegistrationFields(user);
+		assertTrue(dataManager.checkPassword(user));
+
+	}
+
 }
