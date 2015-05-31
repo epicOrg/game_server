@@ -1,17 +1,5 @@
 package game;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import messages.UpdatingMessagesCreator;
-import online_management.OnlineManager;
-
-import org.json.JSONObject;
-
-import voip.RoomAudioCall;
 import data_management.GameDataManager;
 import exceptions.NoSuchRoomException;
 import exceptions.UserNotOnlineException;
@@ -22,6 +10,17 @@ import game.model.Room;
 import game.model.RoomEventListener;
 import game.model.RoomThread;
 import game.model.Team;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
+import messages.UpdatingMessagesCreator;
+import online_management.OnlineManager;
+
+import org.json.JSONObject;
+
+import voip.RoomAudioCall;
 
 /**
  * Updates {@link Player}s about {@link Room} events, sending them messages in
@@ -35,10 +34,7 @@ import game.model.Team;
 
 public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListener {
 
-	private static final int DELAY = 1500;
-
 	private OnlineManager onlineManager;
-	private Timer timer;
 
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
@@ -69,23 +65,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onRoomFull() {
-		try {
-			if (timer != null)
-				timer.cancel();
-			timer = new Timer();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		timer.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				updatePlayers(null, messagesCreator.generateStartMessage());
-				room.setInPlay(true);
-				GameDataManager.getInstance().newAudioCallForRoom(room);
-			}
-		}, DELAY);
+		updatePlayers(null, messagesCreator.generateStartMessage());
+		room.setInPlay(true);
+		GameDataManager.getInstance().newAudioCallForRoom(room);
 
 		roomThread = new RoomThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room
 				.getMap().getWinPoints()), 2));
@@ -101,14 +83,6 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 			interrupted = true;
 			onPlayerStatusChanged();
 		} else {
-			try {
-				if (timer != null)
-					timer.cancel();
-				timer = new Timer();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
 			updatePlayers(player, messagesCreator.generatePlayersListMessage(room));
 		}
 	}
