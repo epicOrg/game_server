@@ -98,7 +98,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		writers.remove(player);
 
 		if (room.isInPlayng() && !room.areAllPlayersReady()) {
-			this.interrupted = true;
+			interrupted = true;
 			onPlayerStatusChanged();
 		} else {
 			try {
@@ -115,6 +115,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	@Override
 	public void onGameEnded() {
+		interrupted = false;
 		writers = new HashMap<>();
 		room.generateMap();
 	}
