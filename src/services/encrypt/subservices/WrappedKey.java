@@ -6,16 +6,28 @@ import org.json.JSONObject;
 import fields_names.EncryptFields;
 import services.IService;
 
+/**
+ * @author Noris
+ * @author Micieli
+ * @date 2015/05/29
+ */
+
 public class WrappedKey implements IService {
 
 	@Override
 	public JSONObject start(JSONObject request) {
 
+		// TODO
+		@SuppressWarnings("unused")
 		String wrappedKey;
 
 		try {
+
 			wrappedKey = request.getString(EncryptFields.WRAPPED_KEY.toString());
-			System.out.println("WrappedKey STR: " + wrappedKey);
+
+			// TODO DEBUG: wrapped symmetric key (string format)
+			// System.out.println("WrappedKey (string): " + wrappedKey);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

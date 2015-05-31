@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_names.ServicesFields;
 import services.IExtendedService;
 import services.IService;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris
@@ -28,7 +28,12 @@ public class Encrypt implements IExtendedService {
 		String serviceType = null;
 
 		try {
+
 			serviceType = jsonRequest.getString(ServicesFields.SERVICE_TYPE.toString());
+
+			// TODO DEBUG: service name
+			// System.out.println("Service: " + serviceType);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

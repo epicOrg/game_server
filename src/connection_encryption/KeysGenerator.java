@@ -1,6 +1,7 @@
 package connection_encryption;
 
-import java.security.Key;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 /**
  * Interface for the asymmetric cryptography. The classes who implements this
@@ -15,7 +16,7 @@ import java.security.Key;
 public interface KeysGenerator {
 
 	/**
-	 * It generate two asymmetric keys (public and private key).
+	 * Generates two asymmetric keys (public and private key).
 	 */
 	public void generateKeys();
 
@@ -23,12 +24,12 @@ public interface KeysGenerator {
 	 * @return the public key: with this key you can encrypt data that can be
 	 *         only decrypted with the private key
 	 */
-	public Key getPublicKey();
+	public PublicKey getPublicKey();
 
 	/**
 	 * @return the private key: you can use this key to decrypt data encrypted
 	 *         with the public key
 	 */
-	public Key getPrivateKey();
+	public PrivateKey getPrivateKey();
 
 }

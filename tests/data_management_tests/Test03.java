@@ -14,6 +14,7 @@ import exceptions.RegistrationFailedException;
  * @see DataManager
  * @see RegisteredUser
  */
+
 class Test03 {
 
 	public static void main(String[] args) throws RegistrationFailedException {
@@ -22,8 +23,7 @@ class Test03 {
 
 		DataManager dataManager = DataManager.getInstance();
 
-		RegisteredUser user = new RegisteredUser("marx", "proletarian707",
-				"marx@proletarian.org");
+		RegisteredUser user = new RegisteredUser("marx", "proletarian707", "marx@proletarian.org");
 
 		System.out.println(dataManager.checkPassword(user));
 

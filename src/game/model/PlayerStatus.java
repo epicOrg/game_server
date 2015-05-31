@@ -149,4 +149,7 @@ public class PlayerStatus {
 		return xDirection + " " + yDirection + " " + zDirection;
 	}
 
+	public String toString() {
+		return toStringPosition() + " | " + toStringDirection();
+	}
 }

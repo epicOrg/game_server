@@ -6,6 +6,7 @@ import java.util.Collections;
 import check_fields.RequestFieldChecher;
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.ConnectionEncrypter;
+import connection_encryption.KeysGenerator;
 import data_management.DataManager;
 import data_management.RegisterDataSaver;
 import data_management.RegisteredUser;
@@ -41,12 +42,9 @@ public class ServerInitializer {
 	}
 
 	private void initChecks() {
-		String[] services = { ServicesFields.ENCRYPT.toString(),
-				ServicesFields.LOGIN.toString(),
-				ServicesFields.REGISTER.toString(),
-				ServicesFields.UNKNOWN.toString(),
-				ServicesFields.GAME.toString(),
-				ServicesFields.POLLING.toString() };
+		String[] services = { ServicesFields.ENCRYPT.toString(), ServicesFields.LOGIN.toString(),
+				ServicesFields.REGISTER.toString(), ServicesFields.UNKNOWN.toString(),
+				ServicesFields.GAME.toString(), ServicesFields.POLLING.toString() };
 
 		ArrayList<String> arrayList = new ArrayList<>();
 		Collections.addAll(arrayList, services);
@@ -54,25 +52,26 @@ public class ServerInitializer {
 	}
 
 	private void initEncryption() {
-		AsymmetricKeysGenerator asymmetricKeysGenerator = new AsymmetricKeysGenerator();
-		asymmetricKeysGenerator.generateKeys();
-		ConnectionEncrypter.setKeysGenerator(asymmetricKeysGenerator);
-		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(
-				new SHA512StringEncrypter()));
+
+		KeysGenerator keysGenerator = new AsymmetricKeysGenerator();
+		keysGenerator.generateKeys();
+		ConnectionEncrypter.setKeysGenerator(keysGenerator);
+
+		RegisteredUser.setPasswordEncrypter(new PasswordEncrypter(new SHA512StringEncrypter()));
 	}
 
 	private void initdataManager() {
 
 		DataManager dataManager = DataManager.getInstance();
 
-		RegisterDataSaver registerDataSaver = new RegisterDataSaver(
-				new UserSaver(Paths.getUsersPath(), new UserLineFormatter()),
-				new EmailSaver(Paths.getEmailsPath(), new EmailFormatter()));
+		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserSaver(
+				Paths.getUsersPath(), new UserLineFormatter()), new EmailSaver(
+				Paths.getEmailsPath(), new EmailFormatter()));
 
 		dataManager.setRegisterDataSaver(registerDataSaver);
 
-		dataManager.setChecker(new RegistrationFileChecker(
-				Paths.getUsersPath(), Paths.getEmailsPath()));
+		dataManager.setChecker(new RegistrationFileChecker(Paths.getUsersPath(), Paths
+				.getEmailsPath()));
 
 		dataManager.setLoginChecker(new LoginFileChecker(Paths.getUsersPath()));
 	}

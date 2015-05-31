@@ -10,7 +10,7 @@ import com.biasedbit.efflux.session.SingleParticipantSession;
  * Forward Audio data in a RTPSession mixing streams of other conversation
  * partecipants.
  * 
- * @author Luca
+ * @author Micieli
  * @date 2015/04/28
  */
 
@@ -21,18 +21,18 @@ public class Forwarder {
 	private MixingPipedInputStream audioInputStream;
 	private SingleParticipantSession session;
 
-	public Forwarder(MixingPipedInputStream audioInputStream,
-			SingleParticipantSession session) {
+	public Forwarder(MixingPipedInputStream audioInputStream, SingleParticipantSession session) {
 		super();
 		this.audioInputStream = audioInputStream;
 		this.session = session;
 	}
 
 	public void forwardData() {
+
 		byte[] data = new byte[DATA_LENTH];
 
 		try {
-			if(audioInputStream.read(data) > 0){
+			if (audioInputStream.read(data) > 0) {
 				session.sendData(data, System.currentTimeMillis(), false);
 			}
 		} catch (IOException e) {

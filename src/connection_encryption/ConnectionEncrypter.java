@@ -1,6 +1,6 @@
 package connection_encryption;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 
 /**
  * @author Noris
@@ -18,7 +18,6 @@ public class ConnectionEncrypter {
 
 	public static void setKeysGenerator(KeysGenerator keysGenerator) {
 		ConnectionEncrypter.keysGenerator = keysGenerator;
-		System.out.println("Key: " + keysGenerator.getPublicKey());
 		enabled = true;
 	}
 
@@ -30,10 +29,10 @@ public class ConnectionEncrypter {
 		return enabled;
 	}
 
-	public void setAsymmetricKey(String wrappedSymmetricKey) {
+	public void setSymmetricKey(String wrappedSymmetricKey) {
 		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(keysGenerator.getPrivateKey());
 		keyUnwrapper.unwrapKey(wrappedSymmetricKey);
-		Key symmetricKey = keyUnwrapper.getUnwrappedKey();
+		SecretKey symmetricKey = keyUnwrapper.getUnwrappedKey();
 		encrypter = new Encrypter(symmetricKey);
 		decrypter = new Decrypter(symmetricKey);
 		symmetricKeySet = true;

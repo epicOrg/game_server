@@ -1,34 +1,28 @@
 package encryption_tests;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.UnsupportedEncodingException;
-import java.security.Key;
 
-import org.junit.Test;
+import javax.crypto.SecretKey;
 
 import connection_encryption.Decrypter;
 import connection_encryption.Encrypter;
 import connection_encryption.SymmetricKeyGenerator;
 
 /**
- * Encryption test for a string.
- * 
  * @author Noris
- * @date 2015/03/31
+ * @date 2015/03/30
  * @see SymmetricKeyGenerator
  * @see Encrypter
  * @see Decrypter
  */
 
-public class Test03 {
+class Test01 {
 
-	@Test
-	public void test() throws UnsupportedEncodingException {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 
 		SymmetricKeyGenerator symmetricKeyGenerator = new SymmetricKeyGenerator();
 		symmetricKeyGenerator.generateKey();
-		Key symmetricKey = symmetricKeyGenerator.getKey();
+		SecretKey symmetricKey = symmetricKeyGenerator.getKey();
 
 		String string = "Questa \u00E8 una stringa di prova!";
 		System.out.println("Uncrypted: " + string);
@@ -45,9 +39,7 @@ public class Test03 {
 		byte[] decryptedData = decrypter.getDecryptedData();
 
 		String string2 = new String(decryptedData, "UTF-8");
-
 		System.out.println("Decrypted: " + string2);
-		assertEquals(string, string2);
 
 	}
 

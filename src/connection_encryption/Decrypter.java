@@ -2,16 +2,13 @@ package connection_encryption;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
+import javax.crypto.SecretKey;
 
 /**
  * @author Noris
@@ -20,35 +17,28 @@ import org.apache.commons.codec.binary.Hex;
 
 public class Decrypter {
 
-	private Key asymmetricKey;
+	private SecretKey symmetricKey;
 	private byte[] decryptedData;
 
-	public Decrypter(Key asymmetricKey) {
-		this.asymmetricKey = asymmetricKey;
+	public Decrypter(SecretKey symmetricKey) {
+		this.symmetricKey = symmetricKey;
 	}
 
 	public void decrypt(String encryptedString) {
-		
-		byte[] encryptedData = null;
-		
-		try {
-			encryptedData = Hex.decodeHex(encryptedString.toCharArray());
-		} catch (DecoderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		byte[] encryptedData = StringConverter.stringToBytes(encryptedString);
 
 		try {
 
-			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.DECRYPT_MODE, asymmetricKey);
+			Cipher cipher = Cipher.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
+			cipher.init(Cipher.DECRYPT_MODE, symmetricKey);
 			decryptedData = cipher.doFinal(encryptedData);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			System.err.println(EncryptionConst.SYMMETRIC_ALGORITHM + " algorithm not found!");
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
 			// TODO Auto-generated catch block

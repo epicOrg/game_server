@@ -45,40 +45,50 @@ public class ClientRequestThread implements Runnable {
 	public void run() {
 		try {
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 
 			String request = in.readLine();
 
 			while (!socket.isClosed()) {
 				if (request == null) {
-					System.out.println("null request");
+
+					// TODO DEBUG: null client request
+					System.out.println("CLIENT: null request");
+
 					return;
 				}
 
-				// TODO DEBUG: client request
-				// System.out.println("CLIENT: " + request);
+				// TODO DEBUG: encrypted client request
+				System.out.println("CLIENT: " + request);
 
-				JSONObject jsonEncryptedRequest = new JSONObject(request);
-				JSONObject jsonRequest = secureConnection
-						.decrypt(jsonEncryptedRequest);
-				JSONObject jResponse = null;
+				JSONObject jsonRequest = new JSONObject(request);
+				// JSONObject jsonRequest = secureConnection.decrypt(request);
+
+				// TODO DEBUG: not encrypted client request
+				// System.out.println("CLIENT: " + jsonRequest);
+
+				JSONObject jsonResponse = null;
 
 				if (cecker.checkRequest(jsonRequest)) {
-					jResponse = elaborateRequest(jsonRequest);
+					jsonResponse = elaborateRequest(jsonRequest);
 				}
 
-				if (jResponse != null) {
-					String response = secureConnection.encrypt(jResponse)
-							.toString();
+				if (jsonResponse != null) {
+
+					// TODO DEBUG: not encrypted server response
+					// System.out.println("SERVER: " + jsonResponse);
+
+					String response = jsonResponse.toString();
+					// String response = secureConnection.encrypt(jsonResponse);
 
 					out.println(response);
 
-					// TODO DEBUG: server response
-					// System.out.println("SERVER: " + response);
+					// TODO DEBUG: encrypted server response
+					System.out.println("SERVER: " + response);
+
 				} else {
-					// System.out.println("SERVER: " + "No response.");
+					// System.out.println("SERVER: " + "no response");
 				}
 
 				request = in.readLine();
@@ -86,22 +96,18 @@ public class ClientRequestThread implements Runnable {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("chiuso");
+			System.out.println("Connection closed by the client.");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private JSONObject elaborateRequest(JSONObject jsonRequest)
-			throws JSONException {
+	private JSONObject elaborateRequest(JSONObject jsonRequest) throws JSONException {
 
-		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
-				.getRemoteSocketAddress();
+		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
 
-		jsonRequest.put(CommonFields.IP_ADDRESS.toString(),
-				inetSocketAddress.getHostName());
-		jsonRequest.put(CommonFields.LOCAL_PORT.toString(),
-				socket.getLocalPort());
+		jsonRequest.put(CommonFields.IP_ADDRESS.toString(), inetSocketAddress.getHostName());
+		jsonRequest.put(CommonFields.LOCAL_PORT.toString(), socket.getLocalPort());
 
 		IService service;
 		if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(

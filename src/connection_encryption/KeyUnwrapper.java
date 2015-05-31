@@ -1,17 +1,15 @@
 package connection_encryption;
 
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
-
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
+import javax.crypto.SecretKey;
 
 /**
- * Use it to unwrap a symmetric key crypted with a public asymmetric key.
+ * Unwraps a symmetric key encrypted with a public asymmetric key.
  * 
  * @author Noris
  * @date 2015/03/30
@@ -19,30 +17,23 @@ import org.apache.commons.codec.binary.Hex;
 
 public class KeyUnwrapper {
 
-	private Key privateKey;
-	private Key symmetricKey;
+	private PrivateKey privateKey;
+	private SecretKey symmetricKey;
 
-	public KeyUnwrapper(Key privateKey) {
-		super();
+	public KeyUnwrapper(PrivateKey privateKey) {
 		this.privateKey = privateKey;
 	}
 
 	public void unwrapKey(String wrappedKeyString) {
 
-		byte[] wrappedKeyData = null;
-
-		try {
-			wrappedKeyData = Hex.decodeHex(wrappedKeyString.toCharArray());
-		} catch (DecoderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		byte[] wrappedKeyData = StringConverter.stringToBytes(wrappedKeyString);
 
 		try {
 
-			Cipher cipher = Cipher.getInstance("RSA");
+			Cipher cipher = Cipher.getInstance(EncryptionConst.ASYMMETRIC_DECODE);
 			cipher.init(Cipher.UNWRAP_MODE, privateKey);
-			symmetricKey = cipher.unwrap(wrappedKeyData, "AES", Cipher.SECRET_KEY);
+			symmetricKey = (SecretKey) cipher.unwrap(wrappedKeyData,
+					EncryptionConst.SYMMETRIC_ALGORITHM, Cipher.SECRET_KEY);
 
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
@@ -56,7 +47,7 @@ public class KeyUnwrapper {
 		}
 	}
 
-	public Key getUnwrappedKey() {
+	public SecretKey getUnwrappedKey() {
 		return symmetricKey;
 	}
 

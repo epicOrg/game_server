@@ -15,13 +15,14 @@ import fields_names.ServicesFields;
 import game.model.Player;
 
 /**
+ * Audio Service acquires audio data needed to initiate VOIP communication
+ * between client end server. Gets back to the client the connection details and
+ * reserves the necessary net resources necessary.
  * 
- * Audio Service acquires audio data needed to initiate Voip communication between client end server.
- * Gets back to the client the connection details and reserves the necessary net resources necessary
- * 
- * @author Luca
+ * @author Micieli
  * @date 2015/05/03
  */
+
 public class Audio implements IService {
 
 	@Override
@@ -29,18 +30,18 @@ public class Audio implements IService {
 
 		GameDataManager dataManager = GameDataManager.getInstance();
 		int localPort = NetUtils.findFreePort();
+
 		try {
 
 			String roomName = request.getString(RoomFields.ROOM_NAME.toString());
 			String username = request.getString(CommonFields.USERNAME.toString());
-			Player player = dataManager.getRoomByName(roomName)
-					.getPlayerByName(username);
+			Player player = dataManager.getRoomByName(roomName).getPlayerByName(username);
 			int playerAudioPort = request.getInt(AudioFields.AUDIO_PORT_CLIENT.toString());
-			AudioData audioData = player.getAudioData();			
+			AudioData audioData = player.getAudioData();
 			audioData.setLocalPort(localPort);
 			int localControlPort = NetUtils.findFreePort();
 			audioData.setLocalControlPort(localControlPort);
-			audioData.setRemotePort(playerAudioPort);			
+			audioData.setRemotePort(playerAudioPort);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -51,18 +52,21 @@ public class Audio implements IService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return generateResponse( localPort);
+
+		return generateResponse(localPort);
 	}
 
-	protected JSONObject generateResponse(int localPort){
+	protected JSONObject generateResponse(int localPort) {
+
 		JSONObject response = new JSONObject();
+
 		try {
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.AUDIO.toString());
 			response.put(AudioFields.AUDIO_PORT_SERVER.toString(), localPort);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return response;
 	}
 

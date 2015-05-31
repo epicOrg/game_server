@@ -8,6 +8,12 @@ import fields_names.EncryptFields;
 import fields_names.ServicesFields;
 import services.IService;
 
+/**
+ * @author Noris
+ * @author Micieli
+ * @date 2015/05/29
+ */
+
 public class PublicKeyRequest implements IService {
 
 	@Override
@@ -17,7 +23,7 @@ public class PublicKeyRequest implements IService {
 
 		try {
 
-			jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.ENCRYPT);
+			jsonResponse.put(ServicesFields.SERVICE.toString(), ServicesFields.ENCRYPT.toString());
 			jsonResponse.put(EncryptFields.PUBLIC_KEY.toString(),
 					ConnectionEncrypter.getPublicKey());
 

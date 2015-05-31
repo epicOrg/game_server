@@ -25,15 +25,17 @@ public class Polling implements IService {
 	@Override
 	public JSONObject start(JSONObject request) {
 
-		// TODO DEBUG PRINT
-		// System.out.println(request.toString());
+		// TODO DEBUG: polling request
+		// System.out.println("Polling: " + request.toString());
 
 		OnlineManager onlineManager = OnlineManager.getInstance();
 
 		try {
+
 			String username = request.getString(CommonFields.USERNAME.toString());
 			OnlineUser user = onlineManager.getOnlineUserByUsername(username);
 			user.setPolled(true);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (UserNotOnlineException e) {

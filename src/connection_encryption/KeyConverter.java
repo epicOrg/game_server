@@ -3,12 +3,11 @@ package connection_encryption;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * @author Noris
@@ -18,20 +17,21 @@ import org.apache.commons.codec.binary.Base64;
 public class KeyConverter {
 
 	public static String keyToString(Key key) {
-		return Base64.encodeBase64String(key.getEncoded());
+		return StringConverter.bytesToString(key.getEncoded());
 	}
 
-	public static Key stringToPublicKey(String key) {
+	public static PublicKey stringToPublicKey(String key) {
 
-		byte[] decodedKey = Base64.decodeBase64(key);
+		byte[] decodedKey = StringConverter.stringToBytes(key);
 
 		X509EncodedKeySpec eks = new X509EncodedKeySpec(decodedKey);
 
 		KeyFactory keyFactor = null;
 
 		try {
-			keyFactor = KeyFactory.getInstance("RSA");
+			keyFactor = KeyFactory.getInstance(EncryptionConst.ASYMMETRIC_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
+			System.err.println(EncryptionConst.ASYMMETRIC_ALGORITHM + " algorithm not found!");
 			e.printStackTrace();
 		}
 
@@ -46,8 +46,8 @@ public class KeyConverter {
 
 	public static Key stringToSymmetricKey(String key) {
 
-		byte[] decodedKey = Base64.decodeBase64(key);
-		return new SecretKeySpec(decodedKey, "AES");
+		byte[] decodedKey = StringConverter.stringToBytes(key);
+		return new SecretKeySpec(decodedKey, EncryptionConst.SYMMETRIC_ALGORITHM);
 
 	}
 

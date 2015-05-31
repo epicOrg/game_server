@@ -163,6 +163,9 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		for (Player p : writers.keySet()) {
 			if (p != excludedPlayer) {
 				writers.get(p).println(strMessage);
+
+				// TODO DEBUG: room messages
+				System.out.println("SERVER: " + strMessage);
 			}
 		}
 	}

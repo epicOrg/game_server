@@ -1,9 +1,10 @@
 package connection_encryption;
 
-import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.SecureRandom;
 
 /**
@@ -13,19 +14,18 @@ import java.security.SecureRandom;
 
 public class AsymmetricKeysGenerator implements KeysGenerator {
 
-	private static final int KEYSIZE = 512;
-
-	private Key publicKey;
-	private Key privateKey;
+	private PublicKey publicKey;
+	private PrivateKey privateKey;
 
 	public void generateKeys() {
 
 		try {
 
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator
+					.getInstance(EncryptionConst.ASYMMETRIC_ALGORITHM);
 			SecureRandom secureRandom = new SecureRandom();
 
-			keyPairGenerator.initialize(KEYSIZE, secureRandom);
+			keyPairGenerator.initialize(EncryptionConst.ASYMMETRIC_KEYSIZE, secureRandom);
 
 			KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
@@ -33,16 +33,16 @@ public class AsymmetricKeysGenerator implements KeysGenerator {
 			privateKey = keyPair.getPrivate();
 
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			System.err.println(EncryptionConst.ASYMMETRIC_ALGORITHM + " algorithm not found!");
 			e.printStackTrace();
 		}
 	}
 
-	public Key getPublicKey() {
+	public PublicKey getPublicKey() {
 		return publicKey;
 	}
 
-	public Key getPrivateKey() {
+	public PrivateKey getPrivateKey() {
 		return privateKey;
 	}
 

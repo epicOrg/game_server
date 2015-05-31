@@ -58,6 +58,10 @@ public class PollingThread extends Thread {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+		// TODO DEBUG: polling request
+		System.out.println("SERVER: " + pollingRequest);
+
 		return pollingRequest.toString();
 	}
 
@@ -75,7 +79,7 @@ public class PollingThread extends Thread {
 			} else {
 
 				// TODO DEBUG PRINT
-				System.out.println("Polling failed");
+				System.out.println("Polling failed!");
 
 				OnlineManager onlineManager = OnlineManager.getInstance();
 
@@ -83,8 +87,8 @@ public class PollingThread extends Thread {
 					GameDataManager.getInstance()
 							.removePlayerFromAnyRooms(onlineUser.getUsername());
 				} catch (NoSuchPlayerException e1) {
-					//if the user isn't in any room
-					//e1.printStackTrace();
+					// if the user isn't in any room
+					// e1.printStackTrace();
 				}
 
 				try {

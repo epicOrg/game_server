@@ -62,6 +62,7 @@ public class CurrentRoomMessagesCreator {
 	 * @return the response to send
 	 */
 	public JSONObject generateExitResponse(boolean result) {
+
 		JSONObject response = new JSONObject();
 
 		try {
@@ -78,6 +79,7 @@ public class CurrentRoomMessagesCreator {
 	}
 
 	private JSONArray formatTeams(Room room) throws JSONException {
+
 		JSONArray teams = new JSONArray();
 
 		for (Team t : room.getTeamManager().getTeams()) {
@@ -88,12 +90,14 @@ public class CurrentRoomMessagesCreator {
 			team.put(CommonFields.LIST.toString(), players);
 			teams.put(team);
 		}
+
 		return teams;
 	}
 
 	private JSONArray formatPlayers(Team t) throws JSONException {
 
 		JSONArray players = new JSONArray();
+
 		for (Player p : t.getPlayers()) {
 			JSONObject jObject = new JSONObject();
 			jObject.put(CommonFields.USERNAME.toString(), p.getUsername());
