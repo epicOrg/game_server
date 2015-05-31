@@ -2,6 +2,11 @@ package messages;
 
 import java.util.ArrayList;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,10 +14,6 @@ import org.json.JSONObject;
 import services.rooms.subservices.CreateRoom;
 import services.rooms.subservices.JoinPlayer;
 import check_fields.RoomChecker;
-import fields_names.CommonFields;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
-import fields_names.ServicesFields;
 import game.model.Room;
 
 /**

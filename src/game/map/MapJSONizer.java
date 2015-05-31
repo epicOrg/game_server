@@ -2,11 +2,12 @@ package game.map;
 
 import java.util.ArrayList;
 
+import messages.fields_names.GameFields;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_names.GameFields;
 import game.model.PlayerStatus;
 
 /**

@@ -2,10 +2,10 @@ package services.game.subservices;
 
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
-import fields_names.CommonFields;
-import fields_names.GameFields;
-import fields_names.RoomFields;
 import game.model.Player;
+import messages.fields_names.CommonFields;
+import messages.fields_names.GameFields;
+import messages.fields_names.RoomFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

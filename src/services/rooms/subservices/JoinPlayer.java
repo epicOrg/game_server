@@ -2,15 +2,15 @@ package services.rooms.subservices;
 
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
-import fields_names.CommonFields;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
 import game.model.Player;
 import game.model.Room;
 
 import java.net.InetAddress;
 
 import messages.RoomsMessagesCreator;
+import messages.fields_names.CommonFields;
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
 import online_management.OnlineManager;
 
 import org.json.JSONException;

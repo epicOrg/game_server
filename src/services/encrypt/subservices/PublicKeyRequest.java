@@ -1,11 +1,12 @@
 package services.encrypt.subservices;
 
+import messages.fields_names.EncryptFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import connection_encryption.ConnectionEncrypter;
-import fields_names.EncryptFields;
-import fields_names.ServicesFields;
 import services.IService;
 
 /**

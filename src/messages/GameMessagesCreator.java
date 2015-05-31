@@ -1,8 +1,5 @@
 package messages;
 
-import fields_names.CommonFields;
-import fields_names.GameFields;
-import fields_names.ServicesFields;
 import game.map.MapJSONizer;
 import game.model.Player;
 import game.model.PlayerStatus;
@@ -10,6 +7,10 @@ import game.model.Room;
 import game.model.Team;
 
 import java.util.ArrayList;
+
+import messages.fields_names.CommonFields;
+import messages.fields_names.GameFields;
+import messages.fields_names.ServicesFields;
 
 import org.json.JSONArray;
 import org.json.JSONException;

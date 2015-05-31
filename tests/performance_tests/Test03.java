@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.RegisterFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import database.Paths;
-import fields_names.CommonFields;
-import fields_names.RegisterFields;
-import fields_names.ServicesFields;
 
 /**
  * This test registers and logins NUMBER_OF_USERS users (login after the

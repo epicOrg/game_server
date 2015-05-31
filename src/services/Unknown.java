@@ -1,9 +1,9 @@
 package services;
 
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import fields_names.ServicesFields;
 
 /**
  * Default Service started when the Requested service from the client isn't

@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,8 +17,6 @@ import services.IService;
 import services.Login;
 import check_fields.RequestFieldChecher;
 import connection_encryption.SecureConnectionApplicator;
-import fields_names.CommonFields;
-import fields_names.ServicesFields;
 
 /**
  * A client dedicated thread that listen for client request and run server

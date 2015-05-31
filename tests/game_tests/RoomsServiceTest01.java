@@ -1,5 +1,9 @@
 package game_tests;
 
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,9 +11,6 @@ import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
-import fields_names.ServicesFields;
 import game.map.generation.GridMapGenerator;
 import game.model.Team;
 import game.model.TeamManager;

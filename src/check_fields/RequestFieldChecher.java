@@ -2,14 +2,14 @@ package check_fields;
 
 import java.util.ArrayList;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.ServicesFields;
 import online_management.OnlineManager;
 import online_management.OnlineUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fields_names.CommonFields;
-import fields_names.ServicesFields;
 import services.IService;
 import services.Login;
 

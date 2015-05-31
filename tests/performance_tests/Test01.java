@@ -2,6 +2,10 @@ package performance_tests;
 
 import java.io.File;
 
+import messages.fields_names.CommonFields;
+import messages.fields_names.RegisterFields;
+import messages.fields_names.ServicesFields;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,9 +14,6 @@ import services.IService;
 import services.Login;
 import services.Register;
 import database.Paths;
-import fields_names.CommonFields;
-import fields_names.RegisterFields;
-import fields_names.ServicesFields;
 
 /**
  * Register NUMBER_OF_USERS users and login them. Note: remember to delete the

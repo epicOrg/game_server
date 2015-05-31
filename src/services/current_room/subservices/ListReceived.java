@@ -1,8 +1,8 @@
 package services.current_room.subservices;
 
 import exceptions.NoSuchRoomException;
-import fields_names.RoomFields;
 import game.model.Room;
+import messages.fields_names.RoomFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

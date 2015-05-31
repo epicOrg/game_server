@@ -1,6 +1,8 @@
 package services.rooms.subservices;
 
 import messages.RoomsMessagesCreator;
+import messages.fields_names.RoomFields;
+import messages.fields_names.RoomsFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,8 +12,6 @@ import services.current_room.CurrentRoom;
 import check_fields.RoomChecker;
 import data_management.GameDataManager;
 import exceptions.RoomAlreadyExistsException;
-import fields_names.RoomFields;
-import fields_names.RoomsFields;
 import game.map.generation.GridMapGenerator;
 import game.model.Room;
 

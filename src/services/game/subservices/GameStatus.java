@@ -1,10 +1,11 @@
 package services.game.subservices;
 
-import fields_names.GameFields;
 import game.model.Player;
 import game.model.PlayerStatus;
 
 import java.util.HashMap;
+
+import messages.fields_names.GameFields;
 
 import org.json.JSONObject;
 
