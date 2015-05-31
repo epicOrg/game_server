@@ -1,6 +1,6 @@
 package messages;
 
-import game.model.RoomThread;
+import game.model.WinCheckerThread;
 import messages.fields_names.GameFields;
 import messages.fields_names.ServicesFields;
 
@@ -13,7 +13,7 @@ import org.json.JSONObject;
  * 
  * @author Micieli
  * @date 2015/05/21
- * @see RoomThread
+ * @see WinCheckerThread
  */
 public class GameEndMessagesCreator {
 

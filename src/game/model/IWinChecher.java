@@ -7,7 +7,7 @@ package game.model;
  * @date 2015/05/05
  * @see Team
  * @see Room
- * @see RoomThread
+ * @see WinCheckerThread
  */
 
 public interface IWinChecher {

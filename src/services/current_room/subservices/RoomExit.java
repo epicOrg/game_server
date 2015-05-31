@@ -1,5 +1,6 @@
 package services.current_room.subservices;
 
+import game.model.Room;
 import messages.CurrentRoomMessagesCreator;
 import messages.fields_names.CommonFields;
 import messages.fields_names.RoomFields;
@@ -12,7 +13,7 @@ import services.game.Game;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
-import game.model.Room;
+import exceptions.RoomCancelledException;
 
 /**
  * A {@link RoomActions} sub-service that execute the exit request of client
@@ -47,6 +48,8 @@ public class RoomExit implements IService {
 			e.printStackTrace();
 		} catch (NoSuchRoomException | NoSuchPlayerException e) {
 			return messagesCreator.generateExitResponse(false);
+		} catch (RoomCancelledException e) {
+			return messagesCreator.generateExitResponse(true);
 		}
 
 		return null;

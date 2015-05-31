@@ -2,6 +2,8 @@ package game.model;
 
 import exceptions.FullRoomException;
 import exceptions.NoSuchPlayerException;
+import exceptions.RoomCancelledException;
+import exceptions.RoomNotEmptyException;
 import game.map.IMap;
 import game.map.MapDimension;
 import game.map.generation.IMapGenerator;
@@ -34,7 +36,8 @@ public class Room {
 	private boolean inPlay = false;
 	private int maxPlayers;
 	private boolean allPlayerReady = false;
-
+	private volatile boolean cancelled =  false;
+	
 	private IMap map;
 	private IMapGenerator mapGenerator;
 
@@ -73,9 +76,14 @@ public class Room {
 	 *            the player to be added
 	 * @throws FullRoomException
 	 *             if the room is already full
+	 * @throws RoomCancelledException 
 	 */
-	public void addPlayer(Player player) throws FullRoomException {
+	public synchronized void addPlayer(Player player) throws FullRoomException, RoomCancelledException {
 
+		if(cancelled){
+			throw new RoomCancelledException();
+		}
+		
 		if (isFull()) {
 			throw new FullRoomException();
 		}
@@ -91,8 +99,13 @@ public class Room {
 	 * 
 	 * @param player
 	 *            the player to be removed
+	 * @throws RoomCancelledException 
 	 */
-	public void removePlayer(Player player) {
+	public synchronized void removePlayer(Player player) throws RoomCancelledException {
+		
+		if(cancelled){
+			throw new RoomCancelledException();
+		}
 
 		if (inPlay && allPlayerReady) {
 			playersUpdater.onExtingFromGame();
@@ -106,7 +119,7 @@ public class Room {
 		}
 	}
 
-	public Player getPlayerByName(String name) throws NoSuchPlayerException {
+	public synchronized Player getPlayerByName(String name) throws NoSuchPlayerException {
 
 		for (Team t : teamManager.getTeams()) {
 			for (Player p : t.getPlayers()) {
@@ -116,14 +129,6 @@ public class Room {
 		}
 
 		throw new NoSuchPlayerException();
-	}
-
-	/**
-	 * @return true if the teams are full (no more players can join the room),
-	 *         false otherwise (there are more users slot).
-	 */
-	private boolean isFull() {
-		return getSize() >= maxPlayers;
 	}
 
 	public int getSize() {
@@ -172,6 +177,20 @@ public class Room {
 		}
 
 		this.inPlay = inPlay;
+	}
+	
+	public synchronized void cancel() throws RoomNotEmptyException{
+		if(!isEmpty() && !cancelled)
+			throw new RoomNotEmptyException();
+		this.cancelled  = true;
+	}
+	
+	private boolean isFull() {
+		return getSize() >= maxPlayers;
+	}
+	
+	private boolean isEmpty(){
+		return getSize() == 0;
 	}
 
 	public boolean isInPlayng() {

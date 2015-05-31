@@ -3,11 +3,13 @@ package data_management;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
 import exceptions.RoomAlreadyExistsException;
+import exceptions.RoomCancelledException;
 import game.RoomPlayersUpdater;
 import game.map.generation.IMapGenerator;
 import game.model.Player;
 import game.model.Room;
 import game.model.RoomEventListener;
+import game.model.RoomRemoverThread;
 
 import java.util.ArrayList;
 
@@ -60,6 +62,8 @@ public class GameDataManager {
 					mapGenerator);
 			RoomEventListener listener = new RoomPlayersUpdater(room);
 			room.setEventListener(listener);
+			RoomRemoverThread removerThread = new RoomRemoverThread(room);
+			removerThread.start();
 			rooms.add(room);
 			return;
 		}
@@ -101,6 +105,9 @@ public class GameDataManager {
 				return;
 			} catch (NoSuchPlayerException e) {
 				//if the user isn't in the room
+				//e.printStackTrace();
+			} catch (RoomCancelledException e) {
+				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
 		}
@@ -153,5 +160,15 @@ public class GameDataManager {
 		}
 
 		throw new NoSuchRoomException();
+	}
+
+	/**
+	 * Delete a room from the roomList.
+	 * 
+	 * @param room	the room to delete
+	 */
+	public void deleteRoom(Room room) {
+		room.setEventListener(null);
+		rooms.remove(room);		
 	}
 }

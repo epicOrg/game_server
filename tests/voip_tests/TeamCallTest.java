@@ -6,6 +6,7 @@ import voip.RoomAudioCall;
 import data_management.GameDataManager;
 import exceptions.FullRoomException;
 import exceptions.NoSuchRoomException;
+import exceptions.RoomCancelledException;
 import game.model.Player;
 import game.model.Room;
 
@@ -43,6 +44,9 @@ class TeamCallTest {
 			room.addPlayer(luca);
 
 		} catch (FullRoomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RoomCancelledException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

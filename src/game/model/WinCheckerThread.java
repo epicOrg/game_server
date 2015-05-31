@@ -22,7 +22,7 @@ import exceptions.UserNotOnlineException;
  * @date 2015/05/12
  */
 
-public class RoomThread extends Thread {
+public class WinCheckerThread extends Thread {
 
 	private static final int CHECKING_PERIOD = 200;
 	private IWinChecher winChecker;
@@ -36,7 +36,7 @@ public class RoomThread extends Thread {
 	 * @param winChecker
 	 *            an implementation of {@link IWinChecher}
 	 */
-	public RoomThread(Room room, IWinChecher winChecker) {
+	public WinCheckerThread(Room room, IWinChecher winChecker) {
 		super();
 		this.room = room;
 		this.winChecker = winChecker;

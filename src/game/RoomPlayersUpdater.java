@@ -8,7 +8,7 @@ import game.model.Player;
 import game.model.PlayerEventListener;
 import game.model.Room;
 import game.model.RoomEventListener;
-import game.model.RoomThread;
+import game.model.WinCheckerThread;
 import game.model.Team;
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 
 	private Room room;
 	private HashMap<Player, PrintWriter> writers = new HashMap<>();
-	private RoomThread roomThread;
+	private WinCheckerThread roomThread;
 	private UpdatingMessagesCreator messagesCreator;
 	private boolean interrupted = false;
 
@@ -69,7 +69,7 @@ public class RoomPlayersUpdater implements RoomEventListener, PlayerEventListene
 		room.setInPlay(true);
 		GameDataManager.getInstance().newAudioCallForRoom(room);
 
-		roomThread = new RoomThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room
+		roomThread = new WinCheckerThread(room, new CircleWinChecker(MapJSONizer.getAdaptedWinPoint(room
 				.getMap().getWinPoints()), 2));
 
 	}

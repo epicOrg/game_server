@@ -1,7 +1,5 @@
 package services.rooms.subservices;
 
-import exceptions.FullRoomException;
-import exceptions.NoSuchRoomException;
 import game.model.Player;
 import game.model.Room;
 
@@ -19,6 +17,9 @@ import org.json.JSONObject;
 import services.IService;
 import voip.NetUtils;
 import data_management.GameDataManager;
+import exceptions.FullRoomException;
+import exceptions.NoSuchRoomException;
+import exceptions.RoomCancelledException;
 
 /**
  * @author Micieli
@@ -58,7 +59,7 @@ public class JoinPlayer implements IService {
 			room.addPlayer(player);
 			return messagesCreator.generateJoinResponse(true, roomName);
 
-		} catch (NoSuchRoomException | FullRoomException e) {
+		} catch (NoSuchRoomException | RoomCancelledException| FullRoomException e) {
 			e.printStackTrace();
 			return messagesCreator.generateJoinResponse(false, roomName);
 		}
