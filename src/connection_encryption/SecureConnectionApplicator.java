@@ -1,10 +1,10 @@
 package connection_encryption;
 
-import messages.fields_names.EncryptFields;
-import messages.fields_names.ServicesFields;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fields_names.EncryptFields;
+import fields_names.ServicesFields;
 
 /**
  * @author Noris

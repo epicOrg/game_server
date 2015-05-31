@@ -1,8 +1,5 @@
 package check_fields;
 
-import messages.fields_names.CommonFields;
-import messages.fields_names.RegisterFields;
-
 import org.apache.commons.validator.routines.EmailValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +7,8 @@ import org.json.JSONObject;
 
 import services.Register;
 import data_management.DataManager;
+import fields_names.CommonFields;
+import fields_names.RegisterFields;
 
 /**
  * Contains methods for check registration fields sending in client request to

@@ -1,8 +1,8 @@
 package messages;
 
+import fields_names.GameFields;
+import fields_names.ServicesFields;
 import game.model.RoomThread;
-import messages.fields_names.GameFields;
-import messages.fields_names.ServicesFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

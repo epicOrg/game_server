@@ -1,8 +1,6 @@
 package services.current_room.subservices;
 
 import messages.CurrentRoomMessagesCreator;
-import messages.fields_names.CommonFields;
-import messages.fields_names.RoomFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +10,8 @@ import services.game.Game;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.NoSuchRoomException;
+import fields_names.CommonFields;
+import fields_names.RoomFields;
 import game.model.Room;
 
 /**

@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import messages.fields_names.ServicesFields;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +11,7 @@ import server.ClientRequestThread;
 import data_management.GameDataManager;
 import exceptions.NoSuchPlayerException;
 import exceptions.UserNotOnlineException;
+import fields_names.ServicesFields;
 
 /**
  * Thread who polls the user each polling-time to check if the user is yet

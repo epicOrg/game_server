@@ -1,10 +1,9 @@
 package services.rooms;
 
+import fields_names.ServicesFields;
 import game.model.Room;
 
 import java.util.HashMap;
-
-import messages.fields_names.ServicesFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

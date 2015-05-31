@@ -1,9 +1,9 @@
 package exceptions;
 
-import messages.fields_names.CommonFields;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fields_names.CommonFields;
 
 /**
  * @author Noris

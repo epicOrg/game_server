@@ -1,4 +1,4 @@
-package messages.fields_names;
+package fields_names;
 
 public enum ServicesFields {
 

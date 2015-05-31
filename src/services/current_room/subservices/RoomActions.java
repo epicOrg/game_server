@@ -2,11 +2,10 @@ package services.current_room.subservices;
 
 import java.util.HashMap;
 
-import messages.fields_names.RoomFields;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fields_names.RoomFields;
 import services.IExtendedService;
 import services.IService;
 import services.game.Game;

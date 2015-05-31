@@ -1,7 +1,5 @@
 package services;
 
-import messages.fields_names.CommonFields;
-import messages.fields_names.ServicesFields;
 import online_management.OnlineManager;
 import online_management.OnlineUser;
 import online_management.PollingThread;
@@ -10,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import exceptions.UserNotOnlineException;
+import fields_names.CommonFields;
+import fields_names.ServicesFields;
 
 /**
  * Receives Pooling response from the client. Doing so the server can check if

@@ -1,13 +1,12 @@
 package services.current_room;
 
+import fields_names.ServicesFields;
 import game.RoomPlayersUpdater;
 import game.model.Player;
 import game.model.PlayerEventListener;
 import game.model.Room;
 
 import java.util.HashMap;
-
-import messages.fields_names.ServicesFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;

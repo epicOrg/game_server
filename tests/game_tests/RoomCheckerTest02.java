@@ -3,10 +3,6 @@ package game_tests;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import messages.fields_names.CommonFields;
-import messages.fields_names.RoomFields;
-import messages.fields_names.RoomsFields;
-import messages.fields_names.ServicesFields;
 import online_management.OnlineManager;
 
 import org.json.JSONException;
@@ -15,6 +11,10 @@ import org.json.JSONObject;
 import services.rooms.Rooms;
 import services.rooms.subservices.CreateRoom;
 import exceptions.UserNotOnlineException;
+import fields_names.CommonFields;
+import fields_names.RoomFields;
+import fields_names.RoomsFields;
+import fields_names.ServicesFields;
 
 /**
  * RoomService request message test with hashCode error.
