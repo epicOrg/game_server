@@ -31,7 +31,7 @@ public class MixingPipedInputStream {
 	}
 
 	/**
-	 * Finds the minimum number of byte available for all the streams
+	 * Finds the minimum number of byte available for all the streams.
 	 * 
 	 * @return the number of byte available
 	 * @throws IOException

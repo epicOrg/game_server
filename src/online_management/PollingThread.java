@@ -40,7 +40,8 @@ public class PollingThread extends Thread {
 
 	@Override
 	public void run() {
-		timer.scheduleAtFixedRate(new PollingTask(), POLLING_DELAY, POLLING_TIME);
+		timer.scheduleAtFixedRate(new PollingTask(), POLLING_DELAY,
+				POLLING_TIME);
 	}
 
 	public void shutdown() {
@@ -53,8 +54,8 @@ public class PollingThread extends Thread {
 
 		try {
 
-			pollingRequest
-					.put(ServicesFields.SERVICE.toString(), ServicesFields.POLLING.toString());
+			pollingRequest.put(ServicesFields.SERVICE.toString(),
+					ServicesFields.POLLING.toString());
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -79,21 +80,22 @@ public class PollingThread extends Thread {
 
 			} else {
 
-				// TODO DEBUG PRINT
+				// TODO DEBUG: polling failed
 				System.out.println("Polling failed!");
 
 				OnlineManager onlineManager = OnlineManager.getInstance();
 
 				try {
-					GameDataManager.getInstance()
-							.removePlayerFromAnyRooms(onlineUser.getUsername());
+					GameDataManager.getInstance().removePlayerFromAnyRooms(
+							onlineUser.getUsername());
 				} catch (NoSuchPlayerException e1) {
-					// if the user isn't in any room
+					// If the user isn't in some room.
 					// e1.printStackTrace();
 				}
 
 				try {
-					onlineManager.setOffline(onlineUser.getUsername(), onlineUser.hashCode());
+					onlineManager.setOffline(onlineUser.getUsername(),
+							onlineUser.hashCode());
 				} catch (UserNotOnlineException e) {
 					e.printStackTrace();
 				}

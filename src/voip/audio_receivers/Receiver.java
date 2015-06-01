@@ -35,8 +35,12 @@ public class Receiver implements RtpSessionDataListener {
 	}
 
 	@Override
-	public void dataPacketReceived(RtpSession arg0, RtpParticipantInfo arg1, final DataPacket packet) {
-		// System.out.println("Received: " + packet.getDataAsArray());
+	public void dataPacketReceived(RtpSession arg0, RtpParticipantInfo arg1,
+			final DataPacket packet) {
+
+		// TODO DEBUG: audio packets
+		// System.out.println("Received Audio: " + packet.getDataAsArray());
+
 		executor.execute(new Runnable() {
 			@Override
 			public void run() {

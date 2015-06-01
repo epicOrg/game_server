@@ -46,11 +46,12 @@ public class RoomRemoverThread extends Thread {
 				GameDataManager.getInstance().deleteRoom(room);
 				timer.cancel();
 				// TODO DEBUG PRINT
-				System.out.println("room " + room.getName() + " deleted");
+				System.out.println("Room \"" + room.getName() + "\" deleted!");
 				room = null;
 			} catch (RoomNotEmptyException e) {
 				// TODO DEBUG PRINT
-				System.out.println("room " + room.getName() + " not empty");
+				System.out
+						.println("Room \"" + room.getName() + "\" not empty!");
 				timer.schedule(new RemoverTask(), MILLIS);
 			}
 		}

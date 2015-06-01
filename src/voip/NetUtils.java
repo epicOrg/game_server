@@ -20,11 +20,15 @@ public class NetUtils {
 	private static ArrayList<Integer> inUse = new ArrayList<>();
 
 	public static int findFreePort() {
+
 		ServerSocket socket = null;
+
 		try {
+
 			socket = new ServerSocket(0);
 
 			int port = socket.getLocalPort();
+
 			try {
 
 				socket.close();
@@ -44,6 +48,7 @@ public class NetUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+
 			if (socket != null) {
 				try {
 					socket.close();
@@ -52,7 +57,8 @@ public class NetUtils {
 				}
 			}
 		}
-		throw new IllegalStateException("Could not find a free TCP/IP port");
+
+		throw new IllegalStateException("Could not find a free TCP/IP port!");
 	}
 
 	public static void releasePort(int port) {
@@ -67,15 +73,21 @@ public class NetUtils {
 	}
 
 	public static String getLocalIpAddress() {
+
 		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en
-					.hasMoreElements();) {
+
+			for (Enumeration<NetworkInterface> en = NetworkInterface
+					.getNetworkInterfaces(); en.hasMoreElements();) {
+
 				NetworkInterface intf = en.nextElement();
 
-				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr
-						.hasMoreElements();) {
+				for (Enumeration<InetAddress> enumIpAddr = intf
+						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+
 					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+
+					if (!inetAddress.isLoopbackAddress()
+							&& inetAddress instanceof Inet4Address) {
 						return inetAddress.getHostAddress().toString();
 					}
 				}

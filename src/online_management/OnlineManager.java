@@ -42,7 +42,8 @@ public class OnlineManager {
 	 * @return user's hashCode
 	 * @see OnlineUser
 	 */
-	public int setOnline(String username, InetAddress ipAddress, PrintWriter printWriter) {
+	public int setOnline(String username, InetAddress ipAddress,
+			PrintWriter printWriter) {
 
 		OnlineUser onlineUser = new OnlineUser(username, ipAddress);
 		PollingThread pollingThread = new PollingThread(onlineUser);
@@ -61,13 +62,14 @@ public class OnlineManager {
 	 * @param hashCode
 	 * @throws UserNotOnlineException
 	 */
-	public void setOffline(String username, int hashCode) throws UserNotOnlineException {
-		
-		if (getHashCodeByUsername(username) == hashCode){
+	public void setOffline(String username, int hashCode)
+			throws UserNotOnlineException {
+
+		if (getHashCodeByUsername(username) == hashCode) {
 			pollingTreads.get(username).shutdown();
 			pollingTreads.remove(username);
 			onlineUsers.remove(username);
-		}			
+		}
 	}
 
 	/**
@@ -90,9 +92,12 @@ public class OnlineManager {
 	 * @return the {@link OnlineUser} instance object of the user
 	 * @throws UserNotOnlineException
 	 */
-	public OnlineUser getOnlineUserByUsername(String username) throws UserNotOnlineException {
+	public OnlineUser getOnlineUserByUsername(String username)
+			throws UserNotOnlineException {
+
 		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
+
 		return onlineUsers.get(username);
 	}
 
@@ -109,9 +114,12 @@ public class OnlineManager {
 	 * @return hashCode of the user
 	 * @throws UserNotOnlineException
 	 */
-	public int getHashCodeByUsername(String username) throws UserNotOnlineException {
+	public int getHashCodeByUsername(String username)
+			throws UserNotOnlineException {
+
 		if (!checkIfOnline(username))
 			throw new UserNotOnlineException();
+
 		return onlineUsers.get(username).hashCode();
 	}
 
@@ -120,10 +128,12 @@ public class OnlineManager {
 	 * @return the username of the user
 	 */
 	public String getUsernameByHashCode(int hashCode) {
+
 		for (Map.Entry<String, OnlineUser> entry : onlineUsers.entrySet()) {
 			if (entry.getValue().hashCode() == hashCode)
 				return entry.getValue().getUsername();
 		}
+
 		return null;
 	}
 }

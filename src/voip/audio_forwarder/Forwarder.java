@@ -21,8 +21,9 @@ public class Forwarder {
 	private MixingPipedInputStream audioInputStream;
 	private SingleParticipantSession session;
 
-	public Forwarder(MixingPipedInputStream audioInputStream, SingleParticipantSession session) {
-		super();
+	public Forwarder(MixingPipedInputStream audioInputStream,
+			SingleParticipantSession session) {
+
 		this.audioInputStream = audioInputStream;
 		this.session = session;
 	}
@@ -32,9 +33,11 @@ public class Forwarder {
 		byte[] data = new byte[DATA_LENTH];
 
 		try {
+
 			if (audioInputStream.read(data) > 0) {
 				session.sendData(data, System.currentTimeMillis(), false);
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

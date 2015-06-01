@@ -8,8 +8,11 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 
 /**
+ * Generates asymmetric keys using a {@link KeyPairGenerator}.
+ * 
  * @author Noris
  * @date 2015/03/30
+ * @see KeyPairGenerator
  */
 
 public class AsymmetricKeysGenerator implements KeysGenerator {

@@ -6,8 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Default Service started when the Requested service from the client isn't
- * supported.
+ * Default service started when the service requested from the client is not
+ * supported by the server.
  * 
  * @author Noris
  * @date 2015/03/26
@@ -20,7 +20,8 @@ public class Unknown implements IService {
 		JSONObject response = new JSONObject();
 
 		try {
-			response.put(ServicesFields.SERVICE.toString(), ServicesFields.UNKNOWN.toString());
+			response.put(ServicesFields.SERVICE.toString(),
+					ServicesFields.UNKNOWN.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

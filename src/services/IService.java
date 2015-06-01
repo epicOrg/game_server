@@ -9,13 +9,12 @@ import services.rooms.Rooms;
 
 /**
  * General interface for server services. <code>Service</code> are the center of
- * all server functionalities.
+ * all the server functionalities.
  * 
  * @author Noris
  * @author Micieli
  * @date 2015/03/26
  * @see Audio
- * @see Call
  * @see CurrentRoom
  * @see Encrypt
  * @see Game
