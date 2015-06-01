@@ -13,11 +13,10 @@ import server.ServerInitializer;
 import services.Register;
 
 /**
- * Test for client registration with an error: username already exists.
+ * Test for client registration with an error: the user name already exists.
  * 
  * @author Noris
  * @date 2015/04/21
- *
  */
 
 class Test02 {

@@ -11,6 +11,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 /**
+ * Checks if {@link MessageDigest} + {@link Hex#encodeHex(byte[])} encrypts a
+ * string in the same way of {@link DigestUtils} only.
+ * 
  * @author Noris
  * @date 2015/04/24
  */

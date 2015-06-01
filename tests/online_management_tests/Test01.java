@@ -19,7 +19,7 @@ import exceptions.UserNotOnlineException;
  * 
  * @author Noris
  * @date 2015/04/05
- * 
+ * @see OnlineManager
  */
 
 public class Test01 {

@@ -8,8 +8,7 @@ import data_management.password_encrypter.Md5StringEncrypter;
 import data_management.password_encrypter.PasswordEncrypter;
 
 /**
- * 
- * Here I test only if two equals passwords are encrypted in the same way.
+ * Tests if two equals passwords are encrypted in the same way.
  * 
  * @author Noris
  * @date 2015/04/14

@@ -47,8 +47,9 @@ public class Test07 {
 		SecretKey symmetricKey = keyGenerator.generateKey();
 
 		System.out.println("> SYMMETRIC KEY........: " + symmetricKey);
-		System.out.println("  " + symmetricKey.getAlgorithm() + "|" + symmetricKey.getFormat()
-				+ "|" + symmetricKey.hashCode() + "\n");
+		System.out.println("  " + symmetricKey.getAlgorithm() + "|"
+				+ symmetricKey.getFormat() + "|" + symmetricKey.hashCode()
+				+ "\n");
 
 		AsymmetricKeysGenerator asymmetricKeysGenerator = new AsymmetricKeysGenerator();
 		asymmetricKeysGenerator.generateKeys();
@@ -63,20 +64,23 @@ public class Test07 {
 			cipher.init(Cipher.WRAP_MODE, publicKey);
 			wrappedKey = cipher.wrap(symmetricKey);
 
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
-				| IllegalBlockSizeException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException
+				| InvalidKeyException | IllegalBlockSizeException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("> WRAPPED KEY..........: " + new String(wrappedKey) + "\n");
+		System.out.println("> WRAPPED KEY..........: " + new String(wrappedKey)
+				+ "\n");
 
 		String wrappedKeyString = StringConverter.bytesToString(wrappedKey);
 
-		System.out.println("> WRAPPED KEY (STR)....: " + wrappedKeyString + "\n");
+		System.out.println("> WRAPPED KEY (STR)....: " + wrappedKeyString
+				+ "\n");
 
 		byte[] newWrappedKey = StringConverter.stringToBytes(wrappedKeyString);
 
-		System.out.println("> NEW WRAPPED KEY......: " + new String(newWrappedKey) + "\n");
+		System.out.println("> NEW WRAPPED KEY......: "
+				+ new String(newWrappedKey) + "\n");
 
 		assertEquals(new String(wrappedKey), new String(newWrappedKey));
 
@@ -86,7 +90,8 @@ public class Test07 {
 
 		System.out.println("> NEW SYMMETRIC KEY....: " + newSymmetricKey);
 		System.out.println("  " + newSymmetricKey.getAlgorithm() + "|"
-				+ newSymmetricKey.getFormat() + "|" + newSymmetricKey.hashCode());
+				+ newSymmetricKey.getFormat() + "|"
+				+ newSymmetricKey.hashCode());
 
 		assertEquals(symmetricKey.hashCode(), newSymmetricKey.hashCode());
 

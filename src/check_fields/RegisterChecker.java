@@ -27,10 +27,10 @@ public class RegisterChecker {
 	private boolean noErrors = true;
 
 	/**
-	 * Checks if the username is valid.
+	 * Checks if the user name is valid.
 	 * 
 	 * @param username
-	 * @return true if the username is valid, false if it's invalid
+	 * @return true if the user name is valid, false if it's invalid
 	 * @see FieldsValues#USERNAME_FORBIDDEN_CHARS
 	 * @see FieldsValues#USERNAME_NEEDED_CHARS
 	 * @see FieldsValues#USERNAME_MAX_LENGTH
@@ -221,14 +221,24 @@ public class RegisterChecker {
 		return true;
 	}
 
+	/**
+	 * Add an error to the current registration session.
+	 */
 	public void addError() {
 		this.noErrors = false;
 	}
 
+	/**
+	 * @return a {@link JSONObject} containing the registration errors.
+	 */
 	public JSONObject getErrors() {
 		return errors;
 	}
 
+	/**
+	 * @return true if the registration has produce at least an error, false
+	 *         otherwise
+	 */
 	public boolean noErrors() {
 		return noErrors;
 	}

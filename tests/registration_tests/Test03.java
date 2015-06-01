@@ -17,7 +17,6 @@ import services.Register;
  * 
  * @author Noris
  * @date 2015/04/21
- *
  */
 
 class Test03 {
@@ -27,7 +26,7 @@ class Test03 {
 		// Initialize the server
 		new ServerInitializer().init();
 
-		// Generate a random username
+		// Generate a random user name
 		String randomUsername = "Democrito" + new Random().nextInt(10000);
 
 		// CLIENT: Registration

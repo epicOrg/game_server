@@ -14,6 +14,7 @@ import exceptions.RegistrationFailedException;
  * @see UsersDataManager
  * @see RegisteredUser
  */
+
 class Test01 {
 
 	public static void main(String[] args) throws RegistrationFailedException {

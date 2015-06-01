@@ -23,8 +23,9 @@ class Test_OpenSocket {
 	private PrintWriter writer;
 
 	public void connectSocket() throws UnknownHostException, IOException {
-		socket.connect(new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS), SERVER_PORT),
-				5000);
+		socket.connect(
+				new InetSocketAddress(InetAddress.getByName(SERVER_ADDRESS),
+						SERVER_PORT), 5000);
 	}
 
 	public void writeSocket(String message) throws IOException {

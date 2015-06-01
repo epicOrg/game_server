@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import services.IService;
 
 /**
- * Elaborate e client request selecting the service asked. 
+ * Elaborate e client request selecting the asked service.
  * 
  * @author Noris
  * @author Micieli
@@ -38,10 +38,11 @@ public class ServiceChooser {
 	}
 
 	/**
-	 * Select the service
+	 * Select the service.
 	 * 
-	 * @param json		the client request
-	 * @return			the service asked
+	 * @param json
+	 *            the client request
+	 * @return the service asked
 	 */
 	public IService chooseService(JSONObject json) {
 

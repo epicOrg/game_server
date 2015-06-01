@@ -39,8 +39,8 @@ public class SecureConnectionApplicator {
 			JSONObject jsonRequest = new JSONObject(request);
 
 			// ...it can be an encryption establishment message...
-			if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(
-					ServicesFields.ENCRYPT.toString())) {
+			if (jsonRequest.getString(ServicesFields.SERVICE.toString())
+					.equals(ServicesFields.ENCRYPT.toString())) {
 
 				if (jsonRequest.has(EncryptFields.WRAPPED_KEY.toString()))
 					connectionEncrypter.setSymmetricKey(jsonRequest
@@ -83,8 +83,8 @@ public class SecureConnectionApplicator {
 		// If [a] the encryption is not enabled, or if [b] the response is an
 		// encryption establishment message, the response is not encrypted.
 		if ((jsonResponse.has(ServicesFields.SERVICE.toString()) && (jsonResponse
-				.getString(ServicesFields.SERVICE.toString()).equals(ServicesFields.ENCRYPT
-				.toString())))
+				.getString(ServicesFields.SERVICE.toString())
+				.equals(ServicesFields.ENCRYPT.toString())))
 				|| !ConnectionEncrypter.isEncryptionEnabled()) {
 			return jsonResponse.toString();
 		}

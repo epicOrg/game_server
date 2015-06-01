@@ -21,7 +21,6 @@ import database.Paths;
  * 
  * @author Noris
  * @date 2015/04/21
- *
  */
 
 class Test01 {

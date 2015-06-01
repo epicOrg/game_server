@@ -12,7 +12,7 @@ import exceptions.RegistrationFailedException;
 import server.ServerInitializer;
 
 /**
- * Test {@link RegistrationFileChecker}.
+ * Tests for {@link RegistrationFileChecker}.
  * 
  * @author Modica
  * @author Gavina
@@ -22,6 +22,7 @@ import server.ServerInitializer;
  * @see RegistrationFileChecker
  * @see RegistrationFailedException
  */
+
 public class Test02 {
 
 	private UsersDataManager dataManager;
@@ -43,15 +44,17 @@ public class Test02 {
 	public void usernameTest() throws RegistrationFailedException {
 
 		dataManager.saveRegistrationFields(user1);
-		assertFalse("Username non esistente",
+		assertFalse("Username available!",
 				dataManager.checkUsername(user1.getUsername()));
-		assertTrue("Username già esistente", dataManager.checkUsername(user2.getUsername()));
+		assertTrue("Username already exists!",
+				dataManager.checkUsername(user2.getUsername()));
 	}
 
 	@Test
 	public void emailTest() {
-		assertFalse("Email non esistente",
+		assertFalse("Email available!",
 				dataManager.checkEmail(user1.getEmail()));
-		assertTrue("Email già esistente", dataManager.checkEmail(user2.getEmail()));
+		assertTrue("Email already used!",
+				dataManager.checkEmail(user2.getEmail()));
 	}
 }

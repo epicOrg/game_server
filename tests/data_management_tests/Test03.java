@@ -14,6 +14,7 @@ import exceptions.RegistrationFailedException;
  * 
  * @author Micieli
  * @author Noris
+ * @author Gavina
  * @date 2015/04/17
  * @see UsersDataManager
  * @see RegisteredUser
@@ -36,18 +37,10 @@ public class Test03 {
 
 	}
 
-	/**
-	 * Test method for
-	 * {@link data_management.UsersDataManager#checkPassword(data_management.RegisteredUser)}
-	 * .
-	 * 
-	 * @throws RegistrationFailedException
-	 */
 	@Test
 	public void testCheckPassword() throws RegistrationFailedException {
 
 		assertTrue(dataManager.checkPassword(user));
-
 		dataManager.saveRegistrationFields(user);
 		assertTrue(dataManager.checkPassword(user));
 

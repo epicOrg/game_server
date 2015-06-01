@@ -13,6 +13,7 @@ import org.junit.Test;
 
 /**
  * @author Noris
+ * @author Gavina
  * @date 2015/05/27
  */
 
@@ -29,11 +30,6 @@ public class Test01 {
 		wallLength = new MapDimension(0.2, 2, 20);
 	}
 
-	/**
-	 * Test method for
-	 * {@link game.map.utils.MapGeometric#isCircleOnSegment(game.map.MapDimension, double, game.map.MapDimension, game.map.MapDimension)}
-	 * .
-	 */
 	@Test
 	public void testIsCircleOnSegment() {
 		MapDimension playerPosition = new MapDimension(5, -1, 12);
@@ -46,6 +42,7 @@ public class Test01 {
 				points.get(1)));
 
 		playerPosition = new MapDimension(5, -1, 0);
+
 		// Player is on the wall!
 		assertTrue(MapGeometric.isCircleOnSegment(playerPosition,
 				MapConst.PLAYER_SIZE / 2 + wallSize, points.get(0),

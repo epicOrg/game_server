@@ -20,7 +20,6 @@ import services.Register;
  * 
  * @author Noris
  * @date 2015/03/31
- *
  */
 
 public class Test01 {

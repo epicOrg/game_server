@@ -30,8 +30,8 @@ import services.rooms.subservices.RoomsList;
 
 /**
  * 
- * Initialize Service creating the services tree, adding subservices into single
- * service.
+ * Initialize Service creating the services tree, adding sub-services into a
+ * single service.
  * 
  * @author Micieli
  * @date 2015/05/24
@@ -42,7 +42,6 @@ public class ServicesInitializer {
 	private ArrayList<IService> services;
 
 	public ServicesInitializer() {
-		super();
 		services = new ArrayList<>();
 		init();
 	}
