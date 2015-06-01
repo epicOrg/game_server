@@ -22,10 +22,10 @@ public class RegisterDataSaver implements IDataSaver {
 	private IDataSaver emailSaver;
 
 	/**
-	 * @param userSaver
-	 *            a <code>IDataSaver</code> that saves e-mails
-	 * @param emailSaver
+	 * @param userSaver 
 	 *            a <code>IDataSaver</code> that saves user data
+	 * @param emailSaver
+	 *           a <code>IDataSaver</code> that saves e-mails
 	 */
 	public RegisterDataSaver(IDataSaver userSaver, IDataSaver emailSaver) {
 		super();

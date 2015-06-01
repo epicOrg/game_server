@@ -29,6 +29,10 @@ import services.rooms.subservices.JoinPlayer;
 import services.rooms.subservices.RoomsList;
 
 /**
+ * 
+ * Initialize Service creating the services tree, adding subservices into single
+ * service.
+ * 
  * @author Micieli
  * @date 2015/05/24
  */
@@ -48,8 +52,8 @@ public class ServicesInitializer {
 		IExtendedService encrypt = new Encrypt();
 		encrypt.addSubService(new PublicKeyRequest());
 		encrypt.addSubService(new WrappedKey());
-
 		services.add(encrypt);
+
 		services.add(new Register());
 		IExtendedService rooms = initRooms();
 		services.add(rooms);
