@@ -63,8 +63,8 @@ public class ClientRequestThread implements Runnable {
 				// TODO DEBUG: encrypted client request
 				System.out.println("CLIENT: " + request);
 
-				JSONObject jsonRequest = new JSONObject(request);
-				// JSONObject jsonRequest = secureConnection.decrypt(request);
+				// JSONObject jsonRequest = new JSONObject(request);
+				JSONObject jsonRequest = secureConnection.decrypt(request);
 
 				// TODO DEBUG: not encrypted client request
 				// System.out.println("CLIENT: " + jsonRequest);
@@ -80,8 +80,8 @@ public class ClientRequestThread implements Runnable {
 					// TODO DEBUG: not encrypted server response
 					// System.out.println("SERVER: " + jsonResponse);
 
-					String response = jsonResponse.toString();
-					// String response = secureConnection.encrypt(jsonResponse);
+					// String response = jsonResponse.toString();
+					String response = secureConnection.encrypt(jsonResponse);
 
 					out.println(response);
 
