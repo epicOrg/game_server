@@ -22,15 +22,15 @@ import exceptions.UsernameAlreadyUsedException;
  * @date 2015/03/27
  */
 
-public class DataManager {
+public class UsersDataManager {
 
-	private static DataManager instance = new DataManager();
+	private static UsersDataManager instance = new UsersDataManager();
 
 	private IDataSaver registerDataSaver;
 	private IRegistrationChecker checker;
 	private ILoginChecker loginChecker;
 
-	private DataManager() {
+	private UsersDataManager() {
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class DataManager {
 		}
 	}
 
-	public static DataManager getInstance() {
+	public static UsersDataManager getInstance() {
 		return instance;
 	}
 

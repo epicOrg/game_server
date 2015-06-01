@@ -6,7 +6,7 @@ import services.Login;
 import exceptions.UserNotOnlineException;
 
 /**
- * <code>ClientIdentityCecker</code> check the user real identity according to
+ * <code>ClientIdentityCecker</code> checks the user real identity according to
  * his username and his hascode, that the user must send every time in his
  * request.
  * 
@@ -34,6 +34,7 @@ public class ClientIdentityCecker {
 	 *         false otherwise
 	 * @throws UserNotOnlineException
 	 *             if the user doesn't result to be online
+	 * @see OnlineManager#getHashCodeByUsername(String)
 	 */
 	public boolean checkHashCode(String username, int hashCode) {
 
@@ -57,6 +58,7 @@ public class ClientIdentityCecker {
 	 *            the username of the user
 	 * 
 	 * @return true if the user is online, false otherwise
+	 * @see OnlineManager#checkIfOnline(String)
 	 */
 	public boolean isUserOnline(String username) {
 		

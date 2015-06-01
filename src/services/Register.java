@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import check_fields.RegisterChecker;
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
@@ -20,7 +20,7 @@ import exceptions.RegistrationFailedException;
 
 public class Register implements IService {
 
-	private DataManager dataManager;
+	private UsersDataManager dataManager;
 
 	private JSONObject jsonRequest;
 	private JSONObject jsonResponse;
@@ -30,7 +30,7 @@ public class Register implements IService {
 	private RegisterChecker registerChecker;
 
 	public Register() {
-		dataManager = DataManager.getInstance();
+		dataManager = UsersDataManager.getInstance();
 	}
 
 	@Override

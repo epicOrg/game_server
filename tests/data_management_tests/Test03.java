@@ -5,23 +5,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import server.ServerInitializer;
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
 /**
- * File saving test with {@link DataManager}.
+ * File saving test with {@link UsersDataManager}.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17
- * @see DataManager
+ * @see UsersDataManager
  * @see RegisteredUser
  */
 
 public class Test03 {
 
-	private DataManager dataManager;
+	private UsersDataManager dataManager;
 	private RegisteredUser user;
 	private ServerInitializer serverInitializer = new ServerInitializer();
 
@@ -30,7 +30,7 @@ public class Test03 {
 
 		serverInitializer.init();
 
-		dataManager = DataManager.getInstance();
+		dataManager = UsersDataManager.getInstance();
 		user = new RegisteredUser("marx", "proletarian707",
 				"marx@proletarian.org");
 
@@ -38,7 +38,7 @@ public class Test03 {
 
 	/**
 	 * Test method for
-	 * {@link data_management.DataManager#checkPassword(data_management.RegisteredUser)}
+	 * {@link data_management.UsersDataManager#checkPassword(data_management.RegisteredUser)}
 	 * .
 	 * 
 	 * @throws RegistrationFailedException

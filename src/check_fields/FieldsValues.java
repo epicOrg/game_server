@@ -1,6 +1,8 @@
 package check_fields;
 
 /**
+ * Defines the checking parameters.
+ * 
  * @author Noris
  * @date 2015/03/30
  */

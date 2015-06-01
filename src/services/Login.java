@@ -12,7 +12,7 @@ import online_management.OnlineUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisteredUser;
 
 /**
@@ -83,7 +83,7 @@ public class Login implements IService {
 			return false;
 		}
 
-		return DataManager.getInstance().checkPassword(user);
+		return UsersDataManager.getInstance().checkPassword(user);
 	}
 
 	private void setUserOnline() {

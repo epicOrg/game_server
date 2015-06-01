@@ -9,10 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import services.Register;
-import data_management.DataManager;
+import data_management.UsersDataManager;
+import data_management.GameDataManager;
 
 /**
- * Contains methods for check registration fields sending in client request to
+ * Contains methods for check registration fields in client request to
  * create an account on the server. The data choose by the user must be
  * compatible with the ones defined in {@link FieldsValues}.
  * 
@@ -31,6 +32,10 @@ public class RegisterChecker {
 	 * 
 	 * @param username
 	 * @return true if the username is valid, false if it's invalid
+	 * @see FieldsValues#USERNAME_FORBIDDEN_CHARS
+	 * @see FieldsValues#USERNAME_NEEDED_CHARS
+	 * @see FieldsValues#USERNAME_MAX_LENGTH
+	 * @see FieldsValues#USERNAME_MIN_LENGTH
 	 */
 	public boolean checkUsername(String username) {
 
@@ -74,6 +79,9 @@ public class RegisterChecker {
 	 * @param user
 	 *            password
 	 * @return true if the password is valid, false if it's invalid
+	 * @see FieldsValues#PASSWORD_NEEDED_CHARS
+	 * @see FieldsValues#PASSWORD_MAX_LENGTH
+	 * @see FieldsValues#PASSWORD_MIN_LENGTH
 	 */
 	public boolean checkPassword(String password) {
 
@@ -160,9 +168,10 @@ public class RegisterChecker {
 	 * @param username
 	 *            the username to check
 	 * @return true if the username is available, false otherwise
+	 * @see UsersDataManager#checkUsername(String)
 	 */
 	public boolean checkAlreadyUsedUsername(String username) {
-		DataManager dataManager = DataManager.getInstance();
+		UsersDataManager dataManager = UsersDataManager.getInstance();
 		if (!dataManager.checkUsername(username)) {
 			JSONArray usernameErrors = new JSONArray();
 			usernameErrors.put(RegisterFields.REGISTER_ALREADY_USED.toString());
@@ -186,9 +195,10 @@ public class RegisterChecker {
 	 * @param email
 	 *            the email to check
 	 * @return true if the aren't user registered with the given email
+	 * @see UsersDataManager#checkEmail(String)
 	 */
 	public boolean checkAlreadyUsedEmail(String email) {
-		DataManager dataManager = DataManager.getInstance();
+		UsersDataManager dataManager = UsersDataManager.getInstance();
 		if (!dataManager.checkEmail(email)) {
 			JSONArray emailErrors = new JSONArray();
 			emailErrors.put(RegisterFields.REGISTER_ALREADY_USED.toString());

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisteredUser;
 import database.loader.RegistrationFileChecker;
 import exceptions.RegistrationFailedException;
@@ -17,14 +17,14 @@ import server.ServerInitializer;
  * @author Modica
  * @author Gavina
  * @date 2015/04/17
- * @see DataManager
+ * @see UsersDataManager
  * @see RegisteredUser
  * @see RegistrationFileChecker
  * @see RegistrationFailedException
  */
 public class Test02 {
 
-	private DataManager dataManager;
+	private UsersDataManager dataManager;
 	private RegisteredUser user1;
 	private RegisteredUser user2;
 	private ServerInitializer serverInitializer = new ServerInitializer();
@@ -34,7 +34,7 @@ public class Test02 {
 
 		serverInitializer.init();
 
-		dataManager = DataManager.getInstance();
+		dataManager = UsersDataManager.getInstance();
 		user1 = new RegisteredUser("Hegel", "I_AM_A_LOL", "hegel@epic.org");
 		user2 = new RegisteredUser("Kant", "I_AM_TROLL", "kant@epic.org");
 	}

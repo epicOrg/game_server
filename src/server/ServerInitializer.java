@@ -8,7 +8,7 @@ import check_fields.RequestFieldChecher;
 import connection_encryption.AsymmetricKeysGenerator;
 import connection_encryption.ConnectionEncrypter;
 import connection_encryption.KeysGenerator;
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisterDataSaver;
 import data_management.RegisteredUser;
 import data_management.password_encrypter.PasswordEncrypter;
@@ -62,7 +62,7 @@ public class ServerInitializer {
 
 	private void initdataManager() {
 
-		DataManager dataManager = DataManager.getInstance();
+		UsersDataManager dataManager = UsersDataManager.getInstance();
 
 		RegisterDataSaver registerDataSaver = new RegisterDataSaver(new UserSaver(
 				Paths.getUsersPath(), new UserLineFormatter()), new EmailSaver(

@@ -1,17 +1,17 @@
 package data_management_tests;
 
 import server.ServerInitializer;
-import data_management.DataManager;
+import data_management.UsersDataManager;
 import data_management.RegisteredUser;
 import exceptions.RegistrationFailedException;
 
 /**
- * File saving test with {@link DataManager}.
+ * File saving test with {@link UsersDataManager}.
  * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/17
- * @see DataManager
+ * @see UsersDataManager
  * @see RegisteredUser
  */
 class Test01 {
@@ -20,7 +20,7 @@ class Test01 {
 
 		new ServerInitializer().init();
 
-		DataManager dataManager = DataManager.getInstance();
+		UsersDataManager dataManager = UsersDataManager.getInstance();
 
 		RegisteredUser user = new RegisteredUser("Hegel", "I_AM_A_LOL",
 				"hegel@epic.org");

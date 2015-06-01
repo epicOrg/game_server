@@ -35,14 +35,29 @@ public class RoomChecker {
 		return fieldIsOk;
 	}
 
+	/**
+	 * Check if the given number of team is a valid one.
+	 * 
+	 * @param numbersOfTeams
+	 *            the number to check
+	 * @return true if it is allowed, false otherwise
+	 */
 	public boolean chekNumberOfTeams(int numbersOfTeams) {
-		if (numbersOfTeams > MAX_TEAMS)
+		if (numbersOfTeams > MAX_TEAMS || numbersOfTeams < 1)
 			return false;
 		return true;
 	}
 
+	/**
+	 * Check if the given number of player per team is a valid one.
+	 * 
+	 * @param numbersOfTeams
+	 *            the number to check
+	 * @return true if it is allowed, false otherwise
+	 */
 	public boolean chekNumberOfPlayer(int numberOfPlayersPerTeam) {
-		if (numberOfPlayersPerTeam > MAX_PLAYERS_PER_TEAM)
+		if (numberOfPlayersPerTeam > MAX_PLAYERS_PER_TEAM
+				|| numberOfPlayersPerTeam < 1)
 			return false;
 		return true;
 	}
