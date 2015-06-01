@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 /**
- * It can be used to create a map, starting from single {@link MapObject} (one,
+ * A map that is constructed starting from single {@link MapObject} (one,
  * more, or none), the size of the map, spawn point(s) and win point(s).
  * 
  * @author Noris

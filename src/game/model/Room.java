@@ -131,6 +131,10 @@ public class Room {
 		throw new NoSuchPlayerException();
 	}
 
+	/**
+	 * 
+	 * @return	the number of current player in the <code>Room</code>
+	 */
 	public int getSize() {
 
 		int size = 0;
@@ -159,7 +163,7 @@ public class Room {
 	 * player.
 	 */
 	public void checkIfFull() {
-		if (isFull())
+		if (isFull() && !inPlay)
 			playersUpdater.onRoomFull();
 	}
 
@@ -179,6 +183,11 @@ public class Room {
 		this.inPlay = inPlay;
 	}
 	
+	/**
+	 * Set the <code>Room</code> cancelled avoiding other future operation.
+	 * 
+	 * @throws RoomNotEmptyException		if the room isn't empty.
+	 */
 	public synchronized void cancel() throws RoomNotEmptyException{
 		if(!isEmpty() && !cancelled)
 			throw new RoomNotEmptyException();

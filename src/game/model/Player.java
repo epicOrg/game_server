@@ -3,6 +3,9 @@ package game.model;
 import voip.AudioData;
 
 /**
+ * A container class for all player information, that notify listener when
+ * something happens.
+ * 
  * @author Micieli
  * @author Noris
  * @date 2015/04/18
@@ -13,7 +16,7 @@ public class Player {
 	private String username;
 	private boolean status;
 
-	private AudioData audioData ;
+	private AudioData audioData;
 
 	private PlayerStatus playerStatus;
 	private PlayerEventListener playerEventListener;

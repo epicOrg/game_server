@@ -2,9 +2,16 @@ package game.map;
 
 import game.model.PlayerStatus;
 
+
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+/**
+ * Defines the typical map behavior.
+ * 
+ * @author Noris
+ * @author Micieli
+ *
+ */
 public interface IMap {
 
 	public void setMapSize(MapDimension mapSize);
@@ -46,5 +53,11 @@ public interface IMap {
 
 	public ArrayList<MapDimension> getWinPoints();
 
+	/**
+	 * When a player ask for a spawnPoint call this method and the map gives him
+	 * one.
+	 * 
+	 * @return		a spawnPoint int the map
+	 */
 	public PlayerStatus getSpawnPoint();
 }
