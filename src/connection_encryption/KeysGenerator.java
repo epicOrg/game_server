@@ -6,8 +6,8 @@ import java.security.PublicKey;
 /**
  * Interface for the asymmetric cryptography. The classes who implements this
  * interface must provided a method that generates two asymmetric keys: the
- * private key can decrypt the data encrypted with the public key, but not vice
- * versa (the public key was used only to encrypt data).
+ * private key can decrypt the data encrypted with the public key, but not the
+ * vice versa (the public key was used only to encrypt data).
  * 
  * @author Noris
  * @date 2015/04/25
