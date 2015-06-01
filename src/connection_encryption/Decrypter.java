@@ -24,6 +24,13 @@ public class Decrypter {
 		this.symmetricKey = symmetricKey;
 	}
 
+	/**
+	 * Decrypts a string using the symmetric key (obviously the kay must be the
+	 * same used to encrypt the string).
+	 * 
+	 * @param encryptedString
+	 *            the encrypted string
+	 */
 	public void decrypt(String encryptedString) {
 
 		byte[] encryptedData = StringConverter.stringToBytes(encryptedString);
@@ -52,17 +59,24 @@ public class Decrypter {
 		}
 	}
 
+	/**
+	 * @return the decrypted data
+	 */
 	public byte[] getDecryptedData() {
 		return decryptedData;
 	}
 
+	/**
+	 * @return the decrypted data in string format
+	 */
 	public String getDecryptedString() {
 		try {
 
 			return new String(decryptedData, "UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			System.err.println("UTF-8 not supported!");
+			e.printStackTrace();
 			return null;
 		}
 	}

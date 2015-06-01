@@ -24,6 +24,12 @@ public class Encrypter {
 		this.symmetricKey = symmetricKey;
 	}
 
+	/**
+	 * Encrypts a string using a symmetric key.
+	 * 
+	 * @param uncryptedString
+	 *            the string to encrypt
+	 */
 	public void encrypt(String uncryptedString) {
 
 		byte[] uncryptedData = uncryptedString.getBytes();
@@ -52,10 +58,16 @@ public class Encrypter {
 		}
 	}
 
+	/**
+	 * @return the encrypted data.
+	 */
 	public byte[] getEncryptedData() {
 		return encryptedData;
 	}
 
+	/**
+	 * @return the encrypted data in string format.
+	 */
 	public String getEncryptedString() {
 		return StringConverter.bytesToString(encryptedData);
 	}

@@ -24,6 +24,13 @@ public class KeyUnwrapper {
 		this.privateKey = privateKey;
 	}
 
+	/**
+	 * Unwraps a symmetric key encrypted with a public asymmetric key, using the
+	 * corresponding private key.
+	 * 
+	 * @param wrappedKeyString
+	 *            the wrapped symmetric key in string format.
+	 */
 	public void unwrapKey(String wrappedKeyString) {
 
 		byte[] wrappedKeyData = StringConverter.stringToBytes(wrappedKeyString);
@@ -47,6 +54,9 @@ public class KeyUnwrapper {
 		}
 	}
 
+	/**
+	 * @return the symmetric key
+	 */
 	public SecretKey getUnwrappedKey() {
 		return symmetricKey;
 	}
