@@ -59,8 +59,11 @@ public class ConnectionEncrypter {
 	 *            public key
 	 */
 	public void setSymmetricKey(String wrappedSymmetricKey) {
-		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(keysGenerator.getPrivateKey());
+		
+		KeyUnwrapper keyUnwrapper = new KeyUnwrapper(
+				keysGenerator.getPrivateKey());
 		keyUnwrapper.unwrapKey(wrappedSymmetricKey);
+		
 		SecretKey symmetricKey = keyUnwrapper.getUnwrappedKey();
 		encrypter = new Encrypter(symmetricKey);
 		decrypter = new Decrypter(symmetricKey);

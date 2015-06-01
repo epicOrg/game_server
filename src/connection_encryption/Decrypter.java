@@ -25,7 +25,7 @@ public class Decrypter {
 	}
 
 	/**
-	 * Decrypts a string using the symmetric key (obviously the kay must be the
+	 * Decrypts a string using the symmetric key (obviously the key must be the
 	 * same used to encrypt the string).
 	 * 
 	 * @param encryptedString
@@ -37,7 +37,8 @@ public class Decrypter {
 
 		try {
 
-			Cipher cipher = Cipher.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
+			Cipher cipher = Cipher
+					.getInstance(EncryptionConst.SYMMETRIC_ALGORITHM);
 			cipher.init(Cipher.DECRYPT_MODE, symmetricKey);
 			decryptedData = cipher.doFinal(encryptedData);
 
@@ -45,7 +46,8 @@ public class Decrypter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
-			System.err.println(EncryptionConst.SYMMETRIC_ALGORITHM + " algorithm not found!");
+			System.err.println(EncryptionConst.SYMMETRIC_ALGORITHM
+					+ " algorithm not found!");
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
 			// TODO Auto-generated catch block

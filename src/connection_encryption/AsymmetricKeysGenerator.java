@@ -25,7 +25,8 @@ public class AsymmetricKeysGenerator implements KeysGenerator {
 					.getInstance(EncryptionConst.ASYMMETRIC_ALGORITHM);
 			SecureRandom secureRandom = new SecureRandom();
 
-			keyPairGenerator.initialize(EncryptionConst.ASYMMETRIC_KEYSIZE, secureRandom);
+			keyPairGenerator.initialize(EncryptionConst.ASYMMETRIC_KEYSIZE,
+					secureRandom);
 
 			KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
@@ -33,7 +34,8 @@ public class AsymmetricKeysGenerator implements KeysGenerator {
 			privateKey = keyPair.getPrivate();
 
 		} catch (NoSuchAlgorithmException e) {
-			System.err.println(EncryptionConst.ASYMMETRIC_ALGORITHM + " algorithm not found!");
+			System.err.println(EncryptionConst.ASYMMETRIC_ALGORITHM
+					+ " algorithm not found!");
 			e.printStackTrace();
 		}
 	}

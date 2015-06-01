@@ -13,7 +13,6 @@ import exceptions.RegistrationFailedException;
 import exceptions.UsernameAlreadyUsedException;
 
 /**
- * 
  * <code>DataManager</code> provides methods to manages users data. Allows the
  * {@link Register} service to save users data and to check them.
  * 
@@ -35,11 +34,11 @@ public class UsersDataManager {
 
 	/**
 	 * 
-	 * Checks if exist another user registered with the same username.
+	 * Checks if exist another user registered with the same name.
 	 * 
 	 * @param username
-	 *            the username to check
-	 * @return true if the username is available, false otherwise
+	 *            the user name to check
+	 * @return true if the user name is available, false otherwise
 	 * @see IRegistrationChecker#checkUsername(String)
 	 */
 	public boolean checkUsername(String username) {
@@ -76,7 +75,6 @@ public class UsersDataManager {
 	}
 
 	/**
-	 * 
 	 * Checks if the password given by the user matches with the one provided
 	 * during the registration.
 	 * 
@@ -100,7 +98,6 @@ public class UsersDataManager {
 	}
 
 	/**
-	 * 
 	 * Permanently saves user data (username, email and password) in the server
 	 * database.
 	 * 
@@ -111,7 +108,8 @@ public class UsersDataManager {
 	 * @see RegisteredUser
 	 * @see IDataSaver
 	 */
-	public void saveRegistrationFields(RegisteredUser user) throws RegistrationFailedException {
+	public void saveRegistrationFields(RegisteredUser user)
+			throws RegistrationFailedException {
 
 		try {
 			registerDataSaver.saveData(user);

@@ -14,7 +14,7 @@ public class RoomChecker {
 	private static final int MAX_PLAYERS_PER_TEAM = 5;
 
 	/**
-	 * Check if the room name is valid.
+	 * Checks if the room name is valid.
 	 * 
 	 * @param roomName
 	 *            the name of the room
@@ -36,7 +36,7 @@ public class RoomChecker {
 	}
 
 	/**
-	 * Check if the given number of team is a valid one.
+	 * Checks if the given number of team is a valid one.
 	 * 
 	 * @param numbersOfTeams
 	 *            the number to check
@@ -49,7 +49,7 @@ public class RoomChecker {
 	}
 
 	/**
-	 * Check if the given number of player per team is a valid one.
+	 * Checks if the given number of player per team is a valid one.
 	 * 
 	 * @param numbersOfTeams
 	 *            the number to check

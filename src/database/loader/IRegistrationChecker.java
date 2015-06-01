@@ -20,7 +20,8 @@ public interface IRegistrationChecker {
 	 * @param username
 	 * @throws UsernameAlreadyUsedException
 	 */
-	public void checkUsername(String username) throws UsernameAlreadyUsedException;
+	public void checkUsername(String username)
+			throws UsernameAlreadyUsedException;
 
 	/**
 	 * Check if email already exists.
@@ -29,6 +30,7 @@ public interface IRegistrationChecker {
 	 * @throws EmailAlreadyUsedException
 	 * @throws IOException
 	 */
-	public void checkEmail(String email) throws EmailAlreadyUsedException, IOException;
+	public void checkEmail(String email) throws EmailAlreadyUsedException,
+			IOException;
 
 }

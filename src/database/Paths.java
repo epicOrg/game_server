@@ -43,7 +43,8 @@ public final class Paths {
 	}
 
 	public static String getConfirmPath() {
-		return getDatabasePath() + USERS_PATH + separator + CONFIRM_PATH + separator;
+		return getDatabasePath() + USERS_PATH + separator + CONFIRM_PATH
+				+ separator;
 	}
 
 }

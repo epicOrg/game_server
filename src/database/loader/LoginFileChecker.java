@@ -27,16 +27,17 @@ public class LoginFileChecker implements ILoginChecker {
 	}
 
 	@Override
-	public void checkUser(RegisteredUser registeredUser) throws LoginFailedException, IOException {
+	public void checkUser(RegisteredUser registeredUser)
+			throws LoginFailedException, IOException {
 
 		BufferedReader reader;
 
 		try {
 
-			reader = new BufferedReader(new FileReader(path + registeredUser.getUsername()));
+			reader = new BufferedReader(new FileReader(path
+					+ registeredUser.getUsername()));
 
 		} catch (FileNotFoundException e) {
-
 			throw new LoginFailedException("Not registred user!");
 		}
 

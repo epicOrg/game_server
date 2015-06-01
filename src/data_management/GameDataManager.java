@@ -58,13 +58,17 @@ public class GameDataManager {
 			getRoomByName(roomName);
 
 		} catch (NoSuchRoomException e) {
+
 			Room room = new Room(roomName, numberOfTeam, teamDimension,
 					mapGenerator);
+
 			RoomEventListener listener = new RoomPlayersUpdater(room);
 			room.setEventListener(listener);
+
 			RoomRemoverThread removerThread = new RoomRemoverThread(room);
 			removerThread.start();
 			rooms.add(room);
+
 			return;
 		}
 
@@ -79,6 +83,7 @@ public class GameDataManager {
 	 *             if there isn't any room with the given name
 	 */
 	public Room getRoomByName(String name) throws NoSuchRoomException {
+
 		for (Room room : rooms) {
 			if (name.equals(room.getName()))
 				return room;
@@ -104,11 +109,11 @@ public class GameDataManager {
 				room.removePlayer(player);
 				return;
 			} catch (NoSuchPlayerException e) {
-				//if the user isn't in the room
-				//e.printStackTrace();
+				// if the user isn't in the room
+				// e.printStackTrace();
 			} catch (RoomCancelledException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 
@@ -165,10 +170,11 @@ public class GameDataManager {
 	/**
 	 * Delete a room from the roomList.
 	 * 
-	 * @param room	the room to delete
+	 * @param room
+	 *            the room to delete
 	 */
 	public void deleteRoom(Room room) {
 		room.setEventListener(null);
-		rooms.remove(room);		
+		rooms.remove(room);
 	}
 }

@@ -68,7 +68,7 @@ public class RequestFieldChecher {
 	}
 
 	/**
-	 * Exclude same services from the check
+	 * Excludes same services from the check.
 	 * 
 	 * @param serviceNotToBeChecked
 	 *            a list of service name that doesn't have to be checked

@@ -7,7 +7,7 @@ import exceptions.UserNotOnlineException;
 
 /**
  * <code>ClientIdentityCecker</code> checks the user real identity according to
- * his username and his hascode, that the user must send every time in his
+ * his user name and his hash-code, that the user must send every time in his
  * request.
  * 
  * @author Noris
@@ -26,9 +26,9 @@ public class ClientIdentityCecker {
 	 * Check if the hashCode given matches with one provided during the login.
 	 * 
 	 * @param username
-	 *            username of the user
+	 *            the user name
 	 * @param hashCode
-	 *            hashcode of the user
+	 *            hash-code of the user
 	 * 
 	 * @return true if the hashCode corresponds to the one saved in the server,
 	 *         false otherwise
@@ -55,13 +55,13 @@ public class ClientIdentityCecker {
 	 * Check if the user is online.
 	 * 
 	 * @param username
-	 *            the username of the user
+	 *            the user name
 	 * 
 	 * @return true if the user is online, false otherwise
 	 * @see OnlineManager#checkIfOnline(String)
 	 */
 	public boolean isUserOnline(String username) {
-		
+
 		return onlineManager.checkIfOnline(username);
 	}
 }

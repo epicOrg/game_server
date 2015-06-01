@@ -18,7 +18,7 @@ import exceptions.LoginFailedException;
 public interface ILoginChecker {
 
 	/**
-	 * Check if the user password matches with the one saved during the
+	 * Checks if the user password matches with the one saved during the
 	 * registration.
 	 * 
 	 * @param registeredUser
@@ -29,6 +29,7 @@ public interface ILoginChecker {
 	 *             if there is a communication problem with the data managing
 	 *             system
 	 */
-	public void checkUser(RegisteredUser registeredUser) throws LoginFailedException, IOException;
+	public void checkUser(RegisteredUser registeredUser)
+			throws LoginFailedException, IOException;
 
 }

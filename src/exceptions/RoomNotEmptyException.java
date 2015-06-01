@@ -8,6 +8,7 @@ import game.model.Room;
  * @author Micieli
  * @see Room#cancel()
  */
+
 @SuppressWarnings("serial")
 public class RoomNotEmptyException extends Exception {
 

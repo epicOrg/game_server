@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * This exception is launched when the username is already used.
+ * This exception is launched when the user name is already used.
  * 
  * @author Modica
  * @author Gavina

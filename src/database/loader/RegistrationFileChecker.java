@@ -35,7 +35,8 @@ public class RegistrationFileChecker implements IRegistrationChecker {
 	}
 
 	@Override
-	public void checkUsername(String username) throws UsernameAlreadyUsedException {
+	public void checkUsername(String username)
+			throws UsernameAlreadyUsedException {
 
 		File file = new File(userPath + username);
 		boolean exsist = file.exists();
@@ -45,22 +46,28 @@ public class RegistrationFileChecker implements IRegistrationChecker {
 	}
 
 	@Override
-	public void checkEmail(String email) throws EmailAlreadyUsedException, IOException {
+	public void checkEmail(String email) throws EmailAlreadyUsedException,
+			IOException {
 
 		BufferedReader reader;
 
 		try {
+
 			reader = new BufferedReader(new FileReader(emailsFile));
 			String line = reader.readLine();
+
 			while (line != null) {
 
 				if (line.trim().equals(email.trim())) {
 					reader.close();
 					throw new EmailAlreadyUsedException();
 				}
+
 				line = reader.readLine();
 			}
+
 			reader.close();
+
 		} catch (FileNotFoundException e) {
 			File file = new File(emailsFile);
 			file.createNewFile();

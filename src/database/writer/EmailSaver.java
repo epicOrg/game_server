@@ -33,7 +33,9 @@ public class EmailSaver implements IDataSaver {
 
 	@Override
 	public void saveData(RegisteredUser user) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filename), true));
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
+				filename), true));
 
 		writer.append(lineFormatter.formatLine(user));
 		writer.close();
