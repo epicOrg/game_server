@@ -1,6 +1,15 @@
 package email_confirmation;
 
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import data_management.RegisteredUser;
+import database.Paths;
 
 /**
  * @author Noris
@@ -9,22 +18,58 @@ import java.util.Random;
 
 public class EmailConfirmation {
 
-	private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static final int CODE_LENGTH = 20;
+	public static void saveCode(RegisteredUser user, String code) {
 
-	public static String generateRandomCode() {
+		try {
 
-		StringBuilder stringBuilder = new StringBuilder(CODE_LENGTH);
-		Random random = new Random();
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
+					Paths.getConfirmPath() + user.getUsername())));
 
-		for (int i = 0; i < CODE_LENGTH; i++) {
-			stringBuilder.append(CHARS.charAt(random.nextInt(CHARS.length())));
+			writer.write(code);
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static boolean checkCode(String username, String code) {
+
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(Paths.getConfirmPath()
+					+ username));
+		} catch (FileNotFoundException e) {
+			return false;
 		}
 
-		return stringBuilder.toString();
+		String savedCode;
+		try {
+			savedCode = reader.readLine();
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		if (code.equals(savedCode)) {
+			new File(Paths.getConfirmPath() + username).delete();
+			return true;
+		}
+
+		return false;
 	}
 
-	public static String getURL(String username) {
-		return "reg=" + username + "&" + generateRandomCode();
+	public static boolean isEmailConfirmed(String username) {
+
+		try {
+			new BufferedReader(
+					new FileReader(Paths.getConfirmPath() + username));
+		} catch (FileNotFoundException e) {
+			return true;
+		}
+
+		return false;
 	}
+
 }

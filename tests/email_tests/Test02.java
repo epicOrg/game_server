@@ -1,5 +1,6 @@
 package email_tests;
 
+import email_confirmation.EmailCodeGenerator;
 import email_confirmation.EmailConfirmation;
 
 /**
@@ -17,7 +18,7 @@ public class Test02 {
 	public static void main(String[] args) {
 
 		for (int i = 0; i < NUM; i++) {
-			System.out.println(EmailConfirmation.generateRandomCode());
+			System.out.println(EmailCodeGenerator.generateRandomCode());
 		}
 	}
 

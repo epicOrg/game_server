@@ -96,6 +96,7 @@ public class Login implements IService {
 		JSONObject response = new JSONObject();
 
 		try {
+			
 			response.put(ServicesFields.SERVICE.toString(), ServicesFields.LOGIN.toString());
 			response.put(CommonFields.USERNAME.toString(), user.getUsername());
 			response.put(CommonFields.HASHCODE.toString(), hashCode);
