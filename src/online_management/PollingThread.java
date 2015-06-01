@@ -81,7 +81,8 @@ public class PollingThread extends Thread {
 			} else {
 
 				// TODO DEBUG: polling failed
-				System.out.println("Polling failed!");
+				System.out.println("> Polling failed: "
+						+ onlineUser.getUsername() + " is offline.");
 
 				OnlineManager onlineManager = OnlineManager.getInstance();
 

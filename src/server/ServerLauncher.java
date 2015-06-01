@@ -31,7 +31,7 @@ public class ServerLauncher {
 				Thread thread = new Thread(new ClientRequestThread(socket));
 
 				// TODO DEBUG: ID of the thread
-				System.out.println("> Thread ID: " + thread.getId());
+				System.out.println("> New Connection: " + (thread.getId() - 7));
 
 				thread.start();
 			}

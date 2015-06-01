@@ -36,6 +36,7 @@ public class ClientRequestThread implements Runnable {
 
 	public ClientRequestThread(Socket socket) {
 		super();
+
 		this.socket = socket;
 		secureConnection = new SecureConnectionApplicator();
 		serviceChooser = new ServiceChooser();
@@ -46,7 +47,9 @@ public class ClientRequestThread implements Runnable {
 	public void run() {
 		try {
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					socket.getInputStream()));
+
 			out = new PrintWriter(socket.getOutputStream(), true);
 
 			String request = in.readLine();
@@ -61,13 +64,13 @@ public class ClientRequestThread implements Runnable {
 				}
 
 				// TODO DEBUG: encrypted client request
-				System.out.println("CLIENT: " + request);
+				// System.out.println("CLIENT: " + request);
 
 				// JSONObject jsonRequest = new JSONObject(request);
 				JSONObject jsonRequest = secureConnection.decrypt(request);
 
 				// TODO DEBUG: not encrypted client request
-				// System.out.println("CLIENT: " + jsonRequest);
+				System.out.println("CLIENT: " + jsonRequest);
 
 				JSONObject jsonResponse = null;
 
@@ -78,7 +81,7 @@ public class ClientRequestThread implements Runnable {
 				if (jsonResponse != null) {
 
 					// TODO DEBUG: not encrypted server response
-					// System.out.println("SERVER: " + jsonResponse);
+					System.out.println("SERVER: " + jsonResponse);
 
 					// String response = jsonResponse.toString();
 					String response = secureConnection.encrypt(jsonResponse);
@@ -86,7 +89,7 @@ public class ClientRequestThread implements Runnable {
 					out.println(response);
 
 					// TODO DEBUG: encrypted server response
-					System.out.println("SERVER: " + response);
+					// System.out.println("SERVER: " + response);
 
 				} else {
 					// System.out.println("SERVER: " + "no response");
@@ -103,12 +106,16 @@ public class ClientRequestThread implements Runnable {
 		}
 	}
 
-	private JSONObject elaborateRequest(JSONObject jsonRequest) throws JSONException {
+	private JSONObject elaborateRequest(JSONObject jsonRequest)
+			throws JSONException {
 
-		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+		InetSocketAddress inetSocketAddress = (InetSocketAddress) socket
+				.getRemoteSocketAddress();
 
-		jsonRequest.put(CommonFields.IP_ADDRESS.toString(), inetSocketAddress.getHostName());
-		jsonRequest.put(CommonFields.LOCAL_PORT.toString(), socket.getLocalPort());
+		jsonRequest.put(CommonFields.IP_ADDRESS.toString(),
+				inetSocketAddress.getHostName());
+		jsonRequest.put(CommonFields.LOCAL_PORT.toString(),
+				socket.getLocalPort());
 
 		IService service;
 		if (jsonRequest.getString(ServicesFields.SERVICE.toString()).equals(
